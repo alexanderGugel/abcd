@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 var register = function (email, password, callback) {
   db.prepare('SELECT COUNT(1) FROM user WHERE useremail = ?').run(email).finalize(function () {
     console.log(arguments);
-  })
+  });
 };
 
 var login = function (email, password, callback) {

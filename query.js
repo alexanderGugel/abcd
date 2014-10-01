@@ -1,18 +1,14 @@
-'use strict';
-
 var pg = require('pg');
 
-var connectionString = process.env.PG_CONNECTION_STRING || 'postgres://alexander:password@localhost/alexander';
+var connectionString = process.env.POSTGRESQL_CONNECTION_STRING || 'postgres://alexander@localhost/alexander';
 
-// pg.defaults.ssl = true;
-
-var query = exports.query = function (query, parameters, callback) {
+var query = function (query, parameters, callback) {
   if (typeof parameters === 'function') {
-    callback = parameters;
-    parameters = [];
+      callback = parameters;
+      parameters = [];
   }
   if (typeof callback !== 'function') {
-    callback = function () {};
+      callback = function () {};
   }
 
   pg.connect(connectionString, function (error, client, done) {
@@ -22,6 +18,9 @@ var query = exports.query = function (query, parameters, callback) {
     }
 
     client.query(query, parameters, function (error, result) {
+      if (error) {
+        console.error(error);
+      }
       done(); // Release the database handle
       callback(error, result);
     });

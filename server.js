@@ -17,8 +17,8 @@ server.get('/login', function () {
 
 });
 
-server.post('/users', function (req, res) {
-  user.register(req.email, req.password, function (error) {
+server.post('/register', function (req, res) {
+  user.register(req.email, req.password, function (error, token) {
     if (error) {
       res.send({
         error: error.message
@@ -31,7 +31,7 @@ server.post('/users', function (req, res) {
   });
 });
 
-server.put('/user', function (req, res) {
+server.post('/login', function (req, res) {
   user.login(req.email, req.password, function (error, token) {
     if (error) {
       res.send({
@@ -44,6 +44,8 @@ server.put('/user', function (req, res) {
     }
   });
 });
+
+
 
 var port = process.env.PORT || 3000;
 server.listen(port, function () {

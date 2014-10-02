@@ -531,7 +531,7 @@ body {
   padding: 0.5em 8px;
   font-weight: 300;
 }
-#experiments table {
+#experiments #experiment-table {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -539,62 +539,93 @@ body {
   background: #fff;
   width: 100%;
 }
-#experiments table thead tr {
+#experiments #experiment-table thead tr {
   border-bottom: 1px solid #ddd;
 }
-#experiments table thead tr .running {
+#experiments #experiment-table thead tr .running {
   width: 100px;
 }
-#experiments table thead tr .name {
+#experiments #experiment-table thead tr .name {
   text-align: left;
 }
-#experiments table thead tr .visitors,
-#experiments table thead tr .actions {
+#experiments #experiment-table thead tr .visitors,
+#experiments #experiment-table thead tr .actions {
   width: 70px;
 }
-#experiments table thead tr .delete {
+#experiments #experiment-table thead tr .delete {
   width: 30px;
 }
-#experiments table thead tr th {
+#experiments #experiment-table thead tr th {
   padding: 0.5em;
   font-weight: 300;
 }
-#experiments table tbody tr {
+#experiments #experiment-table tbody tr {
   border-bottom: 1px solid #efefef;
 }
-#experiments table tbody tr:nth-child(even) {
+#experiments #experiment-table tbody tr:nth-child(even) {
   background: rgba(0,0,0,0.02);
 }
-#experiments table tbody tr .running-true,
-#experiments table tbody tr .running-false {
+#experiments #experiment-table tbody tr .running-true,
+#experiments #experiment-table tbody tr .running-false {
   text-align: center;
 }
-#experiments table tbody tr .running-true {
+#experiments #experiment-table tbody tr .running-true {
   color: #008000;
 }
-#experiments table tbody tr .running-false {
+#experiments #experiment-table tbody tr .running-false {
   color: #f00;
 }
-#experiments table tbody tr .running,
-#experiments table tbody tr .visitors,
-#experiments table tbody tr .actions {
+#experiments #experiment-table tbody tr .running,
+#experiments #experiment-table tbody tr .visitors,
+#experiments #experiment-table tbody tr .actions {
   text-align: center;
 }
-#experiments table tbody tr .delete {
+#experiments #experiment-table tbody tr .delete {
   text-align: center;
 }
-#experiments table tbody tr .delete button {
+#experiments #experiment-table tbody tr .delete button {
   border: 0;
   background: none;
   color: #ccc;
 }
-#experiments table tbody tr .delete button:hover {
+#experiments #experiment-table tbody tr .delete button:hover {
   color: #f00;
 }
-#experiments table tbody tr td {
+#experiments #experiment-table tbody tr td {
   padding: 0.5em;
 }
-#experiments table tbody tr td a {
+#experiments #experiment-table tbody tr td a {
   color: #444;
   text-decoration: none;
+}
+#getting-started {
+  display: none;
+  margin-bottom: 2em;
+}
+#getting-started h3 {
+  color: #666;
+  margin: 0;
+  padding: 0.5em 8px;
+  font-weight: 300;
+}
+#getting-started section {
+  position: relative;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background: #fff;
+  padding: 0.5em;
+}
+#getting-started section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+#getting-started section .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 0;
+  background: none;
 }

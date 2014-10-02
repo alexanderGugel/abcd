@@ -11,7 +11,7 @@ server.use(express.static(__dirname + '/static'));
 
 server.get('/', function(req, res){
   // var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  res.send('hello world');
+  res.sendFile(__dirname + '/static/landing.html');
 });
 
 server.get('/login', function (req, res) {
@@ -75,6 +75,7 @@ server.post('/api/action', function (req, res) {
   var endpoint = req.body.endpoint;
   var experiment = req.body.experiment;
   var variant = req.body.variant;
+  var data = req.body.data;
 });
 
 // Complete action

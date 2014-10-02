@@ -84,7 +84,7 @@ body
     margin: 0
     padding: 0.5em 8px
     font-weight: 300
-  table
+  #experiment-table
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
     border-radius: 2px
     background: #fff
@@ -129,3 +129,28 @@ body
           a
             color: #444
             text-decoration: none
+
+#getting-started
+  display: none
+  margin-bottom: 2em
+  h3
+    color: #666
+    margin: 0
+    padding: 0.5em 8px
+    font-weight: 300
+  section
+    position: relative
+    border-radius: 2px
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    background: #fff
+    padding: 0.5em
+    &:after
+      content: ""
+      display: table
+      clear: both
+    .close
+      position: absolute
+      right: 0
+      top: 0
+      border: 0
+      background: none

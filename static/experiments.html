@@ -10,8 +10,20 @@
       <a href="/settings">Settings</a>
       <a href="/logout">Logout</a>
     </nav>
+    <section id="getting-started">
+      <h3>Getting started</h3>
+      <section>
+        <p>
+          We noticed you are new here! Getting started is very easy.
+        </p>
+        <script src="https://gist.github.com/alexanderGugel/b2beef1e2b5bb21f1e30.js"></script>
+        <button class="close">×</button>
+      </section>
+    </section>
+
     <h3>Experiments</h3>
-    <table>
+
+    <table id="experiment-table">
       <thead>
         <tr>
           <th class="running">Running?</th>
@@ -26,7 +38,7 @@
       </tbody>
     </table>
 
-    <script id="experiments-template" type="x-tmpl-mustache">
+    <script id="experiment-table-template" type="x-tmpl-mustache">
       {{#experiments}}
         <tr>
           <td class="running-{{running}}">•</td>

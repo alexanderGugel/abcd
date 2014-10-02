@@ -1,3 +1,5 @@
+var signup = window.location.pathname === '/signup';
+
 if (localStorage.getItem('token')) {
   window.location.href = '/experiments';
 }
@@ -7,7 +9,7 @@ $('form').on('submit', function (e) {
   var email = $('#email-input').val();
   var password = $('#password-input').val();
   $.ajax({
-    url: window.location.pathname === '/signup' ? '/api/user' : '/api/token',
+    url: signup ? '/api/user' : '/api/token',
     type: 'POST',
     data: JSON.stringify({
       email: email,
@@ -17,6 +19,9 @@ $('form').on('submit', function (e) {
     dataType: 'json',
     success: function (response) {
       localStorage.setItem('token', response.token);
+      if (signup) {
+        localStorage.setItem('newbie', new Date().getTime());
+      }
       window.location.href = '/experiments';
     },
     error: function (response) {

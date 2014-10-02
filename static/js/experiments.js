@@ -5,7 +5,7 @@ if (!localStorage.getItem('token')) {
 }
 
 var loadExperiments = function () {
-  var experimentsTemplate = $('#experiments-template').html();
+  var experimentsTemplate = $('#experiment-table-template').html();
 
   var experiments = [{
     name: 'test',
@@ -33,14 +33,14 @@ var loadExperiments = function () {
     running: false
   }];
 
-  $('#experiments tbody').html(Mustache.render(experimentsTemplate, {
+  $('#experiment-table tbody').html(Mustache.render(experimentsTemplate, {
     experiments: experiments
   }));
 };
 
 loadExperiments();
 
-$('#experiments tbody').on('click', '.delete button', function () {
+$('#experiment-table tbody').on('click', '.delete button', function () {
   var id = $(this).data('id');
   var confirmation = confirm('Are you sure you want to delete this experiment?');
   if (confirmation) {

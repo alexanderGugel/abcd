@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var user = require('./user');
+var endpoint = require('./endpoint');
+var experiment = require('./experiment');
+
 
 var server = express();
 server.use(bodyParser.json());
@@ -59,13 +62,45 @@ server.post('/api/token', function (req, res) {
   });
 });
 
-server.get('/api/experiment', function (req, res) {
+server.get('/api/endpoint', user.requireToken, function (req, res) {
+  endpoint.getForUser(req.userId, function (error, endpoints) {
+    res.send({
+      endpoints: endpoints
+    });
+  });
+});
+
+// Start action
+server.post('/api/action', function (req, res) {
+  var endpoint = req.body.endpoint;
+  var experiment = req.body.experiment;
+  var variant = req.body.variant;
+});
+
+// Complete action
+server.put('/api/action', function (req, res) {
+});
+
+server.get('/api/experiment', user.requireToken, function (req, res) {
+  experiment.getForUser(req.userId, function (error, experiments) {
+    res.send({
+      experiments: experiments
+    });
+  });
 });
 
 server.get('/api/experiment/:id', function (req, res) {
 });
 
-server.post('/api/request', function (req, res) {
+server.delete('/api/experiment/:id', user.requireToken, function (req, res) {
+  experiment.deleteForUser(req.userId, req.body.experimentName, function (error) {
+    if (error) {
+      return res.send({
+        error: error.message
+      });
+    }
+    res.send(204, {});
+  });
 });
 
 var port = process.env.PORT || 3000;

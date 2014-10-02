@@ -22,6 +22,7 @@ var register = function (email, password, callback) {
     query('INSERT INTO "user" (email, password) VALUES ($1, $2) RETURNING id', [email, password], function (error, result) {
       if (!error) {
         var rows = result.rows;
+        query('INSERT INTO "endpoint" (user_id) VALUES ($1)', [rows[0].id]);
         query('INSERT INTO "token" (user_id) VALUES ($1) RETURNING token', [rows[0].id], function (err, result) {
           callback(null, result.rows[0].token);
         });
@@ -52,6 +53,25 @@ var login = function (email, password, callback) {
   });
 };
 
+var requireToken = function (req, res, next) {
+  var token = req.query.token;
+  if (!token) {
+    return res.send(400, {
+      error: 'Missing token'
+    });
+  }
+  query('SELECT user_id FROM "token" WHERE token = $1', [token], function (err, result) {
+    var rows = result.rows;
+    if (rows.length === 0) {
+      return res.send(400, {
+        error: 'Invalid token'
+      });
+    }
+    req.userId = result.rows[0].id;
+    next();
+  });
+};
+
 
 // register('alexander.gugel@gmail.com', 'test', function () {
 //   console.log(arguments);
@@ -62,5 +82,6 @@ var login = function (email, password, callback) {
 
 module.exports = exports = {
   register: register,
-  login: login
+  login: login,
+  requireToken: requireToken
 };

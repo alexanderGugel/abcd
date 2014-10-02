@@ -17,11 +17,18 @@ query(
     'user_id BIGSERIAL NOT NULL REFERENCES "user"(id)' +
   ');' +
 
+  'CREATE TABLE IF NOT EXISTS "endpoint" (' +
+    'id BIGSERIAL PRIMARY KEY,' +
+    'endpoint UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),' +
+    'user_id BIGSERIAL NOT NULL REFERENCES "user"(id)' +
+  ');' +
+
   'CREATE TABLE IF NOT EXISTS "experiment" (' +
     'id BIGSERIAL PRIMARY KEY,' +
     'user_id BIGSERIAL NOT NULL REFERENCES "user"(id),' +
     'name TEXT NOT NULL,' +
-    'running BOOLEAN NOT NULL' +
+    'running BOOLEAN NOT NULL,' +
+    'UNIQUE (user_id, name)' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "variant" (' +

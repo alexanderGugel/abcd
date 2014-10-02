@@ -26,8 +26,8 @@ server.get('/logout', function (req, res) {
   res.sendFile(__dirname + '/static/logout.html');
 });
 
-server.get('/experiments', function (req, res) {
-  res.sendFile(__dirname + '/static/experiments.html');
+server.get('/dashboard', function (req, res) {
+  res.sendFile(__dirname + '/static/dashboard.html');
 });
 
 server.post('/api/user', function (req, res) {

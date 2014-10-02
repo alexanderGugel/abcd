@@ -11,8 +11,8 @@ $(function () {
 
   if (pathname === '/') {
     require('./landing');
-  } else if (pathname === '/experiments') {
-    require('./experiments');
+  } else if (pathname === '/dashboard') {
+    require('./dashboard');
   } else if (pathname === '/logout') {
     require('./logout');
   } else if (pathname === '/signup' || pathname === '/login') {

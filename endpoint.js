@@ -1,7 +1,7 @@
 var query = require('./query');
 
 var getForUser = function (userId, callback) {
-  query('SELECT endpoint FROM "endpoint" WHERE user_id = $1', [userId], function (err, result) {
+  query('SELECT endpoint FROM "endpoint" WHERE user_id = $1', [userId], function (error, result) {
     var rows = result.rows;
     callback(null, rows);
   });

@@ -5,7 +5,7 @@ if (!localStorage.getItem('token')) {
 }
 
 var loadExperiments = function () {
-  var experimentsTemplate = $('#experiment-table-template').html();
+  var experimentsTemplate = $('#experiments-template').html();
 
   var experiments = [{
     name: 'test',
@@ -33,36 +33,36 @@ var loadExperiments = function () {
     running: false
   }];
 
-  $('#experiment-table tbody').html(Mustache.render(experimentsTemplate, {
+  $('#experiments tbody').html(Mustache.render(experimentsTemplate, {
     experiments: experiments
   }));
 };
 
 loadExperiments();
 
-$('#experiment-table tbody').on('click', '.delete button', function () {
+var loadEndpoint = function () {
+  $.ajax({
+    url: '/api/endpoint',
+    type: 'GET',
+    data: {
+      token: localStorage.getItem('token')
+    },
+    dataType: 'json',
+    success: function (response) {
+      var endpoints = response.endpoints;
+      var endpoint = endpoints[0].endpoint;
+      $('#endpoint').text(endpoint);
+    }
+  });
+};
+
+loadEndpoint();
+
+$('#experiments tbody').on('click', '.delete button', function () {
   var id = $(this).data('id');
   var confirmation = confirm('Are you sure you want to delete this experiment?');
   if (confirmation) {
     console.log('Delete ' + id);
     loadExperiments();
-  }
-});
-
-$.ajax({
-  url: '/api/endpoint',
-  type: 'GET',
-  data: {
-    token: localStorage.getItem('token')
-  },
-  // contentType: 'application/json; charset=utf-8',
-  dataType: 'json',
-  success: function (response) {
-    var endpoints = response.endpoints;
-    var endpoint = endpoints
-    // TODO Multiple endpointsz
-  },
-  error: function (response) {
-    // TODO
   }
 });

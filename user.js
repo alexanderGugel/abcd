@@ -67,7 +67,7 @@ var requireToken = function (req, res, next) {
         error: 'Invalid token'
       });
     }
-    req.userId = result.rows[0].id;
+    req.userId = result.rows[0]['user_id'];
     next();
   });
 };

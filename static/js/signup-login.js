@@ -1,7 +1,7 @@
 var signup = window.location.pathname === '/signup';
 
 if (localStorage.getItem('token')) {
-  window.location.href = '/experiments';
+  window.location.href = '/dashboard';
 }
 
 $('form').on('submit', function (e) {
@@ -22,7 +22,7 @@ $('form').on('submit', function (e) {
       if (signup) {
         localStorage.setItem('newbie', new Date().getTime());
       }
-      window.location.href = '/experiments';
+      window.location.href = '/dashboard';
     },
     error: function (response) {
       $('form #error').text(response.responseJSON.error);

@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Experiments - abcd</title>
+    <title>Dashboard - abcd</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
-  <body id="experiments">
+  <body id="dashboard">
     <nav>
-      <a href="/settings">Settings</a>
       <a href="/logout">Logout</a>
+      <a href="/settings">Settings</a>
+      <a href="/help">Help</a>
     </nav>
     <section id="getting-started">
       <h3>Getting started</h3>
@@ -21,9 +22,9 @@
       </section>
     </section>
 
-    <h3>Experiments</h3>
+    <h3>Experiments for endpoint <span id="endpoint"></span></h3>
 
-    <table id="experiment-table">
+    <table id="experiments">
       <thead>
         <tr>
           <th class="running">Running?</th>
@@ -38,7 +39,7 @@
       </tbody>
     </table>
 
-    <script id="experiment-table-template" type="x-tmpl-mustache">
+    <script id="experiments-template" type="x-tmpl-mustache">
       {{#experiments}}
         <tr>
           <td class="running-{{running}}">•</td>

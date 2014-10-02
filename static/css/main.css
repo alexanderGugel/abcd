@@ -506,32 +506,38 @@ body {
   text-decoration: none;
   border-bottom: 1px solid #ccc;
 }
-#experiments {
+#dashboard {
   color: #ccc;
   background: #f0f0f0;
 }
-#experiments nav {
+#dashboard nav {
   display: block;
 }
-#experiments nav:after {
+#dashboard nav:after {
   content: "";
   display: table;
   clear: both;
 }
-#experiments nav a {
+#dashboard nav a {
   float: right;
   display: inline-block;
   padding: 0.25em;
   color: #ccc;
   text-decoration: none;
 }
-#experiments h3 {
+#dashboard h3 {
   color: #666;
   margin: 0;
-  padding: 0.5em 8px;
+  padding: 0 0.5em 0.5em;
   font-weight: 300;
 }
-#experiments #experiment-table {
+#dashboard #endpoint {
+  background: rgba(0,0,0,0.08);
+  display: inline-block;
+  padding: 0.125em;
+  font-family: Consolas, monaco, monospace;
+}
+#dashboard #experiments {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -539,62 +545,62 @@ body {
   background: #fff;
   width: 100%;
 }
-#experiments #experiment-table thead tr {
+#dashboard #experiments thead tr {
   border-bottom: 1px solid #ddd;
 }
-#experiments #experiment-table thead tr .running {
+#dashboard #experiments thead tr .running {
   width: 100px;
 }
-#experiments #experiment-table thead tr .name {
+#dashboard #experiments thead tr .name {
   text-align: left;
 }
-#experiments #experiment-table thead tr .visitors,
-#experiments #experiment-table thead tr .actions {
+#dashboard #experiments thead tr .visitors,
+#dashboard #experiments thead tr .actions {
   width: 70px;
 }
-#experiments #experiment-table thead tr .delete {
+#dashboard #experiments thead tr .delete {
   width: 30px;
 }
-#experiments #experiment-table thead tr th {
+#dashboard #experiments thead tr th {
   padding: 0.5em;
   font-weight: 300;
 }
-#experiments #experiment-table tbody tr {
+#dashboard #experiments tbody tr {
   border-bottom: 1px solid #efefef;
 }
-#experiments #experiment-table tbody tr:nth-child(even) {
+#dashboard #experiments tbody tr:nth-child(even) {
   background: rgba(0,0,0,0.02);
 }
-#experiments #experiment-table tbody tr .running-true,
-#experiments #experiment-table tbody tr .running-false {
+#dashboard #experiments tbody tr .running-true,
+#dashboard #experiments tbody tr .running-false {
   text-align: center;
 }
-#experiments #experiment-table tbody tr .running-true {
+#dashboard #experiments tbody tr .running-true {
   color: #008000;
 }
-#experiments #experiment-table tbody tr .running-false {
+#dashboard #experiments tbody tr .running-false {
   color: #f00;
 }
-#experiments #experiment-table tbody tr .running,
-#experiments #experiment-table tbody tr .visitors,
-#experiments #experiment-table tbody tr .actions {
+#dashboard #experiments tbody tr .running,
+#dashboard #experiments tbody tr .visitors,
+#dashboard #experiments tbody tr .actions {
   text-align: center;
 }
-#experiments #experiment-table tbody tr .delete {
-  text-align: center;
+#dashboard #experiments tbody tr .delete {
+  text-align: right;
 }
-#experiments #experiment-table tbody tr .delete button {
+#dashboard #experiments tbody tr .delete button {
   border: 0;
   background: none;
   color: #ccc;
 }
-#experiments #experiment-table tbody tr .delete button:hover {
+#dashboard #experiments tbody tr .delete button:hover {
   color: #f00;
 }
-#experiments #experiment-table tbody tr td {
+#dashboard #experiments tbody tr td {
   padding: 0.5em;
 }
-#experiments #experiment-table tbody tr td a {
+#dashboard #experiments tbody tr td a {
   color: #444;
   text-decoration: none;
 }

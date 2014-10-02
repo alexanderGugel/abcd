@@ -552,6 +552,9 @@ body {
 #experiments table thead tr .actions {
   width: 70px;
 }
+#experiments table thead tr .delete {
+  width: 30px;
+}
 #experiments table thead tr th {
   padding: 0.5em;
   font-weight: 300;
@@ -576,6 +579,17 @@ body {
 #experiments table tbody tr .visitors,
 #experiments table tbody tr .actions {
   text-align: center;
+}
+#experiments table tbody tr .delete {
+  text-align: center;
+}
+#experiments table tbody tr .delete button {
+  border: 0;
+  background: none;
+  color: #ccc;
+}
+#experiments table tbody tr .delete button:hover {
+  color: #f00;
 }
 #experiments table tbody tr td {
   padding: 0.5em;

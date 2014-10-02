@@ -39,6 +39,13 @@ $(function () {
     $('#experiments tbody').html(Mustache.render(template, {
       experiments: experiments
     }));
+    $('#experiments tbody').on('click', '.delete button', function () {
+      var id = $(this).data('id');
+      var confirmation = confirm('Are you sure you want to delete this experiment?');
+      if (confirmation) {
+        console.log('Delete ' + id);
+      }
+    });
   } else if (pathname === '/logout') {
     localStorage.removeItem('token');
     window.location.href = '/';

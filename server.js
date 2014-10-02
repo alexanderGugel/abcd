@@ -23,7 +23,9 @@ server.get('/logout', function (req, res) {
   res.sendFile(__dirname + '/static/logout.html');
 });
 
-
+server.get('/experiments', function (req, res) {
+  res.sendFile(__dirname + '/static/experiments.html');
+});
 
 server.post('/api/user', function (req, res) {
   var email = req.body.email;
@@ -57,8 +59,14 @@ server.post('/api/token', function (req, res) {
   });
 });
 
+server.get('/api/experiment', function (req, res) {
+});
 
+server.get('/api/experiment/:id', function (req, res) {
+});
 
+server.post('/api/request', function (req, res) {
+});
 
 var port = process.env.PORT || 3000;
 server.listen(port, function () {

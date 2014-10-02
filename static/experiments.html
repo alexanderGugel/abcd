@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Experiments - abcd</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body id="experiments">
+    <nav>
+      <a href="/settings">Settings</a>
+      <a href="/logout">Logout</a>
+    </nav>
+    <h3>Experiments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th class="running">Running?</th>
+          <th class="name">Name</th>
+          <th class="visitors">Visitiors</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <td><a href="/experiment/123">123</a></td>
+        </tr>
+        <tr>
+          <td><a href="/experiment/123">123</a></td>
+        </tr>
+        <tr>
+          <td><a href="/experiment/123">123</a></td>
+        </tr>
+        <tr>
+          <td><a href="/experiment/123">123</a></td>
+        </tr>
+        <tr>
+          <td><a href="/experiment/123">123</a></td>
+        </tr>
+        <tr>
+          <td><a href="/experiment/123">123</a></td>
+        </tr> -->
+      </tbody>
+    </table>
+
+    <script id="experiments-template" type="x-tmpl-mustache">
+      {{#experiments}}
+        <tr>
+          <td class="running-{{running}}">•</td>
+          <td><a href="/experiment/{{id}}">{{name}}</a></td>
+          <td class="visitors">{{visitors}}</td>
+          <td class="actions">{{actions}}</td>
+        </tr>
+      {{/experiments}}
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/bundle.js"></script>
+  </body>
+</html>

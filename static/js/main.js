@@ -1,9 +1,44 @@
+var Mustache = require('mustache');
+
 $(function () {
   var pathname = window.location.pathname;
   if (pathname === '/') {
     if (localStorage.token) {
       window.location.href = '/experiments';
     }
+  } else if (pathname === '/experiments') {
+    if (!localStorage.token) {
+      window.location.href = '/login';
+    }
+    var experiments = [{
+      name: 'test',
+      id: 1,
+      actions: 155,
+      visitors: 1050,
+      running: true
+    },{
+      name: 'test',
+      id: 1,
+      actions: 155,
+      visitors: 1050,
+      running: true
+    },{
+      name: 'test',
+      id: 1,
+      actions: 155,
+      visitors: 1050,
+      running: true
+    },{
+      name: 'test',
+      id: 1,
+      actions: 155,
+      visitors: 1050,
+      running: false
+    }]
+    var template = $('#experiments-template').html();
+    $('#experiments tbody').html(Mustache.render(template, {
+      experiments: experiments
+    }));
   } else if (pathname === '/logout') {
     localStorage.removeItem('token');
     window.location.href = '/';

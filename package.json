@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-css": "stylus --include-css static/css",
+    "watch-css": "stylus -w --include-css static/css"
   },
   "author": "",
   "license": "ISC",
@@ -12,9 +14,12 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.9.0",
     "express": "^4.9.5",
+    "jade": "^1.7.0",
+    "normalize.css": "^3.0.1",
     "pg": "^3.5.0",
     "redis": "^0.12.1",
     "rethinkdb": "^1.15.0-0",
-    "sqlite3": "^3.0.2"
+    "sqlite3": "^3.0.2",
+    "stylus": "^0.49.1"
   }
 }

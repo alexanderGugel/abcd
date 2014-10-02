@@ -11,39 +11,52 @@ server.get('/', function(req, res){
   res.send('hello world');
 });
 
-server.use('/admin', adminRouter);
-
-server.get('/login', function () {
-
+server.get('/login', function (req, res) {
+  res.sendFile(__dirname + '/static/login.html');
 });
 
-server.post('/register', function (req, res) {
-  user.register(req.email, req.password, function (error, token) {
+server.get('/signup', function (req, res) {
+  res.sendFile(__dirname + '/static/signup.html');
+});
+
+server.get('/logout', function (req, res) {
+  res.sendFile(__dirname + '/static/logout.html');
+});
+
+
+
+server.post('/api/user', function (req, res) {
+  var email = req.body.email;
+  var password = req.body.password;
+  user.register(email, password, function (error, token) {
     if (error) {
-      res.send({
+      res.send(400, {
         error: error.message
       });
     } else {
-      res.send({
+      res.send(200, {
         token: token
       });
     }
   });
 });
 
-server.post('/login', function (req, res) {
-  user.login(req.email, req.password, function (error, token) {
+server.post('/api/token', function (req, res) {
+  var email = req.body.email;
+  var password = req.body.password;
+  user.login(email, password, function (error, token) {
     if (error) {
-      res.send({
+      res.send(400, {
         error: error.message
       });
     } else {
-      res.send({
+      res.send(200, {
         token: token
       });
     }
   });
 });
+
 
 
 

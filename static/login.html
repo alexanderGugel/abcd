@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Login to abcd</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body id="login">
+    <form role="form">
+      <h1>Login</h1>
+      <label for="email-input">Email</label>
+      <input type="email" id="email-input" required minlength="3">
+      <label for="password-input">Password</label>
+      <input type="password" id="password-input" required minlength="6">
+      <span id="error"></span>
+      <button type="submit">Login!</button>
+      <p>
+        Forgot your password? - <a href="/forgot">Request a new one</a> <br>
+        First time user? - <a href="/signup">Sign Up</a>
+      </p>
+    </form>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

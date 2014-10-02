@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up for abcd</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body id="signup">
+    <form role="form">
+      <h1>Sign Up for abcd</h1>
+      <label for="email-input">Email</label>
+      <input type="email" id="email-input" placeholder="e.g. santa@claus.beard" required minlength="3">
+      <label for="password-input">Password</label>
+      <input type="password" id="password-input" placeholder="e.g. ••••••••••" required minlength="6">
+      <span id="error"></span>
+      <button type="submit">Sign Up!</button>
+      <p>
+        Already have an account? - <a href="/login">Login</a>
+      </p>
+    </form>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

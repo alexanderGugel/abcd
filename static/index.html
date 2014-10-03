@@ -6,6 +6,89 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
+    <section id="dashboard">
+      <nav>
+        <a href="./logout">Logout</a>
+        <a href="./settings">Settings</a>
+        <a href="./docs">Docs</a>
+      </nav>
+      <section id="getting-started">
+        <h3>Getting started</h3>
+        <section>
+          <p>
+            We noticed you are new here! Getting started is very easy.
+          </p>
+          <!-- // <script src="https://gist.github.com/alexanderGugel/b2beef1e2b5bb21f1e30.js"></script> -->
+          <button class="close">×</button>
+        </section>
+      </section>
+
+      <h3>Experiments for endpoint <span id="endpoint"></span></h3>
+
+      <table id="experiments">
+        <thead>
+          <tr>
+            <th class="running">Running?</th>
+            <th class="name">Name</th>
+            <th class="visitors">Visitiors</th>
+            <th class="actions">Actions</th>
+            <th class="delete"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Experiments go here -->
+        </tbody>
+      </table>
+
+      <script id="experiments-template" type="x-tmpl-mustache">
+        {{#experiments}}
+          <tr>
+            <td class="running-{{running}} running">•</td>
+            <td><a href="./experiment/{{id}}">{{name}}</a></td>
+            <td class="visitors">{{visitors}}</td>
+            <td class="actions">{{actions}}</td>
+            <td class="delete"><button data-id="{{id}}" title="Delete this experiment">×</button></td>
+          </tr>
+        {{/experiments}}
+      </script>
+    </section>
+
+    <section id="landing">
+      <a href="./login">Login</a>
+      <a href="./signup">Sign Up</a>
+    </section>
+
+    <section id="login">
+      <form role="form">
+        <h1>Login</h1>
+        <label for="email-input">Email</label>
+        <input type="email" placeholder="e.g. santa@claus.beard" required minlength="3">
+        <label for="password-input">Password</label>
+        <input type="password" placeholder="e.g. ••••••••••" required minlength="6">
+        <span class="error"></span>
+        <button type="submit">Login!</button>
+        <p>
+          Forgot your password? - <a href="./forgot">Request a new one</a> <br>
+          First time user? - <a href="./signup">Sign Up</a>
+        </p>
+      </form>
+    </section>
+
+    <section id="signup">
+      <form role="form">
+        <h1>Sign Up for abcd</h1>
+        <label for="email-input">Email</label>
+        <input type="email" placeholder="e.g. santa@claus.beard" required minlength="3">
+        <label for="password-input">Password</label>
+        <input type="password" placeholder="e.g. ••••••••••" required minlength="6">
+        <span class="error"></span>
+        <button type="submit">Sign Up!</button>
+        <p>
+          Already have an account? - <a href="./login">Login</a>
+        </p>
+      </form>
+    </section>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bundle.js"></script>
   </body>

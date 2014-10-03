@@ -3,4 +3,9 @@ module.exports = function () {
     page('/dashboard');
     return;
   }
+
+  $(function () {
+    $('section').hide();
+    $('#landing').show();
+  });
 };

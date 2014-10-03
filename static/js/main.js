@@ -1,6 +1,5 @@
 window.page = require('page');
 
-// $(function () {
   // if (localStorage.getItem('newbie') && !localStorage.getItem('hide-getting-started')) {
   //   $('#getting-started').show();
   //   $('#getting-started').on('click', '.close', function () {
@@ -9,15 +8,10 @@ window.page = require('page');
   //   })
   // }
 
-  // page('/', require('./landing'));
-  //
-  page('/dashboard', require('./dashboard'));
-  // page('/dashboard', function () {
-  //   debugger;
-  // });
-  // page('/logout', require('./logout'));
+page('/', require('./landing'));
+page('/dashboard', require('./dashboard'));
+page('/logout', require('./logout'));
 
-  page('/signup', require('./signup-login'));
-  // page('/login', require('./signup-login'));
-  page();
-// });
+page('/signup', require('./signup'));
+page('/login', require('./login'));
+page();

@@ -1,20 +1,20 @@
-// var signup = window.location.pathname === '/signup';
-
-module.exports = function () {
-  $('body').load('signup.html');
+module.exports = function (context) {
+  $(function () {
+    $('section').hide();
+    $('#login').show();
+  });
 
   if (localStorage.getItem('token') !== null) {
-    console.log('TOKEN!')
     page('/dashboard');
     return;
   }
 
-  $('body').on('submit', 'form', function (e) {
+  $('#login form').on('submit', function (e) {
     e.preventDefault();
-    var email = $('#email-input').val();
-    var password = $('#password-input').val();
+    var email = $('#login input[type=email]').val();
+    var password = $('#login input[type=password]').val();
     $.ajax({
-      url: signup ? '/api/user' : '/api/token',
+      url: '/api/token',
       type: 'POST',
       data: JSON.stringify({
         email: email,
@@ -24,15 +24,11 @@ module.exports = function () {
       dataType: 'json',
       success: function (response) {
         localStorage.setItem('token', response.token);
-        if (signup) {
-          localStorage.setItem('newbie', new Date().getTime());
-        }
         page('/dashboard');
       },
       error: function (response) {
-        $('form #error').text(response.responseJSON.error);
+        $('#login .error').text(response.responseJSON.error);
       }
     });
   });
-
 };

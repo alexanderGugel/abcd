@@ -66,9 +66,9 @@ module.exports = function () {
   });
 
   $(function () {
-    $('body').load('dashboard.html', function () {
-      loadExperiments();
-      loadEndpoint();
-    });
+    $('section').hide();
+    $('#dashboard').show();
+    loadExperiments();
+    loadEndpoint();
   });
 };

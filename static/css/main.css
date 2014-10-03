@@ -475,8 +475,8 @@ body {
   margin-bottom: 15px;
   color: #444;
 }
-#login form #error,
-#signup form #error {
+#login form .error,
+#signup form .error {
   color: #900;
 }
 #login form button,

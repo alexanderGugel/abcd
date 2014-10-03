@@ -2,6 +2,11 @@ var query = require('./query');
 
 query(
   'DROP TABLE IF EXISTS "user" CASCADE;' +
+  'DROP TABLE IF EXISTS "token" CASCADE;' +
+  'DROP TABLE IF EXISTS "endpoint" CASCADE;' +
+  'DROP TABLE IF EXISTS "experiment" CASCADE;' +
+  'DROP TABLE IF EXISTS "variant" CASCADE;' +
+  'DROP TABLE IF EXISTS "action" CASCADE;' +
 
   'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";' +
 
@@ -34,8 +39,8 @@ query(
   'CREATE TABLE IF NOT EXISTS "variant" (' +
     'id BIGSERIAL PRIMARY KEY,' +
     'name TEXT NOT NULL,' +
-    'control BOOLEAN NOT NULL,' +
-    'experiment_id BIGSERIAL NOT NULL REFERENCES "experiment"(id)' +
+    'experiment_id BIGSERIAL NOT NULL REFERENCES "experiment"(id),' +
+    'UNIQUE (name, experiment_id)' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "action" (' +
@@ -43,7 +48,7 @@ query(
     'started_at TIMESTAMP DEFAULT NOW(),' +
     'completed_at TIMESTAMP,' +
     'start_data JSON NOT NULL,' +
-    'complete_data JSON NOT NULL,' +
+    'complete_data JSON,' +
     'variant_id BIGSERIAL NOT NULL REFERENCES "variant"(id)' +
   ');'
 );

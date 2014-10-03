@@ -4,6 +4,7 @@ var user = require('./user');
 var endpoint = require('./endpoint');
 var experiment = require('./experiment');
 var action = require('./action');
+var variant = require('./variant');
 
 var server = express();
 server.use(bodyParser.json());
@@ -98,18 +99,6 @@ server.get('/api/endpoint', user.requireToken, function (req, res) {
   });
 });
 
-// Start an action
-server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
-  var endpoint = req.query.endpoint;
-  var experiment = req.body.experiment;
-  var variant = req.body.variant;
-  var data = req.body.data;
-});
-
-// Complete an action
-server.put('/api/action', function (req, res) {
-});
-
 // Get all experiments a specific user has
 server.get('/api/experiment', user.requireToken, function (req, res) {
   experiment.getForUser(req.userId, function (error, experiments) {
@@ -134,6 +123,22 @@ server.delete('/api/experiment/:id', user.requireToken, function (req, res) {
     }
     res.send(204, {});
   });
+});
+
+// Start an action
+server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
+  action.start(req.userId, req.body.experiment, req.body.variant, function (error, result) {
+    if (error) {
+      return res.send(400, {
+        error: error.message
+      });
+    }
+    res.send(200, result);
+  })
+});
+
+// Complete an action
+server.put('/api/action', function (req, res) {
 });
 
 var port = process.env.PORT || 3000;

@@ -1,4 +1,5 @@
 var query = require('./query');
+var async = require('async');
 
 var getForUser = function (userId, callback) {
   query('SELECT * FROM "experiment" WHERE user_id = $1', [userId], function (err, result) {
@@ -28,23 +29,22 @@ var createForUser = function (userId, experimentName, callback) {
   });
 };
 
-var nameToIdForUser = function (userId, experimentName, callback) {
-  query('SELECT id FROM "EXPERIMENT" WHERE user_id = $1 AND name = $2', [userId, experimentName], function (error, result) {
-    
-  });
-};
-
-var findOrCreateForUser = function (userId, experimentName, callback) {
-  createForUser(userId, experimentName, function (error, experimentId) {
-    if (experimentId) {
-      return callback(null, experimentId);
+var findOrCreateByNameForUser = function (userId, experimentName, callback) {
+  query('SELECT * FROM "experiment" WHERE user_id = $1 AND name = $2', [userId, experimentName], function (error, result) {
+    var rows = result.rows;
+    if (rows.length === 0) {
+      createForUser(userId, experimentName, function () {
+        findOrCreateByNameForUser(userId, experimentName, callback);
+      });
+    } else {
+      callback(null, rows[0]);
     }
-    nameToIdForUser(userId, experimentName, callback);
   });
 };
 
 module.exports = exports = {
   getForUser: getForUser,
   deleteForUser: deleteForUser,
-  createForUser: createForUser
+  createForUser: createForUser,
+  findOrCreateByNameForUser: findOrCreateByNameForUser
 };

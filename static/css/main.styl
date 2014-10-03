@@ -10,7 +10,6 @@
     text-align: left
     padding: 1em
     h1
-      font-weight: 300
       text-align: center
     input, label, button
       display: block
@@ -21,27 +20,14 @@
       margin-top: 1.5em
 
 #dashboard
-  nav
-    display: block
-    &:after
-      content: ""
-      display: table
-      clear: both
-    a
-      float: right
-      display: inline-block
-      padding: 0.25em
-      color: #ccc
-      text-decoration: none
-  h3
-    color: #666
+  h2
     margin: 0
-    padding: 0 0.5em 0.5em
-    font-weight: 300
+    padding: 0.5em
   #endpoint
     background: rgba(0, 0, 0, 0.08)
     display: inline-block
-    padding: 0.125em
+    padding: 0.125em 1em
+    margin-left: 0.5em
     font-family: Consolas, monaco, monospace
   #experiments
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
@@ -89,10 +75,8 @@
   display: none
   margin-bottom: 2em
   h3
-    color: #666
     margin: 0
     padding: 0.5em 8px
-    font-weight: 300
   section
     position: relative
     border-radius: 2px
@@ -109,3 +93,23 @@
       top: 0
       border: 0
       background: none
+
+#settings
+  h2, h3, h4
+    margin: 0
+    padding: 0.5em
+  form
+    padding: 0.5em
+    input
+      min-width: 30%
+      width: 300px
+    input, button
+      margin: 0.5em 0.5em 0 0
+  #delete-account
+    margin-top: 10em
+    button
+      padding: 0
+      background: none
+      text-shadow: none
+      box-shadow: none
+      color: #990000

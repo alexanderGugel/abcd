@@ -454,6 +454,7 @@ h4,
 h5,
 h6 {
   color: #444;
+  font-weight: 300;
 }
 form input {
   border: 1px solid #ddd;
@@ -486,6 +487,41 @@ nav a {
   color: #ccc;
   border: 0;
 }
+nav {
+  display: block;
+}
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+nav a {
+  float: right;
+  display: inline-block;
+  padding: 0.25em;
+  color: #ccc;
+  text-decoration: none;
+}
+nav a.active {
+  color: #999;
+}
+#message {
+  position: absolute;
+  padding: 0.5em;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+#message.error {
+  background: rgba(153,0,0,0.8);
+  color: rgba(255,255,255,0.8);
+}
+#message.success {
+  background: rgba(51,102,0,0.8);
+  color: rgba(255,255,255,0.8);
+}
 #login,
 #signup {
   text-align: center;
@@ -499,7 +535,6 @@ nav a {
 }
 #login form h1,
 #signup form h1 {
-  font-weight: 300;
   text-align: center;
 }
 #login form input,
@@ -519,31 +554,15 @@ nav a {
 #signup form p {
   margin-top: 1.5em;
 }
-#dashboard nav {
-  display: block;
-}
-#dashboard nav:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-#dashboard nav a {
-  float: right;
-  display: inline-block;
-  padding: 0.25em;
-  color: #ccc;
-  text-decoration: none;
-}
-#dashboard h3 {
-  color: #666;
+#dashboard h2 {
   margin: 0;
-  padding: 0 0.5em 0.5em;
-  font-weight: 300;
+  padding: 0.5em;
 }
 #dashboard #endpoint {
   background: rgba(0,0,0,0.08);
   display: inline-block;
-  padding: 0.125em;
+  padding: 0.125em 1em;
+  margin-left: 0.5em;
   font-family: Consolas, monaco, monospace;
 }
 #dashboard #experiments {
@@ -607,10 +626,8 @@ nav a {
   margin-bottom: 2em;
 }
 #getting-started h3 {
-  color: #666;
   margin: 0;
   padding: 0.5em 8px;
-  font-weight: 300;
 }
 #getting-started section {
   position: relative;
@@ -630,4 +647,31 @@ nav a {
   top: 0;
   border: 0;
   background: none;
+}
+#settings h2,
+#settings h3,
+#settings h4 {
+  margin: 0;
+  padding: 0.5em;
+}
+#settings form {
+  padding: 0.5em;
+}
+#settings form input {
+  min-width: 30%;
+  width: 300px;
+}
+#settings form input,
+#settings form button {
+  margin: 0.5em 0.5em 0 0;
+}
+#settings #delete-account {
+  margin-top: 10em;
+}
+#settings #delete-account button {
+  padding: 0;
+  background: none;
+  text-shadow: none;
+  box-shadow: none;
+  color: #900;
 }

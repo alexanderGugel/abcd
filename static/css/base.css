@@ -28,6 +28,7 @@ h4,
 h5,
 h6 {
   color: #444;
+  font-weight: 300;
 }
 form input {
   border: 1px solid #ddd;
@@ -59,4 +60,39 @@ form button {
 nav a {
   color: #ccc;
   border: 0;
+}
+nav {
+  display: block;
+}
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+nav a {
+  float: right;
+  display: inline-block;
+  padding: 0.25em;
+  color: #ccc;
+  text-decoration: none;
+}
+nav a.active {
+  color: #999;
+}
+#message {
+  position: absolute;
+  padding: 0.5em;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+#message.error {
+  background: rgba(153,0,0,0.8);
+  color: rgba(255,255,255,0.8);
+}
+#message.success {
+  background: rgba(51,102,0,0.8);
+  color: rgba(255,255,255,0.8);
 }

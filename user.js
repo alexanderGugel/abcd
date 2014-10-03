@@ -1,5 +1,7 @@
 var query = require('./query');
 var bcrypt = require('bcrypt-nodejs');
+var util = require('./util');
+var async = require('async');
 
 var register = function (email, password, callback) {
   if (!email) {
@@ -54,7 +56,7 @@ var login = function (email, password, callback) {
 };
 
 var requireToken = function (req, res, next) {
-  var token = req.query.token;
+  var token = req.query.token || req.body.token;
   if (!token) {
     return res.send(400, {
       error: 'Missing token'
@@ -72,6 +74,80 @@ var requireToken = function (req, res, next) {
   });
 };
 
+var getUser = function (req, res, next) {
+  query('SELECT * FROM "user" WHERE id = $1', [req.userId], function (err, result) {
+    req.user = result.rows[0];
+    next();
+  });
+};
+
+var update = function (id, email, password, callback) {
+  if (email && email.length < 3) {
+    return callback(new Error('Email too short'));
+  }
+  if (password && password.length < 6) {
+    return callback(new Error('Password too short (min 6 characters)'));
+  }
+  if (password) {
+    bcrypt.hash(password, null, null, function (err, password) {
+      query('UPDATE "user" SET password = $1 WHERE id = $2', [password, id], function (error, result) {
+        callback();
+      });
+    });
+  }
+  if (email) {
+    query('UPDATE "user" SET email = $1 WHERE id = $2', [email, id], function (error, result) {
+      if (error.code === '23505') {
+        callback(new Error('Email used by another account'));
+      } else {
+        callback();
+      }
+    });
+  }
+}
+
+var updatePassword = function (id, newPassword, callback) {
+  if (newPassword && newPassword.length < 6) {
+    return callback(new Error('Password too short (min 6 characters)'));
+  }
+  bcrypt.hash(newPassword, null, null, function (err, newPassword) {
+    query('UPDATE "user" SET password = $1 WHERE id = $2', [newPassword, id], function (error, result) {
+      callback();
+    });
+  });
+};
+
+var updateEmail = function (id, newEmail, callback) {
+  if (newEmail && newEmail.length < 3) {
+    return callback(new Error('Email too short'));
+  }
+  query('UPDATE "user" SET email = $1 WHERE id = $2', [newEmail, id], function (error, result) {
+    if (error && error.code === '23505') {
+      callback(new Error('Email used by another account'));
+    } else {
+      callback();
+    }
+  });
+};
+
+var update = function (id, newEmail, newPassword, callback) {
+  if (newPassword && newEmail) {
+    async.series([
+      function (callback) {
+        updateEmail(id, newEmail, callback);
+      },
+      function (callback) {
+        updatePassword(id, newPassword, callback);
+      }
+    ], callback);
+  } else if (newPassword) {
+    updatePassword(id, newPassword, callback);
+  } else if (newEmail) {
+    updateEmail(id, newEmail, callback);
+  } else {
+    callback();
+  }
+}
 
 // register('alexander.gugel@gmail.com', 'test', function () {
 //   console.log(arguments);
@@ -83,5 +159,9 @@ var requireToken = function (req, res, next) {
 module.exports = exports = {
   register: register,
   login: login,
-  requireToken: requireToken
+  requireToken: requireToken,
+  getUser: getUser,
+  updatePassword: updatePassword,
+  updateEmail: updateEmail,
+  update: update
 };

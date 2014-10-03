@@ -67,6 +67,24 @@ server.post('/api/token', function (req, res) {
   });
 });
 
+server.get('/api/user/me', user.requireToken, user.getUser, function (req, res) {
+  res.send({
+    user: req.user
+  });
+});
+
+server.put('/api/user/me', user.requireToken, function (req, res) {
+  user.update(req.userId, req.body.newEmail, req.body.newPassword, function (error) {
+    if (error) {
+      res.send(400, {
+        error: error.message
+      });
+    } else {
+      res.send(204, {});
+    }
+  })
+});
+
 // Get all endpoints for a specifix user
 server.get('/api/endpoint', user.requireToken, function (req, res) {
   endpoint.getForUser(req.userId, function (error, endpoints) {
@@ -82,7 +100,6 @@ server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
   var experiment = req.body.experiment;
   var variant = req.body.variant;
   var data = req.body.data;
-
 });
 
 // Complete an action

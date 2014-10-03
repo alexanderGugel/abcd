@@ -9,7 +9,7 @@
     <nav>
       <a href="/logout">Logout</a>
       <a href="/settings">Settings</a>
-      <a href="/help">Help</a>
+      <a href="/docs">Docs</a>
     </nav>
     <section id="getting-started">
       <h3>Getting started</h3>
@@ -42,7 +42,7 @@
     <script id="experiments-template" type="x-tmpl-mustache">
       {{#experiments}}
         <tr>
-          <td class="running-{{running}}">•</td>
+          <td class="running-{{running}} running">•</td>
           <td><a href="/experiment/{{id}}">{{name}}</a></td>
           <td class="visitors">{{visitors}}</td>
           <td class="actions">{{actions}}</td>

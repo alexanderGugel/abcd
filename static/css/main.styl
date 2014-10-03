@@ -15,11 +15,11 @@ body
   font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
   -webkit-font-smoothing: antialiased
   padding: 0.5em
+  color: #ccc
+  background: #f0f0f0
 
 #login, #signup
-  color: #ccc
   text-align: center
-  background: #f0f0f0
   form
     max-width: 400px
     margin: 10% auto
@@ -65,8 +65,6 @@ body
         border-bottom: 1px solid #ccc
 
 #dashboard
-  color: #ccc
-  background: #f0f0f0
   nav
     display: block
     &:after
@@ -94,43 +92,39 @@ body
     border-radius: 2px
     background: #fff
     width: 100%
+    border-collapse: collapse
     thead
       tr
         border-bottom: 1px solid #ddd
-        .running
-          width: 100px
-        .name
-          text-align: left
-        .visitors, .actions
-          width: 70px
-        .delete
-          width: 30px
         th
           padding: 0.5em
           font-weight: 300
+          &.name
+            width: 99%
+            text-align: left
     tbody
       tr
         border-bottom: 1px solid #efefef
         &:nth-child(even)
           background: rgba(0, 0, 0, 0.02)
-        .running-true, .running-false
-          text-align: center
-        .running-true
-          color: green
-        .running-false
-          color: red
-        .running, .visitors, .actions
-          text-align: center
-        .delete
-          text-align: right
-          button
-            border: 0
-            background: none
-            color: #ccc
-            &:hover
-              color: red
+        &:hover
+          background: rgba(0, 0, 0, 0.05)
         td
           padding: 0.5em
+          &.running-true
+            color: green
+          &.running-false
+            color: red
+          &.running, &.visitors, &.actions
+            text-align: center
+          &.delete
+            text-align: right
+            button
+              border: 0
+              background: none
+              color: #ccc
+              &:hover
+                color: red
           a
             color: #444
               text-decoration: none

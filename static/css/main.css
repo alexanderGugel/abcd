@@ -436,12 +436,12 @@ body {
   font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   padding: 0.5em;
+  color: #ccc;
+  background: #f0f0f0;
 }
 #login,
 #signup {
-  color: #ccc;
   text-align: center;
-  background: #f0f0f0;
 }
 #login form,
 #signup form {
@@ -506,10 +506,6 @@ body {
   text-decoration: none;
   border-bottom: 1px solid #ccc;
 }
-#dashboard {
-  color: #ccc;
-  background: #f0f0f0;
-}
 #dashboard nav {
   display: block;
 }
@@ -544,26 +540,18 @@ body {
   border-radius: 2px;
   background: #fff;
   width: 100%;
+  border-collapse: collapse;
 }
 #dashboard #experiments thead tr {
   border-bottom: 1px solid #ddd;
 }
-#dashboard #experiments thead tr .running {
-  width: 100px;
-}
-#dashboard #experiments thead tr .name {
-  text-align: left;
-}
-#dashboard #experiments thead tr .visitors,
-#dashboard #experiments thead tr .actions {
-  width: 70px;
-}
-#dashboard #experiments thead tr .delete {
-  width: 30px;
-}
 #dashboard #experiments thead tr th {
   padding: 0.5em;
   font-weight: 300;
+}
+#dashboard #experiments thead tr th.name {
+  width: 99%;
+  text-align: left;
 }
 #dashboard #experiments tbody tr {
   border-bottom: 1px solid #efefef;
@@ -571,34 +559,33 @@ body {
 #dashboard #experiments tbody tr:nth-child(even) {
   background: rgba(0,0,0,0.02);
 }
-#dashboard #experiments tbody tr .running-true,
-#dashboard #experiments tbody tr .running-false {
-  text-align: center;
+#dashboard #experiments tbody tr:hover {
+  background: rgba(0,0,0,0.05);
 }
-#dashboard #experiments tbody tr .running-true {
+#dashboard #experiments tbody tr td {
+  padding: 0.5em;
+}
+#dashboard #experiments tbody tr td.running-true {
   color: #008000;
 }
-#dashboard #experiments tbody tr .running-false {
+#dashboard #experiments tbody tr td.running-false {
   color: #f00;
 }
-#dashboard #experiments tbody tr .running,
-#dashboard #experiments tbody tr .visitors,
-#dashboard #experiments tbody tr .actions {
+#dashboard #experiments tbody tr td.running,
+#dashboard #experiments tbody tr td.visitors,
+#dashboard #experiments tbody tr td.actions {
   text-align: center;
 }
-#dashboard #experiments tbody tr .delete {
+#dashboard #experiments tbody tr td.delete {
   text-align: right;
 }
-#dashboard #experiments tbody tr .delete button {
+#dashboard #experiments tbody tr td.delete button {
   border: 0;
   background: none;
   color: #ccc;
 }
-#dashboard #experiments tbody tr .delete button:hover {
+#dashboard #experiments tbody tr td.delete button:hover {
   color: #f00;
-}
-#dashboard #experiments tbody tr td {
-  padding: 0.5em;
 }
 #dashboard #experiments tbody tr td a {
   color: #444;

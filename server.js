@@ -33,6 +33,10 @@ server.get('/dashboard', function (req, res) {
   res.sendFile(__dirname + '/static/index.html');
 });
 
+server.get('/docs', function (req, res) {
+  res.sendFile(__dirname + '/static/index.html');
+});
+
 // Create a new user account (Sign Up)
 server.post('/api/user', function (req, res) {
   var email = req.body.email;

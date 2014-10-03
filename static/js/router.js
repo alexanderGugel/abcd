@@ -8,11 +8,15 @@ window.page = require('page');
   //   })
   // }
 
-page('/', require('./landing'));
-page('/dashboard', require('./dashboard'));
 
-page('/logout', require('./logout'));
+// Not available to logged in users
+page('/', require('./landing'));
 page('/signup', require('./signup'));
 page('/login', require('./login'));
+page('/docs', require('./docs'));
+
+// Only for logged in users
+page('/dashboard', require('./dashboard'));
+page('/logout', require('./logout'));
 page('/settings', require('./settings'))
 page();

@@ -25,10 +25,15 @@ server.get('/logout', function (req, res) {
   res.sendFile(__dirname + '/static/index.html');
 });
 
+server.get('/settings', function (req, res) {
+  res.sendFile(__dirname + '/static/index.html');
+});
+
 server.get('/dashboard', function (req, res) {
   res.sendFile(__dirname + '/static/index.html');
 });
 
+// Create a new user account (Sign Up)
 server.post('/api/user', function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -45,6 +50,7 @@ server.post('/api/user', function (req, res) {
   });
 });
 
+// Create a new token (Login)
 server.post('/api/token', function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -61,6 +67,7 @@ server.post('/api/token', function (req, res) {
   });
 });
 
+// Get all endpoints for a specifix user
 server.get('/api/endpoint', user.requireToken, function (req, res) {
   endpoint.getForUser(req.userId, function (error, endpoints) {
     res.send({
@@ -69,7 +76,7 @@ server.get('/api/endpoint', user.requireToken, function (req, res) {
   });
 });
 
-// Start action
+// Start an action
 server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
   var endpoint = req.query.endpoint;
   var experiment = req.body.experiment;
@@ -78,10 +85,11 @@ server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
 
 });
 
-// Complete action
+// Complete an action
 server.put('/api/action', function (req, res) {
 });
 
+// Get all experiments a specific user has
 server.get('/api/experiment', user.requireToken, function (req, res) {
   experiment.getForUser(req.userId, function (error, experiments) {
     res.send({
@@ -90,10 +98,12 @@ server.get('/api/experiment', user.requireToken, function (req, res) {
   });
 });
 
+// Get all info about a specific experiment
 server.get('/api/experiment/:id', function (req, res) {
   // Detailed info about experiment (actions etc)
 });
 
+// Delete a specific experiment
 server.delete('/api/experiment/:id', user.requireToken, function (req, res) {
   experiment.deleteForUser(req.userId, req.body.experimentName, function (error) {
     if (error) {

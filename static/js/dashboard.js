@@ -56,16 +56,16 @@ module.exports = function () {
     return;
   }
 
-  $('#experiments tbody .delete button').on('click', '.delete button', function () {
-    var id = $(this).data('id');
-    var confirmation = confirm('Are you sure you want to delete this experiment?');
-    if (confirmation) {
-      console.log('Delete ' + id);
-      loadExperiments();
-    }
-  });
-
   $(function () {
+    $('#experiments').on('click', '.delete button', function () {
+      var id = $(this).data('id');
+      var confirmation = confirm('Are you sure you want to delete this experiment?');
+      if (confirmation) {
+        console.log('Delete ' + id);
+        loadExperiments();
+      }
+    });
+
     $('section').hide();
     $('#dashboard').show();
     loadExperiments();

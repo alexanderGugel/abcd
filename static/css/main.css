@@ -433,11 +433,58 @@ html {
   box-sizing: inherit;
 }
 body {
-  font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   padding: 0.5em;
-  color: #ccc;
+  color: #666;
   background: #f0f0f0;
+}
+a {
+  color: #444;
+  text-decoration: none;
+  border-bottom: 1px solid #ccc;
+}
+label {
+  color: #ccc;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #444;
+}
+form input {
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  padding: 1em;
+  margin-bottom: 1em;
+  color: #444;
+}
+form .error {
+  color: #900;
+}
+form button {
+  font-weight: 300;
+  background: #70a0c3;
+  padding: 1em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 0;
+  color: #fff;
+  margin-top: 1.5em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+nav a {
+  color: #ccc;
+  border: 0;
 }
 #login,
 #signup {
@@ -448,63 +495,29 @@ body {
   max-width: 400px;
   margin: 10% auto;
   text-align: left;
-  padding: 10px;
+  padding: 1em;
 }
 #login form h1,
 #signup form h1 {
   font-weight: 300;
-  color: #444;
   text-align: center;
+}
+#login form input,
+#signup form input,
+#login form label,
+#signup form label,
+#login form button,
+#signup form button {
+  display: block;
+  width: 100%;
 }
 #login form label,
 #signup form label {
-  margin-bottom: 5px;
-  display: block;
-}
-#login form input,
-#signup form input {
-  border: 1px solid #ddd;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  background: #fff;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  padding: 1em;
-  display: block;
-  width: 100%;
-  margin-bottom: 15px;
-  color: #444;
-}
-#login form .error,
-#signup form .error {
-  color: #900;
-}
-#login form button,
-#signup form button {
-  font-weight: 300;
-  background: #70a0c3;
-  padding: 1em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  border: 0;
-  color: #fff;
-  width: 100%;
-  margin-top: 25px;
-  display: block;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  margin-bottom: 0.25em;
 }
 #login form p,
 #signup form p {
-  margin-top: 15px;
-  color: #666;
-}
-#login form p a,
-#signup form p a {
-  color: #444;
-  text-decoration: none;
-  border-bottom: 1px solid #ccc;
+  margin-top: 1.5em;
 }
 #dashboard nav {
   display: block;
@@ -535,8 +548,6 @@ body {
 }
 #dashboard #experiments {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
   background: #fff;
   width: 100%;
@@ -603,8 +614,6 @@ body {
 }
 #getting-started section {
   position: relative;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background: #fff;

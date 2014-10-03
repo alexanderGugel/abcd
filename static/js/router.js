@@ -10,8 +10,9 @@ window.page = require('page');
 
 page('/', require('./landing'));
 page('/dashboard', require('./dashboard'));
-page('/logout', require('./logout'));
 
+page('/logout', require('./logout'));
 page('/signup', require('./signup'));
 page('/login', require('./login'));
+page('/settings', require('./settings'))
 page();

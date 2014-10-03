@@ -1,3 +1,6 @@
-if (localStorage.getItem('token')) {
-  window.location.href = '/dashboard';
-}
+module.exports = function () {
+  if (localStorage.getItem('token')) {
+    page('/dashboard');
+    return;
+  }
+};

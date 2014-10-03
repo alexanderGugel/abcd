@@ -1,9 +1,5 @@
 var Mustache = require('mustache');
 
-if (!localStorage.getItem('token')) {
-  window.location.href = '/login';
-}
-
 var loadExperiments = function () {
   var experimentsTemplate = $('#experiments-template').html();
 
@@ -38,8 +34,6 @@ var loadExperiments = function () {
   }));
 };
 
-loadExperiments();
-
 var loadEndpoint = function () {
   $.ajax({
     url: '/api/endpoint',
@@ -56,13 +50,25 @@ var loadEndpoint = function () {
   });
 };
 
-loadEndpoint();
-
-$('#experiments tbody').on('click', '.delete button', function () {
-  var id = $(this).data('id');
-  var confirmation = confirm('Are you sure you want to delete this experiment?');
-  if (confirmation) {
-    console.log('Delete ' + id);
-    loadExperiments();
+module.exports = function () {
+  if (localStorage.getItem('token') === null) {
+    page('/login');
+    return;
   }
-});
+
+  $('#experiments tbody .delete button').on('click', '.delete button', function () {
+    var id = $(this).data('id');
+    var confirmation = confirm('Are you sure you want to delete this experiment?');
+    if (confirmation) {
+      console.log('Delete ' + id);
+      loadExperiments();
+    }
+  });
+
+  $(function () {
+    $('body').load('dashboard.html', function () {
+      loadExperiments();
+      loadEndpoint();
+    });
+  });
+};

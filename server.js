@@ -10,23 +10,23 @@ server.use(bodyParser.json());
 server.use(express.static(__dirname + '/static'));
 
 server.get('/', function(req, res){
-  res.sendFile(__dirname + '/static/landing.html');
+  res.sendFile(__dirname + '/static/index.html');
 });
 
 server.get('/login', function (req, res) {
-  res.sendFile(__dirname + '/static/login.html');
+  res.sendFile(__dirname + '/static/index.html');
 });
 
 server.get('/signup', function (req, res) {
-  res.sendFile(__dirname + '/static/signup.html');
+  res.sendFile(__dirname + '/static/index.html');
 });
 
 server.get('/logout', function (req, res) {
-  res.sendFile(__dirname + '/static/logout.html');
+  res.sendFile(__dirname + '/static/index.html');
 });
 
 server.get('/dashboard', function (req, res) {
-  res.sendFile(__dirname + '/static/dashboard.html');
+  res.sendFile(__dirname + '/static/index.html');
 });
 
 server.post('/api/user', function (req, res) {

@@ -1,2 +1,4 @@
-localStorage.removeItem('token');
-window.location.href = '/';
+module.exports = function () {
+  localStorage.removeItem('token');
+  page('/');
+};

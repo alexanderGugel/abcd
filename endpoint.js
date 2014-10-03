@@ -7,6 +7,26 @@ var getForUser = function (userId, callback) {
   });
 };
 
+var requireEndpoint = function (req, res, next) {
+  var endpoint = req.query.endpoint;
+  if (!endpoint) {
+    return res.send(400, {
+      error: 'Missing endpoint'
+    });
+  }
+  query('SELECT user_id FROM "endpoint" WHERE endpoint = $1', [endpoint], function (err, result) {
+    var rows = result.rows;
+    if (rows.length === 0) {
+      return res.send(400, {
+        error: 'Invalid endpoint'
+      });
+    }
+    req.userId = result.rows[0]['user_id'];
+    next();
+  });
+};
+
 module.exports = exports = {
-  getForUser: getForUser
+  getForUser: getForUser,
+  requireEndpoint: requireEndpoint
 };

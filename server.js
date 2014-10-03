@@ -3,14 +3,13 @@ var bodyParser = require('body-parser')
 var user = require('./user');
 var endpoint = require('./endpoint');
 var experiment = require('./experiment');
-
+var action = require('./action');
 
 var server = express();
 server.use(bodyParser.json());
 server.use(express.static(__dirname + '/static'));
 
 server.get('/', function(req, res){
-  // var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   res.sendFile(__dirname + '/static/landing.html');
 });
 
@@ -71,11 +70,12 @@ server.get('/api/endpoint', user.requireToken, function (req, res) {
 });
 
 // Start action
-server.post('/api/action', function (req, res) {
-  var endpoint = req.body.endpoint;
+server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
+  var endpoint = req.query.endpoint;
   var experiment = req.body.experiment;
   var variant = req.body.variant;
   var data = req.body.data;
+
 });
 
 // Complete action
@@ -91,6 +91,7 @@ server.get('/api/experiment', user.requireToken, function (req, res) {
 });
 
 server.get('/api/experiment/:id', function (req, res) {
+  // Detailed info about experiment (actions etc)
 });
 
 server.delete('/api/experiment/:id', user.requireToken, function (req, res) {

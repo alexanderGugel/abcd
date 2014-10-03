@@ -27,7 +27,7 @@ query(
     'id BIGSERIAL PRIMARY KEY,' +
     'user_id BIGSERIAL NOT NULL REFERENCES "user"(id),' +
     'name TEXT NOT NULL,' +
-    'running BOOLEAN NOT NULL,' +
+    'running BOOLEAN NOT NULL DEFAULT TRUE,' +
     'UNIQUE (user_id, name)' +
   ');' +
 
@@ -38,8 +38,12 @@ query(
     'experiment_id BIGSERIAL NOT NULL REFERENCES "experiment"(id)' +
   ');' +
 
-  'CREATE TABLE IF NOT EXISTS "request" (' +
-    'id BIGSERIAL PRIMARY KEY,' + // TODO: More columns
+  'CREATE TABLE IF NOT EXISTS "action" (' +
+    'id BIGSERIAL PRIMARY KEY,' +
+    'started_at TIMESTAMP DEFAULT NOW(),' +
+    'completed_at TIMESTAMP,' +
+    'start_data JSON NOT NULL,' +
+    'complete_data JSON NOT NULL,' +
     'variant_id BIGSERIAL NOT NULL REFERENCES "variant"(id)' +
   ');'
 );

@@ -11,8 +11,8 @@ module.exports = function (context) {
 
   $('#signup form').on('submit', function (e) {
     e.preventDefault();
-    var email = $('#signup inpu[type=email]').val();
-    var password = $('#signup inpu[type=password]').val();
+    var email = $('#signup input[type=email]').val();
+    var password = $('#signup input[type=password]').val();
     $.ajax({
       url: '/api/user',
       type: 'POST',

@@ -120,7 +120,8 @@ $('.experiments').on('click', '.delete button', function () {
   }
 });
 
-$('#dashboard .create-endpoint').on('click', function () {
+$('#dashboard .create-endpoint').on('click', function (e) {
+  e.preventDefault();
   createEndpoint();
 });
 

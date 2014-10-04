@@ -24,6 +24,7 @@
     margin: 0
     padding: 0.5em
   .endpoint
+    position: relative
     h2
       span
         background: rgba(0, 0, 0, 0.08)
@@ -31,48 +32,60 @@
         padding: 0.125em 1em
         margin-left: 0.5em
         font-family: Consolas, monaco, monospace
-  .experiments
-    margin-bottom: 3em
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-    border-radius: 2px
-    background: #fff
-    width: 100%
-    border-collapse: collapse
-    thead
-      tr
-        border-bottom: 1px solid #ddd
-        th
-          padding: 0.5em
-          font-weight: 300
-          &.name
-            width: 99%
-            text-align: left
-    tbody
-      tr
-        border-bottom: 1px solid #efefef
-        &:nth-child(even)
-          background: rgba(0, 0, 0, 0.02)
+    button
+      &.delete-endpoint
+        line-height: 1.5em
+        float: right
+        position: absolute
+        right: 0
+        top: 0
+        border: 0
+        background: none
+        color: #ccc
         &:hover
-          background: rgba(0, 0, 0, 0.05)
-        td
-          padding: 0.5em
-          &.running-true
-            color: green
-          &.running-false
-            color: red
-          &.running, &.visitors, &.actions
-            text-align: center
-          &.delete
-            text-align: right
-            button
-              border: 0
-              background: none
-              color: #ccc
-              &:hover
-                color: red
-          a
-            color: #444
-              text-decoration: none
+          color: red
+    .experiments
+      margin-bottom: 3em
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+      border-radius: 2px
+      background: #fff
+      width: 100%
+      border-collapse: collapse
+      thead
+        tr
+          border-bottom: 1px solid #ddd
+          th
+            padding: 0.5em
+            font-weight: 300
+            &.name
+              width: 99%
+              text-align: left
+      tbody
+        tr
+          border-bottom: 1px solid #efefef
+          &:nth-child(even)
+            background: rgba(0, 0, 0, 0.02)
+          &:hover
+            background: rgba(0, 0, 0, 0.05)
+          td
+            padding: 0.5em
+            &.running-true
+              color: green
+            &.running-false
+              color: red
+            &.running, &.visitors, &.actions
+              text-align: center
+            &.delete
+              text-align: right
+              button
+                border: 0
+                background: none
+                color: #ccc
+                &:hover
+                  color: red
+            a
+              color: #444
+                text-decoration: none
   .create-endpoint
     margin-top: 0
     padding: 0.5em 1em

@@ -1,7 +1,7 @@
 var query = require('./query');
 
 var read = function (userId, callback) {
-  query('SELECT * FROM "endpoint" WHERE user_id = $1', [userId], function (error, result) {
+  query('SELECT * FROM "endpoint" WHERE user_id = $1 AND is_deleted = FALSE', [userId], function (error, result) {
     if (error) {
       callback(error);
     } else {
@@ -21,7 +21,7 @@ var requireEndpoint = function (req, res, next) {
       error: 'Missing endpoint'
     });
   }
-  query('SELECT * FROM "endpoint" WHERE endpoint = $1', [endpoint], function (error, result) {
+  query('SELECT * FROM "endpoint" WHERE endpoint = $1 AND is_deleted = FALSE', [endpoint], function (error, result) {
     if (error) {
       if (error.code === '22P02') {
         res.status(400).send({
@@ -47,8 +47,15 @@ var requireEndpoint = function (req, res, next) {
   });
 };
 
+var drop = function (userId, endpoint, callback) {
+  query('UPDATE "endpoint" SET is_deleted = TRUE WHERE user_id = $1 AND endpoint = $2', [userId, endpoint], function (error) {
+    callback(error);
+  });
+};
+
 module.exports = exports = {
   create: create,
   read: read,
-  requireEndpoint: requireEndpoint
+  requireEndpoint: requireEndpoint,
+  drop: drop
 };

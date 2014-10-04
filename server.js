@@ -96,7 +96,7 @@ server.put('/api/user/me', user.requireToken, function (req, res) {
   })
 });
 
-// Get all endpoints for a specifix user
+// Get all endpoints for a specific user
 server.get('/api/endpoint', user.requireToken, function (req, res) {
   endpoint.read(req.userId, function (error, endpoints) {
     res.send({
@@ -105,14 +105,32 @@ server.get('/api/endpoint', user.requireToken, function (req, res) {
   });
 });
 
-// Get all endpoints for a specifix user
 server.post('/api/endpoint', user.requireToken, function (req, res) {
   endpoint.create(req.userId, function (error) {
     res.send({});
   });
 });
 
-
+server.delete('/api/endpoint', user.requireToken, function (req, res) {
+  if (!req.body.endpoint) {
+    return res.status(400).send({
+      error: 'Missing endpoint'
+    });
+  }
+  endpoint.drop(req.userId, req.body.endpoint, function (error) {
+    if (error) {
+      if (error.code === '22P02') {
+        return res.status(400).send({
+          error: 'Invalid endpoint'
+        });
+      }
+      return res.status(500).send({
+        error: 'Internal server error'
+      });
+    }
+    res.status(204).send({});
+  });
+});
 
 server.get('/api/experiment', user.requireToken, function (req, res) {
   experiment.readForUser(req.userId, function (error, experiments) {

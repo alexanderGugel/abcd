@@ -46,7 +46,7 @@ var async = require('async');
 ///
 
 var read = function (endpoint, callback) {
-  query('SELECT * FROM "experiment" WHERE endpoint = $1', [endpoint], function (error, result) {
+  query('SELECT * FROM "experiment" WHERE endpoint = $1 AND is_deleted = FALSE', [endpoint], function (error, result) {
     if (error) {
       callback(error);
     } else {
@@ -69,11 +69,13 @@ var create = function (endpointId, experimentName, callback) {
 };
 
 var drop = function (endpoint, experimentName, callback) {
-  // TODO
+  query('UPDATE "experiment" SET is_deleted = TRUE WHERE endpoint = $1 AND name = $2', [userId, experimentName], function (error) {
+    callback(error);
+  });
 };
 
 var readOrCreate = function (endpointId, experimentName, callback) {
-  query('SELECT * FROM "experiment" WHERE endpoint_id = $1 AND name = $2', [endpointId, experimentName], function (error, result) {
+  query('SELECT * FROM "experiment" WHERE endpoint_id = $1 AND name = $2 AND is_deleted = FALSE', [endpointId, experimentName], function (error, result) {
     if (error) {
       callback(error);
     } else if (result.rows.length === 0) {
@@ -85,7 +87,7 @@ var readOrCreate = function (endpointId, experimentName, callback) {
 };
 
 var readForUser = function (userId, callback) {
-  query('SELECT * FROM "endpoint" INNER JOIN "experiment" ON "experiment".endpoint_id = "endpoint".id AND "endpoint".user_id = $1', [userId], function (error, result) {
+  query('SELECT * FROM "endpoint" INNER JOIN "experiment" ON "experiment".endpoint_id = "endpoint".id AND "endpoint".user_id = $1 AND "experiment".is_deleted = FALSE AND "endpoint".is_deleted = FALSE', [userId], function (error, result) {
     if (error) {
       callback(error);
     } else {

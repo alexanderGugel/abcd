@@ -25,6 +25,7 @@ query(
   'CREATE TABLE IF NOT EXISTS "endpoint" (' +
     'id BIGSERIAL PRIMARY KEY,' +
     'endpoint UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),' +
+    'is_deleted BOOLEAN NOT NULL DEFAULT FALSE,' +
     'user_id BIGSERIAL NOT NULL REFERENCES "user"(id)' +
   ');' +
 
@@ -33,6 +34,7 @@ query(
     'endpoint_id BIGSERIAL NOT NULL REFERENCES "endpoint"(id),' +
     'name TEXT NOT NULL,' +
     'running BOOLEAN NOT NULL DEFAULT TRUE,' +
+    'is_deleted BOOLEAN NOT NULL DEFAULT FALSE,' +
     'UNIQUE (endpoint_id, name)' +
   ');' +
 

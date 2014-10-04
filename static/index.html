@@ -35,8 +35,9 @@
 
       <script id="endpoints-template" type="x-tmpl-mustache">
         {{#endpoints}}
-          <div class="endpoint">
+          <div class="endpoint" data-endpoint="{{endpoint}}">
             <h2>Experiments for endpoint <span>{{endpoint}}</span></h2>
+            <button class="delete-endpoint">×</button>
 
             <table class="experiments">
               <thead>
@@ -58,6 +59,15 @@
                     <td class="delete"><button data-id="{{id}}" title="Delete this experiment">×</button></td>
                   </tr>
                 {{/experiments}}
+                {{^experiments.0}}
+                  <tr>
+                    <td></td>
+                    <td><em>No experiments available for this endpoint :(</em></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                {{/experiments.0}}
               </tbody>
             </table>
           </div>

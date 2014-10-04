@@ -95,6 +95,24 @@ var createEndpoint = function () {
   });
 };
 
+var deleteEndpoint = function (endpoint) {
+  $.ajax({
+    url: '/api/endpoint',
+    type: 'DELETE',
+    data: JSON.stringify({
+      token: localStorage.getItem('token'),
+      endpoint: endpoint
+    }),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    success: function () {
+      loadExperiments();
+    }
+  });
+};
+
+
+
 // var loadEndpoints = function () {
 //   $.ajax({
 //     url: '/api/endpoint',
@@ -111,7 +129,7 @@ var createEndpoint = function () {
 //   });
 // };
 
-$('.experiments').on('click', '.delete button', function () {
+$('#dashboard .experiments').on('click', '.delete button', function () {
   var id = $(this).data('id');
   var confirmation = confirm('Are you sure you want to delete this experiment?');
   if (confirmation) {
@@ -123,6 +141,14 @@ $('.experiments').on('click', '.delete button', function () {
 $('#dashboard .create-endpoint').on('click', function (e) {
   e.preventDefault();
   createEndpoint();
+});
+
+$('#dashboard .endpoints').on('click', '.delete-endpoint', function () {
+  var endpoint = $(this).closest('.endpoint').data('endpoint');
+  var confirmation = confirm('Are you sure you want to delete this endpoint and all its experiments?');
+  if (confirmation) {
+    deleteEndpoint(endpoint);
+  }
 });
 
 module.exports = function () {

@@ -10,6 +10,10 @@ var read = function (userId, callback) {
   });
 };
 
+var create = function (userId, callback) {
+  query('INSERT INTO "endpoint" (user_id) VALUES ($1)', [userId], callback);
+};
+
 var requireEndpoint = function (req, res, next) {
   var endpoint = req.query.endpoint || req.body.endpoint;
   if (!endpoint) {
@@ -44,6 +48,7 @@ var requireEndpoint = function (req, res, next) {
 };
 
 module.exports = exports = {
+  create: create,
   read: read,
   requireEndpoint: requireEndpoint
 };

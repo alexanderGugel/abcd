@@ -32,7 +32,8 @@ var loadExperiments = function () {
   // $('.experiments tbody').html(Mustache.render(experimentsTemplate, {
   //   experiments: experiments
   // }));
-  
+
+
   $.ajax({
     url: '/api/experiment',
     type: 'GET',
@@ -40,23 +41,56 @@ var loadExperiments = function () {
       token: localStorage.getItem('token')
     },
     dataType: 'json',
-    success: function (response) {
-      var experiments = response.experiments;
-      var sortedExperiments = {};
-      for (var i = 0; i < experiments.length; i++) {
-        sortedExperiments[experiments[i].endpoint] = sortedExperiments[experiments[i].endpoint] || [];
-        sortedExperiments[experiments[i].endpoint].push(experiments[i]);
-      }
-      var endpoints = [];
-      for (var endpoint in sortedExperiments) {
-        endpoints.push({
-          endpoint: endpoint,
-          experiments: sortedExperiments[endpoint]
-        });
-      }
-      $('#dashboard .endpoints').html(Mustache.render(endpointsTemplate, {
-        endpoints: endpoints
-      }));
+    success: function (experimentResponse) {
+
+      $.ajax({
+        url: '/api/endpoint',
+        type: 'GET',
+        data: {
+          token: localStorage.getItem('token')
+        },
+        dataType: 'json',
+        success: function (endpointResponse) {
+          var experiments = experimentResponse.experiments;
+          var endpoints = endpointResponse.endpoints;
+          var sortedExperiments = {};
+
+          for (var i = 0; i < endpoints.length; i++) {
+            sortedExperiments[endpoints[i].endpoint] = [];
+          }
+
+          for (var i = 0; i < experiments.length; i++) {
+            sortedExperiments[experiments[i].endpoint].push(experiments[i]);
+          }
+
+          endpoints = [];
+          for (var endpoint in sortedExperiments) {
+            endpoints.push({
+              endpoint: endpoint,
+              experiments: sortedExperiments[endpoint]
+            });
+          }
+
+          $('#dashboard .endpoints').html(Mustache.render(endpointsTemplate, {
+            endpoints: endpoints
+          }));
+        }
+      });
+    }
+  });
+};
+
+var createEndpoint = function () {
+  $.ajax({
+    url: '/api/endpoint',
+    type: 'POST',
+    data: JSON.stringify({
+      token: localStorage.getItem('token')
+    }),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    success: function () {
+      loadExperiments();
     }
   });
 };
@@ -84,6 +118,10 @@ $('.experiments').on('click', '.delete button', function () {
     console.log('Delete ' + id);
     loadExperiments();
   }
+});
+
+$('#dashboard .create-endpoint').on('click', function () {
+  createEndpoint();
 });
 
 module.exports = function () {

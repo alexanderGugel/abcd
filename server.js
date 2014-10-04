@@ -105,6 +105,15 @@ server.get('/api/endpoint', user.requireToken, function (req, res) {
   });
 });
 
+// Get all endpoints for a specifix user
+server.post('/api/endpoint', user.requireToken, function (req, res) {
+  endpoint.create(req.userId, function (error) {
+    res.send({});
+  });
+});
+
+
+
 server.get('/api/experiment', user.requireToken, function (req, res) {
   experiment.readForUser(req.userId, function (error, experiments) {
     res.send({

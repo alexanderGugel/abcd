@@ -10,6 +10,12 @@ var server = express();
 server.use(bodyParser.json());
 server.use(express.static(__dirname + '/static'));
 
+server.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 server.get('/', function(req, res){
   res.sendFile(__dirname + '/static/index.html');
 });

@@ -132,9 +132,12 @@ var completeAction = function (server, endpoint, id, callback) {
   }));
 };
 
-startAction('http://localhost:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', 'Experiment 1', 'Variant 1', function (error, action) {
-  completeAction('http://localhost:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', action.id, function () {});
+startAction('http://alex.dev:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', 'Experiment 1', 'Variant 1', function (error, action) {
+  completeAction('http://alex.dev:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', action.id, function () {});
 });
 
+var Experiment = function (name, options) {
+
+};
 
 window.startAction = startAction;

@@ -47,7 +47,7 @@ query(
     'id BIGSERIAL PRIMARY KEY,' +
     'started_at TIMESTAMP DEFAULT NOW(),' +
     'completed_at TIMESTAMP,' +
-    'start_data JSON NOT NULL,' +
+    'start_data JSON,' +
     'complete_data JSON,' +
     'variant_id BIGSERIAL NOT NULL REFERENCES "variant"(id)' +
   ');'

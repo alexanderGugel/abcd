@@ -134,11 +134,19 @@ server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
       });
     }
     res.send(200, result);
-  })
+  });
 });
 
 // Complete an action
-server.put('/api/action', function (req, res) {
+server.post('/api/action/:id', endpoint.requireEndpoint, function (req, res) {
+  action.complete(req.params.id, function (error, result) {
+    if (error) {
+      return res.send(400, {
+        error: error.message
+      });
+    }
+    res.send(200, result || {});
+  });
 });
 
 var port = process.env.PORT || 3000;

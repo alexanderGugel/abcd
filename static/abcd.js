@@ -94,15 +94,15 @@ if (typeof XMLHttpRequest === 'undefined') {
 
 var startAction = function (server, endpoint, experiment, variant, callback) {
   var request = new XMLHttpRequest();
-  request.open('POST', server, true);
+  request.open('POST', server + '/api/action', true);
   request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
   request.onreadystatechange = function() {
     if (this.readyState === 4){
       if (this.status >= 200 && this.status < 400){
-        callback(null, JSON.parse(this.responseText));
+        callback(null, JSON.parse(this.responseText).action);
       } else {
-        callback(JSON.parse(this.responseText));
+        callback(new Error(JSON.parse(this.responseText).error));
       }
     }
   };
@@ -114,12 +114,27 @@ var startAction = function (server, endpoint, experiment, variant, callback) {
 };
 
 var completeAction = function (server, endpoint, id, callback) {
-
+  var request = new XMLHttpRequest();
+  request.open('POST', server + '/api/action/' + id, true);
+  request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  request.onreadystatechange = function() {
+    if (this.readyState === 4){
+      if (this.status >= 200 && this.status < 400){
+        callback(null, JSON.parse(this.responseText));
+      } else {
+        callback(new Error(JSON.parse(this.responseText).error));
+      }
+    }
+  };
+  request.send(JSON.stringify({
+    endpoint: endpoint
+  }));
 };
 
-startAction('http://localhost:3000/api/action', '7f691557-b280-4edf-8c64-4b3f31ac8b38', 'Experiment 1', 'Variant 1', function (error, action) {
-  console.log(error);
-  console.log(action);
+startAction('http://localhost:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', 'Experiment 1', 'Variant 1', function (error, action) {
+  completeAction('http://localhost:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', action.id, function () {});
 });
+
 
 window.startAction = startAction;

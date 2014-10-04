@@ -5,17 +5,16 @@ var variant = require('./variant');
 
 var start = function (userId, experimentName, variantName, callback) {
   if (!experimentName) {
-    callback(new Error('Missing experiment'));
+    return callback(new Error('Missing experiment'));
   }
 
   if (!variantName) {
-    callback(new Error('Missing variant'));
+    return callback(new Error('Missing variant'));
   }
 
   experiment.findOrCreateByNameForUser(userId, experimentName, function (error, experiment) {
     variant.findOrCreate(experiment.id, variantName, function (error, variant) {
       query('INSERT INTO "action" (variant_id, start_data) VALUES ($1, $2) RETURNING id', [variant.id, '{}'], function (error, result) {
-        console.log(error);
         var rows = result.rows;
         callback(null, {
           experiment: experiment,
@@ -27,7 +26,15 @@ var start = function (userId, experimentName, variantName, callback) {
   });
 };
 
-var complete = function (id, data, callback) {
+var complete = function (id, callback) {
+  if (!id) {
+    return callback(new Error('Missing id'));
+  }
+
+  query('UPDATE "action" SET complete_data = $1, completed_at = NOW() WHERE id = $2', ['{}', id], function (error, result) {
+    console.log(error);
+    callback(null);
+  });
 };
 
 module.exports = exports = {

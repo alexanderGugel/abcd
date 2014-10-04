@@ -105,9 +105,8 @@ server.get('/api/endpoint', user.requireToken, function (req, res) {
   });
 });
 
-// Get all experiments a specific user has
 server.get('/api/experiment', user.requireToken, function (req, res) {
-  experiment.read(req.userId, function (error, experiments) {
+  experiment.readForUser(req.userId, function (error, experiments) {
     res.send({
       experiments: experiments
     });

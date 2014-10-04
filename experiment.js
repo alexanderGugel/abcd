@@ -84,11 +84,22 @@ var readOrCreate = function (endpointId, experimentName, callback) {
   });
 };
 
+var readForUser = function (userId, callback) {
+  query('SELECT * FROM "endpoint" INNER JOIN "experiment" ON "experiment".endpoint_id = "endpoint".id AND "endpoint".user_id = $1', [userId], function (error, result) {
+    if (error) {
+      callback(error);
+    } else {
+      callback(null, result.rows);
+    }
+  });
+};
+
 module.exports = exports = {
   create: create,
   read: read,
   drop: drop,
-  readOrCreate: readOrCreate
+  readOrCreate: readOrCreate,
+  readForUser: readForUser
   // getForUser: getForUser,
   // deleteForUser: deleteForUser,
   // createForUser: createForUser,

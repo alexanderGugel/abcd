@@ -561,14 +561,14 @@ nav a.active {
   margin: 0;
   padding: 0.5em;
 }
-#dashboard #endpoint {
+#dashboard .endpoint h2 span {
   background: rgba(0,0,0,0.08);
   display: inline-block;
   padding: 0.125em 1em;
   margin-left: 0.5em;
   font-family: Consolas, monaco, monospace;
 }
-#dashboard #experiments {
+#dashboard .experiments {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -577,52 +577,52 @@ nav a.active {
   width: 100%;
   border-collapse: collapse;
 }
-#dashboard #experiments thead tr {
+#dashboard .experiments thead tr {
   border-bottom: 1px solid #ddd;
 }
-#dashboard #experiments thead tr th {
+#dashboard .experiments thead tr th {
   padding: 0.5em;
   font-weight: 300;
 }
-#dashboard #experiments thead tr th.name {
+#dashboard .experiments thead tr th.name {
   width: 99%;
   text-align: left;
 }
-#dashboard #experiments tbody tr {
+#dashboard .experiments tbody tr {
   border-bottom: 1px solid #efefef;
 }
-#dashboard #experiments tbody tr:nth-child(even) {
+#dashboard .experiments tbody tr:nth-child(even) {
   background: rgba(0,0,0,0.02);
 }
-#dashboard #experiments tbody tr:hover {
+#dashboard .experiments tbody tr:hover {
   background: rgba(0,0,0,0.05);
 }
-#dashboard #experiments tbody tr td {
+#dashboard .experiments tbody tr td {
   padding: 0.5em;
 }
-#dashboard #experiments tbody tr td.running-true {
+#dashboard .experiments tbody tr td.running-true {
   color: #008000;
 }
-#dashboard #experiments tbody tr td.running-false {
+#dashboard .experiments tbody tr td.running-false {
   color: #f00;
 }
-#dashboard #experiments tbody tr td.running,
-#dashboard #experiments tbody tr td.visitors,
-#dashboard #experiments tbody tr td.actions {
+#dashboard .experiments tbody tr td.running,
+#dashboard .experiments tbody tr td.visitors,
+#dashboard .experiments tbody tr td.actions {
   text-align: center;
 }
-#dashboard #experiments tbody tr td.delete {
+#dashboard .experiments tbody tr td.delete {
   text-align: right;
 }
-#dashboard #experiments tbody tr td.delete button {
+#dashboard .experiments tbody tr td.delete button {
   border: 0;
   background: none;
   color: #ccc;
 }
-#dashboard #experiments tbody tr td.delete button:hover {
+#dashboard .experiments tbody tr td.delete button:hover {
   color: #f00;
 }
-#dashboard #experiments tbody tr td a {
+#dashboard .experiments tbody tr td a {
   color: #444;
   text-decoration: none;
 }

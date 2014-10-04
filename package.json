@@ -9,8 +9,10 @@
     "watch-css": "stylus -w --include-css static/css",
     "build-js": "browserify static/js/main.js | uglifyjs -mc > static/js/bundle.js",
     "watch-js": "watchify static/js/main.js -o static/js/bundle.js -dv",
-    "build": "npm run build-js && npm run build-css",
-    "watch": "npm run watch-js & npm run watch-css",
+    "build-abcd": "browserify static/abcd.js | uglifyjs -mc > static/abcd.bundle.js",
+    "watch-abcd": "watchify static/abcd.js -o static/abcd.bundle.js -dv",
+    "build": "npm run build-js && npm run build-css && npm run build-abcd",
+    "watch": "npm run watch-js & npm run watch-css & npm run watch-abcd",
     "start": "node server.js"
   },
   "author": "",
@@ -25,8 +27,10 @@
     "normalize.css": "^3.0.1",
     "page": "^1.3.7",
     "pg": "^3.5.0",
+    "store": "^1.3.16",
     "stylus": "^0.49.1",
-    "uglifyjs": "^2.3.6"
+    "uglifyjs": "^2.3.6",
+    "zepto": "0.0.4"
   },
   "devDependencies": {
     "watchify": "^1.0.6"

@@ -50,11 +50,11 @@ server.post('/api/user', function (req, res) {
   var password = req.body.password;
   user.register(email, password, function (error, token) {
     if (error) {
-      res.send(400, {
+      res.status(400).send({
         error: error.message
       });
     } else {
-      res.send(200, {
+      res.status(200).send({
         token: token
       });
     }
@@ -67,11 +67,11 @@ server.post('/api/token', function (req, res) {
   var password = req.body.password;
   user.login(email, password, function (error, token) {
     if (error) {
-      res.send(400, {
+      res.status(400).send({
         error: error.message
       });
     } else {
-      res.send(200, {
+      res.status(200).send({
         token: token
       });
     }
@@ -87,11 +87,11 @@ server.get('/api/user/me', user.requireToken, user.readMiddleware, function (req
 server.put('/api/user/me', user.requireToken, function (req, res) {
   user.update(req.userId, req.body.newEmail, req.body.newPassword, function (error) {
     if (error) {
-      res.send(400, {
+      res.status(400).send({
         error: error.message
       });
     } else {
-      res.send(204, {});
+      res.status(204).send({});
     }
   })
 });
@@ -128,7 +128,7 @@ server.get('/api/experiment/:id', function (req, res) {
 //         error: error.message
 //       });
 //     }
-//     res.send(204, {});
+//     res.status(204).send({});
 //   });
 // });
 
@@ -136,11 +136,11 @@ server.get('/api/experiment/:id', function (req, res) {
 server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
   action.start(req.endpoint.id, req.body.experiment, req.body.variant, function (error, result) {
     if (error) {
-      return res.send(400, {
+      return res.status(400).send({
         error: error.message
       });
     }
-    res.send(200, result);
+    res.status(200).send(result);
   });
 });
 
@@ -148,11 +148,11 @@ server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
 server.post('/api/action/:id', endpoint.requireEndpoint, function (req, res) {
   action.complete(req.params.id, function (error, result) {
     if (error) {
-      return res.send(400, {
+      return res.status(400).send({
         error: error.message
       });
     }
-    res.send(200, result || {});
+    res.status(200).send(result || {});
   });
 });
 

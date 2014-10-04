@@ -78,7 +78,7 @@ server.post('/api/token', function (req, res) {
   });
 });
 
-server.get('/api/user/me', user.requireToken, user.getUser, function (req, res) {
+server.get('/api/user/me', user.requireToken, user.readMiddleware, function (req, res) {
   res.send({
     user: req.user
   });
@@ -98,7 +98,7 @@ server.put('/api/user/me', user.requireToken, function (req, res) {
 
 // Get all endpoints for a specifix user
 server.get('/api/endpoint', user.requireToken, function (req, res) {
-  endpoint.getForUser(req.userId, function (error, endpoints) {
+  endpoint.read(req.userId, function (error, endpoints) {
     res.send({
       endpoints: endpoints
     });
@@ -107,7 +107,7 @@ server.get('/api/endpoint', user.requireToken, function (req, res) {
 
 // Get all experiments a specific user has
 server.get('/api/experiment', user.requireToken, function (req, res) {
-  experiment.getForUser(req.userId, function (error, experiments) {
+  experiment.read(req.userId, function (error, experiments) {
     res.send({
       experiments: experiments
     });
@@ -117,23 +117,24 @@ server.get('/api/experiment', user.requireToken, function (req, res) {
 // Get all info about a specific experiment
 server.get('/api/experiment/:id', function (req, res) {
   // Detailed info about experiment (actions etc)
+  // TODO
 });
 
 // Delete a specific experiment
-server.delete('/api/experiment/:id', user.requireToken, function (req, res) {
-  experiment.deleteForUser(req.userId, req.body.experimentName, function (error) {
-    if (error) {
-      return res.send({
-        error: error.message
-      });
-    }
-    res.send(204, {});
-  });
-});
+// server.delete('/api/experiment/:id', user.requireToken, function (req, res) {
+//   experiment.deleteForUser(req.userId, req.body.experimentName, function (error) {
+//     if (error) {
+//       return res.send({
+//         error: error.message
+//       });
+//     }
+//     res.send(204, {});
+//   });
+// });
 
 // Start an action
 server.post('/api/action', endpoint.requireEndpoint, function (req, res) {
-  action.start(req.userId, req.body.experiment, req.body.variant, function (error, result) {
+  action.start(req.endpoint.id, req.body.experiment, req.body.variant, function (error, result) {
     if (error) {
       return res.send(400, {
         error: error.message

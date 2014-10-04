@@ -30,10 +30,10 @@ query(
 
   'CREATE TABLE IF NOT EXISTS "experiment" (' +
     'id BIGSERIAL PRIMARY KEY,' +
-    'user_id BIGSERIAL NOT NULL REFERENCES "user"(id),' +
+    'endpoint_id BIGSERIAL NOT NULL REFERENCES "endpoint"(id),' +
     'name TEXT NOT NULL,' +
     'running BOOLEAN NOT NULL DEFAULT TRUE,' +
-    'UNIQUE (user_id, name)' +
+    'UNIQUE (endpoint_id, name)' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "variant" (' +

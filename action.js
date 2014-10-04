@@ -2,8 +2,7 @@ var query = require('./query');
 var experiment = require('./experiment');
 var variant = require('./variant');
 
-
-var start = function (userId, experimentName, variantName, callback) {
+var start = function (endpointId, experimentName, variantName, callback) {
   if (!experimentName) {
     return callback(new Error('Missing experiment'));
   }
@@ -12,14 +11,20 @@ var start = function (userId, experimentName, variantName, callback) {
     return callback(new Error('Missing variant'));
   }
 
-  experiment.findOrCreateByNameForUser(userId, experimentName, function (error, experiment) {
-    variant.findOrCreate(experiment.id, variantName, function (error, variant) {
+  experiment.readOrCreate(endpointId, experimentName, function (error, experiment) {
+    if (error) {
+      return callback(error);
+    }
+    variant.readOrCreate(experiment.id, variantName, function (error, variant) {
+      if (error) {
+        return callback(error);
+      }
       query('INSERT INTO "action" (variant_id, start_data) VALUES ($1, $2) RETURNING id', [variant.id, '{}'], function (error, result) {
-        var rows = result.rows;
+        if (error) {
+          return callback(error);
+        }
         callback(null, {
-          experiment: experiment,
-          variant: variant,
-          action: rows[0]
+          action: result.rows[0]
         });
       })
     });
@@ -32,8 +37,7 @@ var complete = function (id, callback) {
   }
 
   query('UPDATE "action" SET complete_data = $1, completed_at = NOW() WHERE id = $2', ['{}', id], function (error, result) {
-    console.log(error);
-    callback(null);
+    callback(error);
   });
 };
 

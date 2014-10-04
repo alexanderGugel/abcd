@@ -132,12 +132,47 @@ var completeAction = function (server, endpoint, id, callback) {
   }));
 };
 
-startAction('http://alex.dev:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', 'Experiment 1', 'Variant 1', function (error, action) {
-  completeAction('http://alex.dev:3000', '7f691557-b280-4edf-8c64-4b3f31ac8b38', action.id, function () {});
+startAction('http://alex.dev:3000', '2f3ea756-d39b-48c8-a69f-b563bb075a2b', 'Experiment 2', 'Variant 2', function (error, action) {
+  completeAction('http://alex.dev:3000', '2f3ea756-d39b-48c8-a69f-b563bb075a2b', action.id, function () {});
 });
 
-var Experiment = function (name, options) {
+// var abcd = {};
+//
+// abcd.Experiment = function (name, options) {
+//   options = options || {};
+//   this.name = name;
+//   this.variants = {};
+//   this.endpoint = options.endpoint || abcd.endpoint;
+//   this.persists = options.persists || true;
+// };
+//
+// abcd.Experiment.prototype.variant = function (variant, options, callback) {
+//   options = options || {};
+//   if (typeof options === 'function') {
+//     callback = options;
+//   }
+//   this.variants[variant] = {
+//     weight: options.weight || 1,
+//     callback: callback || (function () {})
+//   };
+//   return this;
+// };
+//
+// abcd.Experiment.prototype.control = function (options, callback) {
+//   return this.variant('control', options, callback);
+// };
+//
+// abcd.Experiment.prototype.start = function (variant, data) {
+//   // Check if experiment is already running/ variant already chosen
+//   var experiment = store.get('abcd:' + this.endpoint + ':' + this.name);
+//   if (experiment) {
+//   }
+//
+// };
+//
+// abcd.Experiment.prototype.complete = function (data) {
+//
+// };
 
-};
 
-window.startAction = startAction;
+// window.abcd = abcd;

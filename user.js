@@ -69,42 +69,24 @@ var requireToken = function (req, res, next) {
         error: 'Invalid token'
       });
     }
+    req.token = token;
     req.userId = result.rows[0]['user_id'];
     next();
   });
 };
 
-var getUser = function (req, res, next) {
-  query('SELECT * FROM "user" WHERE id = $1', [req.userId], function (err, result) {
-    req.user = result.rows[0];
-    next();
+var readMiddleware = function (req, res, next) {
+  query('SELECT * FROM "user" WHERE id = $1', [req.userId], function (error, result) {
+    if (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    } else {
+      req.user = result.rows[0];
+      next();
+    }
   });
 };
-
-var update = function (id, email, password, callback) {
-  if (email && email.length < 3) {
-    return callback(new Error('Email too short'));
-  }
-  if (password && password.length < 6) {
-    return callback(new Error('Password too short (min 6 characters)'));
-  }
-  if (password) {
-    bcrypt.hash(password, null, null, function (err, password) {
-      query('UPDATE "user" SET password = $1 WHERE id = $2', [password, id], function (error, result) {
-        callback();
-      });
-    });
-  }
-  if (email) {
-    query('UPDATE "user" SET email = $1 WHERE id = $2', [email, id], function (error, result) {
-      if (error.code === '23505') {
-        callback(new Error('Email used by another account'));
-      } else {
-        callback();
-      }
-    });
-  }
-}
 
 var updatePassword = function (id, newPassword, callback) {
   if (newPassword && newPassword.length < 6) {
@@ -147,20 +129,13 @@ var update = function (id, newEmail, newPassword, callback) {
   } else {
     callback();
   }
-}
-
-// register('alexander.gugel@gmail.com', 'test', function () {
-//   console.log(arguments);
-// });
-// login('alexander.gugel@gmail.com', 'test', function () {
-//   console.log(arguments);
-// });
+};
 
 module.exports = exports = {
   register: register,
   login: login,
   requireToken: requireToken,
-  getUser: getUser,
+  readMiddleware: readMiddleware,
   updatePassword: updatePassword,
   updateEmail: updateEmail,
   update: update

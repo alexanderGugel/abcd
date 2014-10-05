@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Welcome to abcd</title>
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
@@ -30,14 +31,14 @@
       </div>
 
       <form>
-        <button class="create-endpoint">Add endpoint</button>
+        <button class="create-endpoint"><i class="icon ion-plus"></i> Add endpoint</button>
       </form>
 
       <script id="endpoints-template" type="x-tmpl-mustache">
         {{#endpoints}}
           <div class="endpoint" data-endpoint="{{endpoint}}">
-            <h2>Experiments for endpoint <span>{{endpoint}}</span></h2>
-            <button class="delete-endpoint">×</button>
+            <h2>Experiments for endpoint <span>{{endpoint}} <button class="delete-endpoint" title="Delete this endpoint">×</button></span></h2>
+
 
             <table class="experiments">
               <thead>
@@ -56,7 +57,7 @@
                     <td><a href="./experiment/{{id}}">{{name}}</a></td>
                     <td class="visitors">{{visitors}}</td>
                     <td class="actions">{{actions}}</td>
-                    <td class="delete"><button data-id="{{id}}" title="Delete this experiment">×</button></td>
+                    <td class="delete"><button data-id="{{id}}" title="Delete this experiment" class="delete-experiment">×</button></td>
                   </tr>
                 {{/experiments}}
                 {{^experiments.0}}

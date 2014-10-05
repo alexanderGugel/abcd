@@ -1,7 +1,12 @@
-var Mustache = require('mustache');
+var Hogan = require('hogan.js');
+
+var endpointsTemplate;
 
 var loadExperiments = function () {
-  var endpointsTemplate = $('#endpoints-template').html();
+  if (!endpointsTemplate) {
+    endpointsTemplate = $('#endpoints-template').html();
+    endpointsTemplate = Hogan.compile(endpointsTemplate);
+  }
 
   $.ajax({
     url: '/api/experiments',
@@ -40,8 +45,8 @@ var loadExperiments = function () {
             });
           }
 
-          $('#dashboard .endpoints').html(Mustache.render(endpointsTemplate, {
-            endpoints: endpoints
+          $('#dashboard .endpoints').html(endpointsTemplate.render({
+            endpoints: endpoints || []
           }));
         }
       });

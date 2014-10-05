@@ -571,17 +571,12 @@ nav a.active {
   margin-left: 0.5em;
   font-family: Consolas, monaco, monospace;
 }
-#dashboard .endpoint button.delete-endpoint {
-  line-height: 1.5em;
-  float: right;
-  position: absolute;
-  right: 0;
-  top: 0;
+#dashboard .endpoint .delete-endpoint {
   border: 0;
   background: none;
-  color: #ccc;
+  color: #999;
 }
-#dashboard .endpoint button.delete-endpoint:hover {
+#dashboard .endpoint .delete-endpoint:hover {
   color: #f00;
 }
 #dashboard .endpoint .experiments {
@@ -607,6 +602,9 @@ nav a.active {
 }
 #dashboard .endpoint .experiments tbody tr {
   border-bottom: 1px solid #efefef;
+}
+#dashboard .endpoint .experiments tbody tr em {
+  color: #ccc;
 }
 #dashboard .endpoint .experiments tbody tr:nth-child(even) {
   background: rgba(0,0,0,0.02);
@@ -643,7 +641,10 @@ nav a.active {
   color: #444;
   text-decoration: none;
 }
-.create-endpoint {
+form {
+  text-align: right;
+}
+form .create-endpoint {
   margin-top: 0;
   padding: 0.5em 1em;
 }

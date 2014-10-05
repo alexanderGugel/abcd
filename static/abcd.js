@@ -132,8 +132,8 @@ var completeAction = function (server, endpoint, id, callback) {
   }));
 };
 
-startAction('http://alex.dev:3000', '2f3ea756-d39b-48c8-a69f-b563bb075a2b', 'Experiment 2', 'Variant 2', function (error, action) {
-  completeAction('http://alex.dev:3000', '2f3ea756-d39b-48c8-a69f-b563bb075a2b', action.id, function () {});
+startAction('http://alex.dev:3000', '57e8ced9-7216-400b-998d-a2c1e43d5c23', 'Experiment 2', 'Variant 2', function (error, action) {
+  completeAction('http://alex.dev:3000', '57e8ced9-7216-400b-998d-a2c1e43d5c23', action.id, function () {});
 });
 
 // var abcd = {};

@@ -141,10 +141,27 @@ server.get('/api/experiment', user.requireToken, function (req, res) {
 });
 
 // Get all info about a specific experiment
-server.get('/api/experiment/:id', function (req, res) {
-  // Detailed info about experiment (actions etc)
-  // TODO
-});
+// server.delete('/api/experiment/:id', user.requireToken, user.requireEndpoint, function (req, res) {
+  // // TODO
+  // if (!req.body.id) {
+  //   return res.status(400).send({
+  //     error: 'Missing endpoint'
+  //   });
+  // }
+  // endpoint.drop(req.userId, req.body.endpoint, function (error) {
+  //   if (error) {
+  //     if (error.code === '22P02') {
+  //       return res.status(400).send({
+  //         error: 'Invalid endpoint'
+  //       });
+  //     }
+  //     return res.status(500).send({
+  //       error: 'Internal server error'
+  //     });
+  //   }
+  //   res.status(204).send({});
+  // });
+// });
 
 // Delete a specific experiment
 // server.delete('/api/experiment/:id', user.requireToken, function (req, res) {

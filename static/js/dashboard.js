@@ -129,12 +129,12 @@ var deleteEndpoint = function (endpoint) {
 //   });
 // };
 
-$('#dashboard .experiments').on('click', '.delete button', function () {
-  var id = $(this).data('id');
+$('#dashboard').on('click', '.experiments .delete button', function () {
+  var id = $(this).closest('.experiment').data('id');
   var confirmation = confirm('Are you sure you want to delete this experiment?');
   if (confirmation) {
-    console.log('Delete ' + id);
     loadExperiments();
+    deleteExperiment(id);
   }
 });
 

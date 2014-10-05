@@ -6,12 +6,6 @@ var async = require('async');
 
 var users = express.Router();
 
-users.get('/me', auth, function (req, res) {
-  res.send({
-    users: [req.user]
-  });
-});
-
 users.formatValidation = function (req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
@@ -85,6 +79,10 @@ users.get('/me', auth, function (req, res) {
   res.send({
     user: req.user
   });
+});
+
+users.put('/me', auth, function (req, res) {
+  // TODO
 });
 
 module.exports = exports = users;

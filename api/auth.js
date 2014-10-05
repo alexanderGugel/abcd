@@ -1,3 +1,5 @@
+var query = require('./query');
+
 var auth = function (req, res, next) {
   var token = req.query.token || req.body.token;
   if (!token) {

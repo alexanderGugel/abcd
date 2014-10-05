@@ -5,7 +5,7 @@ var auth = require('./auth');
 var experiments = express.Router();
 
 experiments.get('/', auth, function (req, res) {
-  query('SELECT * FROM "experiments" INNER JOIN "endpoints" ON "experiments".endpoint_id = "endpoints".id AND "endpoints".user_id = $1 AND "experiments".is_deleted = FALSE AND "endpoints".is_deleted = FALSE', [req.user.id], function (error, result) {
+  query('SELECT name, running, "experiments".id, endpoint FROM "experiments" INNER JOIN "endpoints" ON "experiments".endpoint_id = "endpoints".id AND "endpoints".user_id = $1 AND "experiments".is_deleted = FALSE AND "endpoints".is_deleted = FALSE', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -16,6 +16,23 @@ experiments.get('/', auth, function (req, res) {
     res.send({
       experiments: result.rows
     });
+  });
+});
+
+experiments.delete('/:id', auth, function (req, res) {
+  query('UPDATE "experiments" SET is_deleted = TRUE WHERE user_id = $1 AND endpoint = $2', [req.user.id, req.params.id], function (error) {
+    if (error) {
+      if (error.code === '22P02') {
+        return res.status(400).send({
+          error: 'Invalid experiment'
+        });
+      }
+      res.status(500).send({
+        error: 'Internal server error'
+      });
+      throw error;
+    }
+    res.status(204).send({});
   });
 });
 

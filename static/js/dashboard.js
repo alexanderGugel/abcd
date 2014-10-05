@@ -79,29 +79,25 @@ var deleteEndpoint = function (endpoint) {
   });
 };
 
+var deleteExperiment = function (id) {
+  $.ajax({
+    url: '/api/experiments/' + id,
+    type: 'DELETE',
+    data: JSON.stringify({
+      token: localStorage.getItem('token')
+    }),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    success: function () {
+      loadExperiments();
+    }
+  });
+};
 
-
-// var loadEndpoints = function () {
-//   $.ajax({
-//     url: '/api/endpoint',
-//     type: 'GET',
-//     data: {
-//       token: localStorage.getItem('token')
-//     },
-//     dataType: 'json',
-//     success: function (response) {
-//       var endpoints = response.endpoints;
-//       var endpoint = endpoints[0].endpoint;
-//       $('#endpoint').text(endpoint);
-//     }
-//   });
-// };
-
-$('#dashboard').on('click', '.experiments .delete button', function () {
+$('#dashboard .experiments').on('click', '.delete-experiment', function () {
   var id = $(this).closest('.experiment').data('id');
   var confirmation = confirm('Are you sure you want to delete this experiment?');
   if (confirmation) {
-    loadExperiments();
     deleteExperiment(id);
   }
 });
@@ -129,6 +125,5 @@ module.exports = function () {
     $('section').hide();
     $('#dashboard').show();
     loadExperiments();
-    // loadEndpoints();
   });
 };

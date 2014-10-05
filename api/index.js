@@ -1,13 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var users = require('./users');
-var tokens = require('./tokens');
-var actions = require('./actions');
-var experiments = require('./experiments');
-var endpoints = require('./endpoints');
-
-
 var api = express.Router().use(bodyParser.json());
 
 api.all('*', function(req, res, next) {
@@ -17,10 +10,15 @@ api.all('*', function(req, res, next) {
 });
 
 // api.use('/actions', actions);
-api.use('/tokens', tokens);
-api.use('/users', users);
-api.use('/experiments', experiments);
-api.use('/endpoints', endpoints);
-// api.use('/variants', variants);
+api.use('/tokens', require('./tokens'));
+api.use('/users', require('./users'));
+api.use('/experiments', require('./experiments'));
+api.use('/endpoints', require('./endpoints'));
+
+api.all('*', function (req, res) {
+  res.status(404).send({
+    error: 'File not found'
+  });
+});
 
 module.exports = exports = api;

@@ -5,7 +5,6 @@ var auth = require('./auth');
 var endpoints = express.Router();
 
 endpoints.post('/', auth, function (req, res) {
-  console.log(arguments);
   query('INSERT INTO "endpoint" (user_id) VALUES ($1) RETURNING endpoint', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({

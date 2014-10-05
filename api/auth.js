@@ -21,6 +21,7 @@ var auth = function (req, res, next) {
       });
     }
     req.user = result.rows[0];
+    delete req.user.password;
     next();
   });
 };

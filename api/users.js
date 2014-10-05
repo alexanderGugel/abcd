@@ -1,6 +1,6 @@
 var express = require('express');
 var auth = require('./auth');
-var query = require('./query');
+var query = require('../db/query');
 var bcrypt = require('bcrypt-nodejs');
 var async = require('async');
 
@@ -46,11 +46,11 @@ users.post('/', users._validateUsernamePassword, function (req, res) {
       });
       throw error;
     }
-    query('INSERT INTO "user" (email, password) VALUES ($1, $2) RETURNING id', [email, password], function (error, result) {
+    query('INSERT INTO "users" (email, password) VALUES ($1, $2) RETURNING id', [email, password], function (error, result) {
       if (!error) {
         var rows = result.rows;
-        // query('INSERT INTO "endpoint" (user_id) VALUES ($1)', [rows[0].id]);
-        query('INSERT INTO "token" (user_id) VALUES ($1) RETURNING token', [rows[0].id], function (error, result) {
+        // query('INSERT INTO "endpoints" (user_id) VALUES ($1)', [rows[0].id]);
+        query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING token', [rows[0].id], function (error, result) {
           if (error) {
             res.status(500).send({
               error: 'Internal server error'
@@ -90,7 +90,7 @@ users.put('/me', auth, function (req, res, next) {
         error: 'Email too short'
       });
     }
-    query('UPDATE "user" SET email = $1 WHERE id = $2', [email, req.user.id], function (error, result) {
+    query('UPDATE "users" SET email = $1 WHERE id = $2', [email, req.user.id], function (error, result) {
       if (error) {
         if (error.code === '23505') {
           res.status(400).send({
@@ -125,7 +125,7 @@ users.put('/me', auth, function (req, res, next) {
         });
         throw error;
       }
-      query('UPDATE "user" SET password = $1 WHERE id = $2', [hash, req.user.id], function (error, result) {
+      query('UPDATE "users" SET password = $1 WHERE id = $2', [hash, req.user.id], function (error, result) {
         if (error) {
           res.send({
             error: 'Internal server error'

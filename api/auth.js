@@ -1,4 +1,4 @@
-var query = require('./query');
+var query = require('../db/query');
 
 var auth = function (req, res, next) {
   var token = req.query.token || req.body.token;
@@ -7,7 +7,7 @@ var auth = function (req, res, next) {
       error: 'Missing token'
     });
   }
-  query('SELECT * FROM "user" INNER JOIN "token" ON "token".token = $1 AND "token".user_id = "user".id', [token], function (error, result) {
+  query('SELECT * FROM "users" INNER JOIN "tokens" ON "tokens".token = $1 AND "tokens".user_id = "users".id', [token], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'

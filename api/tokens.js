@@ -1,6 +1,6 @@
 var express = require('express');
 var auth = require('./auth');
-var query = require('./query');
+var query = require('../db/query');
 var users = require('./users');
 var bcrypt = require('bcrypt-nodejs');
 
@@ -8,7 +8,7 @@ var tokens = express.Router();
 
 tokens.post('/', users._validateUsernamePassword, function (req, res) {
   var email = req.email;
-  query('SELECT id, password FROM "user" WHERE email = $1', [email], function (error, result) {
+  query('SELECT id, password FROM "users" WHERE email = $1', [email], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -33,7 +33,7 @@ tokens.post('/', users._validateUsernamePassword, function (req, res) {
           error: 'Invalid password'
         });
       }
-      query('INSERT INTO "token" (user_id) VALUES ($1) RETURNING token', [rows[0].id], function (error, result) {
+      query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING token', [rows[0].id], function (error, result) {
         if (error) {
           res.status(500).send({
             error: 'Internal server error'

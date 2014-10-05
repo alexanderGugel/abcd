@@ -1,5 +1,5 @@
 var express = require('express');
-var query = require('./query');
+var query = require('../db/query');
 
 var actions = express.Router();
 

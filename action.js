@@ -1,4 +1,4 @@
-var query = require('./query');
+var query = require('../db/query');
 var experiment = require('./experiment');
 var variant = require('./variant');
 
@@ -19,7 +19,7 @@ var start = function (endpointId, experimentName, variantName, callback) {
       if (error) {
         return callback(error);
       }
-      query('INSERT INTO "action" (variant_id, start_data) VALUES ($1, $2) RETURNING id', [variant.id, '{}'], function (error, result) {
+      query('INSERT INTO "actions" (variant_id, start_data) VALUES ($1, $2) RETURNING id', [variant.id, '{}'], function (error, result) {
         if (error) {
           return callback(error);
         }
@@ -36,7 +36,7 @@ var complete = function (id, callback) {
     return callback(new Error('Missing id'));
   }
 
-  query('UPDATE "action" SET complete_data = $1, completed_at = NOW() WHERE id = $2', ['{}', id], function (error, result) {
+  query('UPDATE "actions" SET complete_data = $1, completed_at = NOW() WHERE id = $2', ['{}', id], function (error, result) {
     callback(error);
   });
 };

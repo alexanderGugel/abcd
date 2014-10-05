@@ -2,40 +2,9 @@ var Mustache = require('mustache');
 
 var loadExperiments = function () {
   var endpointsTemplate = $('#endpoints-template').html();
-  //
-  // var experiments = [{
-  //   name: 'test',
-  //   id: 1,
-  //   actions: 155,
-  //   visitors: 1050,
-  //   running: true
-  // },{
-  //   name: 'test',
-  //   id: 1,
-  //   actions: 155,
-  //   visitors: 1050,
-  //   running: true
-  // },{
-  //   name: 'test',
-  //   id: 1,
-  //   actions: 155,
-  //   visitors: 1050,
-  //   running: true
-  // },{
-  //   name: 'test',
-  //   id: 1,
-  //   actions: 155,
-  //   visitors: 1050,
-  //   running: false
-  // }];
-  //
-  // $('.experiments tbody').html(Mustache.render(experimentsTemplate, {
-  //   experiments: experiments
-  // }));
-
 
   $.ajax({
-    url: '/api/experiment',
+    url: '/api/experiments',
     type: 'GET',
     data: {
       token: localStorage.getItem('token')
@@ -44,7 +13,7 @@ var loadExperiments = function () {
     success: function (experimentResponse) {
 
       $.ajax({
-        url: '/api/endpoint',
+        url: '/api/endpoints',
         type: 'GET',
         data: {
           token: localStorage.getItem('token')
@@ -82,7 +51,7 @@ var loadExperiments = function () {
 
 var createEndpoint = function () {
   $.ajax({
-    url: '/api/endpoint',
+    url: '/api/endpoints',
     type: 'POST',
     data: JSON.stringify({
       token: localStorage.getItem('token')
@@ -97,11 +66,10 @@ var createEndpoint = function () {
 
 var deleteEndpoint = function (endpoint) {
   $.ajax({
-    url: '/api/endpoint',
+    url: '/api/endpoints/' + endpoint,
     type: 'DELETE',
     data: JSON.stringify({
-      token: localStorage.getItem('token'),
-      endpoint: endpoint
+      token: localStorage.getItem('token')
     }),
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',

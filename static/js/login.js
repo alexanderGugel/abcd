@@ -3,7 +3,7 @@ $('#login form').on('submit', function (e) {
   var email = $('#login input[type=email]').val();
   var password = $('#login input[type=password]').val();
   $.ajax({
-    url: '/api/token',
+    url: '/api/tokens',
     type: 'POST',
     data: JSON.stringify({
       email: email,

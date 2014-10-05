@@ -1,6 +1,6 @@
 var loadUser = function () {
   $.ajax({
-    url: '/api/user/me',
+    url: '/api/users/me',
     type: 'GET',
     data: {
       token: localStorage.getItem('token')
@@ -20,12 +20,12 @@ $('#update-account').on('submit', function (e) {
   var newPassword = $('#update-account input[type=password]').val();
 
   $.ajax({
-    url: '/api/user/me',
+    url: '/api/users/me',
     type: 'PUT',
     data: JSON.stringify({
       token: localStorage.getItem('token'),
-      newEmail: newEmail,
-      newPassword: newPassword
+      email: newEmail,
+      password: newPassword
     }),
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',

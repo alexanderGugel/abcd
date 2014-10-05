@@ -1,6 +1,5 @@
 var query = require('./query');
 var bcrypt = require('bcrypt-nodejs');
-var util = require('./util');
 var async = require('async');
 
 var register = function (email, password, callback) {

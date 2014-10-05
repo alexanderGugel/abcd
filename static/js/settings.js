@@ -24,8 +24,8 @@ $('#update-account').on('submit', function (e) {
     type: 'PUT',
     data: JSON.stringify({
       token: localStorage.getItem('token'),
-      newEmail: newEmail,
-      newPassword: newPassword
+      email: newEmail,
+      password: newPassword
     }),
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',

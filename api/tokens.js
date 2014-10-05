@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 var tokens = express.Router();
 
-tokens.post('/', users.formatValidation, function (req, res) {
+tokens.post('/', users._validateUsernamePassword, function (req, res) {
   var email = req.email;
   query('SELECT id, password FROM "user" WHERE email = $1', [email], function (error, result) {
     if (error) {

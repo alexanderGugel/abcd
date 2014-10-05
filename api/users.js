@@ -6,7 +6,7 @@ var async = require('async');
 
 var users = express.Router();
 
-users.formatValidation = function (req, res, next) {
+users._validateUsernamePassword = function (req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
 
@@ -36,7 +36,7 @@ users.formatValidation = function (req, res, next) {
   next();
 };
 
-users.post('/', users.formatValidation, function (req, res) {
+users.post('/', users._validateUsernamePassword, function (req, res) {
   var email = req.email;
   var password = req.password;
   bcrypt.hash(password, null, null, function (error, password) {
@@ -81,8 +81,66 @@ users.get('/me', auth, function (req, res) {
   });
 });
 
-users.put('/me', auth, function (req, res) {
-  // TODO
+users.put('/me', auth, function (req, res, next) {
+  var email = req.body.email;
+
+  if (email) {
+    if (email.length < 6) {
+      return res.status(400).send({
+        error: 'Email too short'
+      });
+    }
+    query('UPDATE "user" SET email = $1 WHERE id = $2', [email, req.user.id], function (error, result) {
+      if (error) {
+        if (error.code === '23505') {
+          res.status(400).send({
+            error: 'Email used by another account'
+          });
+        } else {
+          res.send({
+            error: 'Internal server error'
+          });
+          throw error;
+        }
+      } else {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+}, function (req, res, next) {
+  var password = req.body.password;
+
+  if (password) {
+    if (password.length < 6) {
+      return res.status(400).send({
+        error: 'Password too short'
+      });
+    }
+    bcrypt.hash(password, null, null, function(error, hash) {
+      if (error) {
+        res.send({
+          error: 'Internal server error'
+        });
+        throw error;
+      }
+      query('UPDATE "user" SET password = $1 WHERE id = $2', [hash, req.user.id], function (error, result) {
+        if (error) {
+          res.send({
+            error: 'Internal server error'
+          });
+          throw error;
+        } else {
+          next();
+        }
+      });
+    });
+  } else {
+    next();
+  }
+}, function (req, res) {
+  res.status(204).send({});
 });
 
 module.exports = exports = users;

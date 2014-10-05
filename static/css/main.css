@@ -641,10 +641,10 @@ nav a.active {
   color: #444;
   text-decoration: none;
 }
-form {
+#dashboard form {
   text-align: right;
 }
-form .create-endpoint {
+#dashboard form .create-endpoint {
   margin-top: 0;
   padding: 0.5em 1em;
 }

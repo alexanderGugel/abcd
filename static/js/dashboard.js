@@ -46,7 +46,8 @@ var loadExperiments = function () {
           }
 
           $('#dashboard .endpoints').html(endpointsTemplate.render({
-            endpoints: endpoints || []
+            endpoints: endpoints,
+            empty: endpoints.length === 0
           }));
         }
       });

@@ -5,7 +5,7 @@ var auth = require('./auth');
 var experiments = express.Router();
 
 experiments.get('/', auth, function (req, res) {
-  query('SELECT name, running, "experiments".id, endpoint FROM "experiments" INNER JOIN "endpoints" ON "experiments".endpoint_id = "endpoints".id AND "endpoints".user_id = $1 AND "experiments".is_deleted = FALSE AND "endpoints".is_deleted = FALSE', [req.user.id], function (error, result) {
+  query('SELECT "experiments".name, "experiments".running, "experiments".id, endpoint FROM "experiments" INNER JOIN "endpoints" ON "experiments".endpoint_id = "endpoints".id AND "endpoints".user_id = $1 AND "experiments".is_deleted = FALSE AND "endpoints".is_deleted = FALSE', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'

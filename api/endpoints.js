@@ -21,7 +21,7 @@ endpoints.post('/', auth, function (req, res) {
 });
 
 endpoints.get('/', auth, function (req, res) {
-  query('SELECT endpoint FROM "endpoints" WHERE user_id = $1 AND is_deleted = FALSE', [req.user.id], function (error, result) {
+  query('SELECT "endpoint" FROM "endpoints" WHERE user_id = $1 AND is_deleted = FALSE', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'

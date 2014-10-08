@@ -85,7 +85,7 @@ users.put('/me', auth, function (req, res, next) {
   var email = req.body.email;
 
   if (email) {
-    if (email.length < 6) {
+    if (email.length < 3) {
       return res.status(400).send({
         error: 'Email too short'
       });

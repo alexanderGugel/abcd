@@ -9,7 +9,7 @@ api.all('*', function(req, res, next) {
   next();
 });
 
-// api.use('/actions', actions);
+api.use('/actions', require('./actions'));
 api.use('/tokens', require('./tokens'));
 api.use('/users', require('./users'));
 api.use('/experiments', require('./experiments'));

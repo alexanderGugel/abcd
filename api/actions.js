@@ -22,7 +22,7 @@ actions.post('/', function (req, res, next) {
   }
   next();
 }, function (req, res, next) {
-  query('SELECT id FROM "endpoints" WHERE "endpoints".endpoint = $1', [req.body.endpoint], function (error, result) {
+  query('SELECT * FROM "endpoints" WHERE "endpoints".endpoint = $1', [req.body.endpoint], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -34,25 +34,74 @@ actions.post('/', function (req, res, next) {
         error: 'Invalid endpoint'
       });
     }
-    req.endpoint = {
-      endpoint: req.body.endpoint,
-      id: result.rows[0].id
-    };
+    req.endpoint = result.rows[0];
     next();
   });
+}, function (req, res, next) {
+  query(
+    'INSERT INTO "experiments" (name, endpoint_id) VALUES ($1, $2);',
+    [req.body.experiment, req.endpoint.id],
+    function (error, result) {
+      if (error && error.code !== '23505') {
+        res.status(500).send({
+          error: 'Internal server error'
+        });
+        throw error;
+      }
+      next();
+    }
+  );
+}, function (req, res, next) {
+  query(
+    'INSERT INTO "variants" (name, experiment_id) VALUES ($1, (SELECT id FROM experiments WHERE name = $2 AND endpoint_id = $3));',
+    [req.body.variant, req.body.experiment, req.endpoint.id],
+    function (error, result) {
+      if (error && error.code !== '23505') {
+        res.status(500).send({
+          error: 'Internal server error'
+        });
+        throw error;
+      }
+      next();
+    }
+  );
 }, function (req, res) {
   var endpoint = req.endpoint;
   var experiment = req.body.experiment;
   var variant = req.body.variant;
 
   query(
-    'INSERT INTO "experiments" (name, endpoint_id) VALUES ($1, $2) WHERE NOT EXISTS (' +
-      'SELECT 1 FROM "experiments" WHERE endpoint_id = $2 AND name = $1' +
-    ');' +
-    'INSERT INTO "variants" (name, experiment_id) VALUES ($3, $4) WHERE NOT EXISTS (' +
-      'SELECT 1 FROM "variants" WHERE experiment_id = $4 AND name = $3' +
-    ');' +
-  )
+    'INSERT INTO "actions" (variant_id) VALUES ((SELECT id FROM variants WHERE name = $1 AND experiment_id = (SELECT id FROM experiments WHERE name = $2 AND endpoint_id = $3))) RETURNING id;',
+    [req.body.variant, req.body.experiment, req.endpoint.id],
+    function (error, result) {
+      if (error) {
+        res.status(500).send({
+          error: 'Internal server error'
+        });
+        throw error;
+      }
+      res.send({
+        id: result.rows[0].id
+      });
+    }
+  );
+
+
+  // query(
+  //   'INSERT INTO "actions" (variant_id) VALUES ($1) RETUNING id;',
+  //   [req.variant.id],
+  //   function (error, result) {
+  //     if (error) {
+  //       res.status(500).send({
+  //         error: 'Internal server error'
+  //       });
+  //       throw error;
+  //     }
+  //     res.send({
+  //       id: result.rows[0].id
+  //     });
+  //   }
+  // );
 
   // endpoint
   // experiment

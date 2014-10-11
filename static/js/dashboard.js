@@ -65,6 +65,11 @@ var createEndpoint = function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     success: function () {
+      $('#message').stop(true);
+      $('#message').addClass('success');
+      $('#message').text('Successfully created endpoint');
+      $('#message').slideDown().delay(1000).slideUp();
+
       loadExperiments();
     }
   });

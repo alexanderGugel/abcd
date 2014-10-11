@@ -3,6 +3,9 @@ border-radius()
   -moz-border-radius arguments
   border-radius arguments
 
+nav-background = #263238
+button-background = #303f9f
+
 html
   box-sizing: border-box
 
@@ -44,7 +47,7 @@ form
     color: #990000
   button
     font-weight: 300
-    background: #70A0C3
+    background: button-background
     padding: 1em
     border-radius: 2px
     border: 0
@@ -54,7 +57,7 @@ form
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 
 nav
-  background: #0066cc
+  background: nav-background
   padding: 0.75em 0.5em
   margin: -0.5em -0.5em 1em
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
@@ -65,14 +68,14 @@ nav
     text-align: right
   button
     border: 0
-    color: lighten(#0066cc, 80%)
-    background: lighten(#0066cc, 10%)
-    border-bottom: 2px solid darken(#0066cc, 20%)
-    border-right: 2px solid darken(#0066cc, 20%)
+    color: lighten(nav-background, 80%)
+    background: lighten(nav-background, 10%)
+    border-bottom: 2px solid darken(nav-background, 20%)
+    border-right: 2px solid darken(nav-background, 20%)
     border-radius: 3px
     padding: 0.25em 0.5em
   a
-    color: lighten(#0066cc, 50%)
+    color: lighten(nav-background, 50%)
     text-decoration: none
     border: 0
     display: inline-block
@@ -80,9 +83,9 @@ nav
     &:hover
       text-decoration: line-through
     &.active
-      color: lighten(#0066cc, 90%)
+      color: lighten(nav-background, 90%)
     &.logo
-      color: lighten(#0066cc, 90%)
+      color: lighten(nav-background, 90%)
       font-weight: 900
       text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 

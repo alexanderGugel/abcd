@@ -85,27 +85,6 @@ actions.post('/', function (req, res, next) {
       });
     }
   );
-
-
-  // query(
-  //   'INSERT INTO "actions" (variant_id) VALUES ($1) RETUNING id;',
-  //   [req.variant.id],
-  //   function (error, result) {
-  //     if (error) {
-  //       res.status(500).send({
-  //         error: 'Internal server error'
-  //       });
-  //       throw error;
-  //     }
-  //     res.send({
-  //       id: result.rows[0].id
-  //     });
-  //   }
-  // );
-
-  // endpoint
-  // experiment
-  // variant
 });
 
 // Complete action

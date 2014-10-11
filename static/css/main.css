@@ -475,7 +475,7 @@ form .error {
 }
 form button {
   font-weight: 300;
-  background: #70a0c3;
+  background: #303f9f;
   padding: 1em;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -487,7 +487,7 @@ form button {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 nav {
-  background: #06c;
+  background: #263238;
   padding: 0.75em 0.5em;
   margin: -0.5em -0.5em 1em;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -501,17 +501,17 @@ nav div:last-child {
 }
 nav button {
   border: 0;
-  color: #c2e0ff;
-  background: #0075eb;
-  border-bottom: 2px solid #0052a3;
-  border-right: 2px solid #0052a3;
+  color: #cdd8dd;
+  background: #374851;
+  border-bottom: 2px solid #1e282d;
+  border-right: 2px solid #1e282d;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   padding: 0.25em 0.5em;
 }
 nav a {
-  color: #66b2ff;
+  color: #839eab;
   text-decoration: none;
   border: 0;
   display: inline-block;
@@ -521,10 +521,10 @@ nav a:hover {
   text-decoration: line-through;
 }
 nav a.active {
-  color: #e0f0ff;
+  color: #e6ecee;
 }
 nav a.logo {
-  color: #e0f0ff;
+  color: #e6ecee;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }

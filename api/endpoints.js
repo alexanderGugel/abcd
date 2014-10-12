@@ -34,8 +34,8 @@ endpoints.get('/', auth, function (req, res) {
   });
 });
 
-endpoints.delete('/:endpoint', auth, function (req, res) {
-  query('UPDATE "endpoints" SET is_deleted = TRUE WHERE user_id = $1 AND endpoint = $2', [req.user.id, req.params.endpoint], function (error) {
+endpoints.delete('/:id', auth, function (req, res) {
+  query('UPDATE "endpoints" SET is_deleted = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
     if (error) {
       if (error.code === '22P02') {
         return res.status(400).send({

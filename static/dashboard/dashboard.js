@@ -20,7 +20,7 @@ angular.module('angularApp.dashboard', ['ngRoute'])
       token: localStorage.getItem('token')
     })
     .success(function (data) {
-      console.log(data);
+      swal('Created!', 'Successfully created new endpoint ' + data.endpoint.endpoint + ' .', 'success');
       $scope.refresh();
     });
   };
@@ -39,15 +39,26 @@ angular.module('angularApp.dashboard', ['ngRoute'])
   };
 
   $scope.deleteEndpoint = function (endpoint) {
-    $http({
-      url: '/api/endpoints/' + endpoint.id,
-      method: 'DELETE',
-      params: {
-        token: localStorage.getItem('token')
-      }
-    })
-    .success(function (data) {
-      $scope.refresh();
+    swal({
+      title: 'Are you sure?',
+      text: 'This is going to delete endpoint ' + endpoint.endpoint + ' and all associated experiments!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false
+    }, function () {
+      $http({
+        url: '/api/endpoints/' + endpoint.id,
+        method: 'DELETE',
+        params: {
+          token: localStorage.getItem('token')
+        }
+      })
+      .success(function (data) {
+        $scope.refresh();
+        swal('Deleted!', 'Endpoint ' + endpoint.endpoint + ' has been deleted.', 'success');
+      });
     });
   };
 

@@ -1,0 +1,18 @@
+{
+  "name": "abcd",
+  "version": "0.0.0",
+  "authors": [
+    "Alexander Gugel <alexander.gugel@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert": "~0.1.2"
+  }
+}

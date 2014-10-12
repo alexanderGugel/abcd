@@ -14,4 +14,36 @@ angular.module('angularApp.settings', ['ngRoute'])
     $location.path('/');
     return;
   }
+
+  $scope.autoPopulate = function () {
+    $http({
+      url: '/api/users/me',
+      method: 'GET',
+      params: {
+        token: localStorage.getItem('token')
+      }
+    })
+    .success(function (data) {
+      $scope.user = data.user;
+    });
+  };
+
+  $scope.autoPopulate();
+
+  $scope.updateUser = function (user) {
+    $http({
+      method: 'PATCH',
+      url: '/api/users/me',
+      data: user,
+      params: {
+        token: localStorage.getItem('token')
+      }
+    })
+    .success(function (data) {
+      $scope.autoPopulate();
+    })
+    .error(function (data) {
+      $scope.error = data.error;
+    });
+  };
 }]);

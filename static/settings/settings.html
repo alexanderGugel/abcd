@@ -17,9 +17,10 @@
 
   <div>
     <h3>Account</h3>
-      <form id="update-account">
-        <input type="email">
-        <input type="password" placeholder="New password (optional)">
+      <form role="form" ng-submit="updateUser(user)">
+        <input ng-model="user.email" type="email" required>
+        <input ng-model="user.password" type="password" placeholder="New password (optional)">
+        <span class="error" ng-if="error">{{error}}</span>
         <button type="submit">Update!</button>
       </form>
       <form id="delete-account">
@@ -27,8 +28,8 @@
       </form>
   </div>
 
-  <div>
+  <!-- <div>
     <h3>Billing</h3>
     <p>TODO</p>
-  </div>
+  </div> -->
 </section>

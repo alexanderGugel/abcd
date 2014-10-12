@@ -81,7 +81,7 @@ users.get('/me', auth, function (req, res) {
   });
 });
 
-users.put('/me', auth, function (req, res, next) {
+users.patch('/me', auth, function (req, res, next) {
   var email = req.body.email;
 
   if (email) {

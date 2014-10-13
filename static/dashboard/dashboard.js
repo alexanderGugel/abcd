@@ -10,6 +10,8 @@ angular.module('angularApp.dashboard', ['ngRoute'])
 }])
 
 .controller('DashboardCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+  window.s = $scope;
+
   if (localStorage.getItem('token') === null) {
     $location.path('/');
     return;
@@ -26,6 +28,17 @@ angular.module('angularApp.dashboard', ['ngRoute'])
   };
 
   $scope.refresh = function () {
+    $http({
+      url: '/api/experiments',
+      method: 'GET',
+      params: {
+        token: localStorage.getItem('token')
+      }
+    })
+    .success(function (data) {
+      $scope.experiments = data.experiments;
+    });
+
     $http({
       url: '/api/endpoints',
       method: 'GET',

@@ -21,7 +21,7 @@ query(
 
   'CREATE TABLE IF NOT EXISTS "endpoints" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'is_active BOOLEAN NOT NULL DEFAULT FALSE,' +
+    'is_active BOOLEAN NOT NULL DEFAULT TRUE,' +
     'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
 

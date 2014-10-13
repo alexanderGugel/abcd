@@ -14,14 +14,14 @@ endpoints.post('/', auth, function (req, res) {
     }
     res.send({
       endpoint: {
-        endpoint: result.rows[0].id
+        id: result.rows[0].id
       }
     });
   });
 });
 
 endpoints.get('/', auth, function (req, res) {
-  query('SELECT * FROM endpoints WHERE user_id = $1 AND endpoints.is_active = FALSE', [req.user.id], function (error, result) {
+  query('SELECT * FROM endpoints WHERE user_id = $1 AND endpoints.is_active = TRUE', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'

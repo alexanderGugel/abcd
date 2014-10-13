@@ -6,17 +6,22 @@
   <body>
     <script src="http://alex.dev:3000/abcd.bundle.js"></script>
     <script>
-      abcd('8491715b-56e2-4076-bb05-9e96d7d60a7d')
+      abcd.endpoint = '0dba074d-f993-46c1-8491-5ad7fd944c86';
+
+      abcd
       .participate('My little experiment')
       .variant('control', function () {
-
+        console.log('control');
       })
       .variant('blue button', function () {
-
+        console.log('blue button');
       })
       .variant('yellow button', function () {
+        console.log('yellow button');
+      })
+      .start();
 
-      });
+      abcd.complete('My little experiment');
     </script>
   </body>
 </html>

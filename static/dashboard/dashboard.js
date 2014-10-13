@@ -22,23 +22,12 @@ angular.module('angularApp.dashboard', ['ngRoute'])
       token: localStorage.getItem('token')
     })
     .success(function (data) {
-      swal('Created!', 'Successfully created new endpoint ' + data.endpoint.endpoint + ' .', 'success');
+      swal('Created!', 'Successfully created new endpoint ' + data.endpoint.id + ' .', 'success');
       $scope.refresh();
     });
   };
 
   $scope.refresh = function () {
-    // $http({
-    //   url: '/api/experiments',
-    //   method: 'GET',
-    //   params: {
-    //     token: localStorage.getItem('token')
-    //   }
-    // })
-    // .success(function (data) {
-    //   $scope.experiments = data.experiments;
-    // });
-
     $http({
       url: '/api/endpoints',
       method: 'GET',
@@ -54,7 +43,7 @@ angular.module('angularApp.dashboard', ['ngRoute'])
   $scope.deleteEndpoint = function (endpoint) {
     swal({
       title: 'Are you sure?',
-      text: 'This is going to delete endpoint ' + endpoint.endpoint + ' and all associated experiments!',
+      text: 'This is going to delete endpoint ' + endpoint.id + ' and all associated experiments!',
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
@@ -70,7 +59,7 @@ angular.module('angularApp.dashboard', ['ngRoute'])
       })
       .success(function (data) {
         $scope.refresh();
-        swal('Deleted!', 'Endpoint ' + endpoint.endpoint + ' has been deleted.', 'success');
+        swal('Deleted!', 'Endpoint ' + endpoint.id + ' has been deleted.', 'success');
       });
     });
   };

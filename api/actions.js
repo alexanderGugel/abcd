@@ -64,7 +64,7 @@ actions.get('/complete', function (req, res, next) {
         });
         throw error;
       }
-      res.jsonp({});
+      res.jsonp();
     }
   );
 });

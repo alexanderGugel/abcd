@@ -1,3 +1,5 @@
+var store = require('store');
+
 /**
  * JSONP sets up and allows you to execute a JSONP request
  * @param {String} url  The URL you are requesting with the JSON data
@@ -99,3 +101,50 @@
   }
   window.JSONP = JSONP;
 })(window);
+
+window.abcd = {};
+abcd.host = 'http://localhost:3000/api/';
+abcd.endpoint = null;
+
+abcd.participate = function (experiment) {
+  return new Experiment(experiment);
+};
+
+var Experiment = function (experiment) {
+  this.experiment = experiment;
+  this.variants = {};
+};
+
+Experiment.prototype.variant = function (variant, callback) {
+  this.variants[variant] = callback;
+  return this;
+};
+
+Experiment.prototype.start = function () {
+  var action = store.get('abcd:' + this.experiment);
+  if (!action || !action.id) {
+    action = {
+      variant: Object.keys(this.variants)[Math.floor(Math.random()*Object.keys(this.variants).length)]
+    };
+    JSONP(abcd.host + 'actions/start', {
+      variant: action.variant,
+      experiment: this.experiment,
+      endpoint: abcd.endpoint
+    }, function (data) {
+      action.id = data.action.id;
+      store.set('abcd:' + this.experiment, action);
+    }.bind(this));
+  }
+  this.variants[action.variant]();
+};
+
+abcd.complete = function (experiment) {
+  var action = store.get('abcd:' + experiment);
+  // debugger
+  JSONP(abcd.host + 'actions/complete', {
+    id: action.id,
+    endpoint: abcd.endpoint
+  });
+};
+
+window.s = store;

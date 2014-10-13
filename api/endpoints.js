@@ -5,7 +5,7 @@ var auth = require('./auth');
 var endpoints = express.Router();
 
 endpoints.post('/', auth, function (req, res) {
-  query('INSERT INTO "endpoints" (user_id) VALUES ($1) RETURNING endpoint', [req.user.id], function (error, result) {
+  query('INSERT INTO "endpoints" (user_id) VALUES ($1) RETURNING id', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -14,14 +14,14 @@ endpoints.post('/', auth, function (req, res) {
     }
     res.send({
       endpoint: {
-        endpoint: result.rows[0].endpoint
+        endpoint: result.rows[0].id
       }
     });
   });
 });
 
 endpoints.get('/', auth, function (req, res) {
-  query('SELECT * FROM "endpoints" WHERE user_id = $1 AND is_deleted = FALSE', [req.user.id], function (error, result) {
+  query('SELECT * FROM endpoints WHERE user_id = $1 AND endpoints.is_active = FALSE', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -35,7 +35,7 @@ endpoints.get('/', auth, function (req, res) {
 });
 
 endpoints.delete('/:id', auth, function (req, res) {
-  query('UPDATE "endpoints" SET is_deleted = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
+  query('UPDATE "endpoints" SET is_active = FALSE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
     if (error) {
       if (error.code === '22P02') {
         return res.status(400).send({
@@ -51,6 +51,6 @@ endpoints.delete('/:id', auth, function (req, res) {
   });
 });
 
-endpoints.use('/:endpointId/experiments', require('./experiments'));
+// endpoints.use('/:endpointId/experiments', require('./experiments'));
 
 module.exports = exports = endpoints;

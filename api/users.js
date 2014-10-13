@@ -50,7 +50,7 @@ users.post('/', users._validateUsernamePassword, function (req, res) {
       if (!error) {
         var rows = result.rows;
         // query('INSERT INTO "endpoints" (user_id) VALUES ($1)', [rows[0].id]);
-        query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING token', [rows[0].id], function (error, result) {
+        query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING id', [rows[0].id], function (error, result) {
           if (error) {
             res.status(500).send({
               error: 'Internal server error'
@@ -58,7 +58,7 @@ users.post('/', users._validateUsernamePassword, function (req, res) {
             throw error;
           }
           res.send({
-            token: result.rows[0].token
+            token: result.rows[0].id
           });
         });
       } else if (error.code === '23505') {

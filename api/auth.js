@@ -7,7 +7,7 @@ var auth = function (req, res, next) {
       error: 'Missing token'
     });
   }
-  query('SELECT * FROM "users" INNER JOIN "tokens" ON "tokens".token = $1 AND "tokens".user_id = "users".id', [token], function (error, result) {
+  query('SELECT * FROM "users" WHERE id = (SELECT user_id FROM tokens WHERE id = $1)', [token], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'

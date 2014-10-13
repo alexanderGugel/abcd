@@ -4,53 +4,35 @@ query(
   'DROP TABLE IF EXISTS "users" CASCADE;' +
   'DROP TABLE IF EXISTS "tokens" CASCADE;' +
   'DROP TABLE IF EXISTS "endpoints" CASCADE;' +
-  'DROP TABLE IF EXISTS "experiments" CASCADE;' +
-  'DROP TABLE IF EXISTS "variants" CASCADE;' +
   'DROP TABLE IF EXISTS "actions" CASCADE;' +
 
   'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";' +
 
   'CREATE TABLE IF NOT EXISTS "users" (' +
-    'id BIGSERIAL PRIMARY KEY,' +
+    'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'email TEXT NOT NULL UNIQUE,' +
     'password TEXT NOT NULL' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "tokens" (' +
-    'id BIGSERIAL PRIMARY KEY,' +
-    'token UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),' +
-    'user_id BIGSERIAL NOT NULL REFERENCES "users"(id)' +
+    'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
+    'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "endpoints" (' +
-    'id BIGSERIAL PRIMARY KEY,' +
-    'endpoint UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),' +
-    'is_deleted BOOLEAN NOT NULL DEFAULT FALSE,' +
-    'user_id BIGSERIAL NOT NULL REFERENCES "users"(id)' +
-  ');' +
-
-  'CREATE TABLE IF NOT EXISTS "experiments" (' +
-    'id BIGSERIAL PRIMARY KEY,' +
-    'endpoint_id BIGSERIAL NOT NULL REFERENCES "endpoints"(id),' +
-    'name TEXT NOT NULL,' +
-    'running BOOLEAN NOT NULL DEFAULT TRUE,' +
-    'is_deleted BOOLEAN NOT NULL DEFAULT FALSE,' +
-    'UNIQUE (endpoint_id, name)' +
-  ');' +
-
-  'CREATE TABLE IF NOT EXISTS "variants" (' +
-    'id BIGSERIAL PRIMARY KEY,' +
-    'name TEXT NOT NULL,' +
-    'experiment_id BIGSERIAL NOT NULL REFERENCES "experiments"(id),' +
-    'UNIQUE (name, experiment_id)' +
+    'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
+    'is_active BOOLEAN NOT NULL DEFAULT FALSE,' +
+    'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "actions" (' +
-    'id BIGSERIAL PRIMARY KEY,' +
+    'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'started_at TIMESTAMP DEFAULT NOW(),' +
     'completed_at TIMESTAMP,' +
     'start_data JSON,' +
     'complete_data JSON,' +
-    'variant_id BIGSERIAL NOT NULL REFERENCES "variants"(id)' +
+    'variant TEXT NOT NULL,' +
+    'experiment TEXT NOT NULL,' +
+    'endpoint_id UUID NOT NULL REFERENCES "endpoints"(id)' +
   ');'
 );

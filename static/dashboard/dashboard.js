@@ -28,16 +28,16 @@ angular.module('angularApp.dashboard', ['ngRoute'])
   };
 
   $scope.refresh = function () {
-    $http({
-      url: '/api/experiments',
-      method: 'GET',
-      params: {
-        token: localStorage.getItem('token')
-      }
-    })
-    .success(function (data) {
-      $scope.experiments = data.experiments;
-    });
+    // $http({
+    //   url: '/api/experiments',
+    //   method: 'GET',
+    //   params: {
+    //     token: localStorage.getItem('token')
+    //   }
+    // })
+    // .success(function (data) {
+    //   $scope.experiments = data.experiments;
+    // });
 
     $http({
       url: '/api/endpoints',

@@ -51,4 +51,6 @@ endpoints.delete('/:id', auth, function (req, res) {
   });
 });
 
+endpoints.use('/:endpointId/experiments', require('./experiments'));
+
 module.exports = exports = endpoints;

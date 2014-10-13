@@ -1,26 +1,26 @@
-<section id="login">
-  <nav class="pure-g">
+<section id="signin">
+  <!-- <nav class="pure-g">
     <div class="pure-u-1-3">
     </div>
     <div class="pure-u-1-3">
       <a class="logo" href="#/">abcd</a>
     </div>
     <div class="pure-u-1-3">
-      <a class="active" href="#/login">Login</a>
+      <a class="active" href="#/signin">signin</a>
       <a href="#/signup">Sign Up</a>
     </div>
-  </nav>
+  </nav> -->
 
-  <form role="form" ng-submit="createToken(token)">
-    <h1>Login</h1>
+  <form role="form" ng-submit="createToken(token)" class="animated bounceIn">
+    <h1>Sign In</h1>
     <label for="email-input">Email</label>
     <input ng-model="token.email" type="email" name="email-input" placeholder="e.g. santa@claus.beard" required minlength="3">
     <label for="password-input">Password</label>
     <input ng-model="token.password" type="password" name="password-input" placeholder="e.g. ••••••••••" required minlength="6">
     <span class="error" ng-if="error">{{error}}</span>
-    <button type="submit">Login!</button>
+    <button type="submit">Sign In!</button>
     <p>
-      Forgot your password? - <a href="#/forgot">Request a new one</a> <br>
+      <a href="#/forgot">Forgot your password?</a><br>
       First time user? - <a href="#/signup">Sign Up</a>
     </p>
   </form>

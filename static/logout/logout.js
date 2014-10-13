@@ -12,5 +12,5 @@ angular.module('angularApp.logout', ['ngRoute'])
 .controller('LogoutCtrl', ['$location', function ($location) {
   console.log('Logout');
   localStorage.removeItem('token');
-  $location.path('/login');
+  $location.path('/signin');
 }]);

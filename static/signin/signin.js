@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('angularApp.login', ['ngRoute'])
+angular.module('angularApp.signin', ['ngRoute'])
 
 .config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.when('/login', {
-    templateUrl: 'login/login.html',
-    controller: 'LoginCtrl'
+  $routeProvider.when('/signin', {
+    templateUrl: 'signin/signin.html',
+    controller: 'signinCtrl'
   });
 }])
 
-.controller('LoginCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+.controller('signinCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   if (localStorage.getItem('token') !== null) {
     $location.path('/dashboard');
     return;

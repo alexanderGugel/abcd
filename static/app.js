@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('angularApp', [
   'ngRoute',
-  'angularApp.login',
+  'angularApp.signin',
   'angularApp.signup',
   'angularApp.dashboard',
   'angularApp.settings',
@@ -11,6 +11,6 @@ angular.module('angularApp', [
 ]).
 config(['$routeProvider', function ($routeProvider) {
   $routeProvider.otherwise({
-    redirectTo: '/login'
+    redirectTo: '/signin'
   });
 }]);

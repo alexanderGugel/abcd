@@ -81,7 +81,9 @@ actions.post('/', function (req, res, next) {
         throw error;
       }
       res.send({
-        id: result.rows[0].id
+        action: {
+          id: result.rows[0].id
+        }
       });
     }
   );
@@ -89,7 +91,19 @@ actions.post('/', function (req, res, next) {
 
 // Complete action
 actions.post('/:id', function (req, res) {
-  // TODO
+  query(
+    'UPDATE "actions" SET completed_at = NOW() WHERE id = $1',
+    [req.params.id],
+    function (error, result) {
+      if (error) {
+        res.status(500).send({
+          error: 'Internal server error'
+        });
+        throw error;
+      }
+      res.send({});
+    }
+  );
 });
 
 module.exports = exports = actions;

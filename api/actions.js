@@ -4,19 +4,19 @@ var query = require('../db/query');
 var actions = express.Router();
 
 // Start action
-actions.post('/', function (req, res, next) {
+actions.get('/jsonp', function (req, res, next) {
   if (!req.body.endpoint) {
-    return res.status(400).send({
+    return res.status(400).jsonp({
       error: 'Missing endpoint'
     });
   }
   if (!req.body.experiment) {
-    return res.status(400).send({
+    return res.status(400).jsonp({
       error: 'Missing experiment'
     });
   }
   if (!req.body.variant) {
-    return res.status(400).send({
+    return res.status(400).jsonp({
       error: 'Missing variant'
     });
   }
@@ -24,13 +24,13 @@ actions.post('/', function (req, res, next) {
 }, function (req, res, next) {
   query('SELECT * FROM "endpoints" WHERE "endpoints".endpoint = $1', [req.body.endpoint], function (error, result) {
     if (error) {
-      res.status(500).send({
+      res.status(500).jsonp({
         error: 'Internal server error'
       });
       throw error;
     }
     if (result.rows.length === 0) {
-      return res.status(400).send({
+      return res.status(400).jsonp({
         error: 'Invalid endpoint'
       });
     }
@@ -43,7 +43,7 @@ actions.post('/', function (req, res, next) {
     [req.body.experiment, req.endpoint.id],
     function (error, result) {
       if (error && error.code !== '23505') {
-        res.status(500).send({
+        res.status(500).jsonp({
           error: 'Internal server error'
         });
         throw error;
@@ -57,7 +57,7 @@ actions.post('/', function (req, res, next) {
     [req.body.variant, req.body.experiment, req.endpoint.id],
     function (error, result) {
       if (error && error.code !== '23505') {
-        res.status(500).send({
+        res.status(500).jsonp({
           error: 'Internal server error'
         });
         throw error;
@@ -75,12 +75,12 @@ actions.post('/', function (req, res, next) {
     [req.body.variant, req.body.experiment, req.endpoint.id],
     function (error, result) {
       if (error) {
-        res.status(500).send({
+        res.status(500).jsonp({
           error: 'Internal server error'
         });
         throw error;
       }
-      res.send({
+      res.jsonp({
         action: {
           id: result.rows[0].id
         }
@@ -92,16 +92,16 @@ actions.post('/', function (req, res, next) {
 // Complete action
 actions.post('/:id', function (req, res) {
   query(
-    'UPDATE "actions" SET completed_at = NOW() WHERE id = $1',
-    [req.params.id],
+    'UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND endpoint = (SELECT id FROM endpoints WHERE endpoint = $2)',
+    [req.params.id, req.body.endpoint],
     function (error, result) {
       if (error) {
-        res.status(500).send({
+        res.status(500).jsonp({
           error: 'Internal server error'
         });
         throw error;
       }
-      res.send({});
+      res.jsonp({});
     }
   );
 });

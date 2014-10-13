@@ -12,7 +12,7 @@
     "build-abcd": "browserify static/abcd.js | uglifyjs -mc > static/abcd.bundle.js",
     "watch-abcd": "watchify static/abcd.js -o static/abcd.bundle.js -dv",
     "build": "npm run build-js && npm run build-css && npm run build-abcd",
-    "watch": "npm run watch-js & npm run watch-css & npm run watch-abcd",
+    "watch": "npm run watch-js & npm run watch-css & npm run watch-abcd & nodemon server",
     "start": "node server.js"
   },
   "author": "",
@@ -38,6 +38,7 @@
     "zepto": "0.0.4"
   },
   "devDependencies": {
+    "nodemon": "^1.2.1",
     "watchify": "^1.0.6"
   }
 }

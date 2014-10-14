@@ -151,9 +151,11 @@ abcd.complete = function (experiment) {
       id: action.id,
       endpoint: abcd.endpoint
     }, function (data) {
+      action.completed = true;
+      store.set('abcd:' + experiment, action);
       console.log(data);
     });
   };
 
-  go();
+  !action.completed && go();
 };

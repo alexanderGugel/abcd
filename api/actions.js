@@ -56,7 +56,7 @@ actions.get('/complete', function (req, res, next) {
 }, function (req, res) {
   query(
     'UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND endpoint_id = $2',
-    [req.params.id, req.query.endpoint],
+    [req.query.id, req.query.endpoint],
     function (error, result) {
       if (error) {
         res.status(500).jsonp({
@@ -64,7 +64,7 @@ actions.get('/complete', function (req, res, next) {
         });
         throw error;
       }
-      res.jsonp();
+      res.jsonp({});
     }
   );
 });

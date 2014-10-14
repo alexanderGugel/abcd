@@ -102,6 +102,8 @@ var store = require('store');
   window.JSONP = JSONP;
 })(window);
 
+///
+
 window.abcd = {};
 abcd.host = 'http://localhost:3000/api/';
 abcd.endpoint = null;
@@ -140,11 +142,18 @@ Experiment.prototype.start = function () {
 
 abcd.complete = function (experiment) {
   var action = store.get('abcd:' + experiment);
-  // debugger
-  JSONP(abcd.host + 'actions/complete', {
-    id: action.id,
-    endpoint: abcd.endpoint
-  });
-};
+  var go = function () {
+    if (!action.id) {
+      return;
+      setTimeout(go, 1);
+    }
+    JSONP(abcd.host + 'actions/complete', {
+      id: action.id,
+      endpoint: abcd.endpoint
+    }, function (data) {
+      console.log(data);
+    });
+  };
 
-window.s = store;
+  go();
+};

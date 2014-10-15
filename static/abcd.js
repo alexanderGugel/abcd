@@ -113,7 +113,7 @@ abcd.participate = function (experiment) {
 };
 
 var Experiment = function (experiment) {
-  this.experiment = experiment;
+  this.experiment = experiment || function () {};
   this.variants = {};
 };
 
@@ -122,7 +122,7 @@ Experiment.prototype.variant = function (variant, callback) {
   return this;
 };
 
-Experiment.prototype.start = function () {
+Experiment.prototype.start = function (callback) {
   var action = store.get('abcd:' + this.experiment);
   if (!action || !action.id) {
     action = {
@@ -133,8 +133,13 @@ Experiment.prototype.start = function () {
       experiment: this.experiment,
       endpoint: abcd.endpoint
     }, function (data) {
-      action.id = data.action.id;
-      store.set('abcd:' + this.experiment, action);
+      if (data.error) {
+        callback(new Error(data.error));
+      } else {
+        action.id = data.action.id;
+        store.set('abcd:' + this.experiment, action);
+        callback(null, action);
+      }
     }.bind(this));
   }
   this.variants[action.variant]();

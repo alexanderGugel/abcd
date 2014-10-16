@@ -33,7 +33,7 @@ tokens.post('/', users._validateUsernamePassword, function (req, res) {
           error: 'Invalid password'
         });
       }
-      query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING token', [rows[0].id], function (error, result) {
+      query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING id', [rows[0].id], function (error, result) {
         if (error) {
           res.status(500).send({
             error: 'Internal server error'
@@ -41,7 +41,7 @@ tokens.post('/', users._validateUsernamePassword, function (req, res) {
           throw error;
         }
         res.send({
-          token: result.rows[0].token
+          token: result.rows[0].id
         });
       });
     });

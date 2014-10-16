@@ -3821,6 +3821,7 @@ nav button {
   padding: 0.25em 0.5em;
 }
 nav a {
+  position: relative;
   color: #839eab;
   text-decoration: none;
   border: 0;
@@ -3829,13 +3830,83 @@ nav a {
   margin-bottom: 2px;
 }
 nav a:hover {
-  text-decoration: line-through;
+  color: #e6ecee;
+  -webkit-animation: nav-a-animation 300ms;
+  animation: nav-a-animation 300ms;
 }
 nav a.active {
   color: #e6ecee;
+}
+nav a.active:hover {
+  -webkit-animation: none;
+  animation: none;
 }
 nav a.logo {
   color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+@-moz-keyframes nav-a-animation {
+  from {
+    color: #839eab;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-webkit-keyframes nav-a-animation {
+  from {
+    color: #839eab;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-o-keyframes nav-a-animation {
+  from {
+    color: #839eab;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@keyframes nav-a-animation {
+  from {
+    color: #839eab;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-moz-keyframes nav-a-active-animation {
+  from {
+    color: #e6ecee;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-webkit-keyframes nav-a-active-animation {
+  from {
+    color: #e6ecee;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-o-keyframes nav-a-active-animation {
+  from {
+    color: #e6ecee;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@keyframes nav-a-active-animation {
+  from {
+    color: #e6ecee;
+  }
+  to {
+    color: #839eab;
+  }
 }

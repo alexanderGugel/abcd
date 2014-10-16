@@ -3879,6 +3879,9 @@ nav a.logo {
   border-radius: 1px;
   position: relative;
 }
+#dashboard .endpoint h2 {
+  margin-top: 0;
+}
 #dashboard .endpoint h2 span {
   background: rgba(0,0,0,0.08);
   display: inline-block;

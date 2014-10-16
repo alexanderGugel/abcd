@@ -14,24 +14,22 @@
     </div>
   </nav>
 
-  <div class="animated bounceIn">
-    <div class="endpoints">
-      <div class="endpoint" ng-repeat="endpoint in endpoints">
-        <h2>Experiments for endpoint <span>{{endpoint.id}} <button class="delete-endpoint" ng-click="deleteEndpoint(endpoint)" title="Delete this endpoint">×</button></span></h2>
-        <table class="experiments">
-          <thead>
-            <tr>
-              <th class="running">Running?</th>
-              <th class="name">Name</th>
-              <th class="visitors">Visitiors</th>
-              <th class="actions">Actions</th>
-              <th class="delete"></th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
+  <div class="endpoints animated bounceIn">
+    <div class="endpoint" ng-repeat="endpoint in endpoints">
+      <h2>Experiments for endpoint <span>{{endpoint.id}} <button class="delete-endpoint" ng-click="deleteEndpoint(endpoint)" title="Delete this endpoint">×</button></span></h2>
+      <table class="experiments">
+        <thead>
+          <tr>
+            <th class="running">Running?</th>
+            <th class="name">Name</th>
+            <th class="visitors">Visitiors</th>
+            <th class="actions">Actions</th>
+            <th class="delete"></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
     </div>
   </div>
 

@@ -3738,7 +3738,6 @@ html {
 body {
   font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding: 0.5em;
   color: #666;
   background: #f0f0f0;
 }
@@ -3787,10 +3786,9 @@ button {
 }
 nav {
   background: #263238;
-  padding: 0.75em 0.5em;
-  margin: -0.5em -0.5em 0.5em;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   text-align: center;
+  font-size: 1.5em;
 }
 nav div:first-child {
   text-align: left;
@@ -3798,25 +3796,19 @@ nav div:first-child {
 nav div:last-child {
   text-align: right;
 }
-nav button {
-  border: 0;
-  color: #cdd8dd;
-  background: #374851;
-  border-bottom: 2px solid #1e282d;
-  border-right: 2px solid #1e282d;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  padding: 0.25em 0.5em;
+nav img {
+  height: 2em;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  border-radius: 1em;
+  vertical-align: middle;
 }
 nav a {
-  position: relative;
   color: #839eab;
   text-decoration: none;
   border: 0;
   display: inline-block;
   padding: 0.25em;
-  margin-bottom: 2px;
 }
 nav a:hover {
   color: #e6ecee;
@@ -3831,9 +3823,59 @@ nav a.active:hover {
   animation: none;
 }
 nav a.logo {
+  -webkit-animation: none;
+  animation: none;
   color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+@-moz-keyframes nav-a-animation {
+  from {
+    color: #839eab;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-webkit-keyframes nav-a-animation {
+  from {
+    color: #839eab;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-o-keyframes nav-a-animation {
+  from {
+    color: #839eab;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-moz-keyframes nav-a-active-animation {
+  from {
+    color: #e6ecee;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-webkit-keyframes nav-a-active-animation {
+  from {
+    color: #e6ecee;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-o-keyframes nav-a-active-animation {
+  from {
+    color: #e6ecee;
+  }
+  to {
+    color: #839eab;
+  }
 }
 @-moz-keyframes nav-a-animation {
   from {
@@ -3942,101 +3984,25 @@ nav a.logo {
   margin-top: 1em;
   font-weight: bold;
 }
-#dashboard .endpoint {
-  background: #fff;
-  margin-bottom: 0.5em;
-  padding: 1em;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
-  position: relative;
+#dashboard .endpoints {
+  margin: 0;
+  padding: 0.5em;
+  list-style: none;
 }
-#dashboard .endpoint h2 {
-  margin-top: 0;
-}
-#dashboard .endpoint h2 span {
-  background: rgba(0,0,0,0.08);
+#dashboard .endpoints li {
   display: inline-block;
-  padding: 0.125em 1em;
-  margin-left: 0.5em;
+  margin: 0;
+}
+#dashboard .endpoints li.endpoint {
+  border-radius: 3px;
   font-family: Consolas, monaco, monospace;
-}
-#dashboard .endpoint .delete-endpoint {
-  border: 0;
-  background: none;
-  color: #999;
-  padding: 0;
-  text-shadow: none;
-  box-shadow: none;
-}
-#dashboard .endpoint .delete-endpoint:hover {
-  color: #f00;
-}
-#dashboard .endpoint .experiments {
-  margin-bottom: 3em;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #fff;
-  width: 100%;
-  border-collapse: collapse;
-}
-#dashboard .endpoint .experiments thead tr {
-  border-bottom: 1px solid #ddd;
-}
-#dashboard .endpoint .experiments thead tr:last-child {
-  border-bottom: 0;
-}
-#dashboard .endpoint .experiments thead tr th {
   padding: 0.5em;
-  font-weight: 300;
+  font-size: 0.75em;
 }
-#dashboard .endpoint .experiments thead tr th.name {
-  width: 99%;
-  text-align: left;
-}
-#dashboard .endpoint .experiments tbody tr {
-  border-bottom: 1px solid #efefef;
-}
-#dashboard .endpoint .experiments tbody tr em {
-  color: #ccc;
-}
-#dashboard .endpoint .experiments tbody tr:nth-child(even) {
-  background: rgba(0,0,0,0.02);
-}
-#dashboard .endpoint .experiments tbody tr:hover {
-  background: rgba(0,0,0,0.05);
-}
-#dashboard .endpoint .experiments tbody tr td {
-  padding: 0.5em;
-}
-#dashboard .endpoint .experiments tbody tr td.running-true {
-  color: #008000;
-}
-#dashboard .endpoint .experiments tbody tr td.running-false {
-  color: #f00;
-}
-#dashboard .endpoint .experiments tbody tr td.running,
-#dashboard .endpoint .experiments tbody tr td.visitors,
-#dashboard .endpoint .experiments tbody tr td.actions {
-  text-align: center;
-}
-#dashboard .endpoint .experiments tbody tr td.delete {
-  text-align: right;
-}
-#dashboard .endpoint .experiments tbody tr td.delete button {
-  border: 0;
-  background: none;
-  color: #ccc;
-}
-#dashboard .endpoint .experiments tbody tr td.delete button:hover {
-  color: #f00;
-}
-#dashboard .endpoint .experiments tbody tr td a {
-  color: #444;
-  text-decoration: none;
+#dashboard button {
+  padding: 0.25em 0.5em;
 }
 #settings h2,
 #settings h3,

@@ -3749,7 +3749,6 @@ html {
 body {
   font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding: 0.5em;
   color: #666;
   background: #f0f0f0;
 }
@@ -3798,10 +3797,9 @@ button {
 }
 nav {
   background: #263238;
-  padding: 0.75em 0.5em;
-  margin: -0.5em -0.5em 0.5em;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   text-align: center;
+  font-size: 1.5em;
 }
 nav div:first-child {
   text-align: left;
@@ -3809,25 +3807,19 @@ nav div:first-child {
 nav div:last-child {
   text-align: right;
 }
-nav button {
-  border: 0;
-  color: #cdd8dd;
-  background: #374851;
-  border-bottom: 2px solid #1e282d;
-  border-right: 2px solid #1e282d;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  padding: 0.25em 0.5em;
+nav img {
+  height: 2em;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  border-radius: 1em;
+  vertical-align: middle;
 }
 nav a {
-  position: relative;
   color: #839eab;
   text-decoration: none;
   border: 0;
   display: inline-block;
   padding: 0.25em;
-  margin-bottom: 2px;
 }
 nav a:hover {
   color: #e6ecee;
@@ -3842,6 +3834,8 @@ nav a.active:hover {
   animation: none;
 }
 nav a.logo {
+  -webkit-animation: none;
+  animation: none;
   color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

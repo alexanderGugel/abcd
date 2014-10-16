@@ -1,37 +1,40 @@
 <section id="dashboard">
   <nav class="pure-g">
-    <div class="pure-u-1-3">
-      <button ng-click="addEndpoint()"><i class="icon ion-plus"></i> Add endpoint</button>
+    <div class="pure-u-2-5">
     </div>
-    <div class="pure-u-1-3">
+    <div class="pure-u-1-5 animated fadeInDown">
       <a class="logo" href="#/">abcd</a>
     </div>
-    <div class="pure-u-1-3">
-      <a href="#/dashboard" class="active">Dashboard</a>
-      <a href="#/settings">Settings</a>
-      <a href="#/docs">Docs</a>
-      <a href="#/logout">Logout</a>
+    <div class="pure-u-2-5 animated bounceInRight">
+      <!-- <a href="#/dashboard" class="active">Dashboard</a> -->
+      <a href="#/settings"><i class="icon ion-gear-a"></i></a>
+      <a href="#/docs"><i class="icon ion-ios7-bookmarks"></i></a>
+      <a href="#/logout"><i class="icon ion-log-out"></i></a>
     </div>
   </nav>
 
-  <div class="endpoints animated bounceIn">
-    <div class="endpoint" ng-repeat="endpoint in endpoints">
-      <h2>Experiments for endpoint <span>{{endpoint.id}} <button class="delete-endpoint" ng-click="deleteEndpoint(endpoint)" title="Delete this endpoint">×</button></span></h2>
-      <table class="experiments">
-        <thead>
-          <tr>
-            <th class="running">Running?</th>
-            <th class="name">Name</th>
-            <th class="visitors">Visitiors</th>
-            <th class="actions">Actions</th>
-            <th class="delete"></th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
-  </div>
+    <ul class="endpoints animated bounceIn">
+      <li class="endpoint" ng-repeat="endpoint in endpoints">
+        <!-- <h2>Experiments for endpoint <span>{{endpoint.id}} <button class="delete-endpoint" ng-click="deleteEndpoint(endpoint)" title="Delete this endpoint">×</button></span></h2> -->
+        <span>{{endpoint.id}}</span>
+        <!-- <table class="experiments">
+          <thead>
+            <tr>
+              <th class="running">Running?</th>
+              <th class="name">Name</th>
+              <th class="visitors">Visitiors</th>
+              <th class="actions">Actions</th>
+              <th class="delete"></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table> -->
+      </li>
+      <li class="add-endpoint">
+        <button class="animated bounceInUp" ng-click="addEndpoint()"><i class="icon ion-plus"></i> Add endpoint</button>
+      </li>
+    </ul>
 
   <script id="endpoints-template" type="x-tmpl-mustache">
     {{#endpoints}}

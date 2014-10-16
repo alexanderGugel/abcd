@@ -10,8 +10,6 @@ angular.module('angularApp.dashboard', ['ngRoute'])
 }])
 
 .controller('DashboardCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-  window.s = $scope;
-
   if (localStorage.getItem('token') === null) {
     $location.path('/');
     return;

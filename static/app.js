@@ -8,9 +8,32 @@ angular.module('angularApp', [
   'angularApp.dashboard',
   'angularApp.settings',
   'angularApp.logout'
-]).
-config(['$routeProvider', function ($routeProvider) {
+])
+
+.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.otherwise({
     redirectTo: '/signin'
   });
+}])
+
+.run(['$http', '$rootScope', function ($http, $rootScope) {
+  if (localStorage.getItem('token')) {
+    $http({
+      url: '/api/users/me',
+      method: 'GET',
+      params: {
+        token: localStorage.getItem('token')
+      }
+    })
+    .success(function (data) {
+      if (data.error) {
+        localStorage.removeItem('token')
+        $routeProvider.otherwise({
+          redirectTo: '/signin'
+        });
+      } else {
+        $rootScope.user = data.user;
+      }
+    });
+  }
 }]);

@@ -41,6 +41,7 @@ angular.module('angularApp.settings', ['ngRoute'])
     })
     .success(function (data) {
       $scope.autoPopulate();
+      $scope.error = null;
     })
     .error(function (data) {
       $scope.error = data.error;

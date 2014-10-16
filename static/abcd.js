@@ -112,13 +112,17 @@ abcd.participate = function (experiment) {
   return new Experiment(experiment);
 };
 
+abcd.reset = function (experiment) {
+  return new Experiment(experiment).reset();
+};
+
 var Experiment = function (experiment) {
-  this.experiment = experiment || function () {};
+  this.experiment = experiment;
   this.variants = {};
 };
 
 Experiment.prototype.variant = function (variant, callback) {
-  this.variants[variant] = callback;
+  this.variants[variant] = callback || function () {};
   return this;
 };
 
@@ -134,15 +138,25 @@ Experiment.prototype.start = function (callback) {
       endpoint: abcd.endpoint
     }, function (data) {
       if (data.error) {
-        callback(new Error(data.error));
+        var error = data.error;
+        if (callback) {
+          callback(error)
+        } else {
+          throw error;
+        }
       } else {
         action.id = data.action.id;
         store.set('abcd:' + this.experiment, action);
-        callback(null, action);
+        callback && callback(null, action);
       }
     }.bind(this));
   }
   this.variants[action.variant]();
+};
+
+Experiment.prototype.reset = function () {
+  store.remove('abcd:' + this.experiment);
+  return this;
 };
 
 abcd.complete = function (experiment) {
@@ -162,5 +176,5 @@ abcd.complete = function (experiment) {
     });
   };
 
-  !action.completed && go();
+  action && !action.completed && go();
 };

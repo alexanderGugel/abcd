@@ -3985,24 +3985,32 @@ nav a.logo {
   font-weight: bold;
 }
 #dashboard .endpoints {
-  margin: 0;
   padding: 0.5em;
+}
+#dashboard .endpoints ul {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
-#dashboard .endpoints li {
+#dashboard .endpoints ul li {
   display: inline-block;
   margin: 0;
-}
-#dashboard .endpoints li.endpoint {
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  font-size: 0.75em;
   border-radius: 3px;
+}
+#dashboard .endpoints ul li.endpoint {
   font-family: Consolas, monaco, monospace;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #fff;
-  padding: 0.5em;
-  font-size: 0.75em;
 }
-#dashboard button {
-  padding: 0.25em 0.5em;
+#dashboard .endpoints ul li.endpoint .icon {
+  cursor: pointer;
+}
+#dashboard .endpoints ul li.add-endpoint {
+  cursor: pointer;
 }
 #settings h2,
 #settings h3,

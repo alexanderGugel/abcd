@@ -26,33 +26,36 @@
 
 #dashboard
   .endpoints
-    margin: 0
     padding: 0.5em
-    list-style: none
-    li
-      display: inline-block
-      // margin-right: 0.5em
-      // margin: 0.25em 0.25em
+    ul
       margin: 0
-      &.endpoint
-        border-radius: 3px
-        font-family: Consolas, monaco, monospace
-        // border: 1px solid #ddd
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-        background: #fff
+      padding: 0
+      list-style: none
+      li
+        display: inline-block
+        margin: 0
+        margin-right: 0.5em
+        margin-bottom: 0.5em
         padding: 0.5em
         font-size: 0.75em
-  // .add-endpoint
-    button
-      // background: nav-background
-      // background: none
-      // border: 0
-      // box-shadow: none
-      // color: #fff
-      // font-size: 3em
-      // padding: 0
-      // margin: 0
-      padding: 0.25em 0.5em
+        border-radius: 3px
+        &.endpoint
+          font-family: Consolas, monaco, monospace
+          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+          background: #fff
+          .icon
+            cursor: pointer
+        &.add-endpoint
+          cursor: pointer
+        // background: nav-background
+        // background: none
+        // border: 0
+        // box-shadow: none
+        // color: #fff
+        // font-size: 3em
+        // padding: 0
+        // margin: 0
+        // padding: 0.25em 0.5em
 
 // // .endpoint
 //   float: left

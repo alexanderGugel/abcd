@@ -21,7 +21,7 @@ endpoints.post('/', auth, function (req, res) {
 });
 
 endpoints.get('/', auth, function (req, res) {
-  query('SELECT * FROM endpoints WHERE user_id = $1 AND endpoints.is_active = TRUE', [req.user.id], function (error, result) {
+  query('SELECT * FROM endpoints WHERE user_id = $1', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -50,5 +50,23 @@ endpoints.delete('/:id', auth, function (req, res) {
     res.status(204).send({});
   });
 });
+
+endpoints.patch('/:id', auth, function (req, res) {
+  query('UPDATE "endpoints" SET is_active = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
+    if (error) {
+      if (error.code === '22P02') {
+        return res.status(400).send({
+          error: 'Invalid endpoint'
+        });
+      }
+      res.status(500).send({
+        error: 'Internal server error'
+      });
+      throw error;
+    }
+    res.status(204).send({});
+  });
+});
+
 
 module.exports = exports = endpoints;

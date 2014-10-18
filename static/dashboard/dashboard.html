@@ -1,11 +1,14 @@
 <section id="dashboard">
-  <nav class="pure-g">
+  <nav class="pure-g animated fadeInDown">
     <div class="pure-u-2-5">
+      <select class="endpoint" ng-model="activeEndpoint" ng-options="endpoint.id for endpoint in endpoints">
+        <option value="">-- choose endpoint --</option>
+      </select>
     </div>
-    <div class="pure-u-1-5 animated fadeInDown">
+    <div class="pure-u-1-5">
       <a class="logo" href="#/">abcd</a>
     </div>
-    <div class="pure-u-2-5 animated bounceInRight">
+    <div class="pure-u-2-5">
       <!-- <a href="#/dashboard" class="active">Dashboard</a> -->
       <a href="#/docs"><i class="icon ion-ios7-bookmarks"></i></a>
       <a href="#/settings"><i class="icon ion-gear-a"></i></a>
@@ -14,7 +17,7 @@
   </nav>
 
     <div class="pure-g endpoints">
-      <section class="pure-u-1-2">
+      <section class="pure-u-1-2 animated bounceInLeft">
         <h2><i class="icon ion-key"></i> Active endpoints</h2>
         <!-- <p>Experiments are always associated with an endpoint. Deactivating endpoints means no more conversions will be recorded for this endpoint.</p> -->
         <ul>
@@ -27,7 +30,7 @@
           </li>
         </ul>
       </section>
-      <section class="pure-u-1-2">
+      <section class="pure-u-1-2 animated bounceInRight">
         <h2><i class="icon ion-key"></i> Inactive endpoints</h2>
         <!-- <p>Accidentaly deactivated an endpoint? No problem endpoints can be reactivated.</p> -->
         <ul>

@@ -3803,12 +3803,28 @@ nav img {
   border-radius: 1em;
   vertical-align: middle;
 }
+nav select.endpoint {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: none;
+  padding: 0 0.25em;
+  border: 0;
+  width: 100%;
+  display: inline-block;
+  margin: 0;
+}
+nav select.endpoint option {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
 nav a {
   color: #839eab;
   text-decoration: none;
   border: 0;
   display: inline-block;
-  padding: 0.25em;
+  padding: 0 0.25em;
 }
 nav a:hover {
   color: #e6ecee;

@@ -35,30 +35,30 @@
     .error
       margin-top: 1em
 
-
-#dashboard
-  .endpoints
-    padding: 0.5em
-    ul
-      margin: 0
-      padding: 0
-      list-style: none
-      li
-        display: inline-block
-        margin: 0
-        margin-right: 0.5em
-        margin-bottom: 0.5em
-        padding: 0.5em
-        font-size: 0.75em
-        border-radius: 3px
-        &.endpoint
-          font-family: Consolas, monaco, monospace
-          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-          background: #fff
-          .icon
-            cursor: pointer
-        &.add-endpoint
-          cursor: pointer
+//
+// #dashboard
+//   .endpoints
+//     padding: 0.5em
+//     ul
+//       margin: 0
+//       padding: 0
+//       list-style: none
+//       li
+//         display: inline-block
+//         margin: 0
+//         margin-right: 0.5em
+//         margin-bottom: 0.5em
+//         padding: 0.5em
+//         font-size: 0.75em
+//         border-radius: 3px
+//         &.endpoint
+//           font-family: Consolas, monaco, monospace
+//           box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+//           background: #fff
+//           .icon
+//             cursor: pointer
+//         &.add-endpoint
+//           cursor: pointer
         // background: nav-background
         // background: none
         // border: 0
@@ -68,6 +68,53 @@
         // padding: 0
         // margin: 0
         // padding: 0.25em 0.5em
+
+#config
+  padding: 0.5em 0.5em 1em
+  table
+    background: #fff
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+    width: 100%
+    border-collapse: collapse
+    text-align: left
+    border-radius: 2px
+    thead
+      tr
+        border-bottom: 1px solid #ddd
+        th
+          font-weight: 300
+          padding: 0.5em 0.25em
+          &.active, &.actions
+            white-space: nowrap
+            padding: 0.5em 2em
+            width: 1%
+    tbody
+      tr
+        border-bottom: 1px solid #efefef
+        &:nth-child(even)
+          background: rgba(0, 0, 0, 0.02)
+        &:hover
+          background: rgba(0, 0, 0, 0.05)
+        td
+          padding: 0.5em 0.25em
+          &.active
+            text-align: center
+            a
+              border: 0
+              &.activate
+                color: red
+              &.deactivate
+                color: green
+          &.id
+            font-family: Consolas, monaco, monospace
+            color: #ccc
+          &.actions
+            text-align: center
+  .add-endpoint
+    text-align: right
+    padding-top: 1em
+    button
+      padding: 0.25em 0.5em
 
 // // .endpoint
 //   float: left

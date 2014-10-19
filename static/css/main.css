@@ -3730,6 +3730,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 html {
   box-sizing: border-box;
 }
+html,
+body {
+  min-height: 100%;
+}
 *,
 *:before,
 *:after {
@@ -3806,8 +3810,9 @@ nav {
   background: #263238;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   text-align: center;
-  font-size: 1.25em;
-  padding: 0.25em;
+  font-size: 1em;
+  padding: 0.5em;
+  vertical-align: middle;
 }
 nav div:first-child {
   text-align: left;
@@ -3835,6 +3840,17 @@ nav a {
   color: #cdd8dd;
   text-decoration: none;
   border: 0;
+  display: inline-block;
+  margin-right: 1em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+nav a .icon {
+  color: #f5f7f8;
+  display: none;
+}
+nav a:last-child {
+  margin: 0;
 }
 nav a:hover {
   color: #e6ecee;
@@ -3854,6 +3870,54 @@ nav a.logo {
   color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+@-moz-keyframes nav-a-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-webkit-keyframes nav-a-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-o-keyframes nav-a-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-moz-keyframes nav-a-active-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-webkit-keyframes nav-a-active-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-o-keyframes nav-a-active-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #839eab;
+  }
 }
 @-moz-keyframes nav-a-animation {
   from {
@@ -3983,35 +4047,67 @@ nav a.logo {
 #signup form .error {
   margin-top: 1em;
 }
-#dashboard .endpoints {
-  padding: 0.5em;
+#config {
+  padding: 0.5em 0.5em 1em;
 }
-#dashboard .endpoints ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-#dashboard .endpoints ul li {
-  display: inline-block;
-  margin: 0;
-  margin-right: 0.5em;
-  margin-bottom: 0.5em;
-  padding: 0.5em;
-  font-size: 0.75em;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-#dashboard .endpoints ul li.endpoint {
-  font-family: Consolas, monaco, monospace;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+#config table {
   background: #fff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  border-radius: 2px;
 }
-#dashboard .endpoints ul li.endpoint .icon {
-  cursor: pointer;
+#config table thead tr {
+  border-bottom: 1px solid #ddd;
 }
-#dashboard .endpoints ul li.add-endpoint {
-  cursor: pointer;
+#config table thead tr th {
+  font-weight: 300;
+  padding: 0.5em 0.25em;
+}
+#config table thead tr th.active,
+#config table thead tr th.actions {
+  white-space: nowrap;
+  padding: 0.5em 2em;
+  width: 1%;
+}
+#config table tbody tr {
+  border-bottom: 1px solid #efefef;
+}
+#config table tbody tr:nth-child(even) {
+  background: rgba(0,0,0,0.02);
+}
+#config table tbody tr:hover {
+  background: rgba(0,0,0,0.05);
+}
+#config table tbody tr td {
+  padding: 0.5em 0.25em;
+}
+#config table tbody tr td.active {
+  text-align: center;
+}
+#config table tbody tr td.active a {
+  border: 0;
+}
+#config table tbody tr td.active a.activate {
+  color: #f00;
+}
+#config table tbody tr td.active a.deactivate {
+  color: #008000;
+}
+#config table tbody tr td.id {
+  font-family: Consolas, monaco, monospace;
+  color: #ccc;
+}
+#config table tbody tr td.actions {
+  text-align: center;
+}
+#config .add-endpoint {
+  text-align: right;
+  padding-top: 1em;
+}
+#config .add-endpoint button {
+  padding: 0.25em 0.5em;
 }
 #settings h2,
 #settings h3,

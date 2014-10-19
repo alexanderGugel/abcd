@@ -21,7 +21,10 @@ endpoints.post('/', auth, function (req, res) {
 });
 
 endpoints.get('/', auth, function (req, res) {
-  query('SELECT id, is_active FROM endpoints WHERE user_id = $1', [req.user.id], function (error, result) {
+  query(
+    // 'SELECT id, is_active FROM endpoints WHERE user_id = $1'
+    'SELECT endpoints.is_active, endpoints.id, (COUNT(endpoints.id) - 1) AS action_count FROM endpoints LEFT JOIN actions ON actions.endpoint_id = endpoints.id AND endpoints.user_id = $1 GROUP BY endpoints.id;'
+  , [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'

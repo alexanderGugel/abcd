@@ -31,10 +31,15 @@ border-radius()
   border-radius arguments
 
 nav-background = #263238
+// nav-background = #303f9f
 button-background = #303f9f
 
 html
   box-sizing: border-box
+
+// Fix popover bug
+html, body
+  min-height: 100%
 
 *, *:before, *:after
   box-sizing: inherit
@@ -110,8 +115,9 @@ nav
   background: nav-background
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
   text-align: center
-  font-size: 1.25em
-  padding: 0.25em
+  font-size: 1em
+  padding: 0.5em
+  vertical-align: middle
   div:first-child
     text-align: left
   div:last-child
@@ -132,6 +138,15 @@ nav
     color: lighten(nav-background, 80%)
     text-decoration: none
     border: 0
+    display: inline-block
+    margin-right: 1em
+    text-transform: uppercase
+    font-size: 0.75em
+    .icon
+      color: lighten(nav-background, 96%)
+      display: none
+    &:last-child
+      margin: 0
     &:hover
       color: lighten(nav-background, 90%)
       -webkit-animation: nav-a-animation 300ms

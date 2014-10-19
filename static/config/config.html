@@ -1,0 +1,37 @@
+<section id="config" class="animated bounceIn">
+  {{usage}}
+
+  <!-- <h1>Available endpoints</h1> -->
+
+
+  <table class="experiments">
+    <thead>
+      <tr>
+        <th class="active">Active?</th>
+        <th class="id">Endpoint</th>
+        <th class="actions">Actions</th>
+
+        <!-- <th class="visitors">Visitiors</th>
+        <th class="actions">Actions</th>
+        <th class="delete"></th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="endpoint in endpoints">
+        <td class="active">
+          <a class="activate" href="" ng-click="activateEndpoint(endpoint)" title="Activate {{endpoint.id}}" ng-if="!endpoint.is_active">•</a>
+          <a class="deactivate" href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ng-if="endpoint.is_active">•</a>
+        </td>
+        <td class="id">{{endpoint.id}}</td>
+        <td class="actions">{{endpoint.action_count}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="add-endpoint">
+    <button ng-click="addEndpoint()"><i class="icon ion-plus"></i> Add endpoint</button>
+  </div>
+
+
+</section>

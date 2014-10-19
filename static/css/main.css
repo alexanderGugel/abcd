@@ -3879,54 +3879,6 @@ nav a.logo {
     color: #e6ecee;
   }
 }
-@-moz-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-webkit-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-o-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-moz-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-webkit-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-o-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
 @keyframes nav-a-animation {
   from {
     color: #cdd8dd;
@@ -4046,6 +3998,8 @@ nav a.logo {
   margin-bottom: 0.5em;
   padding: 0.5em;
   font-size: 0.75em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 #dashboard .endpoints ul li.endpoint {

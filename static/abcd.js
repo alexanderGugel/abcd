@@ -103,79 +103,127 @@ var store = require('store');
 })(window);
 
 ///
+//
+// window.abcd = {};
 
-window.abcd = {};
-abcd.host = 'http://localhost:3000/api/';
-abcd.endpoint = null;
+// abcd.host = 'http://localhost:3000/api/';
+// abcd.endpoint = null;
 
-abcd.participate = function (experiment) {
-  return new Experiment(experiment);
-};
+// abcd.participate = function (experiment) {
+//   return new Experiment(experiment);
+// };
+//
+// abcd.reset = function (experiment) {
+//   return new Experiment(experiment).reset();
+// };
+//
+// var Experiment = function (experiment) {
+//   this.experiment = experiment;
+//   this.variants = {};
+// };
+//
+// Experiment.prototype.variant = function (variant, callback) {
+//   this.variants[variant] = callback || function () {};
+//   return this;
+// };
+//
+// Experiment.prototype.start = function (callback) {
+//   var action = store.get('abcd:' + this.experiment);
+//   if (!action || !action.id) {
+//     action = {
+//       variant: Object.keys(this.variants)[Math.floor(Math.random()*Object.keys(this.variants).length)]
+//     };
+//     JSONP(abcd.host + 'actions/start', {
+//       variant: action.variant,
+//       experiment: this.experiment,
+//       endpoint: abcd.endpoint
+//     }, function (data) {
+//       if (data.error) {
+//         var error = data.error;
+//         if (callback) {
+//           callback(error)
+//         } else {
+//           throw error;
+//         }
+//       } else {
+//         action.id = data.action.id;
+//         store.set('abcd:' + this.experiment, action);
+//         callback && callback(null, action);
+//       }
+//     }.bind(this));
+//   }
+//   this.variants[action.variant]();
+//   return this;
+// };
+//
+// Experiment.prototype.reset = function () {
+//   store.remove('abcd:' + this.experiment);
+//   return this;
+// };
+//
+// abcd.complete = function (experiment) {
+//   var action = store.get('abcd:' + experiment);
+//   var go = function () {
+//     if (!action.id) {
+//       return;
+//       setTimeout(go, 1);
+//     }
+//     JSONP(abcd.host + 'actions/complete', {
+//       id: action.id,
+//       endpoint: abcd.endpoint
+//     }, function (data) {
+//       action.completed = true;
+//       store.set('abcd:' + experiment, action);
+//       console.log(data);
+//     });
+//   };
+//
+//   action && !action.completed && go();
+// };
 
-abcd.reset = function (experiment) {
-  return new Experiment(experiment).reset();
-};
+var host = 'http://localhost:3000/api/';
 
-var Experiment = function (experiment) {
-  this.experiment = experiment;
-  this.variants = {};
-};
-
-Experiment.prototype.variant = function (variant, callback) {
-  this.variants[variant] = callback || function () {};
-  return this;
-};
-
-Experiment.prototype.start = function (callback) {
-  var action = store.get('abcd:' + this.experiment);
-  if (!action || !action.id) {
-    action = {
-      variant: Object.keys(this.variants)[Math.floor(Math.random()*Object.keys(this.variants).length)]
-    };
-    JSONP(abcd.host + 'actions/start', {
-      variant: action.variant,
-      experiment: this.experiment,
-      endpoint: abcd.endpoint
-    }, function (data) {
-      if (data.error) {
-        var error = data.error;
-        if (callback) {
-          callback(error)
-        } else {
-          throw error;
-        }
-      } else {
-        action.id = data.action.id;
-        store.set('abcd:' + this.experiment, action);
-        callback && callback(null, action);
-      }
-    }.bind(this));
+var participate = function (options, callback) {
+  if (!options.variant || !options.experiment || !options.endpoint) {
+    throw new Error('Missing variant/ experiment/ endpoint');
   }
-  this.variants[action.variant]();
-  return this;
-};
-
-Experiment.prototype.reset = function () {
-  store.remove('abcd:' + this.experiment);
-  return this;
-};
-
-abcd.complete = function (experiment) {
-  var action = store.get('abcd:' + experiment);
-  var go = function () {
-    if (!action.id) {
-      return;
-      setTimeout(go, 1);
+  JSONP(abcd.host + 'participate', {
+    variant: options.variant,
+    experiment: options.experiment,
+    endpoint: options.endpoint
+  }, function (data) {
+    if (data.error) {
+      var error = data.error;
+      (callback && callback(data.error)) || (function () {
+        throw new Error(data.error);
+      })();
+    } else {
+      callback && callback(null, data.action.id);
     }
-    JSONP(abcd.host + 'actions/complete', {
-      id: action.id,
-      endpoint: abcd.endpoint
-    }, function (data) {
-      action.completed = true;
-      store.set('abcd:' + experiment, action);
-      console.log(data);
-    });
-  };
+  });
+};
 
-  action && !action.completed && go();
+var convert = function (options, callback) {
+  if (!options.action || !options.endpoint) {
+    throw new Error('Missing action/ endpoint');
+  }
+  JSONP(abcd.host + 'convert', {
+    action: options.action,
+    endpoint: options.endpoint
+  }, function (data) {
+    if (data.error) {
+      var error = data.error;
+      (callback && callback(data.error)) || (function () {
+        throw new Error(data.error);
+      })();
+    } else {
+      callback && callback(null);
+    }
+  });
+};
+
+window.abcd = {
+  host: host,
+  participate: participate,
+  convert: convert
 };

@@ -85,13 +85,13 @@ button
 
 @keyframes nav-a-animation
   from
-    color: lighten(nav-background, 50%)
+    color: lighten(nav-background, 80%)
   to
     color: lighten(nav-background, 90%)
 
 @keyframes nav-a-active-animation
   from
-    color: lighten(nav-background, 90%)
+    color: lighten(nav-background, 80%)
   to
     color: lighten(nav-background, 50%)
 
@@ -112,8 +112,6 @@ nav
   text-align: center
   font-size: 1.25em
   padding: 0.25em
-  // line-height: 1
-  // vertical-align: middle
   div:first-child
     text-align: left
   div:last-child
@@ -130,30 +128,10 @@ nav
     color: lighten(nav-background, 50%)
     background: rgba(255,255,255,.1)
     display: none
-  select.endpoint
-    // font-family: Consolas, monaco, monospace
-    // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-    // background: #fff
-    // border-radius: 3px
-    // background: none
-    // padding: 0 0.15em
-    // border: 0
-    // width: 100%
-    // display: inline-block
-    // margin: 0
-    // // background: red
-    // option
-    //   border: 0
-    //   margin: 0
-    //   padding: 0
   a
-    color: lighten(nav-background, 50%)
+    color: lighten(nav-background, 80%)
     text-decoration: none
     border: 0
-    display: inline-block
-    position: relative
-    // position: relative
-    // margin: 1px 0
     &:hover
       color: lighten(nav-background, 90%)
       -webkit-animation: nav-a-animation 300ms

@@ -3843,11 +3843,9 @@ nav button {
   display: none;
 }
 nav a {
-  color: #839eab;
+  color: #cdd8dd;
   text-decoration: none;
   border: 0;
-  display: inline-block;
-  position: relative;
 }
 nav a:hover {
   color: #e6ecee;
@@ -3870,7 +3868,7 @@ nav a.logo {
 }
 @-moz-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3878,7 +3876,7 @@ nav a.logo {
 }
 @-webkit-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3886,7 +3884,7 @@ nav a.logo {
 }
 @-o-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3894,7 +3892,7 @@ nav a.logo {
 }
 @keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3902,7 +3900,7 @@ nav a.logo {
 }
 @-moz-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3910,7 +3908,7 @@ nav a.logo {
 }
 @-webkit-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3918,7 +3916,7 @@ nav a.logo {
 }
 @-o-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3926,7 +3924,7 @@ nav a.logo {
 }
 @keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;

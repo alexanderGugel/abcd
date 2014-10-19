@@ -3832,11 +3832,9 @@ nav button {
   display: none;
 }
 nav a {
-  color: #839eab;
+  color: #cdd8dd;
   text-decoration: none;
   border: 0;
-  display: inline-block;
-  position: relative;
 }
 nav a:hover {
   color: #e6ecee;
@@ -3859,7 +3857,7 @@ nav a.logo {
 }
 @-moz-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3867,7 +3865,7 @@ nav a.logo {
 }
 @-webkit-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3875,15 +3873,7 @@ nav a.logo {
 }
 @-o-keyframes nav-a-animation {
   from {
-    color: #839eab;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@keyframes nav-a-animation {
-  from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3891,7 +3881,7 @@ nav a.logo {
 }
 @-moz-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3899,7 +3889,7 @@ nav a.logo {
 }
 @-webkit-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3907,7 +3897,63 @@ nav a.logo {
 }
 @-o-keyframes nav-a-active-animation {
   from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-moz-keyframes nav-a-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
     color: #e6ecee;
+  }
+}
+@-webkit-keyframes nav-a-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-o-keyframes nav-a-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@keyframes nav-a-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #e6ecee;
+  }
+}
+@-moz-keyframes nav-a-active-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-webkit-keyframes nav-a-active-animation {
+  from {
+    color: #cdd8dd;
+  }
+  to {
+    color: #839eab;
+  }
+}
+@-o-keyframes nav-a-active-animation {
+  from {
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3915,7 +3961,7 @@ nav a.logo {
 }
 @keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -4000,8 +4046,6 @@ nav a.logo {
   margin-bottom: 0.5em;
   padding: 0.5em;
   font-size: 0.75em;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 #dashboard .endpoints ul li.endpoint {

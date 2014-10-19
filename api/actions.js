@@ -1,5 +1,6 @@
 var express = require('express');
 var query = require('../db/query');
+var auth = require('./auth');
 
 var actions = express.Router();
 
@@ -10,6 +11,11 @@ actions.use(function (req, res, next) {
     });
   }
   next();
+});
+
+actions.get('/', auth, function (req, res, next) {
+}, function (req, res) {
+
 });
 
 // Start action

@@ -7,7 +7,8 @@ angular.module('angularApp', [
   'angularApp.signup',
   'angularApp.dashboard',
   'angularApp.settings',
-  'angularApp.logout'
+  'angularApp.logout',
+  'angularApp.drop'
 ])
 
 .config(['$routeProvider', function ($routeProvider) {

@@ -3788,7 +3788,8 @@ nav {
   background: #263238;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.25em;
+  padding: 0.25em;
 }
 nav div:first-child {
   text-align: left;
@@ -3797,34 +3798,27 @@ nav div:last-child {
   text-align: right;
 }
 nav img {
-  height: 2em;
+  height: 1em;
   -webkit-border-radius: 1em;
   -moz-border-radius: 1em;
   border-radius: 1em;
-  vertical-align: middle;
 }
-nav select.endpoint {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+nav button {
+  color: #839eab;
   background: none;
-  padding: 0 0.25em;
-  border: 0;
-  width: 100%;
-  display: inline-block;
-  margin: 0;
-}
-nav select.endpoint option {
-  border: 0;
-  margin: 0;
   padding: 0;
+  background: #fff;
+  font-weight: 400;
+  color: #839eab;
+  background: rgba(255,255,255,0.1);
+  display: none;
 }
 nav a {
   color: #839eab;
   text-decoration: none;
   border: 0;
   display: inline-block;
-  padding: 0 0.25em;
+  position: relative;
 }
 nav a:hover {
   color: #e6ecee;
@@ -3844,54 +3838,6 @@ nav a.logo {
   color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-@-moz-keyframes nav-a-animation {
-  from {
-    color: #839eab;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-webkit-keyframes nav-a-animation {
-  from {
-    color: #839eab;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-o-keyframes nav-a-animation {
-  from {
-    color: #839eab;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-moz-keyframes nav-a-active-animation {
-  from {
-    color: #e6ecee;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-webkit-keyframes nav-a-active-animation {
-  from {
-    color: #e6ecee;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-o-keyframes nav-a-active-animation {
-  from {
-    color: #e6ecee;
-  }
-  to {
-    color: #839eab;
-  }
 }
 @-moz-keyframes nav-a-animation {
   from {
@@ -4015,6 +3961,8 @@ nav a.logo {
   margin-bottom: 0.5em;
   padding: 0.5em;
   font-size: 0.75em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 #dashboard .endpoints ul li.endpoint {

@@ -15,6 +15,8 @@ angular.module('angularApp.dashboard', ['ngRoute'])
     return;
   }
 
+  window.d = $scope.dropdown;
+
   $scope.addEndpoint = function () {
     $http.post('/api/endpoints', {
       token: localStorage.getItem('token')

@@ -10,15 +10,22 @@
         <!-- <th class="delete">Delete</th> -->
       </tr>
     </thead>
-    <tbody>
-      <tr ng-repeat="endpoint in endpoints">
+    <tbody ng-repeat="endpoint in endpoints">
+      <tr>
         <td class="active">
           <a class="activate" href="" ng-click="activateEndpoint(endpoint)" title="Activate {{endpoint.id}}" ng-if="!endpoint.is_active">•</a>
           <a class="deactivate" href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ng-if="endpoint.is_active">•</a>
         </td>
-        <td class="id">{{endpoint.id}}</td>
+        <td class="id">
+          <a href="" ng-click="endpoint.show = !endpoint.show">{{endpoint.id}}</a>
+        </td>
         <td class="actions">{{endpoint.action_count}}</td>
         <!-- <td class="delete"><a href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ><i class="icon ion-ios7-trash-outline"></i></a></td> -->
+      </tr>
+      <tr ng-show="endpoint.show">
+        <td></td>
+        <td>More data</td>
+        <td></td>
       </tr>
     </tbody>
   </table>

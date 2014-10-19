@@ -4072,14 +4072,14 @@ nav a.logo {
   padding: 0.5em 1em;
   width: 1%;
 }
-#config table tbody tr {
-  border-bottom: 1px solid #efefef;
-}
-#config table tbody tr:nth-child(even) {
+#config table tbody:nth-child(even) {
   background: rgba(0,0,0,0.02);
 }
-#config table tbody tr:hover {
+#config table tbody:hover {
   background: rgba(0,0,0,0.05);
+}
+#config table tbody tr {
+  border-bottom: 1px solid #efefef;
 }
 #config table tbody tr td {
   padding: 0.5em 0.25em;
@@ -4106,7 +4106,10 @@ nav a.logo {
 }
 #config table tbody tr td.id {
   font-family: Consolas, monaco, monospace;
-  color: #ccc;
+}
+#config table tbody tr td.id a {
+  border: 0;
+  color: #999;
 }
 #config .add-endpoint {
   text-align: right;

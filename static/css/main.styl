@@ -89,12 +89,12 @@
             padding: 0.5em 1em
             width: 1%
     tbody
+      &:nth-child(even)
+        background: rgba(0, 0, 0, 0.02)
+      &:hover
+        background: rgba(0, 0, 0, 0.05)
       tr
         border-bottom: 1px solid #efefef
-        &:nth-child(even)
-          background: rgba(0, 0, 0, 0.02)
-        &:hover
-          background: rgba(0, 0, 0, 0.05)
         td
           padding: 0.5em 0.25em
           &.active, &.actions, &.delete
@@ -107,7 +107,10 @@
                 color: green
           &.id
             font-family: Consolas, monaco, monospace
-            color: #ccc
+            a
+              border: 0
+              color: #999
+
 
   .add-endpoint
     text-align: right

@@ -4066,9 +4066,10 @@ nav a.logo {
   padding: 0.5em 0.25em;
 }
 #config table thead tr th.active,
-#config table thead tr th.actions {
+#config table thead tr th.actions,
+#config table thead tr th.delete {
   white-space: nowrap;
-  padding: 0.5em 2em;
+  padding: 0.5em 1em;
   width: 1%;
 }
 #config table tbody tr {
@@ -4083,24 +4084,29 @@ nav a.logo {
 #config table tbody tr td {
   padding: 0.5em 0.25em;
 }
-#config table tbody tr td.active {
+#config table tbody tr td.active,
+#config table tbody tr td.actions,
+#config table tbody tr td.delete {
   text-align: center;
 }
-#config table tbody tr td.active a {
+#config table tbody tr td.active a,
+#config table tbody tr td.actions a,
+#config table tbody tr td.delete a {
   border: 0;
 }
-#config table tbody tr td.active a.activate {
+#config table tbody tr td.active a.activate,
+#config table tbody tr td.actions a.activate,
+#config table tbody tr td.delete a.activate {
   color: #f00;
 }
-#config table tbody tr td.active a.deactivate {
+#config table tbody tr td.active a.deactivate,
+#config table tbody tr td.actions a.deactivate,
+#config table tbody tr td.delete a.deactivate {
   color: #008000;
 }
 #config table tbody tr td.id {
   font-family: Consolas, monaco, monospace;
   color: #ccc;
-}
-#config table tbody tr td.actions {
-  text-align: center;
 }
 #config .add-endpoint {
   text-align: right;

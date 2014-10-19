@@ -84,9 +84,9 @@
         th
           font-weight: 300
           padding: 0.5em 0.25em
-          &.active, &.actions
+          &.active, &.actions, &.delete
             white-space: nowrap
-            padding: 0.5em 2em
+            padding: 0.5em 1em
             width: 1%
     tbody
       tr
@@ -97,7 +97,7 @@
           background: rgba(0, 0, 0, 0.05)
         td
           padding: 0.5em 0.25em
-          &.active
+          &.active, &.actions, &.delete
             text-align: center
             a
               border: 0
@@ -108,8 +108,7 @@
           &.id
             font-family: Consolas, monaco, monospace
             color: #ccc
-          &.actions
-            text-align: center
+
   .add-endpoint
     text-align: right
     padding-top: 1em

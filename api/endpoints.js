@@ -34,7 +34,7 @@ endpoints.get('/', auth, function (req, res) {
   });
 });
 
-endpoints.get('/:id', function (req, res) {
+endpoints.get('/:id/actions', function (req, res) {
   query('SELECT * FROM actions WHERE endpoint_id = (SELECT id FROM endpoints WHERE id = $1 AND user_id = $2)', [req.params.id, req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({

@@ -6,9 +6,7 @@
   <body>
     <script src="http://alex.dev:3000/abcd.bundle.js"></script>
     <script>
-      abcd.endpoint = 'ead9d5aa-d131-4d6e-b9c8-05e169c79eaa';
-
-      abcd
+      abcd('ead9d5aa-d131-4d6e-b9c8-05e169c79eaa')
       .participate('My little experiment 5')
       .variant('control', function () {
         console.log('control');

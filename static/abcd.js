@@ -103,83 +103,6 @@ var store = require('store');
 })(window);
 
 ///
-//
-// window.abcd = {};
-
-// abcd.host = 'http://localhost:3000/api/';
-// abcd.endpoint = null;
-
-// abcd.participate = function (experiment) {
-//   return new Experiment(experiment);
-// };
-//
-// abcd.reset = function (experiment) {
-//   return new Experiment(experiment).reset();
-// };
-//
-// var Experiment = function (experiment) {
-//   this.experiment = experiment;
-//   this.variants = {};
-// };
-//
-// Experiment.prototype.variant = function (variant, callback) {
-//   this.variants[variant] = callback || function () {};
-//   return this;
-// };
-//
-// Experiment.prototype.start = function (callback) {
-//   var action = store.get('abcd:' + this.experiment);
-//   if (!action || !action.id) {
-//     action = {
-//       variant: Object.keys(this.variants)[Math.floor(Math.random()*Object.keys(this.variants).length)]
-//     };
-//     JSONP(abcd.host + 'actions/start', {
-//       variant: action.variant,
-//       experiment: this.experiment,
-//       endpoint: abcd.endpoint
-//     }, function (data) {
-//       if (data.error) {
-//         var error = data.error;
-//         if (callback) {
-//           callback(error)
-//         } else {
-//           throw error;
-//         }
-//       } else {
-//         action.id = data.action.id;
-//         store.set('abcd:' + this.experiment, action);
-//         callback && callback(null, action);
-//       }
-//     }.bind(this));
-//   }
-//   this.variants[action.variant]();
-//   return this;
-// };
-//
-// Experiment.prototype.reset = function () {
-//   store.remove('abcd:' + this.experiment);
-//   return this;
-// };
-//
-// abcd.complete = function (experiment) {
-//   var action = store.get('abcd:' + experiment);
-//   var go = function () {
-//     if (!action.id) {
-//       return;
-//       setTimeout(go, 1);
-//     }
-//     JSONP(abcd.host + 'actions/complete', {
-//       id: action.id,
-//       endpoint: abcd.endpoint
-//     }, function (data) {
-//       action.completed = true;
-//       store.set('abcd:' + experiment, action);
-//       console.log(data);
-//     });
-//   };
-//
-//   action && !action.completed && go();
-// };
 
 var host = 'http://localhost:3000/api/';
 
@@ -222,8 +145,74 @@ var convert = function (options, callback) {
   });
 };
 
+///
+
+
+var experiment = function (experiment, endpoint) {
+  return new _Experiment(experiment, endpoint);
+};
+
+var _Experiment = function (experiment, endpoint) {
+  this.endpoint = endpoint || window.abcd.endpoint;
+  this.experiment = experiment;
+  this.variants = {};
+};
+
+_Experiment.prototype.variant = function (variant, callback) {
+  this.variants[variant] = callback || function () {};
+  return this;
+};
+
+_Experiment.prototype.start = function (callback) {
+  var action = store.get('abcd:' + this.endpoint + ':' + this.experiment);
+  if (!action || !action.id) {
+    action = {
+      variant: Object.keys(this.variants)[Math.floor(Math.random()*Object.keys(this.variants).length)]
+    };
+
+    participate({
+      variant: action.variant,
+      experiment: this.experiment,
+      endpoint: this.endpoint
+    }, function (error, actionId) {
+      action.id = actionId;
+      store.set('abcd:' + this.endpoint + ':' + this.experiment, action)
+      callback && callback.apply(this, arguments);
+    }.bind(this));
+  }
+  this.variants[action.variant]();
+  return this;
+};
+
+_Experiment.prototype.reset = function () {
+  store.remove('abcd:' + this.endpoint + ':' + this.experiment);
+  return this;
+};
+
+_Experiment.prototype.end = function (callback) {
+  var action = store.get('abcd:' + this.endpoint + ':' + this.experiment);
+  var go = function () {
+    if (!action.id) {
+      setTimeout(go.bind(this), 1);
+      return;
+    }
+
+    convert({
+      endpoint: this.endpoint,
+      action: action.id
+    }, function (error) {
+      action.completed = true;
+      store.set('abcd:' + this.endpoint + ':' + this.experiment, action);
+      callback && callback.apply(this, arguments);
+    }.bind(this));
+  };
+
+  action && !action.completed && go();
+};
+
 window.abcd = {
   host: host,
   participate: participate,
-  convert: convert
+  convert: convert,
+  experiment: experiment
 };

@@ -9,16 +9,33 @@
       // abcd.endpoint = 'ead9d5aa-d131-4d6e-b9c8-05e169c79eaa'
 
       var endpoint = 'ead9d5aa-d131-4d6e-b9c8-05e169c79eaa';
-      
-      abcd.participate({
-        endpoint: endpoint,
-        experiment: 'Button Color',
-        variant: 'blue'
-      }, function (err, action) {
-        abcd.convert({
-          action: action,
-          endpoint: endpoint
-        });
+      //
+      // abcd.participate({
+      //   endpoint: endpoint,
+      //   experiment: 'Button Color',
+      //   variant: 'blue'
+      // }, function (err, action) {
+      //   abcd.convert({
+      //     action: action,
+      //     endpoint: endpoint
+      //   });
+      // });
+      abcd.endpoint = endpoint;
+
+      var experiment = abcd.experiment('Checkout process')
+      experiment.variant('control', function () {
+        console.log('control');
+      })
+      .variant('blue button', function () {
+        console.log('blue button');
+      })
+      .variant('yellow button', function () {
+        console.log('yellow button');
+      })
+      .start();
+
+      experiment.end(function () {
+        experiment.reset();
       });
 
       // abcd.participate('My little experiment 5')

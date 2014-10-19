@@ -6,20 +6,7 @@
   <body>
     <script src="http://alex.dev:3000/abcd.bundle.js"></script>
     <script>
-      // abcd.endpoint = 'ead9d5aa-d131-4d6e-b9c8-05e169c79eaa'
-
       var endpoint = 'ead9d5aa-d131-4d6e-b9c8-05e169c79eaa';
-      //
-      // abcd.participate({
-      //   endpoint: endpoint,
-      //   experiment: 'Button Color',
-      //   variant: 'blue'
-      // }, function (err, action) {
-      //   abcd.convert({
-      //     action: action,
-      //     endpoint: endpoint
-      //   });
-      // });
       abcd.endpoint = endpoint;
 
       var experiment = abcd.experiment('Checkout process')
@@ -37,23 +24,6 @@
           experiment.reset();
         });
       });
-
-
-      // abcd.participate('My little experiment 5')
-      // .variant('control', function () {
-      //   console.log('control');
-      // })
-      // .variant('blue button', function () {
-      //   console.log('blue button');
-      // })
-      // .variant('yellow button', function () {
-      //   console.log('yellow button');
-      // })
-      // .start();
-      //
-      // // abcd.reset('My little experiment 5');
-      //
-      // abcd.convert('My little experiment 5');
     </script>
   </body>
 </html>

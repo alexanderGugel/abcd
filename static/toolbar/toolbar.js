@@ -12,7 +12,7 @@ angular.module('angularApp.toolbar', [])
       content:
         '<a href="#/settings"><i class="icon ion-gear-a"></i> Account settings</a>' +
         '<br>' +
-        '<a href="#/logout"><i class="icon ion-log-out"></i> Signout</a>',
+        '<a href="#/logout"><i class="icon ion-log-out"></i> Sign Out</a>',
       classes: 'drop-theme-arrows-bounce popover',
       position: 'top right'
     });

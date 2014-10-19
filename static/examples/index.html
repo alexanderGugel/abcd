@@ -32,11 +32,12 @@
       .variant('yellow button', function () {
         console.log('yellow button');
       })
-      .start();
-
-      experiment.end(function () {
-        experiment.reset();
+      .start(function () {
+        experiment.end(function () {
+          experiment.reset();
+        });
       });
+
 
       // abcd.participate('My little experiment 5')
       // .variant('control', function () {

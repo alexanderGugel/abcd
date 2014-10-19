@@ -30,7 +30,7 @@ users._validateUsernamePassword = function (req, res, next) {
       error: 'Password too short'
     });
   }
-  email = email.toLowerCase();
+  email = email.toString().toLowerCase();
   req.email = email;
   req.password = password;
   next();

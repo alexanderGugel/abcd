@@ -5,18 +5,12 @@ angular.module('angularApp.dashboard', ['ngRoute'])
 .config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/dashboard', {
     templateUrl: 'dashboard/dashboard.html',
-    controller: 'DashboardCtrl'
+    controller: 'DashboardCtrl',
+    restricted: true
   });
 }])
 
 .controller('DashboardCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-  if (localStorage.getItem('token') === null) {
-    $location.path('/');
-    return;
-  }
-
-  window.d = $scope.dropdown;
-
   $scope.addEndpoint = function () {
     $http.post('/api/endpoints', {
       token: localStorage.getItem('token')

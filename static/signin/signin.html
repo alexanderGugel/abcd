@@ -1,24 +1,25 @@
 <section id="signin">
-  <!-- <nav class="pure-g">
-    <div class="pure-u-1-3">
-    </div>
-    <div class="pure-u-1-3">
-      <a class="logo" href="#/">abcd</a>
-    </div>
-    <div class="pure-u-1-3">
-      <a class="active" href="#/signin">signin</a>
-      <a href="#/signup">Sign Up</a>
-    </div>
-  </nav> -->
-
-  <form role="form" ng-submit="createToken(user)" class="animated bounceIn">
+  <form role="form" name="form" ng-submit="createToken(user)" novalidate>
     <h1>Sign In</h1>
-    <label for="email-input">Email</label>
-    <input ng-model="user.email" type="email" name="email-input" placeholder="e.g. santa@claus.beard" required minlength="3">
-    <label for="password-input">Password</label>
-    <input ng-model="user.password" type="password" name="password-input" placeholder="e.g. ••••••••••" required minlength="6">
-    <span class="error" ng-if="error">{{error}}</span>
-    <button type="submit">Sign In!</button>
+
+    <label for="email">Email</label>
+    <div class="input-group">
+      <input placeholder="e.g. santa@claus.com" type="email" id="email" name="email" ng-model="user.email" required ng-class="{ 'error' : form.email.$invalid && !form.email.$pristine }">
+      <i class="icon ion-ios7-email-outline"></i>
+      <span ng-show="form.email.$invalid && !form.email.$pristine" class="error">Please enter a valid email address.</span>
+    </div>
+
+    <label for="password">Password</label>
+    <div class="input-group">
+      <input placeholder="e.g. cute_dogs24$$" type="password" id="password" name="password" ng-model="user.password" required ng-minlength="6" ng-class="{ 'error' : form.password.$invalid && !form.password.$pristine }">
+      <i class="icon ion-ios7-keypad-outline"></i>
+      <span ng-show="form.password.$error.minlength" class="error">Password is too short (min 6 chars).</span>
+    </div>
+
+    <span class="error" ng-show="error">{{error}}</span>
+
+    <button type="submit" ng-disabled="form.$invalid">Sign In!</button>
+
     <p>
       <a href="#/forgot">Forgot your password?</a><br>
       First time user? - <a href="#/signup">Sign Up</a>

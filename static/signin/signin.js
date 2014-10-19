@@ -9,19 +9,20 @@ angular.module('angularApp.signin', ['ngRoute'])
   });
 }])
 
-.controller('signinCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+.controller('signinCtrl', ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
   if (localStorage.getItem('token') !== null) {
     $location.path('/dashboard');
     return;
   }
 
   $scope.createToken = function (user) {
-    $http.post('/api/tokens', user).
-    success(function (data) {
+    $http.post('/api/tokens', user)
+    .success(function (data) {
       localStorage.setItem('token', data.token);
       $location.path('/dashboard');
-    }).
-    error(function (data) {
+      $rootScope.user = user;
+    })
+    .error(function (data) {
       $scope.error = data.error;
     });
   };

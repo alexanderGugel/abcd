@@ -9,7 +9,7 @@ angular.module('angularApp.signup', ['ngRoute'])
   });
 }])
 
-.controller('SignupCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+.controller('SignupCtrl', ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
   if (localStorage.getItem('token') !== null) {
     $location.path('/dashboard');
     return;
@@ -20,6 +20,7 @@ angular.module('angularApp.signup', ['ngRoute'])
     success(function (data) {
       localStorage.setItem('token', data.token);
       $location.path('/dashboard');
+      $rootScope.user = user;
     }).
     error(function (data) {
       $scope.error = data.error;

@@ -17,8 +17,9 @@ angular.module('angularApp', [
   });
 }])
 
-.run(['$http', '$rootScope', function ($http, $rootScope) {
-  if (localStorage.getItem('token')) {
+.run(['$http', '$rootScope', '$location', function ($http, $rootScope, $location) {
+  if (localStorage.getItem('token') !== null) {
+    $rootScope.user = {};
     $http({
       url: '/api/users/me',
       method: 'GET',
@@ -27,14 +28,18 @@ angular.module('angularApp', [
       }
     })
     .success(function (data) {
-      if (data.error) {
-        localStorage.removeItem('token')
-        $routeProvider.otherwise({
-          redirectTo: '/signin'
-        });
-      } else {
-        $rootScope.user = data.user;
-      }
+      $rootScope.user = data.user;
+    })
+    .error(function (data) {
+      delete $rootScope.user;
+      localStorage.removeItem('token');
+      $location.path('/');
     });
   }
+
+  $rootScope.$on('$routeChangeStart', function (event, next) {
+    if (next.restricted && !$rootScope.user) {
+      $location.path('/signin');
+    }
+  });
 }]);

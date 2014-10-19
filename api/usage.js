@@ -15,9 +15,7 @@ usage.get('/', auth, function (req, res) {
       throw error;
     }
     res.send({
-      usage: _.map(result.rows, function (row) {
-        return row;
-      })
+      usage: result.rows
     });
   });
 });

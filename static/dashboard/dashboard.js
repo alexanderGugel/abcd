@@ -71,5 +71,20 @@ angular.module('angularApp.dashboard', ['ngRoute'])
     });
   };
 
+  $scope.loadUsage = function () {
+    $http({
+      url: '/api/usage',
+      method: 'GET',
+      params: {
+        token: localStorage.getItem('token')
+      }
+    })
+    .success(function (data) {
+      $scope.usage = data.usage;
+    });
+  };
+
+  $scope.loadUsage();
+
   $scope.refresh();
 }]);

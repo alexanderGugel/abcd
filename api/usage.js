@@ -1,0 +1,22 @@
+var express = require('express');
+var query = require('../db/query');
+var auth = require('./auth');
+
+var usage = express.Router();
+
+usage.get('/', auth, function (req, res) {
+  query('SELECT date_trunc(\'hour\', started_at) AS interval, COUNT(started_at) AS requests FROM actions WHERE endpoint_id IN (SELECT id AS user_id FROM endpoints WHERE user_id = $1) GROUP BY interval',
+  [req.user.id], function (error, result) {
+    if (error) {
+      res.status(500).send({
+        error: 'Internal server error'
+      });
+      throw error;
+    }
+    res.send({
+      usage: result.rows
+    });
+  });
+});
+
+module.exports = exports = usage;

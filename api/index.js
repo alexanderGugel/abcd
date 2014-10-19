@@ -17,6 +17,8 @@ api.use('/endpoints', require('./endpoints'));
 api.use('/convert', require('./convert'));
 api.use('/participate', require('./participate'));
 
+api.use('/usage', require('./usage'));
+
 api.all('*', function (req, res) {
   res.status(404).send({
     error: 'File not found'

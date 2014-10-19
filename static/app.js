@@ -9,7 +9,8 @@ angular.module('angularApp', [
   'angularApp.settings',
   'angularApp.logout',
   'angularApp.toolbar',
-  'angularApp.config'
+  'angularApp.config',
+  'angularApp.experiments'
 ])
 
 .config(['$routeProvider', function ($routeProvider) {
@@ -41,6 +42,8 @@ angular.module('angularApp', [
   $rootScope.$on('$routeChangeStart', function (event, next) {
     if (next.restricted && !$rootScope.user) {
       $location.path('/signin');
+    } else if (next.landing && $rootScope.user) {
+      $location.path('/experiments');
     }
   });
 }]);

@@ -13,11 +13,6 @@ actions.use(function (req, res, next) {
   next();
 });
 
-actions.get('/', auth, function (req, res, next) {
-}, function (req, res) {
-
-});
-
 // Start action
 actions.get('/start', function (req, res, next) {
   if (!req.query.experiment) {

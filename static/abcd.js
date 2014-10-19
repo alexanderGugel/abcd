@@ -152,6 +152,7 @@ Experiment.prototype.start = function (callback) {
     }.bind(this));
   }
   this.variants[action.variant]();
+  return this;
 };
 
 Experiment.prototype.reset = function () {

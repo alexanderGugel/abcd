@@ -21,7 +21,7 @@ endpoints.post('/', auth, function (req, res) {
 });
 
 endpoints.get('/', auth, function (req, res) {
-  query('SELECT * FROM endpoints WHERE user_id = $1', [req.user.id], function (error, result) {
+  query('SELECT id, is_active FROM endpoints WHERE user_id = $1', [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -30,6 +30,21 @@ endpoints.get('/', auth, function (req, res) {
     }
     res.send({
       endpoints: result.rows
+    });
+  });
+});
+
+endpoints.get('/:id', function (req, res) {
+  query('SELECT * FROM actions WHERE endpoint_id = (SELECT id FROM endpoints WHERE id = $1 AND user_id = $2)', [req.params.id, req.user.id], function (error, result) {
+    if (error) {
+      res.status(500).send({
+        error: 'Internal server error'
+      });
+      throw error;
+    }
+    var actions = result.rows;
+    res.send({
+      actions: actions
     });
   });
 });

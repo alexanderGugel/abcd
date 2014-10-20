@@ -9,13 +9,13 @@
     padding: 1em
     h1
       text-align: center
-    input, label, button
+    input, label, button, span
       display: block
       width: 100%
     input
-      margin-bottom: 1em
+      padding-left: 2.5em
     label
-      margin-bottom: 0.25em
+      margin: 1em 0 0.25em
     p
       margin-top: 1em
       text-align: center
@@ -23,82 +23,164 @@
     button
       margin-top: 1em
       font-weight: bold
+    .input-group
+      position: relative
+      .error
+        margin-top: 0.25em
+      .icon
+        position: absolute
+        top: -2px
+        color: #ccc
+        padding: 1em
+    .error
+      margin-top: 1em
 
-#dashboard
-  // h2
-  //   margin: 0
-  //   padding: 0.5em
-  .endpoint
-    background: #fff
-    margin-bottom: 0.5em
+#config
+  padding: 0.5em
+  .usage
+    margin-bottom: 1em
     padding: 1em
+    border-radius: 2px
+    background: #fff
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-    border-radius: 1px
-    position: relative
-    h2
+    h1
       margin-top: 0
-      span
-        background: rgba(0, 0, 0, 0.08)
-        display: inline-block
-        padding: 0.125em 1em
-        margin-left: 0.5em
-        font-family: Consolas, monaco, monospace
-    .delete-endpoint
-      border: 0
-      background: none
-      color: #999
-      padding: 0
-      text-shadow: none
-      box-shadow: none
-      &:hover
-        color: red
-    .experiments
-      margin-bottom: 3em
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-      border-radius: 2px
-      background: #fff
-      width: 100%
-      border-collapse: collapse
-      thead
-        tr
-          border-bottom: 1px solid #ddd
-          &:last-child
-            border-bottom: 0
-          th
-            padding: 0.5em
-            font-weight: 300
-            &.name
-              width: 99%
-              text-align: left
-      tbody
-        tr
-          border-bottom: 1px solid #efefef
-          em
-            color: #ccc
-          &:nth-child(even)
-            background: rgba(0, 0, 0, 0.02)
-          &:hover
-            background: rgba(0, 0, 0, 0.05)
-          td
-            padding: 0.5em
-            &.running-true
-              color: green
-            &.running-false
-              color: red
-            &.running, &.visitors, &.actions
-              text-align: center
-            &.delete
-              text-align: right
-              button
-                border: 0
-                background: none
-                color: #ccc
-                &:hover
-                  color: red
+  .help
+    padding: 1em
+    margin-left: 0.5em
+    border-radius: 2px
+    background: #fff
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+  table
+    background: #fff
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+    width: 100%
+    border-collapse: collapse
+    text-align: left
+    border-radius: 2px
+    .active, .created-at, .add-endpoint
+      white-space: nowrap
+      padding: 0.5em 1em
+      width: 1%
+    thead
+      tr
+        border-bottom: 1px solid #ddd
+        th
+          font-weight: 300
+          padding: 0.5em 0.25em
+          &.created-at
+            // text-align: right
+    tbody
+      tr
+        border-bottom: 1px solid #efefef
+        &:nth-child(even)
+          background: rgba(0, 0, 0, 0.02)
+        &:hover
+          background: rgba(0, 0, 0, 0.05)
+        td
+          padding: 0.5em 0.25em
+          &.active
+            text-align: center
+            font-size: 1.5em
+            padding: 0
             a
-              color: #444
-                text-decoration: none
+              border: 0
+              &.activate
+                color: red
+              &.deactivate
+                color: green
+          &.id
+            font-family: Consolas, monaco, monospace
+            a
+              border: 0
+              color: #999
+          &.created-at
+            text-align: right
+            font-size: 0.75em
+          &.add-endpoint
+            padding: 1em 0.25em
+            text-align: right
+            button
+              padding: 0.25em 0.5em
 
+
+  // .add-endpoint
+  //   text-align: right
+  //   padding-top: 1em
+  //   button
+  //     padding: 0.25em 0.5em
+
+// // .endpoint
+//   float: left
+//   span
+//     background: rgba(0, 0, 0, 0.08)
+//     display: inline-block
+//     padding: 0.125em 1em
+//     font-family: Consolas, monaco, monospace
+//   background: #fff
+//   margin-bottom: 0.5em
+//   padding: 0.25em
+//   padding: 0
+//   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+//   border-radius: 1px
+//   position: relative
+//   h2
+//     margin-top: 0
+//   // .delete-endpoint
+//     border: 0
+//     background: none
+//     color: #999
+//     padding: 0
+//     text-shadow: none
+//     box-shadow: none
+//     &:hover
+//       color: red
+//   // .experiments
+//     margin-bottom: 3em
+//     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+//     border-radius: 2px
+//     background: #fff
+//     width: 100%
+//     border-collapse: collapse
+//     thead
+//       tr
+//         border-bottom: 1px solid #ddd
+//         &:last-child
+//           border-bottom: 0
+//         th
+//           padding: 0.5em
+//           font-weight: 300
+//           &.name
+//             width: 99%
+//             text-align: left
+//     tbody
+//       tr
+//         border-bottom: 1px solid #efefef
+//         em
+//           color: #ccc
+//         &:nth-child(even)
+//           background: rgba(0, 0, 0, 0.02)
+//         &:hover
+//           background: rgba(0, 0, 0, 0.05)
+//         td
+//           padding: 0.5em
+//           &.running-true
+//             color: green
+//           &.running-false
+//             color: red
+//           &.running, &.visitors, &.actions
+//             text-align: center
+//           &.delete
+//             text-align: right
+//             button
+//               border: 0
+//               background: none
+//               color: #ccc
+//               &:hover
+//                 color: red
+//           a
+//             color: #444
+//               text-decoration: none
 
 #settings
   h2, h3, h4

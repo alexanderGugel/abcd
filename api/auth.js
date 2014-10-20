@@ -1,4 +1,16 @@
 var query = require('../db/query');
+var crypto = require('crypto');
+
+var getGravatarImage = function (email) {
+  return ('//www.gravatar.com/avatar/' + md5(email)).trim();
+};
+
+var md5 = function (str) {
+  var hash = crypto.createHash('md5');
+  hash.update(str.toLowerCase().trim());
+  return hash.digest('hex');
+};
+
 
 var auth = function (req, res, next) {
   var token = req.query.token || req.body.token;
@@ -21,6 +33,7 @@ var auth = function (req, res, next) {
       });
     }
     req.user = result.rows[0];
+    req.user.gravatar = getGravatarImage(req.user.email);
     delete req.user.password;
     next();
   });

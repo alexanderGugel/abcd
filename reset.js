@@ -11,18 +11,21 @@ query(
   'CREATE TABLE IF NOT EXISTS "users" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'email TEXT NOT NULL UNIQUE,' +
-    'password TEXT NOT NULL' +
+    'password TEXT NOT NULL,' +
+    'created_at TIMESTAMP DEFAULT NOW()' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "tokens" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'user_id UUID NOT NULL REFERENCES "users"(id)' +
+    'user_id UUID NOT NULL REFERENCES "users"(id),' +
+    'created_at TIMESTAMP DEFAULT NOW()' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "endpoints" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'is_active BOOLEAN NOT NULL DEFAULT TRUE,' +
-    'user_id UUID NOT NULL REFERENCES "users"(id)' +
+    'user_id UUID NOT NULL REFERENCES "users"(id),' +
+    'created_at TIMESTAMP DEFAULT NOW()' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "actions" (' +

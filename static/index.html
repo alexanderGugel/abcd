@@ -13,19 +13,29 @@
     <!--<![endif]-->
     <link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css">
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/drop/css/drop-theme-arrows-bounce.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
+    <toolbar></toolbar>
     <div ng-view></div>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="bower_components/sweetalert/lib/sweet-alert.min.js"></script>
+    <script src="bower_components/drop/drop.min.js"></script>
+    <script src="bower_components/crossfilter/crossfilter.min.js"></script>
     <script src="app.js"></script>
     <script src="signin/signin.js"></script>
     <script src="signup/signup.js"></script>
     <script src="logout/logout.js"></script>
-    <script src="settings/settings.js"></script>
     <script src="dashboard/dashboard.js"></script>
+    <script src="experiments/experiments.js"></script>
+    <script src="config/config.js"></script>
+    <script src="settings/settings.js"></script>
+    <script src="toolbar/toolbar.js"></script>
   </body>
 </html>

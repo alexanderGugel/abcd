@@ -21,7 +21,10 @@ endpoints.post('/', auth, function (req, res) {
 });
 
 endpoints.get('/', auth, function (req, res) {
-  query('SELECT * FROM endpoints WHERE user_id = $1 AND endpoints.is_active = TRUE', [req.user.id], function (error, result) {
+  query(
+    'SELECT * FROM endpoints WHERE endpoints.user_id = $1 ORDER BY endpoints.created_at DESC;'
+    // 'SELECT endpoints.is_active, endpoints.id, (COUNT(endpoints.id) - 1) AS action_count, (COUNT(actions.experiment) - 1) AS experiment_count FROM endpoints LEFT JOIN actions ON actions.endpoint_id = endpoints.id WHERE endpoints.user_id = $1 GROUP BY endpoints.id, actions.experiment;'
+  , [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
         error: 'Internal server error'
@@ -33,6 +36,21 @@ endpoints.get('/', auth, function (req, res) {
     });
   });
 });
+
+// endpoints.get('/:id/actions', function (req, res) {
+//   query('SELECT * FROM actions WHERE endpoint_id = (SELECT id FROM endpoints WHERE id = $1 AND user_id = $2)', [req.params.id, req.user.id], function (error, result) {
+//     if (error) {
+//       res.status(500).send({
+//         error: 'Internal server error'
+//       });
+//       throw error;
+//     }
+//     var actions = result.rows;
+//     res.send({
+//       actions: actions
+//     });
+//   });
+// });
 
 endpoints.delete('/:id', auth, function (req, res) {
   query('UPDATE "endpoints" SET is_active = FALSE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
@@ -50,5 +68,23 @@ endpoints.delete('/:id', auth, function (req, res) {
     res.status(204).send({});
   });
 });
+
+endpoints.patch('/:id', auth, function (req, res) {
+  query('UPDATE "endpoints" SET is_active = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
+    if (error) {
+      if (error.code === '22P02') {
+        return res.status(400).send({
+          error: 'Invalid endpoint'
+        });
+      }
+      res.status(500).send({
+        error: 'Internal server error'
+      });
+      throw error;
+    }
+    res.status(204).send({});
+  });
+});
+
 
 module.exports = exports = endpoints;

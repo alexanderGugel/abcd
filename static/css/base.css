@@ -3741,6 +3741,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 html {
   box-sizing: border-box;
 }
+html,
+body {
+  min-height: 100%;
+}
 *,
 *:before,
 *:after {
@@ -3749,9 +3753,8 @@ html {
 body {
   font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding: 0.5em;
   color: #666;
-  background: #f0f0f0;
+  background: #e4e4e4;
 }
 a {
   color: #444;
@@ -3781,27 +3784,46 @@ input {
   padding: 1em;
   color: #444;
 }
-.error {
+input.error {
+  border: 1px solid #900;
+}
+span.error {
   color: #900;
 }
 button {
-  font-weight: 300;
   background: #303f9f;
   padding: 1em;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   border: 0;
-  color: #fff;
+  color: #e8eaf8;
+  text-transform: uppercase;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
+button[disabled] {
+  opacity: 0.5;
+}
+.popover.drop a {
+  border: 0;
+  display: inline-block;
+  padding: 0.5em;
+  border-bottom: 1px solid #eee;
+}
+.popover.drop alast-child {
+  border: 0;
+}
+.popover.drop .drop-content {
+  padding: 0;
+}
 nav {
   background: #263238;
-  padding: 0.75em 0.5em;
-  margin: -0.5em -0.5em 0.5em;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   text-align: center;
+  font-size: 1.25em;
+  padding: 0.5em;
+  vertical-align: middle;
 }
 nav div:first-child {
   text-align: left;
@@ -3809,25 +3831,37 @@ nav div:first-child {
 nav div:last-child {
   text-align: right;
 }
+nav img {
+  height: 1em;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  border-radius: 1em;
+}
 nav button {
-  border: 0;
-  color: #cdd8dd;
-  background: #374851;
-  border-bottom: 2px solid #1e282d;
-  border-right: 2px solid #1e282d;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  padding: 0.25em 0.5em;
+  color: #839eab;
+  background: none;
+  padding: 0;
+  background: #fff;
+  font-weight: 400;
+  color: #839eab;
+  background: rgba(255,255,255,0.1);
+  display: none;
 }
 nav a {
-  position: relative;
-  color: #839eab;
+  color: #cdd8dd;
   text-decoration: none;
   border: 0;
   display: inline-block;
-  padding: 0.25em;
-  margin-bottom: 2px;
+  margin-right: 1em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+nav a .icon {
+  color: #f5f7f8;
+  display: none;
+}
+nav a:last-child {
+  margin: 0;
 }
 nav a:hover {
   color: #e6ecee;
@@ -3842,13 +3876,15 @@ nav a.active:hover {
   animation: none;
 }
 nav a.logo {
+  -webkit-animation: none;
+  animation: none;
   color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 @-moz-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3856,7 +3892,7 @@ nav a.logo {
 }
 @-webkit-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3864,7 +3900,7 @@ nav a.logo {
 }
 @-o-keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3872,7 +3908,7 @@ nav a.logo {
 }
 @keyframes nav-a-animation {
   from {
-    color: #839eab;
+    color: #cdd8dd;
   }
   to {
     color: #e6ecee;
@@ -3880,7 +3916,7 @@ nav a.logo {
 }
 @-moz-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3888,7 +3924,7 @@ nav a.logo {
 }
 @-webkit-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3896,7 +3932,7 @@ nav a.logo {
 }
 @-o-keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;
@@ -3904,7 +3940,7 @@ nav a.logo {
 }
 @keyframes nav-a-active-animation {
   from {
-    color: #e6ecee;
+    color: #cdd8dd;
   }
   to {
     color: #839eab;

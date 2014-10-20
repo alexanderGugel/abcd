@@ -1,33 +1,15 @@
-<section id="settings">
-  <nav class="pure-g">
-    <div class="pure-u-1-3">
-    </div>
-    <div class="pure-u-1-3">
-      <a class="logo" href="#/">abcd</a>
-    </div>
-    <div class="pure-u-1-3">
-      <a href="#/dashboard">Dashboard</a>
-      <a class="active" href="#/settings">Settings</a>
-      <a href="#/docs">Docs</a>
-      <a href="#/logout">Logout</a>
-    </div>
-  </nav>
-
-
-
-  <div class="animated bounceIn">
-    <h2>Settings</h2>
-    <h3>Account</h3>
-      <form role="form" ng-submit="updateUser(user)">
-        <input ng-model="user.email" type="email" required>
-        <input ng-model="user.password" type="password" placeholder="New password (optional)">
-        <span class="error" ng-if="error">{{error}}</span>
-        <button type="submit">Update!</button>
-      </form>
-      <form id="delete-account">
-        <button type="submit">Delete this account (DANGER)!</button>
-      </form>
-  </div>
+<section id="settings" class="animated bounceIn">
+  <h2>Settings</h2>
+  <h3>Account</h3>
+    <form role="form" ng-submit="updateUser(user)">
+      <input ng-model="user.email" type="email" required>
+      <input ng-model="user.password" type="password" placeholder="New password (optional)">
+      <span class="error" ng-if="error">{{error}}</span>
+      <button type="submit">Update!</button>
+    </form>
+    <form id="delete-account">
+      <button type="submit">Delete this account (DANGER)!</button>
+    </form>
 
   <!-- <div>
     <h3>Billing</h3>

@@ -9,8 +9,10 @@ angular.module('angularApp.logout', ['ngRoute'])
   });
 }])
 
-.controller('LogoutCtrl', ['$location', function ($location) {
+.controller('LogoutCtrl', ['$location', '$rootScope', function ($location, $rootScope) {
   console.log('Logout');
   localStorage.removeItem('token');
+  delete $rootScope.user;
+
   $location.path('/signin');
 }]);

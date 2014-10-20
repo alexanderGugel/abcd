@@ -1,0 +1,24 @@
+<nav class="pure-g animated fadeInDown" ng-if="user">
+  <div class="pure-u-2-5">
+    <!-- <select class="endpoint" ng-model="activeEndpoint" ng-options="endpoint.id for endpoint in endpoints">
+      <option value="">-- choose endpoint --</option>
+    </select> -->
+    <button>Endpoints</button>
+    <a href="#/experiments">Experiments</a>
+    <a href="#/debugger">Debugger</a>
+    <a href="#/config">Config</a>
+  </div>
+  <div class="pure-u-1-5">
+    <a class="logo" href="#/">abcd</a>
+  </div>
+  <div class="pure-u-2-5">
+    <!-- <a href="#/dashboard" class="active">Dashboard</a> -->
+    <!-- <a href="#/settings"><img ng-src="{{user.gravatar}}"></a> -->
+    <a href="#/support"><i class="icon ion-ios7-bookmarks"></i> Support</a>
+    <a href="#/docs"><i class="icon ion-ios7-bookmarks"></i> Docs</a>
+    <a ng-click="" href="" profile-link ng-if="user">
+      <!-- <i class="icon ion-chevron-down"></i> -->
+      {{user.email}}
+    </a>
+  </div>
+</nav>

@@ -1,37 +1,33 @@
 <section id="dashboard">
-  <nav class="pure-g">
-    <div class="pure-u-1-3">
-      <button ng-click="addEndpoint()"><i class="icon ion-plus"></i> Add endpoint</button>
-    </div>
-    <div class="pure-u-1-3">
-      <a class="logo" href="#/">abcd</a>
-    </div>
-    <div class="pure-u-1-3">
-      <a href="#/dashboard" class="active">Dashboard</a>
-      <a href="#/settings">Settings</a>
-      <a href="#/docs">Docs</a>
-      <a href="#/logout">Logout</a>
-    </div>
-  </nav>
 
-  <div class="endpoints animated bounceIn">
-    <div class="endpoint" ng-repeat="endpoint in endpoints">
-      <h2>Experiments for endpoint <span>{{endpoint.id}} <button class="delete-endpoint" ng-click="deleteEndpoint(endpoint)" title="Delete this endpoint">×</button></span></h2>
-      <table class="experiments">
-        <thead>
-          <tr>
-            <th class="running">Running?</th>
-            <th class="name">Name</th>
-            <th class="visitors">Visitiors</th>
-            <th class="actions">Actions</th>
-            <th class="delete"></th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
+  {{usage}}
+
+  <div class="pure-g endpoints">
+    <section class="pure-u-1-2 animated bounceInLeft">
+      <h2><i class="icon ion-key"></i> Active endpoints</h2>
+      <!-- <p>Experiments are always associated with an endpoint. Deactivating endpoints means no more conversions will be recorded for this endpoint.</p> -->
+      <ul>
+        <li class="endpoint" ng-repeat="endpoint in endpoints" ng-if="endpoint.is_active">
+          {{endpoint.id}}
+          <span ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}"><i class="icon ion-close"></i></span>
+        </li>
+        <li class="add-endpoint" ng-click="addEndpoint()" title="Add a new endpoint">
+          <i class="icon ion-plus"></i>
+        </li>
+      </ul>
+    </section>
+    <section class="pure-u-1-2 animated bounceInRight">
+      <h2><i class="icon ion-key"></i> Inactive endpoints</h2>
+      <!-- <p>Accidentaly deactivated an endpoint? No problem endpoints can be reactivated.</p> -->
+      <ul>
+        <li class="endpoint" ng-repeat="endpoint in endpoints" ng-if="!endpoint.is_active">
+          {{endpoint.id}}
+          <span ng-click="activateEndpoint(endpoint)" title="Reactivate {{endpoint.id}}"><i class="icon ion-reply"></i></span>
+        </li>
+      </ul>
+    </section>
   </div>
+  
 
   <script id="endpoints-template" type="x-tmpl-mustache">
     {{#endpoints}}

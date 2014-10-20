@@ -9,6 +9,17 @@ angular.module('angularApp.config', ['ngRoute'])
   });
 }])
 
+.directive('highlight', [function() {
+  var link = function (scope, element, attrs) {
+    hljs.highlightBlock(element[0]);
+  };
+
+  return {
+    restrict: 'E',
+    link: link
+  };
+}])
+
 .controller('ConfigCtrl', ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
   $scope.addEndpoint = function () {
     $http.post('/api/endpoints', {

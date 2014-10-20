@@ -71,16 +71,18 @@
           &.created-at
             // text-align: right
     tbody
-      &:nth-child(even)
-        background: rgba(0, 0, 0, 0.02)
-      &:hover
-        background: rgba(0, 0, 0, 0.05)
       tr
         border-bottom: 1px solid #efefef
+        &:nth-child(even)
+          background: rgba(0, 0, 0, 0.02)
+        &:hover
+          background: rgba(0, 0, 0, 0.05)
         td
           padding: 0.5em 0.25em
           &.active
             text-align: center
+            font-size: 1.5em
+            padding: 0
             a
               border: 0
               &.activate
@@ -96,7 +98,7 @@
             text-align: right
             font-size: 0.75em
           &.add-endpoint
-            padding: 0.25em
+            padding: 1em 0.25em
             text-align: right
             button
               padding: 0.25em 0.5em

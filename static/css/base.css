@@ -3754,7 +3754,7 @@ body {
   font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #666;
-  background: #f0f0f0;
+  background: #e4e4e4;
 }
 a {
   color: #444;
@@ -3791,14 +3791,14 @@ span.error {
   color: #900;
 }
 button {
-  font-weight: 300;
   background: #303f9f;
   padding: 1em;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   border: 0;
-  color: #fff;
+  color: #e8eaf8;
+  text-transform: uppercase;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -3821,7 +3821,7 @@ nav {
   background: #263238;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   text-align: center;
-  font-size: 1em;
+  font-size: 1.25em;
   padding: 0.5em;
   vertical-align: middle;
 }

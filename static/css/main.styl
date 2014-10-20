@@ -35,42 +35,22 @@
     .error
       margin-top: 1em
 
-//
-// #dashboard
-//   .endpoints
-//     padding: 0.5em
-//     ul
-//       margin: 0
-//       padding: 0
-//       list-style: none
-//       li
-//         display: inline-block
-//         margin: 0
-//         margin-right: 0.5em
-//         margin-bottom: 0.5em
-//         padding: 0.5em
-//         font-size: 0.75em
-//         border-radius: 3px
-//         &.endpoint
-//           font-family: Consolas, monaco, monospace
-//           box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-//           background: #fff
-//           .icon
-//             cursor: pointer
-//         &.add-endpoint
-//           cursor: pointer
-        // background: nav-background
-        // background: none
-        // border: 0
-        // box-shadow: none
-        // color: #fff
-        // font-size: 3em
-        // padding: 0
-        // margin: 0
-        // padding: 0.25em 0.5em
-
 #config
-  padding: 0.5em 0.5em 1em
+  padding: 0.5em
+  .usage
+    margin-bottom: 1em
+    padding: 1em
+    border-radius: 2px
+    background: #fff
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+    h1
+      margin-top: 0
+  .help
+    padding: 1em
+    margin-left: 0.5em
+    border-radius: 2px
+    background: #fff
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
   table
     background: #fff
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
@@ -78,16 +58,18 @@
     border-collapse: collapse
     text-align: left
     border-radius: 2px
+    .active, .created-at, .add-endpoint
+      white-space: nowrap
+      padding: 0.5em 1em
+      width: 1%
     thead
       tr
         border-bottom: 1px solid #ddd
         th
           font-weight: 300
           padding: 0.5em 0.25em
-          &.active, &.actions, &.delete
-            white-space: nowrap
-            padding: 0.5em 1em
-            width: 1%
+          &.created-at
+            // text-align: right
     tbody
       &:nth-child(even)
         background: rgba(0, 0, 0, 0.02)
@@ -97,7 +79,7 @@
         border-bottom: 1px solid #efefef
         td
           padding: 0.5em 0.25em
-          &.active, &.actions, &.delete
+          &.active
             text-align: center
             a
               border: 0
@@ -110,13 +92,21 @@
             a
               border: 0
               color: #999
+          &.created-at
+            text-align: right
+            font-size: 0.75em
+          &.add-endpoint
+            padding: 0.25em
+            text-align: right
+            button
+              padding: 0.25em 0.5em
 
 
-  .add-endpoint
-    text-align: right
-    padding-top: 1em
-    button
-      padding: 0.25em 0.5em
+  // .add-endpoint
+  //   text-align: right
+  //   padding-top: 1em
+  //   button
+  //     padding: 0.25em 0.5em
 
 // // .endpoint
 //   float: left

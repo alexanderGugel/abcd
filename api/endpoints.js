@@ -22,7 +22,8 @@ endpoints.post('/', auth, function (req, res) {
 
 endpoints.get('/', auth, function (req, res) {
   query(
-    'SELECT endpoints.is_active, endpoints.id, (COUNT(endpoints.id) - 1) AS action_count FROM endpoints LEFT JOIN actions ON actions.endpoint_id = endpoints.id WHERE endpoints.user_id = $1 GROUP BY endpoints.id;'
+    'SELECT * FROM endpoints WHERE endpoints.user_id = $1 ORDER BY endpoints.created_at DESC;'
+    // 'SELECT endpoints.is_active, endpoints.id, (COUNT(endpoints.id) - 1) AS action_count, (COUNT(actions.experiment) - 1) AS experiment_count FROM endpoints LEFT JOIN actions ON actions.endpoint_id = endpoints.id WHERE endpoints.user_id = $1 GROUP BY endpoints.id, actions.experiment;'
   , [req.user.id], function (error, result) {
     if (error) {
       res.status(500).send({
@@ -36,20 +37,20 @@ endpoints.get('/', auth, function (req, res) {
   });
 });
 
-endpoints.get('/:id/actions', function (req, res) {
-  query('SELECT * FROM actions WHERE endpoint_id = (SELECT id FROM endpoints WHERE id = $1 AND user_id = $2)', [req.params.id, req.user.id], function (error, result) {
-    if (error) {
-      res.status(500).send({
-        error: 'Internal server error'
-      });
-      throw error;
-    }
-    var actions = result.rows;
-    res.send({
-      actions: actions
-    });
-  });
-});
+// endpoints.get('/:id/actions', function (req, res) {
+//   query('SELECT * FROM actions WHERE endpoint_id = (SELECT id FROM endpoints WHERE id = $1 AND user_id = $2)', [req.params.id, req.user.id], function (error, result) {
+//     if (error) {
+//       res.status(500).send({
+//         error: 'Internal server error'
+//       });
+//       throw error;
+//     }
+//     var actions = result.rows;
+//     res.send({
+//       actions: actions
+//     });
+//   });
+// });
 
 endpoints.delete('/:id', auth, function (req, res) {
   query('UPDATE "endpoints" SET is_active = FALSE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {

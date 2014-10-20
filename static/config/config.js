@@ -51,7 +51,8 @@ angular.module('angularApp.config', ['ngRoute'])
         }
       })
       .success(function (data) {
-        $scope.refresh();
+        // $scope.refresh();
+        endpoint.is_active = false;
         // swal('Deleted!', 'Endpoint ' + endpoint.id + ' has been deleted.', 'success');
       });
     // });
@@ -66,7 +67,8 @@ angular.module('angularApp.config', ['ngRoute'])
       }
     })
     .success(function (data) {
-      $scope.refresh();
+      endpoint.is_active = true;
+      // $scope.refresh();
     });
   };
 

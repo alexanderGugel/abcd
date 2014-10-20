@@ -1,37 +1,63 @@
 <section id="config" class="animated bounceIn">
-  Usage: {{usage}}
 
-  <table>
-    <thead>
-      <tr>
-        <th class="active">Active?</th>
-        <th class="id">Endpoint</th>
-        <th class="actions">Actions</th>
-        <!-- <th class="delete">Delete</th> -->
-      </tr>
-    </thead>
-    <tbody ng-repeat="endpoint in endpoints">
-      <tr>
-        <td class="active">
-          <a class="activate" href="" ng-click="activateEndpoint(endpoint)" title="Activate {{endpoint.id}}" ng-if="!endpoint.is_active">•</a>
-          <a class="deactivate" href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ng-if="endpoint.is_active">•</a>
-        </td>
-        <td class="id">
-          <a href="" ng-click="endpoint.show = !endpoint.show">{{endpoint.id}}</a>
-        </td>
-        <td class="actions">{{endpoint.action_count}}</td>
-        <!-- <td class="delete"><a href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ><i class="icon ion-ios7-trash-outline"></i></a></td> -->
-      </tr>
-      <tr ng-show="endpoint.show">
-        <td></td>
-        <td>More data</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <section class="usage">
+    <h1>Usage Statistics</h1>
+    Usage: {{usage}}
+  </section>
 
-  <div class="add-endpoint">
-    <button ng-click="addEndpoint()"><i class="icon ion-plus"></i> Add endpoint</button>
+  <div class="pure-g">
+    <div class="pure-u-3-5">
+      <table>
+        <thead>
+          <tr>
+            <th class="active">Active?</th>
+            <th class="id">Endpoint</th>
+            <th class="created-at"></th>
+            <!-- <th class="actions">Actions</th> -->
+            <!-- <th class="experiments">Experiments</th> -->
+          </tr>
+        </thead>
+        <tbody ng-repeat="endpoint in endpoints">
+          <tr>
+            <td class="active">
+              <a class="activate" href="" ng-click="activateEndpoint(endpoint)" title="Activate {{endpoint.id}}" ng-if="!endpoint.is_active">•</a>
+              <a class="deactivate" href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ng-if="endpoint.is_active">•</a>
+            </td>
+            <td class="id">
+              <a href="" ng-click="endpoint.show = !endpoint.show">{{endpoint.id}}</a>
+            </td>
+            <td class="created-at">{{endpoint.created_at | date:'short'}}</td>
+            <!-- <td class="actions">{{endpoint.action_count}}</td> -->
+            <!-- <td class="experiments">{{endpoint.experiment_count}}</td> -->
+
+            <!-- <td class="delete"><a href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ><i class="icon ion-ios7-trash-outline"></i></a></td> -->
+          </tr>
+          <tr ng-show="endpoint.show">
+            <td></td>
+            <td>More data</td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td class="add-endpoint">
+              <button ng-click="addEndpoint()"><i class="icon ion-plus"></i> Add endpoint</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pure-u-2-5">
+      <section class="help">
+        <h3>What are endpoints?</h3>
+        <p>
+          Endpoint is just a fancy word for "API key". They are used in order to configure the abcd client.
+        </p>
+      </section>
+    </div>
   </div>
 
 

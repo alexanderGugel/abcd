@@ -21,11 +21,13 @@ query(
     'created_at TIMESTAMP DEFAULT NOW()' +
   ');' +
 
-  'CREATE TABLE IF NOT EXISTS "endpoints" (' +
+  'CREATE TABLE IF NOT EXISTS "projects" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'is_active BOOLEAN NOT NULL DEFAULT TRUE,' +
-    'user_id UUID NOT NULL REFERENCES "users"(id),' +
-    'created_at TIMESTAMP DEFAULT NOW()' +
+    'endpoint UUID NOT NULL DEFAULT uuid_generate_v4(),' +
+    'name TEXT NOT NULL,' +
+    'is_deleted BOOLEAN DEFAULT FALSE,' +
+    'created_at TIMESTAMP DEFAULT NOW(),' +
+    'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "actions" (' +
@@ -36,6 +38,6 @@ query(
     'complete_data JSON,' +
     'variant TEXT NOT NULL,' +
     'experiment TEXT NOT NULL,' +
-    'endpoint_id UUID NOT NULL REFERENCES "endpoints"(id)' +
+    'project_id UUID NOT NULL REFERENCES "projects"(id)' +
   ');'
 );

@@ -2,15 +2,15 @@ var express = require('express');
 var query = require('../db/query');
 var auth = require('./auth');
 
-var projects = express.Router();
+var experiments = express.Router();
 
-projects.post('/', auth, function (req, res) {
+experiments.post('/', auth, function (req, res) {
   if (!req.body.name) {
     return res.status(400).send({
       error: 'Missing name'
     });
   }
-  query('INSERT INTO "projects" (name, user_id) VALUES ($1) RETURNING id', [req.body.name, req.user.id], function (error, result) {
+  query('INSERT INTO "experiments" (name, user_id) VALUES ($1) RETURNING id', [req.body.name, req.user.id], function (error, result) {
     if (error) {
       throw error;
     }
@@ -22,20 +22,20 @@ projects.post('/', auth, function (req, res) {
   });
 });
 
-projects.get('/', auth, function (req, res) {
+experiments.get('/', auth, function (req, res) {
   query(
-    'SELECT * FROM projects WHERE projects.user_id = $1 ORDER BY projects.created_at DESC;', [req.user.id], function (error, result) {
+    'SELECT * FROM experiments WHERE experiments.user_id = $1 ORDER BY experiments.created_at DESC;', [req.user.id], function (error, result) {
     if (error) {
       throw error;
     }
     res.send({
-      projects: result.rows
+      experiments: result.rows
     });
   });
 });
 
-projects.delete('/:id', auth, function (req, res) {
-  query('UPDATE "projects" SET is_deleted = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
+experiments.delete('/:id', auth, function (req, res) {
+  query('UPDATE "experiments" SET is_deleted = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
     if (error) {
       if (error.code === '22P02') {
         return res.status(400).send({
@@ -48,13 +48,13 @@ projects.delete('/:id', auth, function (req, res) {
   });
 });
 
-projects.patch('/:id', auth, function (req, res) {
+experiments.patch('/:id', auth, function (req, res) {
   if (!req.body.name) {
     return res.status(400).send({
       error: 'Missing name'
     });
   }
-  query('UPDATE "projects" SET name = $3 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name], function (error) {
+  query('UPDATE "experiments" SET name = $3 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name], function (error) {
     if (error) {
       if (error.code === '22P02') {
         return res.status(400).send({
@@ -67,7 +67,7 @@ projects.patch('/:id', auth, function (req, res) {
   });
 });
 
-projects.get('/:id/actions', function (req, res) {
+experiments.get('/:id/actions', auth, function (req, res) {
   query('SELECT * FROM actions WHERE user_id = $1 AND experiment_id = $2', [req.user.id, req.params.id], function (error, result) {
     res.send({
       actions: result.rows
@@ -75,4 +75,4 @@ projects.get('/:id/actions', function (req, res) {
   });
 });
 
-module.exports = exports = projects;
+module.exports = exports = experiments;

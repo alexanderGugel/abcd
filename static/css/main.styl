@@ -1,40 +1,23 @@
-@require 'base.styl'
+@import "base.css"
 
 #signin, #signup
+  font-size: 1.5em
   text-align: center
   form
-    max-width: 400px
+    width: 400px
+    max-width: 100%
     margin: 10% auto
     text-align: left
     padding: 1em
-    h1
-      text-align: center
-    input, label, button, span
+    input, button, span
       display: block
       width: 100%
-    input
-      padding-left: 2.5em
-    label
-      margin: 1em 0 0.25em
+    input, button
+      margin-top: 0.5em
+    span
+      font-size: 0.75em
     p
-      margin-top: 1em
       text-align: center
-      line-height: 2
-    button
-      margin-top: 1em
-      font-weight: bold
-
-.input-group
-  position: relative
-  .error
-    margin-top: 0.25em
-  .icon
-    position: absolute
-    top: -2px
-    color: #ccc
-    padding: 1em
-.error
-  margin-top: 1em
 
 #config
   padding: 0.5em
@@ -103,85 +86,6 @@
             text-align: right
             button
               padding: 0.25em 0.5em
-
-
-// .add-endpoint
-//   text-align: right
-//   padding-top: 1em
-//   button
-//     padding: 0.25em 0.5em
-
-// // .endpoint
-//   float: left
-//   span
-//     background: rgba(0, 0, 0, 0.08)
-//     display: inline-block
-//     padding: 0.125em 1em
-//     font-family: Consolas, monaco, monospace
-//   background: #fff
-//   margin-bottom: 0.5em
-//   padding: 0.25em
-//   padding: 0
-//   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-//   border-radius: 1px
-//   position: relative
-//   h2
-//     margin-top: 0
-//   // .delete-endpoint
-//     border: 0
-//     background: none
-//     color: #999
-//     padding: 0
-//     text-shadow: none
-//     box-shadow: none
-//     &:hover
-//       color: red
-//   // .experiments
-//     margin-bottom: 3em
-//     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-//     border-radius: 2px
-//     background: #fff
-//     width: 100%
-//     border-collapse: collapse
-//     thead
-//       tr
-//         border-bottom: 1px solid #ddd
-//         &:last-child
-//           border-bottom: 0
-//         th
-//           padding: 0.5em
-//           font-weight: 300
-//           &.name
-//             width: 99%
-//             text-align: left
-//     tbody
-//       tr
-//         border-bottom: 1px solid #efefef
-//         em
-//           color: #ccc
-//         &:nth-child(even)
-//           background: rgba(0, 0, 0, 0.02)
-//         &:hover
-//           background: rgba(0, 0, 0, 0.05)
-//         td
-//           padding: 0.5em
-//           &.running-true
-//             color: green
-//           &.running-false
-//             color: red
-//           &.running, &.visitors, &.actions
-//             text-align: center
-//           &.delete
-//             text-align: right
-//             button
-//               border: 0
-//               background: none
-//               color: #ccc
-//               &:hover
-//                 color: red
-//           a
-//             color: #444
-//               text-decoration: none
 
 #settings
   h2, h3, h4

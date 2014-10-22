@@ -3745,7 +3745,8 @@ nav a.create-project {
 .depth5 {
   box-shadow: 0 19px 38px rgba(0,0,0,0.3), 0 15px 12px rgba(0,0,0,0.22);
 }
-.card {
+.card,
+input {
   padding: 0.5em;
   margin: 0.5em;
   background: #fff;
@@ -3783,9 +3784,6 @@ a {
   text-decoration: none;
   border-bottom: 1px solid #ccc;
 }
-label {
-  color: #ccc;
-}
 h1,
 h2,
 h3,
@@ -3797,22 +3795,23 @@ h6 {
 }
 input {
   border: 0;
-  padding: 1em;
+  margin: 0;
 }
 input.error {
-  background: #ff4d4d;
+  background: #ffdbdb;
 }
 span.error {
   color: #900;
 }
 button {
-  background: #690;
-  padding: 1em;
+  background: #3b50ce;
+  padding: 0.5em 1em;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   border: 0;
-  color: #f3ffdb;
+  font-weight: bold;
+  color: #ebeefa;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -3879,25 +3878,22 @@ nav a.logo {
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
+
 #signin,
 #signup {
+  font-size: 1.5em;
   text-align: center;
 }
 #signin form,
 #signup form {
-  max-width: 400px;
+  width: 400px;
+  max-width: 100%;
   margin: 10% auto;
   text-align: left;
   padding: 1em;
 }
-#signin form h1,
-#signup form h1 {
-  text-align: center;
-}
 #signin form input,
 #signup form input,
-#signin form label,
-#signup form label,
 #signin form button,
 #signup form button,
 #signin form span,
@@ -3906,38 +3902,18 @@ nav a.logo {
   width: 100%;
 }
 #signin form input,
-#signup form input {
-  padding-left: 2.5em;
+#signup form input,
+#signin form button,
+#signup form button {
+  margin-top: 0.5em;
 }
-#signin form label,
-#signup form label {
-  margin: 1em 0 0.25em;
+#signin form span,
+#signup form span {
+  font-size: 0.75em;
 }
 #signin form p,
 #signup form p {
-  margin-top: 1em;
   text-align: center;
-  line-height: 2;
-}
-#signin form button,
-#signup form button {
-  margin-top: 1em;
-  font-weight: bold;
-}
-.input-group {
-  position: relative;
-}
-.input-group .error {
-  margin-top: 0.25em;
-}
-.input-group .icon {
-  position: absolute;
-  top: -2px;
-  color: #ccc;
-  padding: 1em;
-}
-.error {
-  margin-top: 1em;
 }
 #config {
   padding: 0.5em;
@@ -3945,8 +3921,6 @@ nav a.logo {
 #config .usage {
   margin-bottom: 1em;
   padding: 1em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -3957,8 +3931,6 @@ nav a.logo {
 #config .help {
   padding: 1em;
   margin-left: 0.5em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -3969,8 +3941,6 @@ nav a.logo {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
 }
 #config table .active,
@@ -4066,6 +4036,6 @@ section.create-project .input-group {
 }
 section.create-project .input-group input {
   width: 100%;
-  padding: 0.5em 0.5em 0.5em 2em;
+  padding: 1em 1em 1em 2em;
   margin: 0;
 }

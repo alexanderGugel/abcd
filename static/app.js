@@ -5,11 +5,9 @@ angular.module('angularApp', [
   'ngRoute',
   'angularApp.signin',
   'angularApp.signup',
-  'angularApp.dashboard',
   'angularApp.settings',
   'angularApp.logout',
   'angularApp.toolbar',
-  'angularApp.projects',
   'angularApp.experiments'
 ])
 
@@ -43,7 +41,7 @@ angular.module('angularApp', [
     if (next.restricted && !$rootScope.user) {
       $location.path('/signin');
     } else if (next.landing && $rootScope.user) {
-      $location.path('/projects/new');
+      $location.path('/experiments');
     }
   });
 }]);

@@ -12,7 +12,7 @@ api.all('*', function(req, res, next) {
 // api.use('/actions', require('./actions'));
 api.use('/tokens', require('./tokens'));
 api.use('/users', require('./users'));
-api.use('/projects', require('./projects'));
+api.use('/experiments', require('./experiments'));
 
 api.use('/convert', require('./convert'));
 api.use('/participate', require('./participate'));

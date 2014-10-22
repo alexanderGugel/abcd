@@ -3,7 +3,7 @@ var query = require('./db/query');
 query(
   'DROP TABLE IF EXISTS "users" CASCADE;' +
   'DROP TABLE IF EXISTS "tokens" CASCADE;' +
-  'DROP TABLE IF EXISTS "endpoints" CASCADE;' +
+  'DROP TABLE IF EXISTS "experiments" CASCADE;' +
   'DROP TABLE IF EXISTS "actions" CASCADE;' +
 
   'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";' +
@@ -21,11 +21,12 @@ query(
     'created_at TIMESTAMP DEFAULT NOW()' +
   ');' +
 
-  'CREATE TABLE IF NOT EXISTS "projects" (' +
+  'CREATE TABLE IF NOT EXISTS "experiments" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'endpoint UUID NOT NULL DEFAULT uuid_generate_v4(),' +
     'name TEXT NOT NULL,' +
     'is_deleted BOOLEAN DEFAULT FALSE,' +
+    'is_active BOOLEAN DEFAULT TRUE,' +
     'created_at TIMESTAMP DEFAULT NOW(),' +
     'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
@@ -37,7 +38,6 @@ query(
     'start_data JSON,' +
     'complete_data JSON,' +
     'variant TEXT NOT NULL,' +
-    'experiment TEXT NOT NULL,' +
-    'project_id UUID NOT NULL REFERENCES "projects"(id)' +
+    'experiment_id UUID NOT NULL REFERENCES "experiments"(id)' +
   ');'
 );

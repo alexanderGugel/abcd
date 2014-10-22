@@ -66,15 +66,6 @@ angular.module('angularApp.toolbar', [])
 
 .directive('toolbar', [function() {
   var link = function (scope, element, attrs) {
-    // attrs.target = element[0];
-    // for (var )
-    // scope[attrs.drop || 'drop'] = new Drop(attrs);
-    // debugger;
-    // new Drop({
-    //   target: element[0],
-    //   content: 'test',
-    //   classes: 'drop-theme-arrows',
-    // });
   };
 
   return {

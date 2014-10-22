@@ -3727,18 +3727,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   -webkit-animation-name: zoomOutUp;
   animation-name: zoomOutUp;
 }
-/**
- * A mixin which helps you to add depth to elements according to the Google Material Design spec:
- * http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality
- *
- * Please note that the values given in the specification cannot be used as is. To create the same visual experience
- * the blur parameter has to be doubled.
- *
- * Author: Florian Kutschera (@gefangenimnetz), Conceptboard GmbH (@conceptboardapp)
- * Source: https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d
- * (modified)
- */
-.depth1 {
+.depth1,
+.drop-element .drop-content,
+nav {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .depth2 {
@@ -3747,7 +3738,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .depth3 {
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
-.depth4 {
+.depth4,
+nav a.create-project {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .depth5 {
@@ -3757,13 +3749,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   padding: 0.5em;
   margin: 0.5em;
   background: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.drop-element {
+  padding: 0 0.5em;
+}
+.drop-element .drop-content {
+  background: #fff;
+}
+.drop-element .drop-content a {
+  padding: 0.25em 0.5em;
+  display: inline-block;
+  border-bottom: 1px solid #eee;
 }
 html {
   box-sizing: border-box;
-}
-html,
-body {
-  min-height: 100%;
 }
 *,
 *:before,
@@ -3771,7 +3773,7 @@ body {
   box-sizing: inherit;
 }
 body {
-  font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font: 400 14px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #666;
   background: #e4e4e4;
@@ -3794,56 +3796,35 @@ h6 {
   font-weight: 300;
 }
 input {
-  border: 1px solid #ddd;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  background: #fff;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
+  border: 0;
   padding: 1em;
-  color: #444;
 }
 input.error {
-  border: 1px solid #900;
+  background: #ff4d4d;
 }
 span.error {
   color: #900;
 }
 button {
-  background: #303f9f;
+  background: #690;
   padding: 1em;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   border: 0;
-  color: #e8eaf8;
-  text-transform: uppercase;
+  color: #f3ffdb;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 button[disabled] {
   opacity: 0.5;
 }
-.popover.drop a {
-  border: 0;
-  display: inline-block;
-  padding: 0.5em;
-  border-bottom: 1px solid #eee;
-}
-.popover.drop alast-child {
-  border: 0;
-}
-.popover.drop .drop-content {
-  padding: 0;
+button:focus {
+  outline: 0;
 }
 nav {
-  background: #263238;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background: #424242;
   text-align: center;
-  font-size: 1.25em;
-  padding: 0.5em;
-  vertical-align: middle;
 }
 nav div:first-child {
   text-align: left;
@@ -3858,101 +3839,43 @@ nav img {
   border-radius: 1em;
 }
 nav a {
-  color: #cdd8dd;
+  color: #ececec;
   text-decoration: none;
   border: 0;
   display: inline-block;
   margin-right: 1em;
-  text-transform: uppercase;
-  font-size: 0.75em;
+  padding: 0.5em;
+}
+nav a.create-project {
+  padding: 0.25em 0.5em;
+  background: #555;
+  color: #ececec;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 0.8em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+nav a.create-project .icon {
+  vertical-align: middle;
+  color: #d9d9d9;
 }
 nav a .icon {
-  color: #f5f7f8;
-  display: none;
+  vertical-align: middle;
+}
+nav a .icon.ion-chevron-down {
+  color: #b3b3b3;
+  font-size: 0.5em;
 }
 nav a:last-child {
   margin: 0;
 }
-nav a:hover {
-  color: #e6ecee;
-  -webkit-animation: nav-a-animation 300ms;
-  animation: nav-a-animation 300ms;
-}
-nav a.active {
-  color: #e6ecee;
-}
-nav a.active:hover {
-  -webkit-animation: none;
-  animation: none;
+nav a:hover,
+nav a.logo {
+  color: #fff;
 }
 nav a.logo {
-  -webkit-animation: none;
-  animation: none;
-  color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-@-moz-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-webkit-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-o-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-moz-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-webkit-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-o-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
 }

@@ -15,7 +15,7 @@ angular.module('angularApp.signup', ['ngRoute'])
     $http.post('/api/users', user).
     success(function (data) {
       localStorage.setItem('token', data.token);
-      $location.path('/experiments');
+      $location.path('/projects/new');
       $rootScope.user = user;
     }).
     error(function (data) {

@@ -1,4 +1,4 @@
-<section id="config" class="animated bounceIn">
+<!-- <section id="config" class="animated bounceIn">
 
   <section class="usage">
     <h1>Usage Statistics</h1>
@@ -13,8 +13,8 @@
             <th class="active">Active?</th>
             <th class="id">Endpoint</th>
             <th class="created-at"></th>
-            <!-- <th class="actions">Actions</th> -->
-            <!-- <th class="experiments">Experiments</th> -->
+            <!-- <th class="actions">Actions</th> -
+            <!-- <th class="experiments">Experiments</th> -
           </tr>
         </thead>
         <tbody>
@@ -27,10 +27,10 @@
               {{endpoint.id}}
             </td>
             <td class="created-at">{{endpoint.created_at | date:'short'}}</td>
-            <!-- <td class="actions">{{endpoint.action_count}}</td> -->
-            <!-- <td class="experiments">{{endpoint.experiment_count}}</td> -->
+            <!-- <td class="actions">{{endpoint.action_count}}</td> -
+            <!-- <td class="experiments">{{endpoint.experiment_count}}</td> -
 
-            <!-- <td class="delete"><a href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ><i class="icon ion-ios7-trash-outline"></i></a></td> -->
+            <!-- <td class="delete"><a href="" ng-click="deactivateEndpoint(endpoint)" title="Deactivate {{endpoint.id}}" ><i class="icon ion-ios7-trash-outline"></i></a></td> -
           </tr>
         </tbody>
         <tbody>
@@ -63,7 +63,7 @@ experiment.variant('control', function () {
 .variant('blue button', function () {
   console.log('blue button');
 })
-.variant('yellow button', function () {
+.variant('yellow button'x, function () {
   console.log('yellow button');
 })
 .start(function () {
@@ -77,4 +77,25 @@ experiment.variant('control', function () {
   </div>
 
 
+</section> -->
+
+<section class="pure-g create-project" ng-if="new">
+  <div class="pure-u-1-4"></div>
+  <section class="pure-u-1-2">
+    <form role="form" name="form" ng-submit="createProject(project)" novalidate>
+      <div class="input-group">
+        <i class="icon ion-android-promotion"></i>
+        <input class="depth1" placeholder="e.g. PRISM" type="name" id="name" name="name" ng-model="project.name" required ng-class="{ 'error' : form.name.$invalid && !form.name.$pristine }">
+      </div>
+      <div class="pure-g">
+        <div class="pure-u-1-2">
+          <p>
+            Projects consist of various experiments.
+            There is no need to explicitley create experiments.
+          </p>
+        </div>
+      </div>
+    </form>
+  </section>
+  <div class="pure-u-1-4"></div>
 </section>

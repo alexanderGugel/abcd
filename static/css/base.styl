@@ -1,18 +1,6 @@
 @import '../../node_modules/normalize.css/normalize.css'
 @import '../../node_modules/animate.css/animate.css'
 
-/**
- * A mixin which helps you to add depth to elements according to the Google Material Design spec:
- * http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality
- *
- * Please note that the values given in the specification cannot be used as is. To create the same visual experience
- * the blur parameter has to be doubled.
- *
- * Author: Florian Kutschera (@gefangenimnetz), Conceptboard GmbH (@conceptboardapp)
- * Source: https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d
- * (modified)
- */
-
 .depth1
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 .depth2
@@ -33,27 +21,34 @@ border-radius()
   padding: 0.5em
   margin: 0.5em
   background: #fff
-  borde-radius(2px)
+  border-radius(2px)
 
-nav-background = #263238
-// nav-background = #303f9f
-button-background = #303f9f
+.drop-element
+  padding: 0 0.5em
+  .drop-content
+    @extend .depth1
+    background: #fff
+    a
+      padding: 0.25em 0.5em
+      display: inline-block
+      border-bottom: 1px solid #eee
+
+// nav-background = lighten(#263238, 50%)
+// nav-background = #0066cc
+nav-background = #424242
+// button-background = #303f9f
+button-background = #669900
 
 html
   box-sizing: border-box
-
-// Fix popover bug
-html, body
-  min-height: 100%
 
 *, *:before, *:after
   box-sizing: inherit
 
 body
-  font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+  font: 400 14px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
   -webkit-font-smoothing: antialiased
   color: #666
-  // background: #f0f0f0
   background: #e4e4e4
 
 a
@@ -69,15 +64,16 @@ h1, h2, h3, h4, h5, h6
   font-weight: 300
 
 input
-  border: 1px solid #ddd
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-  background: #fff
-  border-radius: 2px
+  border: 0
+  // border: 1px solid #ddd
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  // background: #fff
+  // border-radius: 2px
   padding: 1em
-  color: #444
+  // color: #444
   &.error
-    border: 1px solid #990000
+    background: lighten(#990000, 50%)
 
 span.error
   color: #990000
@@ -88,42 +84,30 @@ button
   border-radius: 2px
   border: 0
   color: lighten(button-background, 90%)
-  text-transform: uppercase
+  // text-transform: uppercase
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
   &[disabled]
     opacity: 0.5
+  &:focus
+    outline: 0
 
-@keyframes nav-a-animation
-  from
-    color: lighten(nav-background, 80%)
-  to
-    color: lighten(nav-background, 90%)
-
-@keyframes nav-a-active-animation
-  from
-    color: lighten(nav-background, 80%)
-  to
-    color: lighten(nav-background, 50%)
-
-.popover.drop
-  a
-    border: 0
-    display: inline-block
-    padding: 0.5em
-    border-bottom: 1px solid #eee
-    &last-child
-      border: 0
-  .drop-content
-    padding: 0
+// .popover.drop
+//   a
+//     border: 0
+//     display: inline-block
+//     padding: 0.5em
+//     border-bottom: 1px solid #eee
+//     &last-child
+//       border: 0
+//   .drop-content
+//     font-size: 16px
+//     padding: 0
 
 nav
   background: nav-background
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  @extend .depth1
   text-align: center
-  font-size: 1.25em
-  padding: 0.5em
-  vertical-align: middle
   div:first-child
     text-align: left
   div:last-child
@@ -132,31 +116,33 @@ nav
     height: 1em
     border-radius: 1em
   a
-    color: lighten(nav-background, 80%)
+    color: lighten(nav-background, 90%)
     text-decoration: none
     border: 0
     display: inline-block
     margin-right: 1em
-    text-transform: uppercase
-    font-size: 0.75em
-
+    padding: 0.5em
+    &.create-project
+      padding: 0.25em 0.5em
+      @extend .depth4
+      background: lighten(nav-background, 10%)
+      color: lighten(nav-background, 90%)
+      vertical-align: middle
+      display: inline-block
+      font-size: 0.8em
+      border-radius(2px)
+      .icon
+        vertical-align: middle
+        color: lighten(nav-background, 80%)
     .icon
-      color: lighten(nav-background, 96%)
-      display: none
+      vertical-align: middle
+      &.ion-chevron-down
+        color: lighten(nav-background, 60%)
+        font-size: 0.5em
     &:last-child
       margin: 0
-    &:hover
-      color: lighten(nav-background, 90%)
-      -webkit-animation: nav-a-animation 300ms
-      animation: nav-a-animation 300ms
-    &.active
-      color: lighten(nav-background, 90%)
-      &:hover
-        -webkit-animation: none
-        animation: none
+    &:hover, &.logo
+      color: lighten(nav-background, 100%)
     &.logo
-      -webkit-animation: none
-      animation: none
-      color: #fff
       font-weight: 900
       text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)

@@ -1,4 +1,4 @@
-@require 'base'
+@require 'base.styl'
 
 #signin, #signup
   text-align: center
@@ -23,17 +23,18 @@
     button
       margin-top: 1em
       font-weight: bold
-    .input-group
-      position: relative
-      .error
-        margin-top: 0.25em
-      .icon
-        position: absolute
-        top: -2px
-        color: #ccc
-        padding: 1em
-    .error
-      margin-top: 1em
+
+.input-group
+  position: relative
+  .error
+    margin-top: 0.25em
+  .icon
+    position: absolute
+    top: -2px
+    color: #ccc
+    padding: 1em
+.error
+  margin-top: 1em
 
 #config
   padding: 0.5em
@@ -104,11 +105,11 @@
               padding: 0.25em 0.5em
 
 
-  // .add-endpoint
-  //   text-align: right
-  //   padding-top: 1em
-  //   button
-  //     padding: 0.25em 0.5em
+// .add-endpoint
+//   text-align: right
+//   padding-top: 1em
+//   button
+//     padding: 0.25em 0.5em
 
 // // .endpoint
 //   float: left
@@ -201,3 +202,13 @@
       text-shadow: none
       box-shadow: none
       color: #990000
+
+
+section.create-project
+  padding: 1em 0.5em
+  .input-group
+    font-size: 2em
+    input
+      width: 100%
+      padding: 1em 1em 1em 2em
+      margin: 0

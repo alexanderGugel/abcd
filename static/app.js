@@ -9,7 +9,7 @@ angular.module('angularApp', [
   'angularApp.settings',
   'angularApp.logout',
   'angularApp.toolbar',
-  'angularApp.config',
+  'angularApp.projects',
   'angularApp.experiments'
 ])
 
@@ -43,7 +43,7 @@ angular.module('angularApp', [
     if (next.restricted && !$rootScope.user) {
       $location.path('/signin');
     } else if (next.landing && $rootScope.user) {
-      $location.path('/experiments');
+      $location.path('/projects/new');
     }
   });
 }]);

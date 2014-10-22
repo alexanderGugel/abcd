@@ -1,3 +1,55 @@
-<section id="experiments" class="depth1 card">
-  <h1>Experiments</h1>
+<section id="experiments" ng-if="!new">
+  <div class="depth1 card">
+    <h1>Available Experiments</h1>
+  </div>
+  <div class="depth1 card experiments">
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Name</th>
+          <th class="endpoint">Endpoint</th>
+          <th class="created-at">Created at</th>
+          <th class="is-active">Active?</th>
+          <th class="delete"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="experiment in experiments" ng-class="{ 'deleted': experiment.is_deleted }">
+          <td class="name">{{experiment.name}}</td>
+          <td class="endpoint">
+            <span>{{experiment.endpoint}}</span>
+          </td>
+          <td class="created-at">{{experiment.created_at | date:'short'}}</td>
+          <td class="is-active" ng-click="experiment.is_active = !experiment.is_active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.is_active, 'inactive': !experiment.is_active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
+          <td class="delete" ng-click="experiment.is_deleted = !experiment.is_deleted; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.is_deleted, 'ion-ios7-trash': !experiment.is_deleted }"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="create-experiment">
+    <a href="#/experiments/new"><button>Create experiment</button></a>
+  </div>
+</section>
+
+<section id="experiments" ng-if="new">
+  <div class="depth1 card">
+    <h1>Create a new experiment</h1>
+    <p>
+      Experiments represent a single application that Bugsnag monitors for errors. We recommend creating a project for each language in your application.
+    </p>
+  </div>
+  <!-- <div class="pure-g">
+    <form class="pure-u-1-2" role="form" name="form" ng-submit="createExperiment(experiment)" novalidate>
+      <input class="depth1" placeholder="Experiment name" type="text" id="name" name="name" ng-model="experiment.name" required ng-class="{ 'error' : form.name.$invalid && !form.name.$pristine }">
+      <span ng-show="form.email.$invalid && !form.email.$pristine" class="error">Missing name.</span>
+
+
+      <span class="error" ng-show="error">{{error}}</span>
+
+      <button class="depth1" type="submit" ng-disabled="form.$invalid">Sign In!</button>
+    </form>
+    <div class="pure-u-1-2">
+      test
+    </div>
+  </div> -->
 </section>

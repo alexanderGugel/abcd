@@ -10,7 +10,7 @@ experiments.post('/', auth, function (req, res) {
       error: 'Missing name'
     });
   }
-  query('INSERT INTO "experiments" (name, user_id) VALUES ($1) RETURNING id', [req.body.name, req.user.id], function (error, result) {
+  query('INSERT INTO "experiments" (name, user_id) VALUES ($1, $2) RETURNING id', [req.body.name, req.user.id], function (error, result) {
     if (error) {
       throw error;
     }
@@ -48,19 +48,17 @@ experiments.delete('/:id', auth, function (req, res) {
   });
 });
 
-experiments.patch('/:id', auth, function (req, res) {
-  if (!req.body.name) {
-    return res.status(400).send({
-      error: 'Missing name'
-    });
-  }
-  query('UPDATE "experiments" SET name = $3 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name], function (error) {
+experiments.put('/:id', auth, function (req, res) {
+  query('UPDATE "experiments" SET name = $3, is_deleted = $4, is_active = $5 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.is_deleted, req.body.is_active], function (error) {
     if (error) {
-      if (error.code === '22P02') {
-        return res.status(400).send({
-          error: 'Invalid project'
-        });
-      }
+      // if (error.code === '22P02') {
+      //   return res.status(400).send({
+      //     error: 'Invalid project'
+      //   });
+      // }
+      res.status(400).send({
+        error: 'Invalid experiment'
+      });
       throw error;
     }
     res.status(204).send({});

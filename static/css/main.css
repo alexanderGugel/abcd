@@ -3738,15 +3738,15 @@ nav {
 .depth3 {
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
-.depth4,
-nav a.create-project {
+.depth4 {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .depth5 {
   box-shadow: 0 19px 38px rgba(0,0,0,0.3), 0 15px 12px rgba(0,0,0,0.22);
 }
 .card,
-input {
+input,
+button {
   padding: 0.5em;
   margin: 0.5em;
   background: #fff;
@@ -3764,6 +3764,10 @@ input {
   padding: 0.25em 0.5em;
   display: inline-block;
   border-bottom: 1px solid #eee;
+}
+html,
+body {
+  min-height: 100%;
 }
 html {
   box-sizing: border-box;
@@ -3792,6 +3796,10 @@ h5,
 h6 {
   color: #444;
   font-weight: 300;
+  margin: 0;
+}
+p {
+  margin: 0;
 }
 input {
   border: 0;
@@ -3804,16 +3812,12 @@ span.error {
   color: #900;
 }
 button {
-  background: #3b50ce;
-  padding: 0.5em 1em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
   border: 0;
-  font-weight: bold;
+  margin: 0;
+  background: #3b50ce;
   color: #ebeefa;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  font-weight: bold;
 }
 button[disabled] {
   opacity: 0.5;
@@ -3824,6 +3828,7 @@ button:focus {
 nav {
   background: #424242;
   text-align: center;
+  padding: 0 0.5em;
 }
 nav div:first-child {
   text-align: left;
@@ -3838,27 +3843,11 @@ nav img {
   border-radius: 1em;
 }
 nav a {
-  color: #ececec;
+  color: #d9d9d9;
   text-decoration: none;
   border: 0;
   display: inline-block;
-  margin-right: 1em;
-  padding: 0.5em;
-}
-nav a.create-project {
-  padding: 0.25em 0.5em;
-  background: #555;
-  color: #ececec;
-  vertical-align: middle;
-  display: inline-block;
-  font-size: 0.8em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-}
-nav a.create-project .icon {
-  vertical-align: middle;
-  color: #d9d9d9;
+  padding: 0.5em 0.25em;
 }
 nav a .icon {
   vertical-align: middle;
@@ -3877,6 +3866,7 @@ nav a.logo {
 nav a.logo {
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  margin-right: 2em;
 }
 
 #signin,
@@ -4038,4 +4028,78 @@ section.create-project .input-group input {
   width: 100%;
   padding: 1em 1em 1em 2em;
   margin: 0;
+}
+div.create-experiment {
+  padding: 0.5em;
+  text-align: right;
+}
+#experiments .experiments {
+  padding: 0;
+}
+#experiments .experiments table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#experiments .experiments table tr {
+  border-bottom: 1px solid #eee;
+}
+#experiments .experiments table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+#experiments .experiments table tr:hover {
+  background: #f4f4f4;
+}
+#experiments .experiments table tr.deleted {
+  opacity: 0.3;
+}
+#experiments .experiments table tr td.is-active,
+#experiments .experiments table tr td.delete {
+  cursor: pointer;
+}
+#experiments .experiments table tr td.endpoint {
+  font-family: Consolas, monaco, monospace;
+}
+#experiments .experiments table tr td.endpoint span {
+  background: #eee;
+  color: #444;
+}
+#experiments .experiments table tr td,
+#experiments .experiments table tr th {
+  padding: 0.75em 0.5em;
+}
+#experiments .experiments table tr td.name,
+#experiments .experiments table tr th.name,
+#experiments .experiments table tr td.endpoint,
+#experiments .experiments table tr th.endpoint,
+#experiments .experiments table tr td.created-at,
+#experiments .experiments table tr th.created-at {
+  text-align: left;
+}
+#experiments .experiments table tr td.created-at,
+#experiments .experiments table tr th.created-at,
+#experiments .experiments table tr td.is-active,
+#experiments .experiments table tr th.is-active,
+#experiments .experiments table tr td.delete,
+#experiments .experiments table tr th.delete,
+#experiments .experiments table tr td.endpoint,
+#experiments .experiments table tr th.endpoint {
+  width: 0.5%;
+  white-space: nowrap;
+}
+#experiments .experiments table tr td.is-active,
+#experiments .experiments table tr th.is-active {
+  text-align: center;
+}
+#experiments .experiments table tr td.is-active .active,
+#experiments .experiments table tr th.is-active .active {
+  color: #008000;
+}
+#experiments .experiments table tr td.is-active .inactive,
+#experiments .experiments table tr th.is-active .inactive {
+  color: #f00;
+}
+#experiments .experiments table tr td.delete,
+#experiments .experiments table tr th.delete {
+  font-size: 1.5em;
+  padding: 0.5em;
 }

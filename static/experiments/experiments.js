@@ -3,7 +3,7 @@
 angular.module('angularApp.experiments', ['ngRoute'])
 
 .config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.when('/experiments/:id?', {
+  $routeProvider.when('/experiments', {
     templateUrl: 'experiments/experiments.html',
     controller: 'ExperimentsCtrl',
     restricted: true
@@ -11,14 +11,25 @@ angular.module('angularApp.experiments', ['ngRoute'])
 }])
 
 .controller('ExperimentsCtrl', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
-  $scope.new = $routeParams.id === 'new';
+  $scope.updateExperiment = function (experiment) {
+    return $http({
+      url: '/api/experiments/' + experiment.id,
+      method: 'PUT',
+      data: experiment,
+      params: {
+        token: localStorage.getItem('token')
+      }
+    });
+  };
 
-  $scope.createExperiment = function (name) {
+  $scope.createExperiment = function (experiment) {
     $http.post('/api/experiments', {
-      name: name,
+      name: experiment.name,
       token: localStorage.getItem('token')
     })
     .success(function (data) {
+      experiment.name = undefined;
+      $scope.fetchExperiments();
     });
   };
 
@@ -31,27 +42,9 @@ angular.module('angularApp.experiments', ['ngRoute'])
       }
     })
     .success(function (data) {
-      $scope.experiments = data.experiments;
+      $scope.experiments = data;
     });
   };
-
-  $scope.updateExperiment = function (experiment) {
-    $http({
-      url: '/api/experiments/' + experiment.id,
-      method: 'PUT',
-      data: experiment,
-      params: {
-        token: localStorage.getItem('token')
-      }
-    })
-    .success(function (data) {
-      // $scope.fetchExperiments();
-    });
-  };
-
-
 
   $scope.fetchExperiments();
-  $scope.createExperiment('Test');
-
 }]);

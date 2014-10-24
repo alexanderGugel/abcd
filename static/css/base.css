@@ -3754,6 +3754,12 @@ button {
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
+.right {
+  text-align: right;
+}
+.seamless {
+  margin-top: 0;
+}
 .drop-element {
   padding: 0 0.5em;
 }

@@ -1,4 +1,4 @@
-@import "base.css"
+@require "base"
 
 #signin, #signup
   font-size: 1.5em
@@ -108,18 +108,10 @@
       color: #990000
 
 
-section.create-project
-  padding: 1em 0.5em
-  .input-group
-    font-size: 2em
-    input
-      width: 100%
-      padding: 1em 1em 1em 2em
-      margin: 0
-
 div.create-experiment
   padding: 0.5em
-  text-align: right
+  :last-child
+    text-align: right
 
 
 #experiments
@@ -128,6 +120,8 @@ div.create-experiment
     table
       border-collapse: collapse
       width: 100%
+      a
+        border: 0
       tr
         border-bottom: 1px solid #eee
         &:nth-child(even)
@@ -160,3 +154,9 @@ div.create-experiment
           &.delete
             font-size: 1.5em
             padding: 0.5em
+
+#experiment
+  .summary
+    text-align: center
+    h1
+      font-weight: 900

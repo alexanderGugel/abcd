@@ -3754,6 +3754,12 @@ button {
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
+.right {
+  text-align: right;
+}
+.seamless {
+  margin-top: 0;
+}
 .drop-element {
   padding: 0 0.5em;
 }
@@ -3868,7 +3874,6 @@ nav a.logo {
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   margin-right: 2em;
 }
-
 #signin,
 #signup {
   font-size: 1.5em;
@@ -3911,6 +3916,8 @@ nav a.logo {
 #config .usage {
   margin-bottom: 1em;
   padding: 1em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -3921,6 +3928,8 @@ nav a.logo {
 #config .help {
   padding: 1em;
   margin-left: 0.5em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -3931,6 +3940,8 @@ nav a.logo {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
   border-radius: 2px;
 }
 #config table .active,
@@ -4018,19 +4029,10 @@ nav a.logo {
   box-shadow: none;
   color: #900;
 }
-section.create-project {
-  padding: 1em 0.5em;
-}
-section.create-project .input-group {
-  font-size: 2em;
-}
-section.create-project .input-group input {
-  width: 100%;
-  padding: 1em 1em 1em 2em;
-  margin: 0;
-}
 div.create-experiment {
   padding: 0.5em;
+}
+div.create-experiment :last-child {
   text-align: right;
 }
 #experiments .experiments {
@@ -4039,6 +4041,9 @@ div.create-experiment {
 #experiments .experiments table {
   border-collapse: collapse;
   width: 100%;
+}
+#experiments .experiments table a {
+  border: 0;
 }
 #experiments .experiments table tr {
   border-bottom: 1px solid #eee;
@@ -4102,4 +4107,10 @@ div.create-experiment {
 #experiments .experiments table tr th.delete {
   font-size: 1.5em;
   padding: 0.5em;
+}
+#experiment .summary {
+  text-align: center;
+}
+#experiment .summary h1 {
+  font-weight: 900;
 }

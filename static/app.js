@@ -8,7 +8,8 @@ angular.module('angularApp', [
   'angularApp.settings',
   'angularApp.logout',
   'angularApp.toolbar',
-  'angularApp.experiments'
+  'angularApp.experiments',
+  'angularApp.experiment'
 ])
 
 .config(['$routeProvider', function ($routeProvider) {

@@ -21,3 +21,8 @@ usage.get('/', auth, function (req, res) {
 });
 
 module.exports = exports = usage;
+
+
+SELECT date_trunc('hour', started_at) AS interval,
+COUNT(started_at) AS requests
+FROM actions GROUP BY endpoint, interval

@@ -1,19 +1,51 @@
-<section id="experiments" class="pure-g">
-  <div class="pure-u-3-4">
-    <!-- <div class="depth1 card">
-      <h1>
-        Available Experiments
-      </h1>
-    </div> -->
-    <div class="depth1 card experiments">
-      <table>
+<section id="experiment">
+  <div class="depth1 card pure-g">
+    <h1 class="pure-u-1-2">
+      {{experiment.name}}
+    </h1>
+    <div class="pure-u-1-2 right">
+    </div>
+  </div>
+  <div class="pure-g">
+    <div class="pure-u-3-4">
+      <div class="depth1 card pure-g seamless summary">
+        <div class="pure-u-1-4">
+          <h1>{{experiment.actions.length}}</h1>
+          actions
+        </div>
+        <div class="pure-u-1-4">
+          <h1>{{experiment.actions.length}}</h1>
+          conversions
+        </div>
+        <div class="pure-u-1-4">
+          <h1>3</h1>
+          variants
+        </div>
+        <div class="pure-u-1-4">
+          <h1>80%</h1>
+          max. conversion rate
+        </div>
+      </div>
+    </div>
+
+    <div class="pure-u-1-4">
+      <div class="card depth1 seamless">
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <!-- <table>
         <thead>
           <tr>
             <th class="name">Name</th>
             <th class="endpoint">Endpoint</th>
             <th class="created-at">Created at</th>
             <th class="is-active">Active?</th>
-            <!-- <th class="delete"></th> -->
+            <th class="delete"></th>
           </tr>
         </thead>
         <tbody>
@@ -29,7 +61,7 @@
             </td>
             <td class="created-at">{{experiment.created_at | date:'short'}}</td>
             <td class="is-active" ng-click="experiment.is_active = !experiment.is_active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.is_active, 'inactive': !experiment.is_active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
-            <!-- <td class="delete" ng-click="experiment.is_deleted = !experiment.is_deleted; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.is_deleted, 'ion-ios7-trash': !experiment.is_deleted }"></i></td> -->
+            <td class="delete" ng-click="experiment.is_deleted = !experiment.is_deleted; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.is_deleted, 'ion-ios7-trash': !experiment.is_deleted }"></i></td>
           </tr>
         </tbody>
       </table>
@@ -45,34 +77,5 @@
         <input class="depth1" placeholder="Name (e.g. Follow button)" type="text" id="name" name="name" ng-model="experiment.name" required>
         <button type="submit" ng-disabled="form.$invalid">Add experiment!</button>
       </form>
-    </div>
-  </div>
-<!--
-  <div class="pure-u-1-4">
-    <section class="card depth1">
-      <h2>Current Usage</h2>
-      <br>
-      <div class="pure-g">
-        <div class="pure-u-1-2">
-          Actions (last month)
-        </div>
-        <div class="pure-u-1-2 right">
-          <strong>2390</strong> / 4000
-        </div>
-        <div class="pure-u-1-2">
-          Active Experiments
-        </div>
-        <div class="pure-u-1-2 right">
-          <strong>12</strong>/∞
-        </div>
-      </div>
-      <br>
-      <h2>Gettings started</h2>
-      <ul>
-        <li><a href="#/docs">Use the JS client</a></li>
-        <li><a href="#/docs">Learn more about the REST API</a></li>
-        <li><a href="#/docs">Support</a></li>
-      </ul>
-    </section>
-  </div> -->
+    </div> -->
 </section>

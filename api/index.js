@@ -17,7 +17,7 @@ api.use('/experiments', require('./experiments'));
 api.use('/convert', require('./convert'));
 api.use('/participate', require('./participate'));
 
-api.use('/usage', require('./usage'));
+// api.use('/usage', require('./usage'));
 
 api.all('*', function (req, res) {
   res.status(404).send({

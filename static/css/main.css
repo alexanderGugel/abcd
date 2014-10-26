@@ -3889,7 +3889,10 @@ nav a.logo {
   max-width: 100%;
   margin: 10% auto;
   text-align: left;
-  padding: 1em;
+}
+#signin form span,
+#signup form span {
+  font-size: 0.75em;
 }
 #signin form input,
 #signup form input,
@@ -3903,13 +3906,13 @@ nav a.logo {
 #signin form input,
 #signup form input,
 #signin form button,
-#signup form button {
+#signup form button,
+#signin form p,
+#signup form p {
   margin-top: 0.5em;
 }
-#signin form span,
-#signup form span {
-  font-size: 0.75em;
-}
+#signin form button,
+#signup form button,
 #signin form p,
 #signup form p {
   text-align: center;

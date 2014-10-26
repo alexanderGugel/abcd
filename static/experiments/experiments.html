@@ -21,15 +21,15 @@
               Created at
               <i ng-if="predicate === 'created_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="is-active" ng-click="predicate = 'is_active'; reverse = !reverse">
+            <th class="is-active" ng-click="predicate = 'active'; reverse = !reverse">
               Active?
-              <i ng-if="predicate === 'is_active'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+              <i ng-if="predicate === 'active'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <!-- <th class="delete"></th> -->
+            <th class="delete"></th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="experiment in experiments | orderBy:predicate:reverse" ng-class="{ 'deleted': experiment.is_deleted }" ng-if="!experiment.is_deleted || showDeleted">
+          <tr ng-repeat="experiment in experiments | orderBy:predicate:reverse" ng-class="{ 'deleted': experiment.archived }" ng-if="!experiment.archived || showDeleted">
             <td class="name">
               <a href="#/experiments/{{experiment.id}}">
                 <i class="icon ion-link"></i>
@@ -40,8 +40,8 @@
               <span>{{experiment.endpoint}}</span>
             </td>
             <td class="created-at">{{experiment.created_at | date:'short'}}</td>
-            <td class="is-active" ng-click="experiment.is_active = !experiment.is_active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.is_active, 'inactive': !experiment.is_active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
-            <!-- <td class="delete" ng-click="experiment.is_deleted = !experiment.is_deleted; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.is_deleted, 'ion-ios7-trash': !experiment.is_deleted }"></i></td> -->
+            <td class="is-active" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
+            <td class="delete" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.archived, 'ion-ios7-trash': !experiment.archived }"></i></td>
           </tr>
         </tbody>
       </table>

@@ -25,8 +25,8 @@ query(
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'endpoint UUID NOT NULL DEFAULT uuid_generate_v4(),' +
     'name TEXT NOT NULL,' +
-    'is_deleted BOOLEAN DEFAULT FALSE,' +
-    'is_active BOOLEAN DEFAULT TRUE,' +
+    'archived BOOLEAN DEFAULT FALSE,' +
+    'active BOOLEAN DEFAULT TRUE,' +
     'created_at TIMESTAMP DEFAULT NOW(),' +
     'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +

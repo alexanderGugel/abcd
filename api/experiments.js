@@ -31,7 +31,7 @@ experiments.get('/', auth, function (req, res) {
 });
 
 experiments.delete('/:id', auth, function (req, res) {
-  query('UPDATE "experiments" SET is_deleted = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
+  query('UPDATE "experiments" SET archived = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
     if (error) {
       if (error.code === '22P02') {
         return res.status(400).send({
@@ -45,7 +45,7 @@ experiments.delete('/:id', auth, function (req, res) {
 });
 
 experiments.put('/:id', auth, function (req, res) {
-  query('UPDATE "experiments" SET name = $3, is_deleted = $4, is_active = $5 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.is_deleted, req.body.is_active], function (error) {
+  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active], function (error) {
     if (error) {
       res.status(400).send({
         error: 'Invalid experiment'

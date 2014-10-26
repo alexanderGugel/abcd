@@ -69,7 +69,7 @@ angular.module('angularApp.toolbar', [])
   };
 
   return {
-    link: link,
+    // link: link,
     restrict: 'E',
     templateUrl: 'toolbar/toolbar.html'
   };

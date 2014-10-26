@@ -59,7 +59,7 @@
             <th class="name">Name</th>
             <th class="endpoint">Endpoint</th>
             <th class="created-at">Created at</th>
-            <th class="is-active">Active?</th>
+            <th class="active">Active?</th>
             <th class="delete"></th>
           </tr>
         </thead>
@@ -75,7 +75,7 @@
               <span>{{experiment.endpoint}}</span>
             </td>
             <td class="created-at">{{experiment.created_at | date:'short'}}</td>
-            <td class="is-active" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
+            <td class="active" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
             <td class="delete" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.archived, 'ion-ios7-trash': !experiment.archived }"></i></td>
           </tr>
         </tbody>

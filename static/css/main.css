@@ -4063,8 +4063,8 @@ div.create-experiment :last-child {
 #experiments .experiments table tr.deleted {
   opacity: 0.3;
 }
-#experiments .experiments table tr td.is-active,
-#experiments .experiments table tr td.delete {
+#experiments .experiments table tr td.active,
+#experiments .experiments table tr td.archive {
   cursor: pointer;
 }
 #experiments .experiments table tr td.endpoint {
@@ -4088,29 +4088,29 @@ div.create-experiment :last-child {
 }
 #experiments .experiments table tr td.created-at,
 #experiments .experiments table tr th.created-at,
-#experiments .experiments table tr td.is-active,
-#experiments .experiments table tr th.is-active,
-#experiments .experiments table tr td.delete,
-#experiments .experiments table tr th.delete,
+#experiments .experiments table tr td.active,
+#experiments .experiments table tr th.active,
+#experiments .experiments table tr td.archive,
+#experiments .experiments table tr th.archive,
 #experiments .experiments table tr td.endpoint,
 #experiments .experiments table tr th.endpoint {
   width: 0.5%;
   white-space: nowrap;
 }
-#experiments .experiments table tr td.is-active,
-#experiments .experiments table tr th.is-active {
+#experiments .experiments table tr td.active,
+#experiments .experiments table tr th.active {
   text-align: center;
 }
-#experiments .experiments table tr td.is-active .active,
-#experiments .experiments table tr th.is-active .active {
+#experiments .experiments table tr td.active .active,
+#experiments .experiments table tr th.active .active {
   color: #008000;
 }
-#experiments .experiments table tr td.is-active .inactive,
-#experiments .experiments table tr th.is-active .inactive {
+#experiments .experiments table tr td.active .inactive,
+#experiments .experiments table tr th.active .inactive {
   color: #f00;
 }
-#experiments .experiments table tr td.delete,
-#experiments .experiments table tr th.delete {
+#experiments .experiments table tr td.archive,
+#experiments .experiments table tr th.archive {
   font-size: 1.5em;
   padding: 0.5em;
 }

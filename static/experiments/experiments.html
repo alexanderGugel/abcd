@@ -21,15 +21,15 @@
               Created at
               <i ng-if="predicate === 'created_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="is-active" ng-click="predicate = 'active'; reverse = !reverse">
+            <th class="active" ng-click="predicate = 'active'; reverse = !reverse">
               Active?
               <i ng-if="predicate === 'active'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="delete"></th>
+            <th class="archive"></th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="experiment in experiments | orderBy:predicate:reverse" ng-class="{ 'deleted': experiment.archived }" ng-if="!experiment.archived || showDeleted">
+          <tr ng-repeat="experiment in experiments | orderBy:predicate:reverse" ng-class="{ 'deleted': experiment.archived }" ng-if="!experiment.archived || showArchived">
             <td class="name">
               <a href="#/experiments/{{experiment.id}}">
                 <i class="icon ion-link"></i>
@@ -40,17 +40,17 @@
               <span>{{experiment.endpoint}}</span>
             </td>
             <td class="created-at">{{experiment.created_at | date:'short'}}</td>
-            <td class="is-active" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
-            <td class="delete" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.archived, 'ion-ios7-trash': !experiment.archived }"></i></td>
+            <td class="active" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
+            <td class="archive" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="create-experiment pure-g">
       <div class="pure-u-1-4">
-        <a href="" ng-click="showDeleted = !showDeleted">
-          <small ng-if="showDeleted">Hide deleted experiments</small>
-          <small ng-if="!showDeleted">Show deleted experiments</small>
+        <a href="" ng-click="showArchived = !showArchived">
+          <small ng-if="showArchived">Hide archived experiments</small>
+          <small ng-if="!showArchived">Show archived experiments</small>
         </a>
       </div>
       <form role="form" name="form" ng-submit="createExperiment(experiment)" novalidate class="pure-u-3-4">

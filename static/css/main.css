@@ -3761,6 +3761,9 @@ button {
 .seamless {
   margin-top: 0;
 }
+.inner-seamless {
+  padding: 0;
+}
 .drop-element {
   padding: 0 0.5em;
 }
@@ -3788,7 +3791,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  font: 400 14px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #666;
   background: #e4e4e4;
@@ -4035,92 +4038,82 @@ nav a.logo {
   box-shadow: none;
   color: #900;
 }
-div.create-experiment {
-  padding: 0.5em;
-}
-div.create-experiment :last-child {
-  text-align: right;
-}
-#experiments .experiments {
-  padding: 0;
-}
-#experiments .experiments table {
+#experiments table {
   border-collapse: collapse;
   width: 100%;
 }
-#experiments .experiments table a {
+#experiments table a {
   border: 0;
 }
-#experiments .experiments table tr {
+#experiments table tbody tr:last-child {
+  border-bottom: 0;
+}
+#experiments table tr {
   border-bottom: 1px solid #eee;
 }
-#experiments .experiments table tr:nth-child(even) {
+#experiments table tr:nth-child(even) {
   background: #f9f9f9;
 }
-#experiments .experiments table tr:hover {
+#experiments table tr:hover {
   background: #f4f4f4;
 }
-#experiments .experiments table tr.deleted {
+#experiments table tr.deleted {
   opacity: 0.3;
 }
-#experiments .experiments table tr td.active,
-#experiments .experiments table tr td.archive {
+#experiments table tr td.active,
+#experiments table tr td.archive {
   cursor: pointer;
 }
-#experiments .experiments table tr td.endpoint {
+#experiments table tr td.endpoint {
   font-family: Consolas, monaco, monospace;
 }
-#experiments .experiments table tr td.endpoint span {
+#experiments table tr td.endpoint span {
   background: #eee;
   color: #444;
 }
-#experiments .experiments table tr td,
-#experiments .experiments table tr th {
+#experiments table tr td,
+#experiments table tr th {
   padding: 0.75em 0.5em;
 }
-#experiments .experiments table tr td.name,
-#experiments .experiments table tr th.name,
-#experiments .experiments table tr td.endpoint,
-#experiments .experiments table tr th.endpoint,
-#experiments .experiments table tr td.created-at,
-#experiments .experiments table tr th.created-at {
+#experiments table tr td.name,
+#experiments table tr th.name,
+#experiments table tr td.endpoint,
+#experiments table tr th.endpoint,
+#experiments table tr td.created-at,
+#experiments table tr th.created-at {
   text-align: left;
 }
-#experiments .experiments table tr td.created-at,
-#experiments .experiments table tr th.created-at,
-#experiments .experiments table tr td.active,
-#experiments .experiments table tr th.active,
-#experiments .experiments table tr td.archive,
-#experiments .experiments table tr th.archive,
-#experiments .experiments table tr td.endpoint,
-#experiments .experiments table tr th.endpoint {
+#experiments table tr td.created-at,
+#experiments table tr th.created-at,
+#experiments table tr td.active,
+#experiments table tr th.active,
+#experiments table tr td.archive,
+#experiments table tr th.archive,
+#experiments table tr td.endpoint,
+#experiments table tr th.endpoint {
   width: 0.5%;
   white-space: nowrap;
 }
-#experiments .experiments table tr td.active,
-#experiments .experiments table tr th.active {
+#experiments table tr td.active,
+#experiments table tr th.active {
   text-align: center;
 }
-#experiments .experiments table tr td.active .active,
-#experiments .experiments table tr th.active .active {
+#experiments table tr td.active .active,
+#experiments table tr th.active .active {
   color: #008000;
 }
-#experiments .experiments table tr td.active .inactive,
-#experiments .experiments table tr th.active .inactive {
+#experiments table tr td.active .inactive,
+#experiments table tr th.active .inactive {
   color: #f00;
 }
-#experiments .experiments table tr td.archive,
-#experiments .experiments table tr th.archive {
+#experiments table tr td.archive,
+#experiments table tr th.archive {
   font-size: 1.5em;
   padding: 0.5em;
 }
-#experiment .summary {
-  text-align: center;
+#experiments footer {
+  padding: 0.5em;
 }
-#experiment .summary h1 {
-  font-weight: 900;
-}
-#experiment .experiment-name {
-  padding: 0;
-  font-size: 2em;
+#experiments footer :last-child {
+  text-align: right;
 }

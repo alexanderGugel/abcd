@@ -3761,6 +3761,9 @@ button {
 .seamless {
   margin-top: 0;
 }
+.inner-seamless {
+  padding: 0;
+}
 .drop-element {
   padding: 0 0.5em;
 }
@@ -3788,7 +3791,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  font: 400 14px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #666;
   background: #e4e4e4;

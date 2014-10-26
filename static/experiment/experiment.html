@@ -1,5 +1,21 @@
-<section id="experiment">
-  <div class="depth1 card pure-g">
+<section id="experiment" class="pure-g">
+  <div class="pure-u-1-4">
+    <header class="depth1 card">
+      <h2>{{experiment.name}}</h2>
+    </header>
+    <section class="depth1 card">
+      <p>test</p>
+    </section>
+
+  </div>
+  <div class="pure-u-3-4">
+    <section class="depth1 card">
+
+    </section>
+  </div>
+
+
+  <!-- <div class="depth1 card pure-g">
     <input class="pure-u-1-2" ng-model="experiment.name" class="experiment-name">
     <div class="pure-u-1-2">
 
@@ -48,49 +64,5 @@
         <a href="">Download as JSON</a>
       </div>
     </div>
-  </div>
-
-
-
-
-      <!-- <table>
-        <thead>
-          <tr>
-            <th class="name">Name</th>
-            <th class="endpoint">Endpoint</th>
-            <th class="created-at">Created at</th>
-            <th class="active">Active?</th>
-            <th class="delete"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="experiment in experiments" ng-class="{ 'deleted': experiment.archived }" ng-if="!experiment.archived || showDeleted">
-            <td class="name">
-              <a href="#/experiments/{{experiment.id}}">
-                <i class="icon ion-link"></i>
-                {{experiment.name}}
-              </a>
-            </td>
-            <td class="endpoint">
-              <span>{{experiment.endpoint}}</span>
-            </td>
-            <td class="created-at">{{experiment.created_at | date:'short'}}</td>
-            <td class="active" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
-            <td class="delete" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-arrow-return-left': experiment.archived, 'ion-ios7-trash': !experiment.archived }"></i></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="create-experiment pure-g">
-      <div class="pure-u-1-4">
-        <a href="" ng-click="showDeleted = !showDeleted">
-          <small ng-if="showDeleted">Hide deleted experiments</small>
-          <small ng-if="!showDeleted">Show deleted experiments</small>
-        </a>
-      </div>
-      <form role="form" name="form" ng-submit="createExperiment(experiment)" novalidate class="pure-u-3-4">
-        <input class="depth1" placeholder="Name (e.g. Follow button)" type="text" id="name" name="name" ng-model="experiment.name" required>
-        <button type="submit" ng-disabled="form.$invalid">Add experiment!</button>
-      </form>
-    </div> -->
+  </div> -->
 </section>

@@ -1,11 +1,5 @@
-<section id="experiments" class="pure-g">
-  <div class="pure-u-1-1">
-    <!-- <div class="depth1 card">
-      <h1>
-        Available Experiments
-      </h1>
-    </div> -->
-    <div class="depth1 card experiments">
+<section id="experiments">
+    <div class="depth1 card inner-seamless">
       <table>
         <thead>
           <tr>
@@ -46,7 +40,7 @@
         </tbody>
       </table>
     </div>
-    <div class="create-experiment pure-g">
+    <footer class="pure-g">
       <div class="pure-u-1-4">
         <a href="" ng-click="showArchived = !showArchived">
           <small ng-if="showArchived">Hide archived experiments</small>
@@ -57,8 +51,7 @@
         <input class="depth1" placeholder="Name (e.g. Follow button)" type="text" id="name" name="name" ng-model="experiment.name" required>
         <button type="submit" ng-disabled="form.$invalid">Add experiment!</button>
       </form>
-    </div>
-  </div>
+    </footer>
 
   <!-- <div class="pure-u-1-4">
     <div class="card depth1">

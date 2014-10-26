@@ -1,20 +1,28 @@
 <section id="experiment">
   <div class="depth1 card pure-g">
-    <h1 class="pure-u-1-2">
-      {{experiment.name}}
-    </h1>
+    <input class="pure-u-1-2" ng-model="experiment.name" class="experiment-name">
+    <div class="pure-u-1-2">
+
+    </div>
+    <p class="pure-u-1-1">Just a really cool experiment description</p>
     <div class="pure-u-1-2 right">
     </div>
   </div>
   <div class="pure-g">
     <div class="pure-u-3-4">
+      <nav class="card seamless">
+        <a href="" ng-click="active = graph">Results</a>
+        <a href="" ng-click="active = graph">Settings</a>
+        <a href="" ng-click="active = graph">Setup</a>
+
+      </nav>
       <div class="depth1 card pure-g seamless summary">
         <div class="pure-u-1-4">
-          <h1>{{experiment.actions.length}}</h1>
+          <h1>{{experiment.actions.size()}}</h1>
           actions
         </div>
         <div class="pure-u-1-4">
-          <h1>{{experiment.actions.length}}</h1>
+          <h1>{{experiment.actions.size()}}</h1>
           conversions
         </div>
         <div class="pure-u-1-4">
@@ -26,11 +34,18 @@
           max. conversion rate
         </div>
       </div>
+      <div class="depth1 card seamless">
+        GRAPH
+      </div>
+      <div class="depth1 card seamless">
+        ACTIONS
+      </div>
     </div>
 
     <div class="pure-u-1-4">
       <div class="card depth1 seamless">
-
+        <a href="">Download as CSV</a><br>
+        <a href="">Download as JSON</a>
       </div>
     </div>
   </div>

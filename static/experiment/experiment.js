@@ -12,7 +12,7 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
 .controller('ExperimentCtrl', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
   $scope.fetchActions = function (experiment) {
-    $http({
+    return $http({
       url: '/api/experiments/' + experiment.id + '/actions',
       method: 'GET',
       params: {
@@ -20,7 +20,7 @@ angular.module('angularApp.experiment', ['ngRoute'])
       }
     })
     .success(function (data) {
-      experiment.actions = data;
+      experiment.actions = crossfilter(data);
     });
   };
 
@@ -39,10 +39,35 @@ angular.module('angularApp.experiment', ['ngRoute'])
     });
   };
 
+  $scope.filterBetween = function (startDate, endDate) {
+    experiment.actionsByStartedAt.filterRange([startDate, endDate]);
+  };
+
+  $scope.resetFilters = function () {
+    dimension.filterAll()
+  };
+
   $scope.experiment = {
     id: $routeParams.id
   };
 
   $scope.fetchExperiment($scope.experiment);
-  $scope.fetchActions($scope.experiment);
+  $scope.fetchActions($scope.experiment).then(function () {
+    var experiment = $scope.experiment;
+
+    experiment.actionsByStartedAt = experiment.actions.dimension(function (action) {
+      return action['started_at'];
+    });
+
+    // debugger;
+
+    // var dates = experiment.actionsByStartedAt.group(d3.time.day);
+    // experiment.actionGroupsByStartedAt = experiment.actionsByStartedAt.group(function (startedAt) {
+    //
+    // });
+  });
+
+
+
+
 }]);

@@ -74,7 +74,19 @@ experiments.get('/usage', auth, function (req, res) {
   });
 });
 
+experiments.get('/:id/participate', function (req, res) {
+  // TODO
+  // query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  //   res.send(result.rows);
+  // });
+});
 
+experiments.get('/:id/complete', function (req, res) {
+  // TODO
+  // query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  //   res.send(result.rows);
+  // });
+});
 
 
 

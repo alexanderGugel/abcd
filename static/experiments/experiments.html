@@ -1,5 +1,5 @@
 <section id="experiments" class="pure-g">
-  <div class="pure-u-3-4">
+  <div class="pure-u-1-1">
     <!-- <div class="depth1 card">
       <h1>
         Available Experiments
@@ -9,15 +9,27 @@
       <table>
         <thead>
           <tr>
-            <th class="name">Name</th>
-            <th class="endpoint">Endpoint</th>
-            <th class="created-at">Created at</th>
-            <th class="is-active">Active?</th>
+            <th class="name" ng-click="predicate = 'name'; reverse = !reverse">
+              Name
+              <i ng-if="predicate === 'name'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            </th>
+            <th class="endpoint" ng-click="predicate = 'endpoint'; reverse = !reverse">
+              Endpoint
+              <i ng-if="predicate === 'endpoint'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            </th>
+            <th class="created-at" ng-click="predicate = 'created_at'; reverse = !reverse">
+              Created at
+              <i ng-if="predicate === 'created_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            </th>
+            <th class="is-active" ng-click="predicate = 'is_active'; reverse = !reverse">
+              Active?
+              <i ng-if="predicate === 'is_active'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            </th>
             <!-- <th class="delete"></th> -->
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="experiment in experiments" ng-class="{ 'deleted': experiment.is_deleted }" ng-if="!experiment.is_deleted || showDeleted">
+          <tr ng-repeat="experiment in experiments | orderBy:predicate:reverse" ng-class="{ 'deleted': experiment.is_deleted }" ng-if="!experiment.is_deleted || showDeleted">
             <td class="name">
               <a href="#/experiments/{{experiment.id}}">
                 <i class="icon ion-link"></i>
@@ -47,6 +59,12 @@
       </form>
     </div>
   </div>
+
+  <!-- <div class="pure-u-1-4">
+    <div class="card depth1">
+      test
+    </div>
+  </div> -->
 <!--
   <div class="pure-u-1-4">
     <section class="card depth1">

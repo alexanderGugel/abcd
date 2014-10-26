@@ -3753,6 +3753,7 @@ button {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
+  text-align: left;
 }
 .right {
   text-align: right;
@@ -3832,7 +3833,7 @@ button:focus {
   outline: 0;
 }
 nav {
-  background: #424242;
+  background: #444;
   text-align: center;
   padding: 0 0.5em;
 }
@@ -3849,7 +3850,7 @@ nav img {
   border-radius: 1em;
 }
 nav a {
-  color: #d9d9d9;
+  color: #dadada;
   text-decoration: none;
   border: 0;
   display: inline-block;
@@ -3859,7 +3860,7 @@ nav a .icon {
   vertical-align: middle;
 }
 nav a .icon.ion-chevron-down {
-  color: #b3b3b3;
+  color: #b4b4b4;
   font-size: 0.5em;
 }
 nav a:last-child {

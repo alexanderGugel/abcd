@@ -11,6 +11,8 @@ angular.module('angularApp.experiments', ['ngRoute'])
 }])
 
 .controller('ExperimentsCtrl', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
+  $scope.predicate = 'created_at';
+
   $scope.updateExperiment = function (experiment) {
     return $http({
       url: '/api/experiments/' + experiment.id,

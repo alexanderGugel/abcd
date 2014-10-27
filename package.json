@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "build-css": "stylus --include-css static/css",
     "watch-css": "stylus -w --include-css static/css",
     "build-js": "echo TODO",
@@ -38,7 +38,9 @@
     "zepto": "0.0.4"
   },
   "devDependencies": {
+    "mocha": "^1.21.5",
     "nodemon": "^1.2.1",
+    "supertest": "^0.14.0",
     "watchify": "^1.0.6"
   }
 }

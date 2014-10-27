@@ -3,7 +3,7 @@ var query = require('./db/query');
 query(
   'DROP TABLE IF EXISTS "users" CASCADE;' +
   'DROP TABLE IF EXISTS "tokens" CASCADE;' +
-  'DROP TABLE IF EXISTS "endpoints" CASCADE;' +
+  'DROP TABLE IF EXISTS "experiments" CASCADE;' +
   'DROP TABLE IF EXISTS "actions" CASCADE;' +
 
   'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";' +
@@ -21,11 +21,14 @@ query(
     'created_at TIMESTAMP DEFAULT NOW()' +
   ');' +
 
-  'CREATE TABLE IF NOT EXISTS "endpoints" (' +
+  'CREATE TABLE IF NOT EXISTS "experiments" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'is_active BOOLEAN NOT NULL DEFAULT TRUE,' +
-    'user_id UUID NOT NULL REFERENCES "users"(id),' +
-    'created_at TIMESTAMP DEFAULT NOW()' +
+    'endpoint UUID NOT NULL DEFAULT uuid_generate_v4(),' +
+    'name TEXT NOT NULL,' +
+    'archived BOOLEAN DEFAULT FALSE,' +
+    'active BOOLEAN DEFAULT TRUE,' +
+    'created_at TIMESTAMP DEFAULT NOW(),' +
+    'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
 
   'CREATE TABLE IF NOT EXISTS "actions" (' +
@@ -35,7 +38,6 @@ query(
     'start_data JSON,' +
     'complete_data JSON,' +
     'variant TEXT NOT NULL,' +
-    'experiment TEXT NOT NULL,' +
-    'endpoint_id UUID NOT NULL REFERENCES "endpoints"(id)' +
+    'experiment_id UUID NOT NULL REFERENCES "experiments"(id)' +
   ');'
 );

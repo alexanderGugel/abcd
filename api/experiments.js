@@ -3,37 +3,93 @@ var query = require('../db/query');
 var auth = require('./auth');
 
 var experiments = express.Router();
-//
-// experiments.get('/', auth, function (req, res) {
-//   query('SELECT * FROM experiments WHERE "experiments".is_deleted = FALSE AND "endpoints".is_deleted = FALSE', [req.user.id], function (error, result) {
-//     if (error) {
-//       res.status(500).send({
-//         error: 'Internal server error'
-//       });
-//       throw error;
-//     }
-//
-//     res.send({
-//       experiments: result.rows
-//     });
-//   });
-// });
-//
-// experiments.delete('/:id', auth, function (req, res) {
-//   query('UPDATE "experiments" SET is_deleted = TRUE WHERE user_id = $1 AND endpoint = $2', [req.user.id, req.params.id], function (error) {
-//     if (error) {
-//       if (error.code === '22P02') {
-//         return res.status(400).send({
-//           error: 'Invalid experiment'
-//         });
-//       }
-//       res.status(500).send({
-//         error: 'Internal server error'
-//       });
-//       throw error;
-//     }
-//     res.status(204).send({});
-//   });
-// });
+
+experiments.post('/', auth, function (req, res) {
+  if (!req.body.name) {
+    return res.status(400).send({
+      error: 'Missing name'
+    });
+  }
+  query('INSERT INTO "experiments" (name, user_id) VALUES ($1, $2) RETURNING id', [req.body.name, req.user.id], function (error, result) {
+    if (error) {
+      throw error;
+    }
+    res.send({
+      id: result.rows[0].id
+    });
+  });
+});
+
+experiments.get('/', auth, function (req, res) {
+  query(
+    'SELECT * FROM experiments WHERE experiments.user_id = $1 ORDER BY experiments.created_at DESC;', [req.user.id], function (error, result) {
+    if (error) {
+      throw error;
+    }
+    res.send(result.rows);
+  });
+});
+
+experiments.delete('/:id', auth, function (req, res) {
+  query('UPDATE "experiments" SET archived = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
+    if (error) {
+      if (error.code === '22P02') {
+        return res.status(400).send({
+          error: 'Invalid project'
+        });
+      }
+      throw error;
+    }
+    res.status(204).send({});
+  });
+});
+
+experiments.put('/:id', auth, function (req, res) {
+  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active], function (error) {
+    if (error) {
+      res.status(400).send({
+        error: 'Invalid experiment'
+      });
+      throw error;
+    }
+    res.status(204).send({});
+  });
+});
+
+experiments.get('/:id', auth, function (req, res) {
+  query('SELECT * FROM experiments WHERE id = $2 AND user_id = $1', [req.user.id, req.params.id], function (error, result) {
+    res.send(result.rows[0]);
+  });
+});
+
+experiments.get('/:id/actions', auth, function (req, res) {
+  query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    res.send(result.rows);
+  });
+});
+
+experiments.get('/usage', auth, function (req, res) {
+  query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    res.send(result.rows);
+  });
+});
+
+experiments.get('/:id/participate', function (req, res) {
+  // TODO
+  // query('INSERT INTO actions (variant, experiment_id) VALUES ($1, (SELECT id FROM experiments WHERE endpoint = $2)) RETURNING id;', [req.user.id, req.params.id], function (error, result) {
+  //   res.send(result.rows);
+  // });
+  //
+
+});
+
+experiments.get('/:id/complete', function (req, res) {
+  // TODO
+  // query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  //   res.send(result.rows);
+  // });
+});
+
+
 
 module.exports = exports = experiments;

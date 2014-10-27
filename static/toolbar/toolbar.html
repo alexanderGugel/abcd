@@ -1,24 +1,23 @@
 <nav class="pure-g animated fadeInDown" ng-if="user">
-  <div class="pure-u-2-5">
+  <div class="pure-u-3-5">
     <!-- <select class="endpoint" ng-model="activeEndpoint" ng-options="endpoint.id for endpoint in endpoints">
       <option value="">-- choose endpoint --</option>
     </select> -->
-    <button>Endpoints</button>
-    <a href="#/experiments">Experiments</a>
-    <a href="#/debugger">Debugger</a>
-    <a href="#/config">Config</a>
-  </div>
-  <div class="pure-u-1-5">
+    <!-- <button>Endpoints</button> -->
+    <!-- <a ng-click="" href="" toolbar-projects-dropdown ng-if="user">Projects <i class="icon ion-chevron-down"></i></a> -->
+    <!-- <a href="#/projects/new" ng-if="user" class="create-project">Create project <i class="icon ion-plus"></i></a> -->
+    <!-- <a href="#/debugger">Debugger</a>
+    <a href="#/config">Config</a> -->
     <a class="logo" href="#/">abcd</a>
+    <a href="#/experiments">Experiments</a>
+    <i class="icon ion-ios7-arrow-right" ng-if="experiment"></i>
+    <a href="#/experiments/{{experiment.id}}" ng-if="experiment">{{experiment.name}}</a>
   </div>
   <div class="pure-u-2-5">
     <!-- <a href="#/dashboard" class="active">Dashboard</a> -->
     <!-- <a href="#/settings"><img ng-src="{{user.gravatar}}"></a> -->
-    <a href="#/support"><i class="icon ion-ios7-bookmarks"></i> Support</a>
-    <a href="#/docs"><i class="icon ion-ios7-bookmarks"></i> Docs</a>
-    <a ng-click="" href="" profile-link ng-if="user">
-      <!-- <i class="icon ion-chevron-down"></i> -->
-      {{user.email}}
-    </a>
+    <a href="#/support"><i class="icon ion-help-buoy"></i> Support</a>
+    <a href="#/docs"><i class="icon ion-document"></i> Docs</a>
+    <a ng-click="" href="" toolbar-user-dropdown ng-if="user">{{user.email}}  <i class="icon ion-chevron-down"></i></a>
   </div>
 </nav>

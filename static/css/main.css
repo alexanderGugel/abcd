@@ -3727,12 +3727,63 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   -webkit-animation-name: zoomOutUp;
   animation-name: zoomOutUp;
 }
-html {
-  box-sizing: border-box;
+.depth1,
+.drop-element .drop-content,
+nav {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.depth2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.depth3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.depth4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.depth5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.3), 0 15px 12px rgba(0,0,0,0.22);
+}
+.card,
+input,
+button {
+  padding: 0.5em;
+  margin: 0.5em;
+  background: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.seamless {
+  margin-top: 0;
+}
+.inner-seamless {
+  padding: 0;
+}
+.drop-element {
+  padding: 0 0.5em;
+}
+.drop-element .drop-content {
+  background: #fff;
+}
+.drop-element .drop-content a {
+  padding: 0.25em 0.5em;
+  display: inline-block;
+  border-bottom: 1px solid #eee;
+}
+[ng-click] {
+  cursor: pointer;
 }
 html,
 body {
   min-height: 100%;
+}
+html {
+  box-sizing: border-box;
 }
 *,
 *:before,
@@ -3740,7 +3791,7 @@ body {
   box-sizing: inherit;
 }
 body {
-  font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #666;
   background: #e4e4e4;
@@ -3750,9 +3801,6 @@ a {
   text-decoration: none;
   border-bottom: 1px solid #ccc;
 }
-label {
-  color: #ccc;
-}
 h1,
 h2,
 h3,
@@ -3761,58 +3809,39 @@ h5,
 h6 {
   color: #444;
   font-weight: 300;
+  margin: 0;
+}
+p {
+  margin: 0;
 }
 input {
-  border: 1px solid #ddd;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  background: #fff;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  padding: 1em;
-  color: #444;
+  border: 0;
+  margin: 0;
 }
 input.error {
-  border: 1px solid #900;
+  background: #ffdbdb;
 }
 span.error {
   color: #900;
 }
 button {
-  background: #303f9f;
-  padding: 1em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
   border: 0;
-  color: #e8eaf8;
-  text-transform: uppercase;
+  margin: 0;
+  background: #3b50ce;
+  color: #ebeefa;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  font-weight: bold;
 }
 button[disabled] {
   opacity: 0.5;
 }
-.popover.drop a {
-  border: 0;
-  display: inline-block;
-  padding: 0.5em;
-  border-bottom: 1px solid #eee;
-}
-.popover.drop alast-child {
-  border: 0;
-}
-.popover.drop .drop-content {
-  padding: 0;
+button:focus {
+  outline: 0;
 }
 nav {
-  background: #263238;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background: #444;
   text-align: center;
-  font-size: 1.25em;
-  padding: 0.5em;
-  vertical-align: middle;
+  padding: 0 0.5em;
 }
 nav div:first-child {
   text-align: left;
@@ -3826,182 +3855,49 @@ nav img {
   -moz-border-radius: 1em;
   border-radius: 1em;
 }
-nav button {
-  color: #839eab;
-  background: none;
-  padding: 0;
-  background: #fff;
-  font-weight: 400;
-  color: #839eab;
-  background: rgba(255,255,255,0.1);
-  display: none;
-}
 nav a {
-  color: #cdd8dd;
+  color: #dadada;
   text-decoration: none;
   border: 0;
   display: inline-block;
-  margin-right: 1em;
-  text-transform: uppercase;
-  font-size: 0.75em;
+  padding: 0.5em 0.25em;
 }
 nav a .icon {
-  color: #f5f7f8;
-  display: none;
+  vertical-align: middle;
+}
+nav a .icon.ion-chevron-down {
+  color: #b4b4b4;
+  font-size: 0.5em;
 }
 nav a:last-child {
   margin: 0;
 }
-nav a:hover {
-  color: #e6ecee;
-  -webkit-animation: nav-a-animation 300ms;
-  animation: nav-a-animation 300ms;
-}
-nav a.active {
-  color: #e6ecee;
-}
-nav a.active:hover {
-  -webkit-animation: none;
-  animation: none;
+nav a:hover,
+nav a.logo {
+  color: #fff;
 }
 nav a.logo {
-  -webkit-animation: none;
-  animation: none;
-  color: #fff;
   font-weight: 900;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-@-moz-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-webkit-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-o-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-moz-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-webkit-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-o-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-moz-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-webkit-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-o-keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@keyframes nav-a-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #e6ecee;
-  }
-}
-@-moz-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-webkit-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@-o-keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
-@keyframes nav-a-active-animation {
-  from {
-    color: #cdd8dd;
-  }
-  to {
-    color: #839eab;
-  }
-}
 #signin,
 #signup {
+  font-size: 1.5em;
   text-align: center;
 }
 #signin form,
 #signup form {
-  max-width: 400px;
+  width: 400px;
+  max-width: 100%;
   margin: 10% auto;
   text-align: left;
-  padding: 1em;
 }
-#signin form h1,
-#signup form h1 {
-  text-align: center;
+#signin form span,
+#signup form span {
+  font-size: 0.75em;
 }
 #signin form input,
 #signup form input,
-#signin form label,
-#signup form label,
 #signin form button,
 #signup form button,
 #signin form span,
@@ -4010,42 +3906,18 @@ nav a.logo {
   width: 100%;
 }
 #signin form input,
-#signup form input {
-  padding-left: 2.5em;
-}
-#signin form label,
-#signup form label {
-  margin: 1em 0 0.25em;
-}
+#signup form input,
+#signin form button,
+#signup form button,
 #signin form p,
 #signup form p {
-  margin-top: 1em;
-  text-align: center;
-  line-height: 2;
+  margin-top: 0.5em;
 }
 #signin form button,
-#signup form button {
-  margin-top: 1em;
-  font-weight: bold;
-}
-#signin form .input-group,
-#signup form .input-group {
-  position: relative;
-}
-#signin form .input-group .error,
-#signup form .input-group .error {
-  margin-top: 0.25em;
-}
-#signin form .input-group .icon,
-#signup form .input-group .icon {
-  position: absolute;
-  top: -2px;
-  color: #ccc;
-  padding: 1em;
-}
-#signin form .error,
-#signup form .error {
-  margin-top: 1em;
+#signup form button,
+#signin form p,
+#signup form p {
+  text-align: center;
 }
 #config {
   padding: 0.5em;
@@ -4053,6 +3925,8 @@ nav a.logo {
 #config .usage {
   margin-bottom: 1em;
   padding: 1em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -4063,6 +3937,8 @@ nav a.logo {
 #config .help {
   padding: 1em;
   margin-left: 0.5em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -4073,6 +3949,8 @@ nav a.logo {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
   border-radius: 2px;
 }
 #config table .active,
@@ -4159,4 +4037,89 @@ nav a.logo {
   text-shadow: none;
   box-shadow: none;
   color: #900;
+}
+#experiments table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#experiments table a {
+  border: 0;
+}
+#experiments table tbody tr:last-child {
+  border-bottom: 0;
+}
+#experiments table tbody tr:hover {
+  background: #f4f4f4;
+}
+#experiments table tr {
+  border-bottom: 1px solid #eee;
+}
+#experiments table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+#experiments table tr.deleted {
+  opacity: 0.3;
+}
+#experiments table tr td.active,
+#experiments table tr td.archive {
+  cursor: pointer;
+}
+#experiments table tr td.endpoint {
+  font-family: Consolas, monaco, monospace;
+}
+#experiments table tr td.endpoint span {
+  background: #eee;
+  color: #444;
+}
+#experiments table tr td,
+#experiments table tr th {
+  padding: 0.75em 0.5em;
+}
+#experiments table tr td.name,
+#experiments table tr th.name,
+#experiments table tr td.endpoint,
+#experiments table tr th.endpoint,
+#experiments table tr td.created-at,
+#experiments table tr th.created-at {
+  text-align: left;
+}
+#experiments table tr td.created-at,
+#experiments table tr th.created-at,
+#experiments table tr td.active,
+#experiments table tr th.active,
+#experiments table tr td.archive,
+#experiments table tr th.archive,
+#experiments table tr td.endpoint,
+#experiments table tr th.endpoint {
+  width: 0.5%;
+  white-space: nowrap;
+}
+#experiments table tr td.active,
+#experiments table tr th.active {
+  text-align: center;
+}
+#experiments table tr td.active .active,
+#experiments table tr th.active .active {
+  color: #008000;
+}
+#experiments table tr td.active .inactive,
+#experiments table tr th.active .inactive {
+  color: #f00;
+}
+#experiments table tr td.archive,
+#experiments table tr th.archive {
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+#experiments footer {
+  padding: 0.5em;
+}
+#experiments footer :last-child {
+  text-align: right;
+}
+#experiment .icon.active {
+  color: #008000;
+}
+#experiment .icon.inactive {
+  color: #f00;
 }

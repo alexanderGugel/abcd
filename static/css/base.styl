@@ -1,54 +1,68 @@
 @import '../../node_modules/normalize.css/normalize.css'
 @import '../../node_modules/animate.css/animate.css'
 
-/**
- * A mixin which helps you to add depth to elements according to the Google Material Design spec:
- * http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality
- *
- * Please note that the values given in the specification cannot be used as is. To create the same visual experience
- * the blur parameter has to be doubled.
- *
- * Author: Florian Kutschera (@gefangenimnetz), Conceptboard GmbH (@conceptboardapp)
- * Source: https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d
- * (modified for Stylus)
- */
-
-depth(level = 1)
-  if level = 1
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-  else if level = 2
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-  else if level = 3
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
-  else if level = 4
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
-  else if level = 5
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
+.depth1
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+.depth2
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+.depth3
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+.depth4
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+.depth5
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
 
 border-radius()
   -webkit-border-radius arguments
   -moz-border-radius arguments
   border-radius arguments
 
-nav-background = #263238
-// nav-background = #303f9f
-button-background = #303f9f
+.card
+  padding: 0.5em
+  margin: 0.5em
+  background: #fff
+  border-radius(2px)
+  text-align: left
+
+.right
+  text-align: right
+
+.seamless
+  margin-top: 0
+
+.inner-seamless
+  padding: 0
+
+.drop-element
+  padding: 0 0.5em
+  .drop-content
+    @extend .depth1
+    background: #fff
+    a
+      padding: 0.25em 0.5em
+      display: inline-block
+      border-bottom: 1px solid #eee
+
+nav-background = #424242
+nav-background = #444
+button-background = #3b50ce
+
+[ng-click]
+  cursor: pointer
+
+html, body
+  min-height: 100%
 
 html
   box-sizing: border-box
-
-// Fix popover bug
-html, body
-  min-height: 100%
 
 *, *:before, *:after
   box-sizing: inherit
 
 body
-  font: 300 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+  font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
   -webkit-font-smoothing: antialiased
   color: #666
-  // background: #f0f0f0
   background: #e4e4e4
 
 a
@@ -56,69 +70,42 @@ a
   text-decoration: none
   border-bottom: 1px solid #ccc
 
-label
-  color: #ccc
-
 h1, h2, h3, h4, h5, h6
   color: #444
   font-weight: 300
+  margin: 0
+
+p
+  margin: 0
 
 input
-  border: 1px solid #ddd
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-  background: #fff
-  border-radius: 2px
-  padding: 1em
-  color: #444
+  border: 0
+  @extend .card
+  margin: 0
   &.error
-    border: 1px solid #990000
+    background: lighten(#990000, 90%)
 
 span.error
   color: #990000
 
 button
-  background: button-background
-  padding: 1em
-  border-radius: 2px
   border: 0
+  @extend .card
+  margin: 0
+  background: button-background
   color: lighten(button-background, 90%)
-  text-transform: uppercase
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  font-weight: bold
   &[disabled]
     opacity: 0.5
-
-@keyframes nav-a-animation
-  from
-    color: lighten(nav-background, 80%)
-  to
-    color: lighten(nav-background, 90%)
-
-@keyframes nav-a-active-animation
-  from
-    color: lighten(nav-background, 80%)
-  to
-    color: lighten(nav-background, 50%)
-
-.popover.drop
-  a
-    border: 0
-    display: inline-block
-    padding: 0.5em
-    border-bottom: 1px solid #eee
-    &last-child
-      border: 0
-  .drop-content
-    padding: 0
+  &:focus
+    outline: 0
 
 nav
   background: nav-background
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  @extend .depth1
   text-align: center
-  font-size: 1.25em
-  padding: 0.5em
-  vertical-align: middle
+  padding: 0 0.5em
   div:first-child
     text-align: left
   div:last-child
@@ -126,40 +113,21 @@ nav
   img
     height: 1em
     border-radius: 1em
-  button
-    color: lighten(nav-background, 50%)
-    background: none
-    padding: 0
-    background: #fff
-    font-weight: 400
-    color: lighten(nav-background, 50%)
-    background: rgba(255,255,255,.1)
-    display: none
   a
     color: lighten(nav-background, 80%)
     text-decoration: none
     border: 0
     display: inline-block
-    margin-right: 1em
-    text-transform: uppercase
-    font-size: 0.75em
+    padding: 0.5em 0.25em
     .icon
-      color: lighten(nav-background, 96%)
-      display: none
+      vertical-align: middle
+      &.ion-chevron-down
+        color: lighten(nav-background, 60%)
+        font-size: 0.5em
     &:last-child
       margin: 0
-    &:hover
-      color: lighten(nav-background, 90%)
-      -webkit-animation: nav-a-animation 300ms
-      animation: nav-a-animation 300ms
-    &.active
-      color: lighten(nav-background, 90%)
-      &:hover
-        -webkit-animation: none
-        animation: none
+    &:hover, &.logo
+      color: lighten(nav-background, 100%)
     &.logo
-      -webkit-animation: none
-      animation: none
-      color: #fff
       font-weight: 900
       text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)

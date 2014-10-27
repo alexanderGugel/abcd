@@ -107,33 +107,33 @@ var store = require('store');
 var host = 'http://localhost:3000/api/';
 
 var participate = function (options, callback) {
-  if (!options.variant || !options.experiment || !options.endpoint) {
-    throw new Error('Missing variant/ experiment/ endpoint');
+  if (!options.variant || !options.experimentId) {
+    throw new Error('variant and experimentId are required');
   }
-  JSONP(abcd.host + 'participate', {
-    variant: options.variant,
-    experiment: options.experiment,
-    endpoint: options.endpoint
+  JSONP(abcd.host + 'experiments/' + options.experimentId + '/participate', {
+    variant: options.variant
   }, function (data) {
+    // debugger;
     if (data.error) {
       var error = data.error;
       (callback && callback(data.error)) || (function () {
         throw new Error(data.error);
       })();
     } else {
-      callback && callback(null, data.action.id);
+      callback && callback(null, data.id);
     }
   });
 };
 
 var convert = function (options, callback) {
-  if (!options.action || !options.endpoint) {
-    throw new Error('Missing action/ endpoint');
+  // debugger;
+  if (!options.actionId || !options.experimentId) {
+    throw new Error('actionId and experimentId are required');
   }
-  JSONP(abcd.host + 'convert', {
-    action: options.action,
-    endpoint: options.endpoint
+  JSONP(abcd.host + 'experiments/' + options.experimentId + '/convert', {
+    action_id: options.actionId
   }, function (data) {
+    // debugger;
     if (data.error) {
       var error = data.error;
       (callback && callback(data.error)) || (function () {
@@ -152,9 +152,8 @@ var experiment = function (experiment, endpoint) {
   return new _Experiment(experiment, endpoint);
 };
 
-var _Experiment = function (experiment, endpoint) {
-  this.endpoint = endpoint || window.abcd.endpoint;
-  this.experiment = experiment;
+var _Experiment = function (experimentId, endpoint) {
+  this.experimentId = experimentId;
   this.variants = {};
 };
 
@@ -164,7 +163,7 @@ _Experiment.prototype.variant = function (variant, callback) {
 };
 
 _Experiment.prototype.start = function (callback) {
-  var action = store.get('abcd:' + this.endpoint + ':' + this.experiment);
+  var action = store.get('abcd:' + this.experimentId);
   if (!action || !action.id) {
     action = {
       variant: Object.keys(this.variants)[Math.floor(Math.random()*Object.keys(this.variants).length)]
@@ -172,11 +171,11 @@ _Experiment.prototype.start = function (callback) {
 
     participate({
       variant: action.variant,
-      experiment: this.experiment,
-      endpoint: this.endpoint
+      experimentId: this.experimentId,
     }, function (error, actionId) {
+      // debugger;
       action.id = actionId;
-      store.set('abcd:' + this.endpoint + ':' + this.experiment, action)
+      store.set('abcd:' + this.experimentId, action);
       callback && callback.apply(this, arguments);
     }.bind(this));
   }
@@ -185,12 +184,12 @@ _Experiment.prototype.start = function (callback) {
 };
 
 _Experiment.prototype.reset = function () {
-  store.remove('abcd:' + this.endpoint + ':' + this.experiment);
+  store.remove('abcd:' + this.experimentId);
   return this;
 };
 
-_Experiment.prototype.end = function (callback) {
-  var action = store.get('abcd:' + this.endpoint + ':' + this.experiment);
+_Experiment.prototype.convert = function (callback) {
+  var action = store.get('abcd:' + this.experimentId);
   var go = function () {
     if (!action.id) {
       setTimeout(go.bind(this), 1);
@@ -198,14 +197,14 @@ _Experiment.prototype.end = function (callback) {
     }
 
     convert({
-      endpoint: this.endpoint,
-      action: action.id
+      experimentId: this.experimentId,
+      actionId: action.id
     }, function (error) {
       action.completed = true;
-      store.set('abcd:' + this.endpoint + ':' + this.experiment, action);
+      store.set('abcd:' + this.experimentId, action);
       callback && callback.apply(this, arguments);
     }.bind(this));
-  };
+  }.bind(this);
 
   action && !action.completed && go();
 };

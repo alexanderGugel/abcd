@@ -6,10 +6,7 @@
   <body>
     <script src="http://alex.dev:3000/abcd.bundle.js"></script>
     <script>
-      var endpoint = 'ead7300a-93ad-41f7-916e-bcee6517251c';
-      abcd.endpoint = endpoint;
-
-      var experiment = abcd.experiment('Checkout process')
+      var experiment = abcd.experiment('dd8789d4-b90f-4c88-b621-dcdbc4e0e64b')
       experiment.variant('control', function () {
         console.log('control');
       })
@@ -20,7 +17,8 @@
         console.log('yellow button');
       })
       .start(function () {
-        experiment.end(function () {
+        experiment.convert(function () {
+          // debugger;
           experiment.reset();
         });
       });

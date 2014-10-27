@@ -196,125 +196,6 @@ nav a.logo {
 #signup form p {
   text-align: center;
 }
-#config {
-  padding: 0.5em;
-}
-#config .usage {
-  margin-bottom: 1em;
-  padding: 1em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  background: #fff;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-#config .usage h1 {
-  margin-top: 0;
-}
-#config .help {
-  padding: 1em;
-  margin-left: 0.5em;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  background: #fff;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-#config table {
-  background: #fff;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-}
-#config table .active,
-#config table .created-at,
-#config table .add-endpoint {
-  white-space: nowrap;
-  padding: 0.5em 1em;
-  width: 1%;
-}
-#config table thead tr {
-  border-bottom: 1px solid #ddd;
-}
-#config table thead tr th {
-  font-weight: 300;
-  padding: 0.5em 0.25em;
-}
-#config table tbody tr {
-  border-bottom: 1px solid #efefef;
-}
-#config table tbody tr:nth-child(even) {
-  background: rgba(0,0,0,0.02);
-}
-#config table tbody tr:hover {
-  background: rgba(0,0,0,0.05);
-}
-#config table tbody tr td {
-  padding: 0.5em 0.25em;
-}
-#config table tbody tr td.active {
-  text-align: center;
-  font-size: 1.5em;
-  padding: 0;
-}
-#config table tbody tr td.active a {
-  border: 0;
-}
-#config table tbody tr td.active a.activate {
-  color: #f00;
-}
-#config table tbody tr td.active a.deactivate {
-  color: #008000;
-}
-#config table tbody tr td.id {
-  font-family: Consolas, monaco, monospace;
-}
-#config table tbody tr td.id a {
-  border: 0;
-  color: #999;
-}
-#config table tbody tr td.created-at {
-  text-align: right;
-  font-size: 0.75em;
-}
-#config table tbody tr td.add-endpoint {
-  padding: 1em 0.25em;
-  text-align: right;
-}
-#config table tbody tr td.add-endpoint button {
-  padding: 0.25em 0.5em;
-}
-#settings h2,
-#settings h3,
-#settings h4 {
-  margin: 0;
-  padding: 0.5em;
-}
-#settings form {
-  padding: 0.5em;
-}
-#settings form input {
-  min-width: 30%;
-  width: 300px;
-}
-#settings form input,
-#settings form button {
-  margin: 0.5em 0.5em 0 0;
-}
-#settings #delete-account {
-  margin-top: 10em;
-}
-#settings #delete-account button {
-  padding: 0;
-  background: none;
-  text-shadow: none;
-  box-shadow: none;
-  color: #900;
-}
 table {
   border-collapse: collapse;
   width: 100%;
@@ -348,10 +229,10 @@ table .mini {
 #experiments tr.deleted {
   opacity: 0.3;
 }
-#experiments tr td.endpoint {
+#experiments tr td.id {
   font-family: Consolas, monaco, monospace;
 }
-#experiments tr td.endpoint span {
+#experiments tr td.id span {
   background: #eee;
   color: #444;
 }

@@ -75,21 +75,20 @@ experiments.get('/usage', auth, function (req, res) {
 });
 
 experiments.get('/:id/participate', function (req, res) {
-  // TODO
-  // query('INSERT INTO actions (variant, experiment_id) VALUES ($1, (SELECT id FROM experiments WHERE endpoint = $2)) RETURNING id;', [req.user.id, req.params.id], function (error, result) {
-  //   res.send(result.rows);
-  // });
-  //
-
+  query('INSERT INTO actions (variant, experiment_id) VALUES ($1, $2) RETURNING id;', [req.query.variant || 'control', req.params.id], function (error, result) {
+    res.jsonp(result.rows[0]);
+  });
 });
 
-experiments.get('/:id/complete', function (req, res) {
-  // TODO
-  // query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
-  //   res.send(result.rows);
-  // });
+experiments.get('/:id/convert', function (req, res) {
+  if (!req.query.action_id) {
+    return res.status(500).jsonp({
+      error: 'Action id required'
+    });
+  }
+  query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = $2', [req.query.action_id, req.params.id], function (error, result) {
+    res.jsonp({});
+  });
 });
-
-
 
 module.exports = exports = experiments;

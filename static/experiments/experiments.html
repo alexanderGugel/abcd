@@ -7,9 +7,9 @@
               Name
               <i ng-if="predicate === 'name'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="endpoint mini" ng-click="predicate = 'endpoint'; reverse = !reverse">
-              Endpoint
-              <i ng-if="predicate === 'endpoint'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            <th class="id mini" ng-click="predicate = 'id'; reverse = !reverse">
+              Id
+              <i ng-if="predicate === 'id'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
             <th class="created-at mini" ng-click="predicate = 'created_at'; reverse = !reverse">
               Created at
@@ -30,8 +30,8 @@
                 {{experiment.name}}
               </a>
             </td>
-            <td class="endpoint mini">
-              <span>{{experiment.endpoint}}</span>
+            <td class="id mini">
+              <span>{{experiment.id}}</span>
             </td>
             <td class="created-at mini">{{experiment.created_at | date:'short'}}</td>
             <td class="active mini" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>

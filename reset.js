@@ -23,7 +23,6 @@ query(
 
   'CREATE TABLE IF NOT EXISTS "experiments" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'endpoint UUID NOT NULL DEFAULT uuid_generate_v4(),' +
     'name TEXT NOT NULL,' +
     'archived BOOLEAN DEFAULT FALSE,' +
     'active BOOLEAN DEFAULT TRUE,' +

@@ -4048,14 +4048,14 @@ nav a.logo {
 #experiments table tbody tr:last-child {
   border-bottom: 0;
 }
+#experiments table tbody tr:hover {
+  background: #f4f4f4;
+}
 #experiments table tr {
   border-bottom: 1px solid #eee;
 }
 #experiments table tr:nth-child(even) {
   background: #f9f9f9;
-}
-#experiments table tr:hover {
-  background: #f4f4f4;
 }
 #experiments table tr.deleted {
   opacity: 0.3;
@@ -4116,4 +4116,10 @@ nav a.logo {
 }
 #experiments footer :last-child {
   text-align: right;
+}
+#experiment .icon.active {
+  color: #008000;
+}
+#experiment .icon.inactive {
+  color: #f00;
 }

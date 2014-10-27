@@ -113,14 +113,15 @@
     a
       border: 0
     tbody
-      tr:last-child
-        border-bottom: 0
+      tr
+        &:last-child
+          border-bottom: 0
+        &:hover
+          background: #f4f4f4
     tr
       border-bottom: 1px solid #eee
       &:nth-child(even)
         background: #f9f9f9
-      &:hover
-        background: #f4f4f4
       &.deleted
         opacity: 0.3
       td
@@ -153,6 +154,11 @@
       text-align: right
 
 #experiment
+  .icon
+    &.active
+      color: green
+    &.inactive
+      color: red
   // .summary
   //   text-align: center
   //   h1

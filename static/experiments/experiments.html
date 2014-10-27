@@ -7,19 +7,19 @@
               Name
               <i ng-if="predicate === 'name'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="endpoint" ng-click="predicate = 'endpoint'; reverse = !reverse">
+            <th class="endpoint mini" ng-click="predicate = 'endpoint'; reverse = !reverse">
               Endpoint
               <i ng-if="predicate === 'endpoint'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="created-at" ng-click="predicate = 'created_at'; reverse = !reverse">
+            <th class="created-at mini" ng-click="predicate = 'created_at'; reverse = !reverse">
               Created at
               <i ng-if="predicate === 'created_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="active" ng-click="predicate = 'active'; reverse = !reverse">
+            <th class="active mini" ng-click="predicate = 'active'; reverse = !reverse">
               Active?
               <i ng-if="predicate === 'active'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
             </th>
-            <th class="archive"></th>
+            <th class="archive mini"></th>
           </tr>
         </thead>
         <tbody>
@@ -30,12 +30,12 @@
                 {{experiment.name}}
               </a>
             </td>
-            <td class="endpoint">
+            <td class="endpoint mini">
               <span>{{experiment.endpoint}}</span>
             </td>
-            <td class="created-at">{{experiment.created_at | date:'short'}}</td>
-            <td class="active" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
-            <td class="archive" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i></td>
+            <td class="created-at mini">{{experiment.created_at | date:'short'}}</td>
+            <td class="active mini" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
+            <td class="archive mini" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i></td>
           </tr>
         </tbody>
       </table>

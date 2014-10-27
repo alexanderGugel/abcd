@@ -12,7 +12,7 @@
     "build-abcd": "browserify static/abcd.js | uglifyjs -mc > static/abcd.bundle.js",
     "watch-abcd": "watchify static/abcd.js -o static/abcd.bundle.js -dv",
     "build": "npm run build-js && npm run build-css && npm run build-abcd",
-    "watch": "npm run watch-js & npm run watch-css & npm run watch-abcd & nodemon server",
+    "watch": "npm run watch-js & npm run watch-css & npm run watch-abcd & nodemon server && open http://localhost:3000",
     "start": "node server.js"
   },
   "author": "",

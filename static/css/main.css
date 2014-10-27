@@ -315,83 +315,67 @@ nav a.logo {
   box-shadow: none;
   color: #900;
 }
-#experiments table {
+table {
   border-collapse: collapse;
   width: 100%;
 }
-#experiments table a {
-  border: 0;
-}
-#experiments table tbody tr:last-child {
-  border-bottom: 0;
-}
-#experiments table tbody tr:hover {
-  background: #f4f4f4;
-}
-#experiments table tr {
+table thead {
   border-bottom: 1px solid #eee;
 }
-#experiments table tr:nth-child(even) {
+table tr {
+  border-bottom: 1px solid #eee;
+}
+table tr:last-child {
+  border-bottom: 0;
+}
+table tr:hover {
+  background: #f4f4f4;
+}
+table tr:nth-child(even) {
   background: #f9f9f9;
 }
-#experiments table tr.deleted {
-  opacity: 0.3;
-}
-#experiments table tr td.active,
-#experiments table tr td.archive {
-  cursor: pointer;
-}
-#experiments table tr td.endpoint {
-  font-family: Consolas, monaco, monospace;
-}
-#experiments table tr td.endpoint span {
-  background: #eee;
-  color: #444;
-}
-#experiments table tr td,
-#experiments table tr th {
+table tr td,
+table tr th {
   padding: 0.75em 0.5em;
 }
-#experiments table tr td.name,
-#experiments table tr th.name,
-#experiments table tr td.endpoint,
-#experiments table tr th.endpoint,
-#experiments table tr td.created-at,
-#experiments table tr th.created-at {
-  text-align: left;
-}
-#experiments table tr td.created-at,
-#experiments table tr th.created-at,
-#experiments table tr td.active,
-#experiments table tr th.active,
-#experiments table tr td.archive,
-#experiments table tr th.archive,
-#experiments table tr td.endpoint,
-#experiments table tr th.endpoint {
+table .mini {
   width: 0.5%;
   white-space: nowrap;
 }
-#experiments table tr td.active,
-#experiments table tr th.active {
+#experiments a {
+  border: 0;
+}
+#experiments tr.deleted {
+  opacity: 0.3;
+}
+#experiments tr td.endpoint {
+  font-family: Consolas, monaco, monospace;
+}
+#experiments tr td.endpoint span {
+  background: #eee;
+  color: #444;
+}
+#experiments tr td.active,
+#experiments tr th.active {
   text-align: center;
 }
-#experiments table tr td.active .active,
-#experiments table tr th.active .active {
+#experiments tr td.active .active,
+#experiments tr th.active .active {
   color: #008000;
 }
-#experiments table tr td.active .inactive,
-#experiments table tr th.active .inactive {
+#experiments tr td.active .inactive,
+#experiments tr th.active .inactive {
   color: #f00;
 }
-#experiments table tr td.archive,
-#experiments table tr th.archive {
+#experiments tr td.archive,
+#experiments tr th.archive {
   font-size: 1.5em;
   padding: 0.5em;
 }
-#experiments footer {
+footer {
   padding: 0.5em;
 }
-#experiments footer :last-child {
+footer :last-child {
   text-align: right;
 }
 #experiment header input {

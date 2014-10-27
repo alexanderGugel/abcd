@@ -106,39 +106,38 @@
       box-shadow: none
       color: #990000
 
+table
+  border-collapse: collapse
+  width: 100%
+  thead
+    border-bottom: 1px solid #eee
+  tr
+    border-bottom: 1px solid #eee
+    &:last-child
+      border-bottom: 0
+    &:hover
+      background: #f4f4f4
+    &:nth-child(even)
+      background: #f9f9f9
+    td, th
+      padding: 0.75em 0.5em
+  .mini
+    width: 0.5%
+    white-space: nowrap
+
 #experiments
-  table
-    border-collapse: collapse
-    width: 100%
     a
       border: 0
-    tbody
-      tr
-        &:last-child
-          border-bottom: 0
-        &:hover
-          background: #f4f4f4
     tr
-      border-bottom: 1px solid #eee
-      &:nth-child(even)
-        background: #f9f9f9
       &.deleted
         opacity: 0.3
       td
-        &.active, &.archive
-          cursor: pointer
         &.endpoint
           font-family: Consolas, monaco, monospace
           span
             background: #eee
             color: #444
       td, th
-        padding: 0.75em 0.5em
-        &.name, &.endpoint, &.created-at
-          text-align: left
-        &.created-at, &.active, &.archive, &.endpoint
-          width: 0.5%
-          white-space: nowrap
         &.active
           text-align: center
           .active
@@ -167,6 +166,8 @@
       color: green
     &.inactive
       color: red
+  table
+
   // .summary
   //   text-align: center
   //   h1

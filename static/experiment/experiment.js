@@ -34,10 +34,9 @@ angular.module('angularApp.experiment', ['ngRoute'])
       }
     })
     .success(function (data) {
-      $scope.experiment = data;
+      $scope.experiment = $rootScope.experiment = data;
     });
   };
-
 
   $scope.updateExperiment = function (experiment) {
     experiment.name = experiment.name || experiment.originalName;
@@ -47,6 +46,28 @@ angular.module('angularApp.experiment', ['ngRoute'])
       data: experiment,
       params: {
         token: localStorage.getItem('token')
+      }
+    });
+  };
+
+  $scope.filterActions = function (actions) {
+
+  };
+
+  $scope.summarizeActions = function () {
+    $scope.summary = _.reduce($scope.actions, function (summary, action) {
+      // debugger;
+      summary.variants[action.variant] = summary.variants[action.variant] || {
+        actions: 0,
+        conversions: 0
+      };
+      summary.variants[action.variant].actions++;
+      if (action.completed_at) {
+        summary.variants[action.variant].conversions++;
+      }
+      return summary;
+    }, {
+      variants: {
       }
     });
   };
@@ -61,6 +82,13 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.fetchExperiment($routeParams.id);
   $scope.fetchActions($routeParams.id).then(function () {
+    if ($scope.actions.length > 0) {
+      $scope.startDate = new Date($scope.actions[0].started_at);
+      $scope.endDate = new Date($scope.actions[$scope.actions.length - 1].started_at);
+    }
+
+    $scope.summarizeActions();
+
     // var experiment = $scope.experiment;
     //
     // experiment.actionsByStartedAt = experiment.actions.dimension(function (action) {

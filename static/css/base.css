@@ -3796,6 +3796,9 @@ body {
   color: #666;
   background: #e4e4e4;
 }
+input {
+  -webkit-font-smoothing: antialiased;
+}
 a {
   color: #444;
   text-decoration: none;

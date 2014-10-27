@@ -1,4 +1,4 @@
-@require "base"
+@import "base.styl"
 
 #signin, #signup
   font-size: 1.5em
@@ -154,6 +154,14 @@
       text-align: right
 
 #experiment
+  header
+    input
+      @extend h2
+      font-size: 1.5em
+      width: 100%
+      display: block
+      padding: 0
+      border-bottom: 1px dashed #ccc
   .icon
     &.active
       color: green

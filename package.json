@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "build-css": "stylus --include-css static/css",
-    "watch-css": "stylus -w --include-css static/css",
+    "build-css": "stylus static/css/main.sty;",
+    "watch-css": "stylus -w static/css/main.styl",
     "build-js": "echo TODO",
     "watch-js": "echo TODO",
     "build-abcd": "browserify static/abcd.js | uglifyjs -mc > static/abcd.bundle.js",

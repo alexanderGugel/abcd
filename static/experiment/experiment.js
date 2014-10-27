@@ -11,38 +11,36 @@ angular.module('angularApp.experiment', ['ngRoute'])
 }])
 
 .controller('ExperimentCtrl', ['$scope', '$http', '$location', '$routeParams', '$rootScope', function ($scope, $http, $location, $routeParams, $rootScope) {
-  $scope.fetchActions = function (experiment) {
+  $scope.fetchActions = function (experimentId) {
     return $http({
-      url: '/api/experiments/' + experiment.id + '/actions',
+      url: '/api/experiments/' + experimentId + '/actions',
       method: 'GET',
       params: {
         token: localStorage.getItem('token')
       }
     })
     .success(function (data) {
-      experiment.actions = crossfilter(data);
-      // experiment.actions = data;
-
+      // experiment.actions = crossfilter(data);
+      $scope.actions = data;
     });
   };
 
-  $scope.fetchExperiment = function (experiment) {
+  $scope.fetchExperiment = function (experimentId) {
     return $http({
-      url: '/api/experiments/' + experiment.id,
+      url: '/api/experiments/' + experimentId,
       method: 'GET',
       params: {
         token: localStorage.getItem('token')
       }
     })
     .success(function (data) {
-      for (var key in data) {
-        experiment[key] = data[key];
-      }
+      $scope.experiment = data;
     });
   };
 
 
   $scope.updateExperiment = function (experiment) {
+    experiment.name = experiment.name || experiment.originalName;
     return $http({
       url: '/api/experiments/' + experiment.id,
       method: 'PUT',
@@ -53,39 +51,35 @@ angular.module('angularApp.experiment', ['ngRoute'])
     });
   };
 
-  $scope.filterBetween = function (startDate, endDate) {
-    experiment.actionsByStartedAt.filterRange([startDate, endDate]);
-  };
+  // $scope.filterBetween = function (startDate, endDate) {
+  //   experiment.actionsByStartedAt.filterRange([startDate, endDate]);
+  // };
+  //
+  // $scope.resetFilters = function () {
+  //   dimension.filterAll()
+  // };
 
-  $scope.resetFilters = function () {
-    dimension.filterAll()
-  };
-
-  $scope.experiment = {
-    id: $routeParams.id
-  };
-
-  $scope.fetchExperiment($scope.experiment);
-  $scope.fetchActions($scope.experiment).then(function () {
-    var experiment = $scope.experiment;
-
-    experiment.actionsByStartedAt = experiment.actions.dimension(function (action) {
-      return Date.parse(action['started_at']);
-    });
-
-    var latestAction = experiment.actionsByStartedAt.top(1)[0];
-    var oldestAction = experiment.actionsByStartedAt.bottom(1)[0];
-
-    var age = Date.parse(latestAction['started_at']) - Date.parse(oldestAction['started_at']);
-
-    experiment.actionGroupsByStartedAt = experiment.actionsByStartedAt.group(function (startedAt) {
-      // var d = Date.parse(startedAt);
-      // Math.random() > 0.9 && console.log(d);
-      // d = Math.round((d/60));
-      return Math.round(startedAt/60);
-    });
-
-    var t = experiment.actionGroupsByStartedAt;
+  $scope.fetchExperiment($routeParams.id);
+  $scope.fetchActions($routeParams.id).then(function () {
+    // var experiment = $scope.experiment;
+    //
+    // experiment.actionsByStartedAt = experiment.actions.dimension(function (action) {
+    //   return Date.parse(action['started_at']);
+    // });
+    //
+    // var latestAction = experiment.actionsByStartedAt.top(1)[0];
+    // var oldestAction = experiment.actionsByStartedAt.bottom(1)[0];
+    //
+    // var age = Date.parse(latestAction['started_at']) - Date.parse(oldestAction['started_at']);
+    //
+    // experiment.actionGroupsByStartedAt = experiment.actionsByStartedAt.group(function (startedAt) {
+    //   // var d = Date.parse(startedAt);
+    //   // Math.random() > 0.9 && console.log(d);
+    //   // d = Math.round((d/60));
+    //   return Math.round(startedAt/60);
+    // });
+    //
+    // var t = experiment.actionGroupsByStartedAt;
     // console.log(t.all());
     // debugger;
 

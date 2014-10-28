@@ -126,14 +126,12 @@ var participate = function (options, callback) {
 };
 
 var convert = function (options, callback) {
-  // debugger;
   if (!options.actionId || !options.experimentId) {
     throw new Error('actionId and experimentId are required');
   }
   JSONP(abcd.host + 'experiments/' + options.experimentId + '/convert', {
     action_id: options.actionId
   }, function (data) {
-    // debugger;
     if (data.error) {
       var error = data.error;
       (callback && callback(data.error)) || (function () {
@@ -146,7 +144,6 @@ var convert = function (options, callback) {
 };
 
 ///
-
 
 var experiment = function (experiment, endpoint) {
   return new _Experiment(experiment, endpoint);
@@ -173,7 +170,6 @@ _Experiment.prototype.start = function (callback) {
       variant: action.variant,
       experimentId: this.experimentId,
     }, function (error, actionId) {
-      // debugger;
       action.id = actionId;
       store.set('abcd:' + this.experimentId, action);
       callback && callback.apply(this, arguments);

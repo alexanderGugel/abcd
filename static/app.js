@@ -5,6 +5,7 @@ angular.module('angularApp', [
   'ngRoute',
   'angularApp.signin',
   'angularApp.signup',
+  'angularApp.forgot',
   'angularApp.settings',
   'angularApp.logout',
   'angularApp.toolbar',
@@ -18,7 +19,11 @@ angular.module('angularApp', [
   });
 }])
 
-.run(['$http', '$rootScope', '$location', function ($http, $rootScope, $location) {
+.run(['$http', '$rootScope', '$location', '$routeParams', function ($http, $rootScope, $location, $routeParams) {
+  if ($location.search().token) {
+    localStorage.setItem('token', $location.search().token);
+  }
+
   if (localStorage.getItem('token') !== null) {
     $rootScope.user = {};
     $http({

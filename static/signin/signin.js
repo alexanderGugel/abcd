@@ -15,7 +15,7 @@ angular.module('angularApp.signin', ['ngRoute'])
     $http.post('/api/tokens', user)
     .success(function (data) {
       localStorage.setItem('token', data.token);
-      $location.path('/projects/new');
+      $location.path('/experiments');
       $rootScope.user = user;
     })
     .error(function (data) {

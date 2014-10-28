@@ -1,6 +1,7 @@
 var express = require('express');
 var query = require('../db/query');
 var auth = require('./auth');
+var json2csv = require('json2csv');
 
 var experiments = express.Router();
 
@@ -68,11 +69,32 @@ experiments.get('/:id/actions', auth, function (req, res) {
   });
 });
 
+experiments.get('/:id/actions', auth, function (req, res) {
+  query('SELECT id, started_at, completed_at, variant FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    res.send(result.rows);
+  });
+});
+
+
+experiments.get('/:id/actions.csv', auth, function (req, res) {
+  query('SELECT id, started_at, completed_at, variant FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    json2csv({
+      data: result.rows,
+      fields: ['id', 'started_at', 'completed_at', 'variant']
+    }, function(err, csv) {
+      res.send(result.rows);
+    });
+  });
+});
+
+
 experiments.get('/usage', auth, function (req, res) {
   query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     res.send(result.rows);
   });
 });
+
+//
 
 experiments.get('/:id/participate', function (req, res) {
   query('INSERT INTO actions (variant, experiment_id) VALUES ($1, $2) RETURNING id;', [req.query.variant || 'control', req.params.id], function (error, result) {

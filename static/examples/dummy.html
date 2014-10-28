@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <script src="http://alex.dev:3000/abcd.bundle.js"></script>
+    <script>
+      var experimentId = 'dd8789d4-b90f-4c88-b621-dcdbc4e0e64b';
+      var variants = ['control', 'blue button', 'red button'];
+
+      for (var i = 0; i < 5000; i++) {
+        var variant = variants[Math.round(Math.random() * 2)];
+        abcd.participate({
+          experimentId: experimentId,
+          variant: variant
+        }, function (error, actionId) {
+          if (Math.random() > variant.length*0.05) {
+            abcd.convert({
+              actionId: actionId,
+              experimentId: experimentId
+            });
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

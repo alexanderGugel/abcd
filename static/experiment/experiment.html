@@ -26,16 +26,30 @@
   <div class="pure-u-2-3">
     <section class="depth1 card inner-seamless">
       <table>
+        <thead>
+          <tr>
+            <th ng-click="predicate = 'variant'; reverse = !reverse">
+              Variant
+              <i ng-if="predicate === 'variant'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            </th>
+            <th ng-click="predicate = 'conversions'; reverse = !reverse">
+              Conversions/ Views
+              <i ng-if="predicate === 'conversions'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            </th>
+            <th ng-click="predicate = 'conversionRate'; reverse = !reverse">
+              Conversion Rate
+              <i ng-if="predicate === 'conversionRate'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            </th>
+          </tr>
+        </thead>
         <tbody>
-          <tr ng-repeat="(variant, result) in summary.variants">
+          <tr ng-repeat="(variant, result) in summary.variants | orderBy:predicate:reverse">
             <td>{{variant}}</td>
             <td>{{result.conversions}} / {{result.actions}}</td>
             <td>{{(result.conversions / result.actions) * 100}} %</td>
           </tr>
         </tbody>
       </table>
-      {{summary}}
-      <!-- {{actions}} -->
     </section>
   </div>
 

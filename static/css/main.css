@@ -42,6 +42,7 @@ button {
 }
 .drop-element .drop-content {
   background: #fff;
+  padding: 0 !important;
 }
 .drop-element .drop-content a {
   padding: 0.25em 0.5em;

@@ -70,6 +70,7 @@ angular.module('angularApp.experiment', ['ngRoute'])
       variants: {
       }
     });
+    $scope.summary
   };
 
   // $scope.filterBetween = function (startDate, endDate) {

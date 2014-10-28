@@ -16,7 +16,6 @@ var mailgun = require('mailgun-js')({
 
 tokens.put('/', function (req, res) {
   var email = req.body.email;
-  console.log(email)
   query('INSERT INTO "tokens" (user_id) SELECT id FROM users WHERE email = $1 RETURNING id', [email], function (error, result) {
     if (error) {
       if (error.code === '42601') {

@@ -13,7 +13,7 @@ angular.module('angularApp.toolbar', [])
         '<a href="#/settings"><i class="icon ion-gear-a"></i> Account settings</a>' +
         '<br>' +
         '<a href="#/logout"><i class="icon ion-log-out"></i> Sign Out</a>',
-      // classes: 'drop-theme-arrows-bounce popover',
+      classes: 'drop-theme-arrows-bounce',
       position: 'top right'
     });
     $rootScope.$on('$routeChangeStart', function (event, next) {
@@ -32,7 +32,7 @@ angular.module('angularApp.toolbar', [])
       target: element[0],
       content:
         '<a href="#/logout" class="create-project"><i class="icon ion-ios7-plus-empty"></i> Create Project</a>',
-      classes: 'projects',
+      classes: 'drop-theme-arrows-bounce',
       position: 'top left'
     });
     $rootScope.$on('$routeChangeStart', function (event, next) {

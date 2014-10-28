@@ -31,20 +31,6 @@ experiments.get('/', auth, function (req, res) {
   });
 });
 
-experiments.delete('/:id', auth, function (req, res) {
-  query('UPDATE "experiments" SET archived = TRUE WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id], function (error) {
-    if (error) {
-      if (error.code === '22P02') {
-        return res.status(400).send({
-          error: 'Invalid project'
-        });
-      }
-      throw error;
-    }
-    res.status(204).send({});
-  });
-});
-
 experiments.put('/:id', auth, function (req, res) {
   query('UPDATE "experiments" SET name = $3, archived = $4, active = $5 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active], function (error) {
     if (error) {
@@ -63,18 +49,17 @@ experiments.get('/:id', auth, function (req, res) {
   });
 });
 
-experiments.get('/:id/actions', auth, function (req, res) {
-  query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
-    res.send(result.rows);
-  });
-});
-
+// experiments.get('/:id/actions', auth, function (req, res) {
+//   query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+//     res.send(result.rows);
+//   });
+// });
+//
 experiments.get('/:id/actions', auth, function (req, res) {
   query('SELECT id, started_at, completed_at, variant FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     res.send(result.rows);
   });
 });
-
 
 experiments.get('/:id/actions.csv', auth, function (req, res) {
   query('SELECT id, started_at, completed_at, variant FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
@@ -86,15 +71,6 @@ experiments.get('/:id/actions.csv', auth, function (req, res) {
     });
   });
 });
-
-
-experiments.get('/usage', auth, function (req, res) {
-  query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
-    res.send(result.rows);
-  });
-});
-
-//
 
 experiments.get('/:id/participate', function (req, res) {
   query('INSERT INTO actions (variant, experiment_id) VALUES ($1, $2) RETURNING id;', [req.query.variant || 'control', req.params.id], function (error, result) {

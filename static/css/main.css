@@ -235,7 +235,7 @@ table .mini {
   width: 0.5%;
   white-space: nowrap;
 }
-#experiments a {
+#experiments tr a {
   border: 0;
 }
 #experiments tr.deleted {

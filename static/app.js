@@ -7,6 +7,7 @@ angular.module('angularApp', [
   'angularApp.signup',
   'angularApp.forgot',
   'angularApp.settings',
+  'angularApp.usage',
   'angularApp.logout',
   'angularApp.toolbar',
   'angularApp.experiments',

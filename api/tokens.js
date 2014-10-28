@@ -6,8 +6,8 @@ var bcrypt = require('bcrypt-nodejs');
 
 var tokens = express.Router();
 
-var api_key = 'key-e9c635d45d97b8b4c349eb6f642edce7';
-var domain = 'sandbox878f038f5b9746ba9d2915ae3bd840be.mailgun.org';
+var api_key = process.env.MAILGUN_API_KEY;
+var domain = process.env.MAILGUN_DOMAIN;
 
 var mailgun = require('mailgun-js')({
   apiKey: api_key,

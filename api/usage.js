@@ -6,23 +6,33 @@ var _ = require('async');
 var usage = express.Router();
 
 usage.get('/', auth, function (req, res) {
-  query('SELECT date_trunc(\'hour\', started_at) AS interval, COUNT(started_at) AS requests, endpoint_id AS endpoint FROM actions WHERE endpoint_id IN (SELECT id AS user_id FROM endpoints WHERE user_id = $1) GROUP BY endpoint, interval',
-  [req.user.id], function (error, result) {
-    if (error) {
-      res.status(500).send({
-        error: 'Internal server error'
-      });
-      throw error;
-    }
-    res.send({
-      usage: result.rows
-    });
+
+  query(
+    'WITH filled_dates AS ( ' +
+      'SELECT day, 0 AS blank_count FROM ' +
+      'generate_series(\'2014-01-01 00:00\'::timestamptz, current_date::timestamptz, \'1 day\') ' +
+      'AS day ' +
+    '), ' +
+
+    'action_counts AS ( ' +
+      'SELECT date_trunc(\'day\', started_at) AS day, count(*) AS count ' +
+      'FROM actions ' +
+      'WHERE actions.experiment_id = (SELECT id FROM experiments WHERE user_id = $1)' +
+      'GROUP BY date_trunc(\'day\', started_at)' +
+    ') ' +
+
+    'SELECT filled_dates.day, ' +
+    'coalesce(action_counts.count, filled_dates.blank_count) AS actions ' +
+    'FROM filled_dates ' +
+    'LEFT OUTER JOIN action_counts ON action_counts.day = filled_dates.day '
+  , [req.user.id], function (error, result) {
+    res.send(result.rows);
   });
 });
 
 module.exports = exports = usage;
 
-
-SELECT date_trunc('hour', started_at) AS interval,
-COUNT(started_at) AS requests
-FROM actions GROUP BY endpoint, interval
+//
+// SELECT date_trunc('hour', started_at) AS interval,
+// COUNT(started_at) AS requests
+// FROM actions GROUP BY endpoint, interval

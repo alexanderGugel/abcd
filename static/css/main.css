@@ -235,18 +235,16 @@ table .mini {
   width: 0.5%;
   white-space: nowrap;
 }
+span.id {
+  font-family: Consolas, monaco, monospace;
+  background: #eee;
+  color: #444;
+}
 #experiments tr a {
   border: 0;
 }
 #experiments tr.deleted {
   opacity: 0.3;
-}
-#experiments tr td.id {
-  font-family: Consolas, monaco, monospace;
-}
-#experiments tr td.id span {
-  background: #eee;
-  color: #444;
 }
 #experiments tr td.active,
 #experiments tr th.active {

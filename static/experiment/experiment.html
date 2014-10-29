@@ -6,6 +6,7 @@
     </header>
     <section class="depth1 card">
       <h3>Status</h3>
+
       <i ng-click="experiment.active = !experiment.active; updateExperiment(experiment)" ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }" class="icon ion-ios7-circle-filled"></i>
       <small ng-if="experiment.active">This project is currently active</small>
       <small ng-if="!experiment.active">This project is currently inactive</small>

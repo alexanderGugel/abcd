@@ -31,7 +31,7 @@
               </a>
             </td>
             <td class="id mini">
-              <span>{{experiment.id}}</span>
+              <span class="id">{{experiment.id}}</span>
             </td>
             <td class="created-at mini">{{experiment.created_at | date:'short'}}</td>
             <td class="active mini" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>

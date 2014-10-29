@@ -295,3 +295,18 @@ footer :last-child {
 #experiment .icon.inactive {
   color: #f00;
 }
+#experiment .chart .area {
+  fill: #4682b4;
+  clip-path: url("#clip");
+}
+#experiment .chart .axis path,
+#experiment .chart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+#experiment .chart .brush .extent {
+  stroke: #fff;
+  fill-opacity: 0.125;
+  shape-rendering: crispEdges;
+}

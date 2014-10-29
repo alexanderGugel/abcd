@@ -17,7 +17,7 @@ usage.get('/', auth, function (req, res) {
     'action_counts AS ( ' +
       'SELECT date_trunc(\'day\', started_at) AS day, count(*) AS count ' +
       'FROM actions ' +
-      'WHERE actions.experiment_id = (SELECT id FROM experiments WHERE user_id = $1)' +
+      'WHERE actions.experiment_id IN (SELECT id FROM experiments WHERE user_id = $1)' +
       'GROUP BY date_trunc(\'day\', started_at)' +
     ') ' +
 

@@ -27,9 +27,6 @@
     <div class="depth1 card inner-seamless">
       <textarea placeholder="Add a description (optional)" ng-model="experiment.description" ng-blur="updateExperiment(experiment)"></textarea>
     </div>
-    <section class="depth1 card inner-seamless chart">
-      <chart></chart>
-    </section>
     <section class="depth1 card inner-seamless">
       <table>
         <thead>
@@ -56,6 +53,9 @@
           </tr>
         </tbody>
       </table>
+    </section>
+    <section class="depth1 card inner-seamless chart">
+      <chart></chart>
     </section>
     <section class="export right">
       <a href="/api/experiments/{{experiment.id}}/actions.csv?token={{token}}">Export as CSV</a>

@@ -1,4 +1,4 @@
-var query = require('./db/query');
+  var query = require('./db/query');
 
 query(
   'DROP TABLE IF EXISTS "users" CASCADE;' +
@@ -24,6 +24,7 @@ query(
   'CREATE TABLE IF NOT EXISTS "experiments" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'name TEXT NOT NULL,' +
+    'description TEXT,' +
     'archived BOOLEAN DEFAULT FALSE,' +
     'active BOOLEAN DEFAULT TRUE,' +
     'created_at TIMESTAMP DEFAULT NOW(),' +

@@ -25,13 +25,15 @@ angular.module('angularApp', [
     localStorage.setItem('token', $location.search().token);
   }
 
-  if (localStorage.getItem('token') !== null) {
+  $rootScope.token = localStorage.getItem('token');
+
+  if ($rootScope.token !== null) {
     $rootScope.user = {};
     $http({
       url: '/api/users/me',
       method: 'GET',
       params: {
-        token: localStorage.getItem('token')
+        token: $rootScope.token
       }
     })
     .success(function (data) {
@@ -39,6 +41,7 @@ angular.module('angularApp', [
     })
     .error(function (data) {
       delete $rootScope.user;
+      delete $rootScope.token;
       localStorage.removeItem('token');
       $location.path('/');
     });

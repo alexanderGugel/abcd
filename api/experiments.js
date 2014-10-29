@@ -32,7 +32,7 @@ experiments.get('/', auth, function (req, res) {
 });
 
 experiments.put('/:id', auth, function (req, res) {
-  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active], function (error) {
+  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5, description = $6 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active, req.body.description], function (error) {
     if (error) {
       res.status(400).send({
         error: 'Invalid experiment'
@@ -66,8 +66,8 @@ experiments.get('/:id/actions.csv', auth, function (req, res) {
     json2csv({
       data: result.rows,
       fields: ['id', 'started_at', 'completed_at', 'variant']
-    }, function(err, csv) {
-      res.send(result.rows);
+    }, function (err, csv) {
+      res.send(csv);
     });
   });
 });

@@ -74,7 +74,7 @@ input {
   -webkit-font-smoothing: antialiased;
 }
 a {
-  color: #444;
+  color: #666;
   text-decoration: none;
   border-bottom: 1px solid #ccc;
 }
@@ -277,6 +277,19 @@ footer :last-child {
   display: block;
   padding: 0;
   border-bottom: 1px dashed #ccc;
+}
+#experiment textarea {
+  display: block;
+  border: 0;
+  width: 100%;
+  padding: 0.5em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  color: #666;
+}
+#experiment .export p {
+  font-size: 0.75em;
 }
 #experiment .icon.active {
   color: #008000;

@@ -288,8 +288,8 @@ footer :last-child {
   border-radius: 2px;
   color: #666;
 }
-#experiment .export p {
-  font-size: 0.75em;
+#experiment .export {
+  padding: 0.5em 1em;
 }
 #experiment .icon.active {
   color: #008000;

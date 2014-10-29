@@ -160,53 +160,88 @@ nav a.logo {
 }
 #signin,
 #signup,
-#forgot {
+#forgot,
+#support {
   font-size: 1.5em;
   text-align: center;
 }
 #signin form,
 #signup form,
-#forgot form {
-  width: 400px;
+#forgot form,
+#support form {
   max-width: 100%;
   margin: 10% auto;
   text-align: left;
 }
 #signin form span,
 #signup form span,
-#forgot form span {
+#forgot form span,
+#support form span {
   font-size: 0.75em;
 }
 #signin form input,
 #signup form input,
 #forgot form input,
+#support form input,
 #signin form button,
 #signup form button,
 #forgot form button,
+#support form button,
 #signin form span,
 #signup form span,
-#forgot form span {
+#forgot form span,
+#support form span,
+#signin form textarea,
+#signup form textarea,
+#forgot form textarea,
+#support form textarea {
   display: block;
   width: 100%;
 }
 #signin form input,
 #signup form input,
 #forgot form input,
+#support form input,
 #signin form button,
 #signup form button,
 #forgot form button,
+#support form button,
 #signin form p,
 #signup form p,
-#forgot form p {
+#forgot form p,
+#support form p,
+#signin form textarea,
+#signup form textarea,
+#forgot form textarea,
+#support form textarea {
   margin-top: 0.5em;
 }
 #signin form button,
 #signup form button,
 #forgot form button,
+#support form button,
 #signin form p,
 #signup form p,
-#forgot form p {
+#forgot form p,
+#support form p {
   text-align: center;
+}
+#signin form,
+#signup form,
+#forgot form {
+  width: 400px;
+}
+#support form {
+  width: 600px;
+}
+#support form textarea {
+  border: 0;
+  margin: 0;
+  height: 300px;
+  color: #666;
+}
+#support form p {
+  text-align: left;
 }
 table {
   border-collapse: collapse;

@@ -1,22 +1,36 @@
 @import "base.styl"
 
-#signin, #signup, #forgot
+#signin, #signup, #forgot, #support
   font-size: 1.5em
   text-align: center
   form
-    width: 400px
     max-width: 100%
     margin: 10% auto
     text-align: left
     span
       font-size: 0.75em
-    input, button, span
+    input, button, span, textarea
       display: block
       width: 100%
-    input, button, p
+    input, button, p, textarea
       margin-top: 0.5em
     button, p
       text-align: center
+
+#signin, #signup, #forgot
+  form
+    width: 400px
+
+#support
+  form
+    textarea
+      border: 0
+      margin: 0
+      height: 300px
+      color: #666
+    width: 600px
+    p
+      text-align: left
 
 table
   border-collapse: collapse

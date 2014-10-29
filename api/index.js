@@ -13,6 +13,7 @@ api.use('/tokens', require('./tokens'));
 api.use('/users', require('./users'));
 api.use('/experiments', require('./experiments'));
 api.use('/usage', require('./usage'));
+api.use('/tickets', require('./tickets'));
 
 api.all('*', function (req, res) {
   res.status(404).send({

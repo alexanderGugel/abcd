@@ -1,5 +1,5 @@
 <nav class="pure-g animated fadeInDown" ng-if="user">
-  <div class="pure-u-3-5">
+  <div class="pure-u-2-5 left">
     <!-- <select class="endpoint" ng-model="activeEndpoint" ng-options="endpoint.id for endpoint in endpoints">
       <option value="">-- choose endpoint --</option>
     </select> -->
@@ -8,12 +8,14 @@
     <!-- <a href="#/projects/new" ng-if="user" class="create-project">Create project <i class="icon ion-plus"></i></a> -->
     <!-- <a href="#/debugger">Debugger</a>
     <a href="#/config">Config</a> -->
-    <a class="logo" href="#/">abcd</a>
     <a href="#/experiments">Experiments</a>
     <i class="icon ion-ios7-arrow-right" ng-if="experiment"></i>
     <a href="#/experiments/{{experiment.id}}" ng-if="experiment">{{experiment.name}}</a>
   </div>
-  <div class="pure-u-2-5">
+  <div class="pure-u-1-5 center">
+    <a class="logo" href="#/">abcd</a>
+  </div>
+  <div class="pure-u-2-5 right">
     <!-- <a href="#/dashboard" class="active">Dashboard</a> -->
     <!-- <a href="#/settings"><img ng-src="{{user.gravatar}}"></a> -->
     <a href="#/support"><i class="icon ion-help-buoy"></i> Help &amp; Support</a>

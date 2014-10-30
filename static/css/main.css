@@ -31,6 +31,12 @@ button {
 .right {
   text-align: right;
 }
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
 .seamless {
   margin-top: 0;
 }
@@ -118,14 +124,7 @@ button:focus {
 }
 nav {
   background: #444;
-  text-align: center;
   padding: 0 0.5em;
-}
-nav div:first-child {
-  text-align: left;
-}
-nav div:last-child {
-  text-align: right;
 }
 nav img {
   height: 1em;

@@ -73,7 +73,7 @@ experiments.get('/:id/actions.csv', auth, function (req, res) {
 });
 
 experiments.get('/:id/participate', function (req, res) {
-  query('INSERT INTO actions (variant, experiment_id) VALUES ($1, $2) RETURNING id;', [req.query.variant || 'control', req.params.id], function (error, result) {
+  query('INSERT INTO actions (variant, experiment_id) VALUES ($1, (SELECT id FROM experiments WHERE id = $2 AND is_active = TRUE)) RETURNING id;', [req.query.variant || 'control', req.params.id], function (error, result) {
     res.jsonp(result.rows[0]);
   });
 });
@@ -84,7 +84,7 @@ experiments.get('/:id/convert', function (req, res) {
       error: 'Action id required'
     });
   }
-  query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = $2', [req.query.action_id, req.params.id], function (error, result) {
+  query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = (SELECT id FROM experiments WHERE id = $2 AND is_active = TRUE)', [req.query.action_id, req.params.id], function (error, result) {
     res.jsonp({});
   });
 });

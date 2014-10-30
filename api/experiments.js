@@ -23,7 +23,7 @@ experiments.post('/', auth, function (req, res) {
 
 experiments.get('/', auth, function (req, res) {
   query(
-    'SELECT * FROM experiments WHERE experiments.user_id = $1 ORDER BY experiments.created_at DESC;', [req.user.id], function (error, result) {
+    'SELECT * FROM experiments WHERE experiments.user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1) ORDER BY experiments.created_at DESC;', [req.user.id], function (error, result) {
     if (error) {
       throw error;
     }
@@ -32,7 +32,7 @@ experiments.get('/', auth, function (req, res) {
 });
 
 experiments.put('/:id', auth, function (req, res) {
-  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5, description = $6 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active, req.body.description], function (error) {
+  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5, description = $6 WHERE (user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active, req.body.description], function (error) {
     if (error) {
       res.status(400).send({
         error: 'Invalid experiment'
@@ -44,17 +44,11 @@ experiments.put('/:id', auth, function (req, res) {
 });
 
 experiments.get('/:id', auth, function (req, res) {
-  query('SELECT * FROM experiments WHERE id = $2 AND user_id = $1', [req.user.id, req.params.id], function (error, result) {
+  query('SELECT * FROM experiments WHERE (user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id], function (error, result) {
     res.send(result.rows[0]);
   });
 });
 
-// experiments.get('/:id/actions', auth, function (req, res) {
-//   query('SELECT * FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
-//     res.send(result.rows);
-//   });
-// });
-//
 experiments.get('/:id/actions', auth, function (req, res) {
   query('SELECT id, started_at, completed_at, variant FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     res.send(result.rows);

@@ -280,6 +280,12 @@ span.id {
 #experiments tr.deleted {
   opacity: 0.3;
 }
+#experiments tr:last-child td:first-child {
+  border-bottom-left-radius: 2px;
+}
+#experiments tr:last-child td:last-child {
+  border-bottom-right-radius: 2px;
+}
 #experiments tr td.active,
 #experiments tr th.active {
   text-align: center;

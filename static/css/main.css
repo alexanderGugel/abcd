@@ -68,9 +68,13 @@ code pre {
   padding: 0 !important;
 }
 .drop-element .drop-content a {
-  padding: 0.25em 0.5em;
+  padding: 0.5em 0.75em;
+  font-weight: 300;
   display: inline-block;
   border-bottom: 1px solid #eee;
+}
+.drop-element .drop-content a .icon {
+  margin-right: 0.5em;
 }
 [ng-click] {
   cursor: pointer;

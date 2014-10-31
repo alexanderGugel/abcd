@@ -25,6 +25,12 @@ border-radius()
   -moz-border-radius arguments
   border-radius arguments
 
+.lead
+  font-size: 1.5em
+  font-weight: 300
+  color: #666
+  margin: 1em 0
+
 .card
   padding: 0.5em
   margin: 0.5em
@@ -41,6 +47,13 @@ border-radius()
 .left
   text-align: left
 
+code
+  pre
+    border-radius(5px)
+    @extend .depth1
+    margin: 0 0 0.5em
+    padding: 1em
+    background: rgba(0, 0, 0, 0.05)
 
 .seamless
   margin-top: 0
@@ -72,22 +85,24 @@ html
   box-sizing: inherit
 
 body
-  font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
   -webkit-font-smoothing: antialiased
-  color: #666
+  color: #444
   background: #e4e4e4
+
+html, button, input, select, textarea, .pure-g [class *= "pure-u"]
+  font: 400 16px/1.5 "Roboto", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
 
 input
   -webkit-font-smoothing: antialiased
 
 a
-  color: #666
+  color: #444
   text-decoration: none
   border-bottom: 1px solid #ccc
 
 h1, h2, h3, h4, h5, h6
-  color: #444
-  font-weight: 300
+  color: #222
+  font-weight: 500
   margin: 0
 
 p

@@ -27,7 +27,43 @@
     <div class="depth1 card inner-seamless">
       <textarea placeholder="Add a description (optional)" ng-model="experiment.description" ng-blur="updateExperiment(experiment)"></textarea>
     </div>
-    <section class="depth1 card inner-seamless">
+    <section class="depth5 card setup-initial" ng-if="actions.length === 0">
+      <h1>Boom!</h1>
+      <p class="lead">
+        Looks like there aren't any registered actions for this experiment. Start tracking conversions by installing our client so we can start showing you pretty tables and charts.
+      </p>
+      <code>
+<pre>
+&lt;script src=&quot;http://alex.dev:3000/abcd.bundle.js&quot;&gt;&lt;/script&gt;
+</pre>
+      </code>
+      <code>
+<pre>&lt;script&gt;
+var experiment = abcd.experiment('{{experiment.id}}')
+
+experiment.variant('control', function () {
+  console.log('I am in the control group :(');
+})
+.variant('blue button', function () {
+  $('button').css({ background: 'blue' });
+})
+.variant('yellow button', function () {
+  $('button').css({ background: 'yellow' });
+})
+.start();
+
+$('button').on('click', function () {
+  experiment.convert();
+});
+&lt;/script&gt;
+</pre>
+      </code>
+      <br>
+      <p>
+        Can it be that easy? There is only one way to find out.
+      </p>
+    </section>
+    <section class="depth1 card inner-seamless" ng-if="actions.length > 0">
       <table>
         <thead>
           <tr>
@@ -54,10 +90,10 @@
         </tbody>
       </table>
     </section>
-    <section class="depth1 card inner-seamless chart">
+    <section class="depth1 card inner-seamless chart" ng-if="actions.length > 0">
       <chart></chart>
     </section>
-    <section class="export right">
+    <section class="export right" ng-if="actions.length > 0">
       <a href="/api/experiments/{{experiment.id}}/actions.csv?token={{token}}">Export as CSV</a>
       <a href="/api/experiments/{{experiment.id}}/actions?token={{token}}">Export as JSON</a>
     </section>

@@ -1,6 +1,7 @@
 @import '../../node_modules/normalize.css/normalize.css';
 @import '../../node_modules/animate.css/animate.css';
 .depth1,
+code pre,
 .drop-element .drop-content,
 nav {
   border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -16,6 +17,12 @@ nav {
 }
 .depth5 {
   box-shadow: 0 19px 38px rgba(0,0,0,0.3), 0 15px 12px rgba(0,0,0,0.22);
+}
+.lead {
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #666;
+  margin: 1em 0;
 }
 .card,
 input,
@@ -36,6 +43,14 @@ button {
 }
 .left {
   text-align: left;
+}
+code pre {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 0 0 0.5em;
+  padding: 1em;
+  background: rgba(0,0,0,0.05);
 }
 .seamless {
   margin-top: 0;
@@ -71,16 +86,23 @@ html {
   box-sizing: inherit;
 }
 body {
-  font: 400 16px/1.5 "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
-  color: #666;
+  color: #444;
   background: #e4e4e4;
+}
+html,
+button,
+input,
+select,
+textarea,
+.pure-g [class *= "pure-u"] {
+  font: 400 16px/1.5 "Roboto", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 input {
   -webkit-font-smoothing: antialiased;
 }
 a {
-  color: #666;
+  color: #444;
   text-decoration: none;
   border-bottom: 1px solid #ccc;
 }
@@ -91,8 +113,8 @@ h4,
 h5,
 h6,
 #experiment header input {
-  color: #444;
-  font-weight: 300;
+  color: #222;
+  font-weight: 500;
   margin: 0;
 }
 p {
@@ -325,6 +347,9 @@ footer :last-child {
   -moz-border-radius: 2px;
   border-radius: 2px;
   color: #666;
+}
+#experiment .setup-initial {
+  padding: 2em;
 }
 #experiment .export {
   padding: 0.5em 1em;

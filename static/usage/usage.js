@@ -21,11 +21,8 @@ angular.module('angularApp.usage', ['ngRoute'])
   .success(function (data) {
     $scope.usage = _.map(data, function (datum) {
       datum.day = new Date(datum.day);
-      // datum.actions = parseInt(datum.actions);
       return datum;
     });
-
-    // debugger;
 
     $scope.options = {
       axes: {
@@ -35,17 +32,17 @@ angular.module('angularApp.usage', ['ngRoute'])
         },
         y: {
           type: 'linear',
-          ticks: 1
+          ticks: 1,
+          min: 0
         }
       },
       series: [
         {
           y: 'actions',
-          color: 'steelblue',
-          thickness: '2px',
-          type: 'area'
-          // striped: true,
-          // label: 'Pouet'
+          color: '#ccc',
+          thickness: '3px',
+          type: 'area',
+          dotSize: 5
         }
       ]
       // lineMode: 'linear',

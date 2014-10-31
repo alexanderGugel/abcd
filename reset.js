@@ -28,6 +28,7 @@ query(
     'archived BOOLEAN DEFAULT FALSE,' +
     'active BOOLEAN DEFAULT TRUE,' +
     'created_at TIMESTAMP DEFAULT NOW(),' +
+    'deleted BOOLEAN DEFAULT FALSE,'
     'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
 

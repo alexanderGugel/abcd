@@ -176,6 +176,22 @@ angular.module('angularApp.experiment', ['ngRoute'])
     });
   };
 
+  $scope.deleteExperiment = function (experiment) {
+    var confirmation = confirm('Are you sure you want to delete this experiment and all results?');
+    if (!confirmation) {
+      return;
+    }
+    return $http({
+      url: '/api/experiments/' + experiment.id,
+      method: 'DELETE',
+      params: {
+        token: localStorage.getItem('token')
+      }
+    }).success(function () {
+      $location.path('/');
+    });
+  }
+
   $scope.filterActions = function (actions) {
 
   };

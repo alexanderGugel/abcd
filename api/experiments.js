@@ -23,7 +23,7 @@ experiments.post('/', auth, function (req, res) {
 
 experiments.get('/', auth, function (req, res) {
   query(
-    'SELECT * FROM experiments WHERE experiments.user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1) ORDER BY experiments.created_at DESC;', [req.user.id], function (error, result) {
+    'SELECT * FROM experiments WHERE deleted = FALSE AND experiments.user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1) ORDER BY experiments.created_at DESC;', [req.user.id], function (error, result) {
     if (error) {
       throw error;
     }
@@ -44,8 +44,20 @@ experiments.put('/:id', auth, function (req, res) {
 });
 
 experiments.get('/:id', auth, function (req, res) {
-  query('SELECT * FROM experiments WHERE (user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id], function (error, result) {
-    res.send(result.rows[0]);
+  query('SELECT * FROM experiments WHERE (deleted = FALSE AND user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id], function (error, result) {
+    if (result.rows) {
+      res.send(result.rows[0]);
+    } else {
+      res.status(404).send({
+        error: 'Experiment does not exist'
+      });
+    }
+  });
+});
+
+experiments.delete('/:id', auth, function (req, res) {
+  query('UPDATE experiments SET deleted = TRUE WHERE (user_id = $1 AND id = $2)', [req.user.id, req.params.id], function (error, result) {
+    res.send({});
   });
 });
 

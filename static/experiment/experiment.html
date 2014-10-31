@@ -24,8 +24,8 @@
     </section>
 
     <section class="ago">
-      created <span am-time-ago="experiment.created_at"></span> | {{actions.length}} action<span ng-if="actions.length !== 1"></span> | {{experiment.name}} |
-      <a href="" ng-click="resetExperiment(experiment)">Reset (delete all actions)</a>
+      created <span am-time-ago="experiment.created_at"></span> | {{actions.length}} action<span ng-if="actions.length !== 1">s</span> | {{experiment.name}} |
+      <a href="" ng-click="resetExperiment(experiment)">Reset</a> | <a href="" ng-click="deleteExperiment(experiment)">Delete</a>
     </section>
   </div>
   <div class="pure-u-2-3">

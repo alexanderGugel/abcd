@@ -50,13 +50,20 @@ experiments.get('/:id', auth, function (req, res) {
 });
 
 experiments.get('/:id/actions', auth, function (req, res) {
-  query('SELECT id, started_at, completed_at, variant FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  query('SELECT id, started_at, completed_at, variant FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     res.send(result.rows);
   });
 });
 
+
+experiments.delete('/:id/actions', auth, function (req, res) {
+  query('UPDATE actions SET deleted = TRUE WHERE experiment_id IN (SELECT is FROM experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    res.send({});
+  });
+});
+
 experiments.get('/:id/actions.csv', auth, function (req, res) {
-  query('SELECT id, started_at, completed_at, variant FROM actions WHERE experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  query('SELECT id, started_at, completed_at, variant FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     json2csv({
       data: result.rows,
       fields: ['id', 'started_at', 'completed_at', 'variant']

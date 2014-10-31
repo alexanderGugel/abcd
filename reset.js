@@ -31,13 +31,6 @@ query(
     'user_id UUID NOT NULL REFERENCES "users"(id)' +
   ');' +
 
-  'CREATE TABLE IF NOT EXISTS "collaborators" (' +
-    'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'experiment_id UUID NOT NULL REFERENCES "experiments"(id),' +
-    'user_id UUID NOT NULL REFERENCES "users"(id),' +
-    'UNIQUE (experiment_id, user_id)' +
-  ');' +
-
   'CREATE TABLE IF NOT EXISTS "actions" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
     'started_at TIMESTAMP DEFAULT NOW(),' +
@@ -45,6 +38,7 @@ query(
     'start_data JSON,' +
     'complete_data JSON,' +
     'variant TEXT NOT NULL,' +
+    'deleted BOOLEAN DEFAULT FALSE,'
     'experiment_id UUID NOT NULL REFERENCES "experiments"(id)' +
   ');'
 );

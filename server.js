@@ -1,15 +1,22 @@
 var express = require('express');
+var http = require('http');
+
 var api = require('./api');
+var io = require('./api/io');
 
-var server = express();
+var app = express();
 
-server.use('/api', api);
+app.use('/api', api);
 
-server.use(express.static(__dirname + '/static'));
+app.use(express.static(__dirname + '/static'));
 
-server.get('*', function (req, res) {
+app.get('*', function (req, res) {
   res.sendFile(__dirname + '/static/index.html');
 });
+
+var server = http.createServer(app);
+
+io(server);
 
 var port = process.env.PORT || 3000;
 server.listen(port, function () {

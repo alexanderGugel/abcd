@@ -10,7 +10,7 @@ usage.get('/', auth, function (req, res) {
   query(
     'WITH filled_dates AS ( ' +
       'SELECT day, 0 AS blank_count FROM ' +
-      'generate_series(\'2014-01-01 00:00\'::timestamptz, current_date::timestamptz, \'1 day\') ' +
+      'generate_series(date_trunc(\'month\', current_date)::timestamptz, current_date::timestamptz, \'1 day\') ' +
       'AS day ' +
     '), ' +
 

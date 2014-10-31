@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('angularApp', [
   'ngRoute',
+  'n3-line-chart',
   'angularMoment',
   'angularApp.signin',
   'angularApp.signup',

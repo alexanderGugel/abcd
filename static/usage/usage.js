@@ -10,29 +10,6 @@ angular.module('angularApp.usage', ['ngRoute'])
   });
 }])
 
-.directive('usage', [function () {
-  var chart;
-
-  var link = function (scope, element, attrs) {
-    chart = c3.generate({
-      bindTo: element[0]
-    });
-
-    scope.$watch('usage', function () {
-      var days = _.map(scope.usage, function (datum) {
-        return datum.day;
-      });
-      console.log(days);
-    });
-  };
-
-
-  return {
-    link: link,
-    restrict: 'E'
-  };
-}])
-
 .controller('UsageCtrl', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
   $http({
     url: '/api/usage',
@@ -42,6 +19,41 @@ angular.module('angularApp.usage', ['ngRoute'])
     }
   })
   .success(function (data) {
-    $scope.usage = data;
+    $scope.usage = _.map(data, function (datum) {
+      datum.day = new Date(datum.day);
+      // datum.actions = parseInt(datum.actions);
+      return datum;
+    });
+
+    // debugger;
+
+    $scope.options = {
+      axes: {
+        x: {
+          key: 'day',
+          type: 'date'
+        },
+        y: {
+          type: 'linear',
+          ticks: 1
+        }
+      },
+      series: [
+        {
+          y: 'actions',
+          color: 'steelblue',
+          thickness: '2px',
+          type: 'area'
+          // striped: true,
+          // label: 'Pouet'
+        }
+      ]
+      // lineMode: 'linear',
+      // tension: 0.7,
+      // tooltip: {mode: 'scrubber', formatter: function(x, y, series) {return 'pouet';}},
+      // drawLegend: true,
+      // drawDots: true,
+      // columnsHGap: 5
+    };
   });
 }]);

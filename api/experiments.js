@@ -2,6 +2,7 @@ var express = require('express');
 var query = require('../db/query');
 var auth = require('./auth');
 var json2csv = require('json2csv');
+var redis = require('../redis')();
 
 var experiments = express.Router();
 
@@ -95,6 +96,7 @@ experiments.get('/:id/participate', function (req, res) {
       }
       throw error;
     }
+    redis.publish(req.params.id, result.rows[0].id);
     res.jsonp(result.rows[0]);
   });
 });
@@ -107,6 +109,7 @@ experiments.get('/:id/convert', function (req, res) {
   }
   query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)', [req.query.action_id, req.params.id], function (error, result) {
     res.jsonp({});
+    redis.publish(req.params.id, req.query.action_id);
   });
 });
 

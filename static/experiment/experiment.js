@@ -11,6 +11,15 @@ angular.module('angularApp.experiment', ['ngRoute'])
 }])
 
 .controller('ExperimentCtrl', ['$scope', '$http', '$location', '$routeParams', '$rootScope', function ($scope, $http, $location, $routeParams, $rootScope) {
+  var experimentId = $routeParams.id;
+
+  var socket = io();
+
+  socket.emit('debug', {
+    experimentId: experimentId,
+    token: localStorage.getItem('token')
+  });
+
   $scope.fetchActions = function (experimentId) {
     return $http({
       url: '/api/experiments/' + experimentId + '/actions',
@@ -77,6 +86,19 @@ angular.module('angularApp.experiment', ['ngRoute'])
     });
   };
 
-  $scope.fetchExperiment($routeParams.id);
-  $scope.fetchActions($routeParams.id);
+  $scope.fetchExperiment(experimentId);
+  $scope.fetchActions(experimentId).then(function () {
+    socket.on('action', function (action) {
+      if (!action.completed_at) {
+        $scope.actions.push(action);
+      } else {
+        var oldAction = _.where($scope.actions, {
+          id: action.id
+        })[0];
+
+        _.assign(oldAction, action);
+      }
+      $scope.$apply('actions');
+    });
+  });
 }]);

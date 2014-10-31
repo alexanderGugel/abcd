@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('angularApp', [
   'ngRoute',
+  'angularMoment',
   'angularApp.signin',
   'angularApp.signup',
   'angularApp.forgot',
@@ -20,6 +21,8 @@ angular.module('angularApp', [
     redirectTo: '/signin'
   });
 }])
+
+.constant('angularMomentConfig', {})
 
 .run(['$http', '$rootScope', '$location', '$routeParams', function ($http, $rootScope, $location, $routeParams) {
   if ($location.search().token) {

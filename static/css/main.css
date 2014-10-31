@@ -353,6 +353,11 @@ footer :last-child {
 #experiment .export {
   padding: 0.5em 1em;
 }
+#experiment .ago {
+  padding: 0 1em;
+  font-size: 0.75em;
+  font-weight: 300;
+}
 #experiment .icon.active {
   color: #008000;
 }

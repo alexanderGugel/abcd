@@ -160,6 +160,22 @@ angular.module('angularApp.experiment', ['ngRoute'])
     });
   };
 
+  $scope.resetExperiment = function (experiment) {
+    var confirmation = confirm('Are you sure you want to reset this experiment? This will delete all associated actions and conversions.');
+    if (!confirmation) {
+      return;
+    }
+    return $http({
+      url: '/api/experiments/' + experiment.id + '/actions',
+      method: 'DELETE',
+      params: {
+        token: localStorage.getItem('token')
+      }
+    }).success(function () {
+      $scope.fetchActions(experiment.id);
+    });
+  };
+
   $scope.filterActions = function (actions) {
 
   };

@@ -57,7 +57,7 @@ experiments.get('/:id/actions', auth, function (req, res) {
 
 
 experiments.delete('/:id/actions', auth, function (req, res) {
-  query('UPDATE actions SET deleted = TRUE WHERE experiment_id IN (SELECT is FROM experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  query('UPDATE actions SET deleted = TRUE WHERE (experiment_id IN (SELECT id FROM experiments WHERE id = $2 AND user_id = $1))', [req.user.id, req.params.id], function (error, result) {
     res.send({});
   });
 });

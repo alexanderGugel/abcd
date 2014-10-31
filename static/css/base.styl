@@ -37,6 +37,9 @@ border-radius()
   border-radius(2px)
   text-align: left
 
+.transparent
+  background: none
+
 .right
   text-align: right
 
@@ -120,6 +123,8 @@ span.error
 button
   border: 0
   @extend .card
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  border: 0
   margin: 0
   background: button-background
   color: lighten(button-background, 90%)
@@ -137,17 +142,17 @@ nav
   img
     height: 1em
     border-radius: 1em
+  .icon
+    vertical-align: middle
+    color: lighten(nav-background, 60%)
+    &.ion-chevron-down
+      font-size: 0.5em
   a
     color: lighten(nav-background, 80%)
     text-decoration: none
     border: 0
     display: inline-block
     padding: 0.5em 0.25em
-    .icon
-      vertical-align: middle
-      &.ion-chevron-down
-        color: lighten(nav-background, 60%)
-        font-size: 0.5em
     &:last-child
       margin: 0
     &:hover, &.logo

@@ -107,9 +107,9 @@ experiments.get('/:id/convert', function (req, res) {
       error: 'Action id required'
     });
   }
-  redis.publish(req.params.id, req.query.action_id);
   query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)', [req.query.action_id, req.params.id], function (error, result) {
     res.jsonp({});
+    redis.publish(req.params.id, req.query.action_id);
   });
 });
 

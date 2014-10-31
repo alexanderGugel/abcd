@@ -19,6 +19,10 @@ var onConnect =  function () {
   console.log('Successfully connected to Redis ' + redisHost + ':' + redisPort);
 };
 
+var onEnd =  function () {
+  console.log('Successfully ended connection to Redis ' + redisHost + ':' + redisPort);
+};
+
 // How to use this module:
 // var redis = require('./redis');
 // redis.set('key', 'value');
@@ -39,5 +43,6 @@ module.exports = exports = (function () {
   });
   redisClient.on('error', onError);
   redisClient.on('connect', onConnect);
+  redisClient.on('end', onEnd);
   return redisClient;
 });

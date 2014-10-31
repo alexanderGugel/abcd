@@ -15,7 +15,10 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   var socket = io();
 
-  socket.emit('debug', experimentId);
+  socket.emit('debug', {
+    experimentId: experimentId,
+    token: localStorage.getItem('token')
+  });
 
   $scope.fetchActions = function (experimentId) {
     return $http({
@@ -86,7 +89,16 @@ angular.module('angularApp.experiment', ['ngRoute'])
   $scope.fetchExperiment(experimentId);
   $scope.fetchActions(experimentId).then(function () {
     socket.on('action', function (action) {
-      console.log(action);
+      if (!action.completed_at) {
+        $scope.actions.push(action);
+      } else {
+        var oldAction = _.where($scope.actions, {
+          id: action.id
+        })[0];
+
+        _.assign(oldAction, action);
+      }
+      $scope.$apply('actions');
     });
   });
 }]);

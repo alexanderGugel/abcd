@@ -255,6 +255,16 @@ nav a.logo {
 #support form p {
   text-align: center;
 }
+#signin form input,
+#signup form input,
+#forgot form input,
+#support form input,
+#signin form button,
+#signup form button,
+#forgot form button,
+#support form button {
+  font-size: 1em;
+}
 #signin form,
 #signup form,
 #forgot form {

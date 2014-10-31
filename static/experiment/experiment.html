@@ -111,8 +111,8 @@ $('button').on('click', function () {
         </tbody>
       </table>
     </section>
-    <section class="depth1 card inner-seamless chart" ng-if="actions.length > 0">
-      <chart></chart>
+    <section class="depth1 card inner-seamless chart">
+      <linechart data="usage" options="options" mode=""></linechart>
     </section>
     <section class="export right" ng-if="actions.length > 0">
       <a href="/api/experiments/{{experiment.id}}/actions.csv?token={{token}}">Export as CSV</a>

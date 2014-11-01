@@ -1,0 +1,19 @@
+<div class="depth1 card inner-seamless">
+  <textarea placeholder="Add a description (optional)" ng-model="experiment.description" ng-blur="updateExperiment(experiment)"></textarea>
+</div>
+
+<div class="actions card transparent right">
+  <button ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)">
+    <i class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i>
+    <span ng-if="experiment.archived">Unarchive</span>
+    <span ng-if="!experiment.archived">Archive</span>
+  </button>
+  <button ng-click="experiment.active = !experiment.active; updateExperiment(experiment)">
+    <i class="icon" ng-class="{ 'ion-reply': experiment.active, 'ion-ios7-filing-outline': !experiment.archived }"></i>
+    <span ng-if="experiment.active">Inactivate</span>
+    <span ng-if="!experiment.active">Activate</span>
+  </button>
+  <button ng-click="resetExperiment(experiment)">
+    Reset
+  </button>
+</div>

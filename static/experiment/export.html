@@ -1,0 +1,4 @@
+<section class="export right" ng-if="actions.length > 0">
+  <a href="/api/experiments/{{experiment.id}}/actions.csv?token={{token}}">Export as CSV</a>
+  <a href="/api/experiments/{{experiment.id}}/actions?token={{token}}">Export as JSON</a>
+</section>

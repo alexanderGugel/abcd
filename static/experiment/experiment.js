@@ -10,6 +10,41 @@ angular.module('angularApp.experiment', ['ngRoute'])
   });
 }])
 
+.directive('summary', [function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'experiment/summary.html'
+  };
+}])
+
+.directive('description', [function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'experiment/description.html'
+  };
+}])
+
+.directive('setup-initial', [function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'experiment/setup-initial.html'
+  };
+}])
+
+.directive('results', [function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'experiment/results.html'
+  };
+}])
+
+.directive('export', [function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'experiment/export.html'
+  };
+}])
+
 .controller('ExperimentCtrl', ['$scope', '$http', '$location', '$routeParams', '$rootScope', function ($scope, $http, $location, $routeParams, $rootScope) {
   var experimentId = $routeParams.id;
 

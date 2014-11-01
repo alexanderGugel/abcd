@@ -5,12 +5,19 @@
   </div>
 
   <div class="pure-u-2-3">
+    <div class="card transparent pure-g center toggle-bar">
+      <a class="pure-u-1-3" href="" ng-click="show = 'results'" ng-class="{'active': show === 'results'}"><i class="icon ion-pie-graph"></i> Results</a>
+      <a class="pure-u-1-3" href="" ng-click="show = 'setup'" ng-class="{'active': show === 'setup'}"><i class="icon ion-wrench"></i> Setup</a>
+      <a class="pure-u-1-3" href="" ng-click="show = 'debugger'" ng-class="{'active': show === 'debugger'}"><i class="icon ion-ios7-glasses"></i> Debugger</a>
+    </div>
+
     <description></description>
 
-    <results></results>
+    <results ng-if="show === 'results'"></results>
+    <export ng-if="show === 'results'"></export>
 
-    <setup-initial ng-if="actions.length === 0"></setup-initial>
+    <setup-initial ng-if="show === 'setup'"></setup-initial>
 
-    <export></export>
+    <debugger ng-if="show === 'debugger'"></debugger>
   </div>
 </section>

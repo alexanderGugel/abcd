@@ -1,0 +1,21 @@
+<section class="depth1 card debugger">
+  <div class="right">
+    <a href="" ng-click="debugger = []">Clear</a>
+  </div>
+  <p class="lead">As soon as an incoming action (view or conversion) hits our servers it will show up here.</p>
+
+  <ul>
+    <li ng-repeat="action in debugger">
+      <span class="type started" ng-if="!action.completed_at">View</span>
+      <span class="type completed" ng-if="action.completed_at">Conversion</span>
+
+      <span class="id">{{action.id}}</span>
+
+      <br>
+
+      <span class="user-agent">{{action.meta_data.user_agent.raw}}</span>
+      <span class="ip">{{action.meta_data.ip}}</span>
+      <span class="duration" ng-if="action.completed_at">• started <span am-time-ago="action.started_at"></span></span>
+    </li>
+  </ul>
+</section>

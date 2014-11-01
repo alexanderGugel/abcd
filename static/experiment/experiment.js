@@ -24,10 +24,17 @@ angular.module('angularApp.experiment', ['ngRoute'])
   };
 }])
 
-.directive('setup-initial', [function () {
+.directive('setupInitial', [function () {
   return {
     restrict: 'E',
     templateUrl: 'experiment/setup-initial.html'
+  };
+}])
+
+.directive('debugger', [function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'experiment/debugger.html'
   };
 }])
 
@@ -55,6 +62,8 @@ angular.module('angularApp.experiment', ['ngRoute'])
     token: localStorage.getItem('token')
   });
 
+  $scope.debugger = [];
+
   $scope.fetchActions = function (experimentId) {
     return $http({
       url: '/api/experiments/' + experimentId + '/actions',
@@ -65,6 +74,12 @@ angular.module('angularApp.experiment', ['ngRoute'])
     })
     .success(function (data) {
       $scope.actions = data;
+
+      if (data.length > 0) {
+        $scope.show = 'results';
+      } else {
+        $scope.show = 'setup';
+      }
     });
   };
 
@@ -124,6 +139,8 @@ angular.module('angularApp.experiment', ['ngRoute'])
   $scope.fetchExperiment(experimentId);
   $scope.fetchActions(experimentId).then(function () {
     socket.on('action', function (action) {
+      $scope.debugger.push(action);
+
       if (!action.completed_at) {
         $scope.actions.push(action);
       } else {

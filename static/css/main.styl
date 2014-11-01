@@ -92,6 +92,17 @@ span.id
       display: block
       padding: 0
       border-bottom: 1px dashed #ccc
+  .toggle-bar
+    a
+      border: 0
+      color: #999
+      font-weight: 300
+      .icon
+        color: #ccc
+      &.active, &:hover
+        color: #666
+        .icon
+          color: #999
   .actions
     display: none
     button
@@ -122,6 +133,36 @@ span.id
       color: green
     &.inactive
       color: red
+  .debugger
+    ul
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        margin-bottom: 1em
+        &:last-child
+          margin-bottom: 0
+    .type
+      border-radius(2px)
+      @extend .depth1
+      display: inline-block
+      padding: 0.125em 0.5em
+      opacity: 0.5
+      margin-right: 0.5em
+      margin-bottom: 0.25em
+      color: #fff
+      &.started
+        background: #00796b
+      &.completed
+        background: #0288d1
+    .user-agent, .ip, .duration
+      font-size: 0.85em
+    .user-agent
+      display: block
+      color: #ccc
+    .ip, .duration
+      display: inline-block
+      color: #ddd
 
 #usage
   .chart

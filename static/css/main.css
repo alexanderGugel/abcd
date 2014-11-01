@@ -1,7 +1,8 @@
 .depth1,
 code pre,
 .drop-element .drop-content,
-nav {
+nav,
+#experiment .debugger .type {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .depth2 {
@@ -355,6 +356,22 @@ footer :last-child {
   padding: 0;
   border-bottom: 1px dashed #ccc;
 }
+#experiment .toggle-bar a {
+  border: 0;
+  color: #999;
+  font-weight: 300;
+}
+#experiment .toggle-bar a .icon {
+  color: #ccc;
+}
+#experiment .toggle-bar a.active,
+#experiment .toggle-bar a:hover {
+  color: #666;
+}
+#experiment .toggle-bar a.active .icon,
+#experiment .toggle-bar a:hover .icon {
+  color: #999;
+}
 #experiment .actions {
   display: none;
 }
@@ -394,6 +411,48 @@ footer :last-child {
 }
 #experiment .icon.inactive {
   color: #f00;
+}
+#experiment .debugger ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#experiment .debugger ul li {
+  margin-bottom: 1em;
+}
+#experiment .debugger ul li:last-child {
+  margin-bottom: 0;
+}
+#experiment .debugger .type {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 0.125em 0.5em;
+  opacity: 0.5;
+  margin-right: 0.5em;
+  margin-bottom: 0.25em;
+  color: #fff;
+}
+#experiment .debugger .type.started {
+  background: #00796b;
+}
+#experiment .debugger .type.completed {
+  background: #0288d1;
+}
+#experiment .debugger .user-agent,
+#experiment .debugger .ip,
+#experiment .debugger .duration {
+  font-size: 0.85em;
+}
+#experiment .debugger .user-agent {
+  display: block;
+  color: #ccc;
+}
+#experiment .debugger .ip,
+#experiment .debugger .duration {
+  display: inline-block;
+  color: #ddd;
 }
 #usage .chart {
   height: 500px;

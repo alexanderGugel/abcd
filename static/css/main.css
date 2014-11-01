@@ -26,8 +26,7 @@ button {
 .seamless {
   margin: 0;
 }
-.inner-seamless,
-code pre {
+.inner-seamless {
   padding: 0;
 }
 .right {
@@ -44,6 +43,7 @@ code pre {
   -moz-border-radius: 5px;
   border-radius: 5px;
   background: rgba(0,0,0,0.05);
+  margin: 0.5em 0;
 }
 .drop-element {
   padding: 0 0.5em;

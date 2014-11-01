@@ -6,8 +6,8 @@
 
   <ul>
     <li ng-repeat="action in debugger">
-      <span class="type started" ng-if="!action.completed_at">View</span>
-      <span class="type completed" ng-if="action.completed_at">Conversion</span>
+      <span class="type started" ng-if="!action.completed_at">Started</span>
+      <span class="type completed" ng-if="action.completed_at">Completed</span>
 
       <span class="id">{{action.id}}</span>
 

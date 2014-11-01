@@ -1,4 +1,4 @@
-<section id="actions">
+<section id="actions" ng-controller="ActionsCtrl">
   <div class="card inner-seamless depth">
     <table>
       <thead>
@@ -6,7 +6,7 @@
           <th class="type mini">
           </th>
           <th class="id mini" ng-click="predicate = 'id'; reverse = !reverse">
-            Id
+            Action Id
             <i ng-if="predicate === 'id'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
           <th class="started-at mini" ng-init="predicate = 'started_at'" ng-click="predicate = 'started_at'; reverse = !reverse">
@@ -21,10 +21,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="action in actions | orderBy:predicate:reverse">
-          <td class="type mini center">
-            <span class="type started" ng-if="!actions.completed_at">View</span>
-            <span class="type completed" ng-if="actions.completed_at">Conversion</span>
+        <tr ng-repeat="action in actions | orderBy:predicate:reverse | offset: actionsCurrentPage*actionsPerPage | limitTo: actionsPerPage">
+          <td class="type mini right">
+            <span class="type started" ng-if="!action.completed_at">Started</span>
+            <span class="type completed" ng-if="action.completed_at">Completed</span>
           </td>
           <td class="id mini">
             <span class="id">{{action.id}}</span>
@@ -41,4 +41,22 @@
       </tbody>
     </table>
   </div>
+
+  <footer class="pure-g card inner-seamless transparent pagination">
+    <div class="pure-u-2-5 left">
+      <button ng-click="actionsCurrentPage = actionsCurrentPage - 1" ng-disabled="actionsCurrentPage === 0">
+        <i class="icon ion-chevron-left"></i>
+        Previous Page
+      </button>
+    </div>
+    <div class="pure-u-1-5 center status">
+      {{actionsCurrentPage}} / {{actionsPageCount()}}
+    </div>
+    <div class="pure-u-2-5 right">
+      <button ng-click="actionsCurrentPage = actionsCurrentPage + 1" ng-disabled="actionsCurrentPage === actionsPageCount()">
+        Next Page
+        <i class="icon ion-chevron-right"></i>
+      </button>
+    </div>
+  </footer>
 </section>

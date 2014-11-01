@@ -59,6 +59,23 @@ angular.module('angularApp.experiment', ['ngRoute'])
   };
 }])
 
+.filter('offset', function() {
+  return function(input, start) {
+    start = parseInt(start, 10);
+    return input.slice(start);
+  };
+})
+
+.controller('ActionsCtrl', ['$scope', function ($scope) {
+
+  $scope.actionsPerPage = 50;
+  $scope.actionsCurrentPage = 0;
+
+  $scope.actionsPageCount = function () {
+    return Math.ceil($scope.actions.length/$scope.actionsPerPage)-1;
+  };
+}])
+
 .controller('ExperimentCtrl', ['$scope', '$http', '$location', '$routeParams', '$rootScope', function ($scope, $http, $location, $routeParams, $rootScope) {
   var experimentId = $routeParams.id;
 

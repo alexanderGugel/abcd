@@ -1,5 +1,8 @@
 <section id="actions" ng-controller="ActionsCtrl">
-  <export></export>
+  <div class="pure-g card transparent inner-seamless">
+    <input ng-model="searchText" placeholder="Search (e.g. by action id)" class="card depth pure-u-1-2 seamless">
+    <export class="pure-u-1-2"></export>
+  </div>
   <div class="card inner-seamless depth">
     <table>
       <thead>
@@ -22,26 +25,24 @@
             Completed at
             <i ng-if="predicate === 'completed_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-          <th class="ip mini" ng-click="predicate = ip'; reverse = !reverse">
+          <th class="ip mini" ng-click="predicate = 'ip'; reverse = !reverse">
             IP
             <i ng-if="predicate === 'ip'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-          <th class="browser mini" ng-click="predicate = 'browser'; reverse = !reverse">
+          <th class="browser mini" ng-click="predicate = user_agent['browser']; reverse = !reverse">
             Browser
-            <i ng-if="predicate === 'browser'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+            <i ng-if="predicate === user_agent['browser']" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
           <th class="browser mini" ng-click="predicate = 'browser'; reverse = !reverse">
             Browser
             <i ng-if="predicate === 'browser'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-
-
 
           <!-- <th class="archive mini"></th> -->
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="action in actions | orderBy:predicate:reverse | offset: actionsCurrentPage*actionsPerPage | limitTo: actionsPerPage">
+        <tr ng-repeat="action in actions | filter:searchText | orderBy:predicate:reverse | offset: actionsCurrentPage*actionsPerPage | limitTo: actionsPerPage">
           <td class="type mini right">
             <span class="type started" ng-if="!action.completed_at">Started</span>
             <span class="type completed" ng-if="action.completed_at">Completed</span>
@@ -65,7 +66,7 @@
             {{action.meta_data.user_agent.browser.name}}
             {{action.meta_data.user_agent.browser.major}}
           </td>
-          <td class="browser mini">
+          <td class="os mini">
             {{action.meta_data.user_agent.os.name}}
             {{action.meta_data.user_agent.os.version}}
           </td>

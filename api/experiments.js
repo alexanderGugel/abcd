@@ -100,7 +100,7 @@ experiments.get('/:id/participate', function (req, res) {
     ip: ip
   };
 
-  query('INSERT INTO actions (variant, experiment_id, meta_data) VALUES ($1, (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)) RETURNING id;', [req.query.variant || 'control', req.params.id, meta_data], function (error, result) {
+  query('INSERT INTO actions (variant, meta_data, experiment_id) VALUES ($1, $2, (SELECT id FROM experiments WHERE id = $3 AND active = TRUE)) RETURNING id;', [req.query.variant || 'control', meta_data, req.params.id], function (error, result) {
     if (error) {
       if (error.code === '23502') {
         return res.jsonp({

@@ -34,7 +34,7 @@ query(
 
   'CREATE TABLE IF NOT EXISTS "actions" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'meta_data JSON',
+    'meta_data JSON,',
     'started_at TIMESTAMP DEFAULT NOW(),' +
     'completed_at TIMESTAMP,' +
     'start_data JSON,' +

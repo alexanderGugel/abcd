@@ -378,6 +378,11 @@ footer :last-child {
 }
 #experiment .export {
   padding: 0.5em 1em;
+  font-size: 0.75em;
+}
+#experiment .export a {
+  display: inline-block;
+  margin-left: 0.75em;
 }
 #experiment .ago {
   padding: 0 1em;

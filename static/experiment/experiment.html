@@ -16,7 +16,7 @@
 
     <results ng-if="show === 'results' && actions.length > 0"></results>
 
-    <setup-initial ng-if="actions.length === 0"></setup-initial>
+    <setup ng-if="actions.length === 0 || show === 'setup'"></setup>
 
     <actions ng-if="show === 'actions'"></actions>
 

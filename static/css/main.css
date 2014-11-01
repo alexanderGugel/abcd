@@ -374,9 +374,6 @@ span.id {
   border-radius: 2px;
   color: #666;
 }
-#experiment .setup-initial {
-  padding: 0.5em 2em;
-}
 #experiment .export {
   padding: 0.5em 1em;
   font-size: 0.75em;

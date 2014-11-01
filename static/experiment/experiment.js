@@ -24,10 +24,10 @@ angular.module('angularApp.experiment', ['ngRoute'])
   };
 }])
 
-.directive('setupInitial', [function () {
+.directive('setup', [function () {
   return {
     restrict: 'E',
-    templateUrl: 'experiment/setup-initial.html'
+    templateUrl: 'experiment/setup.html'
   };
 }])
 

@@ -1,7 +1,11 @@
-<section class="depth card setup-initial">
-  <p class="lead">
+<section class="depth card">
+  <p class="lead card" ng-show="actions.length === 0">
     Looks like there aren't any registered actions for this experiment. Start tracking conversions by installing our client so we can start showing you pretty tables and charts.
   </p>
+  <p class="lead card" ng-show="actions.length > 0">
+    Setting up your experiment is easy. Simply add a few lines of JavaScript magic and <strong>BOOM</strong>.
+  </p>
+  <div class="card">
   <code>
 <pre>
 &lt;script src=&quot;http://alex.dev:3000/abcd.bundle.js&quot;&gt;&lt;/script&gt;
@@ -29,8 +33,10 @@
 &lt;/script&gt;
 </pre>
   </code>
-  <br>
-  <p>
+  </div>
+  <p class="card">
     Can it be that easy? There is only one way to find out.
+    <br>
+    Your experiment's id is <span class="id">{{experiment.id}}</span>
   </p>
 </section>

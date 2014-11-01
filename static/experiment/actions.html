@@ -65,7 +65,7 @@
       </button>
     </div>
     <div class="pure-u-1-5 center status">
-      {{actionsCurrentPage}} / {{actionsPageCount()}}
+      {{actionsCurrentPage+1}} / {{actionsPageCount()+1}}
     </div>
     <div class="pure-u-2-5 right">
       <button ng-click="actionsCurrentPage = actionsCurrentPage + 1" ng-disabled="actionsCurrentPage === actionsPageCount()">

@@ -2,9 +2,9 @@
   <div class="right">
     <a href="" ng-click="debugger = []">Clear</a>
   </div>
-  <p class="lead card">As soon as an incoming action (view or conversion) hits our servers it will show up here.</p>
+  <p class="lead card" ng-show="debugger.length === 0">As soon as an incoming action (view or conversion) hits our servers it will show up here.</p>
 
-  <ul>
+  <ul class="card">
     <li ng-repeat="action in debugger">
       <span class="type started" ng-if="!action.completed_at">Started</span>
       <span class="type completed" ng-if="action.completed_at">Completed</span>

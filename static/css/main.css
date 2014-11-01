@@ -9,6 +9,7 @@
   margin: 1em 0;
 }
 .card,
+code pre,
 input,
 button {
   padding: 0.5em;
@@ -21,6 +22,13 @@ button {
 }
 .transparent {
   background: none;
+}
+.seamless {
+  margin: 0;
+}
+.inner-seamless,
+code pre {
+  padding: 0;
 }
 .right {
   text-align: right;
@@ -35,15 +43,7 @@ code pre {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  margin: 0 0 0.5em;
-  padding: 1em;
   background: rgba(0,0,0,0.05);
-}
-.seamless {
-  margin: 0;
-}
-.inner-seamless {
-  padding: 0;
 }
 .drop-element {
   padding: 0 0.5em;
@@ -78,6 +78,8 @@ html {
 body {
   color: #444;
   background: #e4e4e4;
+  line-height: 1.5;
+  font-size: 16px;
 }
 html,
 button,
@@ -85,7 +87,7 @@ input,
 select,
 textarea,
 .pure-g [class *= "pure-u"] {
-  font: 400 16px/1.5 "Roboto", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: "Roboto", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 a {
@@ -136,6 +138,7 @@ button:focus {
 nav {
   background: #444;
   padding: 0 0.5em;
+  font-weight: 500;
 }
 nav img {
   height: 1em;

@@ -27,6 +27,12 @@ border-radius()
 .transparent
   background: none
 
+.seamless
+  margin: 0
+
+.inner-seamless
+  padding: 0
+
 .right
   text-align: right
 
@@ -40,14 +46,8 @@ code
   pre
     border-radius(5px)
     background: rgba(0, 0, 0, 0.05)
-    @extend .inner-seamless
     @extend .card
-
-.seamless
-  margin: 0
-
-.inner-seamless
-  padding: 0
+    @extend .inner-seamless
 
 .drop-element
   padding: 0 0.5em
@@ -77,9 +77,11 @@ html
 body
   color: #444
   background: #e4e4e4
+  line-height: 1.5
+  font-size: 16px
 
 html, button, input, select, textarea, .pure-g [class *= "pure-u"]
-  font: 400 16px/1.5 "Roboto", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+  font-family: "Roboto", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
   -webkit-font-smoothing: antialiased
 
 a
@@ -123,6 +125,7 @@ button
 nav
   background: nav-background
   padding: 0 0.5em
+  font-weight: 500
   img
     height: 1em
     border-radius: 1em

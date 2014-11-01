@@ -5,10 +5,11 @@
   </div>
 
   <div class="pure-u-2-3">
-    <div class="card transparent pure-g center toggle-bar" ng-if="actions.length > 0">
-      <a class="pure-u-1-3" href="" ng-click="show = 'results'" ng-class="{'active': show === 'results'}"><i class="icon ion-pie-graph"></i> Results</a>
-      <a class="pure-u-1-3" href="" ng-click="show = 'setup'" ng-class="{'active': show === 'setup'}"><i class="icon ion-wrench"></i> Setup</a>
-      <a class="pure-u-1-3" href="" ng-click="show = 'debugger'" ng-class="{'active': show === 'debugger'}"><i class="icon ion-ios7-glasses"></i> Debugger</a>
+    <div class="card transparent pure-g center toggle-bar" ng-show="actions.length > 0">
+      <a class="pure-u-1-4" href="" ng-click="show = 'results'" ng-class="{'active': show === 'results'}"><i class="icon ion-pie-graph"></i> Results</a>
+      <a class="pure-u-1-4" href="" ng-click="show = 'setup'" ng-class="{'active': show === 'setup'}"><i class="icon ion-wrench"></i> Setup</a>
+      <a class="pure-u-1-4" href="" ng-click="show = 'debugger'" ng-class="{'active': show === 'debugger'}"><i class="icon ion-ios7-glasses"></i> Debugger</a>
+      <a class="pure-u-1-4" href="" ng-click="show = 'actions'" ng-class="{'active': show === 'actions'}"><i class="icon ion-funnel"></i> Actions</a>
     </div>
 
     <description></description>
@@ -17,6 +18,8 @@
 
     <setup-initial ng-if="actions.length === 0"></setup-initial>
 
-    <!-- <debugger ng-if="show === 'debugger'"></debugger> -->
+    <actions ng-if="show === 'actions'"></actions>
+
+    <debugger ng-if="show === 'debugger'"></debugger>
   </div>
 </section>

@@ -31,6 +31,13 @@ angular.module('angularApp.experiment', ['ngRoute'])
   };
 }])
 
+.directive('actions', [function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'experiment/actions.html'
+  };
+}])
+
 .directive('debugger', [function () {
   return {
     restrict: 'E',

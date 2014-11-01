@@ -389,6 +389,20 @@ span.id {
 #experiment .icon.inactive {
   color: #f00;
 }
+#experiment .type {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  padding: 0.125em 0.5em;
+  opacity: 0.5;
+  color: #fff;
+}
+#experiment .type.started {
+  background: #00796b;
+}
+#experiment .type.completed {
+  background: #0288d1;
+}
 #experiment .debugger ul {
   list-style: none;
   margin: 0;
@@ -399,23 +413,6 @@ span.id {
 }
 #experiment .debugger ul li:last-child {
   margin-bottom: 0;
-}
-#experiment .debugger .type {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  display: inline-block;
-  padding: 0.125em 0.5em;
-  opacity: 0.5;
-  margin-right: 0.5em;
-  margin-bottom: 0.25em;
-  color: #fff;
-}
-#experiment .debugger .type.started {
-  background: #00796b;
-}
-#experiment .debugger .type.completed {
-  background: #0288d1;
 }
 #experiment .debugger .user-agent,
 #experiment .debugger .ip,

@@ -1,0 +1,44 @@
+<section id="actions">
+  <div class="card inner-seamless depth">
+    <table>
+      <thead>
+        <tr>
+          <th class="type mini">
+          </th>
+          <th class="id mini" ng-click="predicate = 'id'; reverse = !reverse">
+            Id
+            <i ng-if="predicate === 'id'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+          </th>
+          <th class="started-at mini" ng-init="predicate = 'started_at'" ng-click="predicate = 'started_at'; reverse = !reverse">
+            Started at
+            <i ng-if="predicate === 'started_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+          </th>
+          <th class="completed-at mini" ng-click="predicate = 'completed_at'; reverse = !reverse">
+            Completed at
+            <i ng-if="predicate === 'completed_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+          </th>
+          <!-- <th class="archive mini"></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="action in actions | orderBy:predicate:reverse">
+          <td class="type mini center">
+            <span class="type started" ng-if="!actions.completed_at">View</span>
+            <span class="type completed" ng-if="actions.completed_at">Conversion</span>
+          </td>
+          <td class="id mini">
+            <span class="id">{{action.id}}</span>
+          </td>
+          <td class="started-at mini">
+            <span am-time-ago="action.started_at"></span>
+          </td>
+          <td class="completed-at mini">
+            <span am-time-ago="action.completed_at"></span>
+          </td>
+          <!-- <td class="active mini" ng-click="action.active = !action.active; updateExperiment(action)"><span ng-class="{ 'active': action.active, 'inactive': !action.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
+          <td class="archive mini" ng-click="action.archived = !action.archived; updateExperiment(action)"><i class="icon" ng-class="{ 'ion-reply': action.archived, 'ion-ios7-filing-outline': !action.archived }"></i></td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

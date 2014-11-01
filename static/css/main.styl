@@ -126,6 +126,15 @@ span.id
       color: green
     &.inactive
       color: red
+  .type
+    border-radius(2px)
+    padding: 0.125em 0.5em
+    opacity: 0.5
+    color: #fff
+    &.started
+      background: #00796b
+    &.completed
+      background: #0288d1
   .debugger
     ul
       list-style: none
@@ -135,18 +144,6 @@ span.id
         margin-bottom: 1em
         &:last-child
           margin-bottom: 0
-    .type
-      border-radius(2px)
-      display: inline-block
-      padding: 0.125em 0.5em
-      opacity: 0.5
-      margin-right: 0.5em
-      margin-bottom: 0.25em
-      color: #fff
-      &.started
-        background: #00796b
-      &.completed
-        background: #0288d1
     .user-agent, .ip, .duration
       font-size: 0.85em
     .user-agent

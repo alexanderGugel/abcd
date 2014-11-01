@@ -66,7 +66,7 @@ experiments.delete('/:id', auth, function (req, res) {
 });
 
 experiments.get('/:id/actions', auth, function (req, res) {
-  query('SELECT id, started_at, completed_at, variant FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  query('SELECT id, started_at, completed_at, variant, meta_data FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     res.send(result.rows);
   });
 });

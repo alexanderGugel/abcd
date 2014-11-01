@@ -39,10 +39,9 @@ border-radius()
 code
   pre
     border-radius(5px)
-    // @extend .depth
-    margin: 0 0 0.5em
-    padding: 1em
     background: rgba(0, 0, 0, 0.05)
+    @extend .inner-seamless
+    @extend .card
 
 .seamless
   margin: 0
@@ -53,14 +52,12 @@ code
 .drop-element
   padding: 0 0.5em
   .drop-content
-    // @extend .depth
-    background: #fff
+    @extend .depth
     padding: 0 !important
     a
       .icon
         margin-right: 0.5em
       padding: 0.5em 0.75em
-      // color: #666
       font-weight: 300
       display: inline-block
       border-bottom: 1px solid #eee

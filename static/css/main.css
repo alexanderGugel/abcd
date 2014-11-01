@@ -1,4 +1,5 @@
-.depth {
+.depth,
+.drop-element .drop-content {
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 .lead {
@@ -48,7 +49,6 @@ code pre {
   padding: 0 0.5em;
 }
 .drop-element .drop-content {
-  background: #fff;
   padding: 0 !important;
 }
 .drop-element .drop-content a {

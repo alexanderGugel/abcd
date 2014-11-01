@@ -2,7 +2,7 @@
   <div class="right">
     <a href="" ng-click="debugger = []">Clear</a>
   </div>
-  <p class="lead">As soon as an incoming action (view or conversion) hits our servers it will show up here.</p>
+  <p class="lead card">As soon as an incoming action (view or conversion) hits our servers it will show up here.</p>
 
   <ul>
     <li ng-repeat="action in debugger">
@@ -15,7 +15,7 @@
 
       <span class="user-agent">{{action.meta_data.user_agent.raw}}</span>
       <span class="ip">{{action.meta_data.ip}}</span>
-      <span class="duration" ng-if="action.completed_at">• started <span am-time-ago="action.started_at"></span></span>
+      <span class="duration" ng-if="action.started_at">• started <span am-time-ago="action.started_at"></span></span>
     </li>
   </ul>
 </section>

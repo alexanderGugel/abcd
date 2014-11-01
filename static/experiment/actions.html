@@ -22,10 +22,20 @@
             Completed at
             <i ng-if="predicate === 'completed_at'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-          <th class="ip mini" ng-click="predicate = 'ip'; reverse = !reverse">
+          <th class="ip mini" ng-click="predicate = ip'; reverse = !reverse">
             IP
             <i ng-if="predicate === 'ip'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
+          <th class="browser mini" ng-click="predicate = 'browser'; reverse = !reverse">
+            Browser
+            <i ng-if="predicate === 'browser'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+          </th>
+          <th class="browser mini" ng-click="predicate = 'browser'; reverse = !reverse">
+            Browser
+            <i ng-if="predicate === 'browser'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+          </th>
+
+
 
           <!-- <th class="archive mini"></th> -->
         </tr>
@@ -50,6 +60,14 @@
           </td>
           <td class="ip mini">
             {{action.meta_data.ip}}
+          </td>
+          <td class="browser mini">
+            {{action.meta_data.user_agent.browser.name}}
+            {{action.meta_data.user_agent.browser.major}}
+          </td>
+          <td class="browser mini">
+            {{action.meta_data.user_agent.os.name}}
+            {{action.meta_data.user_agent.os.version}}
           </td>
           <!-- <td class="active mini" ng-click="action.active = !action.active; updateExperiment(action)"><span ng-class="{ 'active': action.active, 'inactive': !action.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
           <td class="archive mini" ng-click="action.archived = !action.archived; updateExperiment(action)"><i class="icon" ng-class="{ 'ion-reply': action.archived, 'ion-ios7-filing-outline': !action.archived }"></i></td> -->

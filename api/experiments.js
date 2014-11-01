@@ -93,10 +93,7 @@ experiments.get('/:id/participate', function (req, res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
   var meta_data = {
-    user_agent: {
-      parsed: userAgentParsed,
-      raw: userAgent
-    },
+    user_agent: userAgentParsed,
     ip: ip
   };
 

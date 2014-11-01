@@ -1,10 +1,13 @@
 var express = require('express');
 var http = require('http');
+var morgan = require('morgan');
 
 var api = require('./api');
 var io = require('./api/io');
 
 var app = express();
+
+app.use(morgan('combined'));
 
 app.use('/api', api);
 

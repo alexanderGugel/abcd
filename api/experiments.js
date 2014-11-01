@@ -1,8 +1,11 @@
 var express = require('express');
 var query = require('../db/query');
 var auth = require('./auth');
-var json2csv = require('json2csv');
+var json2csv = require('json-2-csv');
 var redis = require('../redis')();
+
+var UAParser = require('ua-parser-js');
+var uaParser = new UAParser();
 
 var experiments = express.Router();
 
@@ -76,18 +79,28 @@ experiments.delete('/:id/actions', auth, function (req, res) {
 });
 
 experiments.get('/:id/actions.csv', auth, function (req, res) {
-  query('SELECT id, started_at, completed_at, variant FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
-    json2csv({
-      data: result.rows,
-      fields: ['id', 'started_at', 'completed_at', 'variant']
-    }, function (err, csv) {
+  query('SELECT id, started_at, completed_at, variant, meta_data FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    json2csv.json2csv(result.rows, function (err, csv) {
+      if (err) throw err;
       res.send(csv);
     });
   });
 });
 
 experiments.get('/:id/participate', function (req, res) {
-  query('INSERT INTO actions (variant, experiment_id) VALUES ($1, (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)) RETURNING id;', [req.query.variant || 'control', req.params.id], function (error, result) {
+  var userAgent = req.headers['user-agent'];
+  var userAgentParsed = uaParser.setUA(userAgent).getResult();
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+  var meta_data = {
+    user_agent: {
+      parsed: userAgentParsed,
+      raw: userAgent
+    },
+    ip: ip
+  };
+
+  query('INSERT INTO actions (variant, experiment_id, meta_data) VALUES ($1, (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)) RETURNING id;', [req.query.variant || 'control', req.params.id, meta_data], function (error, result) {
     if (error) {
       if (error.code === '23502') {
         return res.jsonp({

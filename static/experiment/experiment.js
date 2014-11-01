@@ -55,6 +55,8 @@ angular.module('angularApp.experiment', ['ngRoute'])
 .controller('ExperimentCtrl', ['$scope', '$http', '$location', '$routeParams', '$rootScope', function ($scope, $http, $location, $routeParams, $rootScope) {
   var experimentId = $routeParams.id;
 
+  $scope.show = 'results';
+
   var socket = io();
 
   socket.emit('debug', {
@@ -74,12 +76,6 @@ angular.module('angularApp.experiment', ['ngRoute'])
     })
     .success(function (data) {
       $scope.actions = data;
-
-      if (data.length > 0) {
-        $scope.show = 'results';
-      } else {
-        $scope.show = 'setup';
-      }
     });
   };
 

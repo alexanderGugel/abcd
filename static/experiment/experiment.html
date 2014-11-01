@@ -5,7 +5,7 @@
   </div>
 
   <div class="pure-u-2-3">
-    <div class="card transparent pure-g center toggle-bar">
+    <div class="card transparent pure-g center toggle-bar" ng-if="actions.length > 0">
       <a class="pure-u-1-3" href="" ng-click="show = 'results'" ng-class="{'active': show === 'results'}"><i class="icon ion-pie-graph"></i> Results</a>
       <a class="pure-u-1-3" href="" ng-click="show = 'setup'" ng-class="{'active': show === 'setup'}"><i class="icon ion-wrench"></i> Setup</a>
       <a class="pure-u-1-3" href="" ng-click="show = 'debugger'" ng-class="{'active': show === 'debugger'}"><i class="icon ion-ios7-glasses"></i> Debugger</a>
@@ -13,11 +13,10 @@
 
     <description></description>
 
-    <results ng-if="show === 'results'"></results>
-    <export ng-if="show === 'results'"></export>
+    <results ng-if="show === 'results' && actions.length > 0"></results>
 
-    <setup-initial ng-if="show === 'setup'"></setup-initial>
+    <setup-initial ng-if="actions.length === 0"></setup-initial>
 
-    <debugger ng-if="show === 'debugger'"></debugger>
+    <!-- <debugger ng-if="show === 'debugger'"></debugger> -->
   </div>
 </section>

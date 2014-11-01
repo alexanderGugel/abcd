@@ -38,6 +38,9 @@ button {
 .left {
   text-align: left;
 }
+.subtle {
+  color: #eee;
+}
 code pre {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -365,7 +368,7 @@ span.id {
   color: #666;
 }
 #experiment .setup-initial {
-  padding: 2em;
+  padding: 0.5em 2em;
 }
 #experiment .export {
   padding: 0.5em 1em;

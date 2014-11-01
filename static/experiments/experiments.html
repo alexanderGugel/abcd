@@ -1,5 +1,5 @@
 <section id="experiments">
-  <div class="depth1 card inner-seamless">
+  <div class="card inner-seamless depth">
     <table>
       <thead>
         <tr>
@@ -40,15 +40,15 @@
       </tbody>
     </table>
   </div>
-  <footer class="pure-g">
+  <footer class="pure-g card inner-seamless transparent">
     <div class="pure-u-1-4">
       <a href="" ng-click="showArchived = !showArchived">
         <small ng-if="showArchived">Hide archived experiments</small>
         <small ng-if="!showArchived">Show archived experiments</small>
       </a>
     </div>
-    <form role="form" name="form" ng-submit="createExperiment(experiment)" novalidate class="pure-u-3-4">
-      <input class="depth1" placeholder="Name (e.g. Follow button)" type="text" id="name" name="name" ng-model="experiment.name" required>
+    <form role="form" name="form" ng-submit="createExperiment(experiment)" novalidate class="pure-u-3-4 right">
+      <input class="depth" placeholder="Name (e.g. Follow button)" type="text" id="name" name="name" ng-model="experiment.name" required>
       <button type="submit" ng-disabled="form.$invalid">Add experiment!</button>
     </form>
   </footer>

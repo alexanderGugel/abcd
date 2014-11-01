@@ -1,11 +1,11 @@
 <section id="forgot" class="animated bounceIn">
   <form role="form" name="form" ng-submit="sendToken(user)" novalidate>
-    <input class="depth1" placeholder="Email" type="email" id="email" name="email" ng-model="user.email" required ng-class="{ 'error' : form.email.$invalid && !form.email.$pristine }">
+    <input class="depth" placeholder="Email" type="email" id="email" name="email" ng-model="user.email" required ng-class="{ 'error' : form.email.$invalid && !form.email.$pristine }">
     <span ng-show="form.email.$invalid && !form.email.$pristine" class="error">Please enter a valid email address.</span>
 
     <span class="error" ng-show="error">{{error}}</span>
 
-    <button class="depth1" type="submit" ng-disabled="form.$invalid">Help me out!</button>
+    <button class="depth" type="submit" ng-disabled="form.$invalid">Help me out!</button>
 
     <p>
       Had a brainwave? - <a href="#/signin">Sign In</a><br>

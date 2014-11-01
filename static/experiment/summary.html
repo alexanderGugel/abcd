@@ -1,8 +1,9 @@
-<header class="depth1 card">
+<header class="depth card">
   <input type="text" ng-model="experiment.name" ng-focus="experiment.originalName = experiment.name" ng-blur="updateExperiment(experiment)">
   <small>Click to change experiment name</small>
 </header>
-<section class="depth1 card">
+
+<section class="depth card">
   <h3>Status</h3>
 
   <i ng-click="experiment.active = !experiment.active; updateExperiment(experiment)" ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }" class="icon ion-ios7-circle-filled"></i>
@@ -15,7 +16,8 @@
   <small ng-if="experiment.archived">This project has been archived</small>
   <small ng-if="!experiment.archived">This project has not been archived</small>
 </section>
-<section class="depth1 card">
+
+<section class="depth card">
   {{startDate}}
   <input type="date" ng-model="startDate">
   <input type="date" ng-model="endDate">

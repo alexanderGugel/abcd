@@ -33,7 +33,9 @@
           <td class="id mini">
             <span class="id">{{experiment.id}}</span>
           </td>
-          <td class="created-at mini">{{experiment.created_at | date:'short'}}</td>
+          <td class="created-at mini">
+            <span am-time-ago="experiment.created_at"></span>
+          </td>
           <td class="active mini" ng-click="experiment.active = !experiment.active; updateExperiment(experiment)"><span ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
           <td class="archive mini" ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)"><i class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i></td>
         </tr>

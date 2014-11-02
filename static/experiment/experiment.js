@@ -90,6 +90,16 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.debugger = [];
 
+  $scope.$watch('actions', function (newActions) {
+    _.each(newActions, function (action) {
+      if (action.type) return;
+      action.type = action.completed_at ? 'completed' : 'started';
+      action.ip = action.meta_data.ip;
+      action.browser = action.meta_data.user_agent.browser.name + ' ' + action.meta_data.user_agent.browser.major;
+      action.os = action.meta_data.user_agent.os.name + ' ' + action.meta_data.user_agent.os.version;
+    });
+  });
+
   $scope.fetchActions = function (experimentId) {
     return $http({
       url: '/api/experiments/' + experimentId + '/actions',

@@ -33,19 +33,17 @@
             Browser
             <i ng-if="predicate === user_agent['browser']" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-          <th class="browser mini" ng-click="predicate = 'browser'; reverse = !reverse">
-            Browser
-            <i ng-if="predicate === 'browser'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+          <th class="browser mini" ng-click="predicate = 'os'; reverse = !reverse">
+            OS
+            <i ng-if="predicate === 'os'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-
           <!-- <th class="archive mini"></th> -->
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="action in actions | filter:searchText | orderBy:predicate:reverse | offset: actionsCurrentPage*actionsPerPage | limitTo: actionsPerPage">
           <td class="type mini right">
-            <span class="type started" ng-if="!action.completed_at">Started</span>
-            <span class="type completed" ng-if="action.completed_at">Completed</span>
+            <span class="type" ng-class="action.type">{{action.type}}</span>
           </td>
           <!-- <td class="id mini">
             <span class="id">{{action.id}}</span>
@@ -63,12 +61,10 @@
             {{action.meta_data.ip}}
           </td>
           <td class="browser mini">
-            {{action.meta_data.user_agent.browser.name}}
-            {{action.meta_data.user_agent.browser.major}}
+            {{action.browser}}
           </td>
           <td class="os mini">
-            {{action.meta_data.user_agent.os.name}}
-            {{action.meta_data.user_agent.os.version}}
+            {{action.os}}
           </td>
           <!-- <td class="active mini" ng-click="action.active = !action.active; updateExperiment(action)"><span ng-class="{ 'active': action.active, 'inactive': !action.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
           <td class="archive mini" ng-click="action.archived = !action.archived; updateExperiment(action)"><i class="icon" ng-class="{ 'ion-reply': action.archived, 'ion-ios7-filing-outline': !action.archived }"></i></td> -->

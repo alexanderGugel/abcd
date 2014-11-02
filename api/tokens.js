@@ -42,39 +42,27 @@ tokens.put('/', function (req, res) {
 });
 
 tokens.post('/', users._validateUsernamePassword, function (req, res) {
-  var email = req.email;
-  query('SELECT id, password FROM "users" WHERE email = $1', [email], function (error, result) {
-    if (error) {
-      res.status(500).send({
-        error: 'Internal server error'
-      });
-      throw error;
-    }
-    var rows = result.rows;
-    if (rows.length === 0) {
+  query('SELECT id, password FROM "users" WHERE email = $1', [req.email], function (error, result) {
+    if (error) throw error;
+
+    if (!result.rows) {
       return res.status(400).send({
         error: 'Account does not exist'
       });
     }
-    bcrypt.compare(req.password, rows[0].password, function (error, correct) {
-      if (error) {
-        res.status(500).send({
-          error: 'Internal server error'
-        });
-        throw error;
-      }
+
+    bcrypt.compare(req.password, result.rows[0].password, function (error, correct) {
+      if (error) throw error;
+
       if (!correct) {
         return res.status(400).send({
           error: 'Invalid password'
         });
       }
-      query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING id', [rows[0].id], function (error, result) {
-        if (error) {
-          res.status(500).send({
-            error: 'Internal server error'
-          });
-          throw error;
-        }
+
+      query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING id', [result.rows[0].id], function (error, result) {
+        if (error) throw error;
+
         res.send({
           token: result.rows[0].id
         });

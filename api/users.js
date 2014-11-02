@@ -37,26 +37,16 @@ users._validateUsernamePassword = function (req, res, next) {
 };
 
 users.post('/', users._validateUsernamePassword, function (req, res) {
-  var email = req.email;
-  var password = req.password;
-  bcrypt.hash(password, null, null, function (error, password) {
-    if (error) {
-      res.status(500).send({
-        error: 'Internal server error'
-      });
-      throw error;
-    }
-    query('INSERT INTO "users" (email, password) VALUES ($1, $2) RETURNING id', [email, password], function (error, result) {
+  bcrypt.hash(req.password, null, null, function (error, password) {
+    if (error) throw error;
+
+    query('INSERT INTO "users" (email, password) VALUES ($1, $2) RETURNING id', [req.email, password], function (error, result) {
       if (!error) {
         var rows = result.rows;
-        // query('INSERT INTO "endpoints" (user_id) VALUES ($1)', [rows[0].id]);
+
         query('INSERT INTO "tokens" (user_id) VALUES ($1) RETURNING id', [rows[0].id], function (error, result) {
-          if (error) {
-            res.status(500).send({
-              error: 'Internal server error'
-            });
-            throw error;
-          }
+          if (error) throw error;
+
           res.send({
             token: result.rows[0].id
           });
@@ -66,9 +56,6 @@ users.post('/', users._validateUsernamePassword, function (req, res) {
           error: 'User account already exists'
         });
       } else {
-        res.status(500).send({
-          error: 'Internal server error'
-        });
         throw error;
       }
     });
@@ -97,9 +84,6 @@ users.patch('/me', auth, function (req, res, next) {
             error: 'Email used by another account'
           });
         } else {
-          res.send({
-            error: 'Internal server error'
-          });
           throw error;
         }
       } else {
@@ -119,21 +103,11 @@ users.patch('/me', auth, function (req, res, next) {
       });
     }
     bcrypt.hash(password, null, null, function(error, hash) {
-      if (error) {
-        res.send({
-          error: 'Internal server error'
-        });
-        throw error;
-      }
+      if (error) throw error;
+
       query('UPDATE "users" SET password = $1 WHERE id = $2', [hash, req.user.id], function (error, result) {
-        if (error) {
-          res.send({
-            error: 'Internal server error'
-          });
-          throw error;
-        } else {
-          next();
-        }
+        if (error) throw error;
+        next();
       });
     });
   } else {

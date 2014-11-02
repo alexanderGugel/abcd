@@ -17,7 +17,7 @@ api.use('/tickets', require('./tickets'));
 
 api.all('*', function (req, res) {
   res.status(404).send({
-    error: 'File not found'
+    error: 'Unknown API request'
   });
 });
 

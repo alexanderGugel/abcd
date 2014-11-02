@@ -20,21 +20,15 @@ var auth = function (req, res, next) {
     });
   }
   query('SELECT * FROM "users" WHERE id = (SELECT user_id FROM tokens WHERE id = $1)', [token], function (error, result) {
-    if (error) {
-      res.status(500).send({
-        error: 'Internal server error'
-      });
-      throw error;
-    }
-    var rows = result.rows;
-    if (rows.length === 0) {
+    if (error) throw error;
+    if (!result.rows) {
       return res.send(400, {
         error: 'Invalid token'
       });
     }
     req.user = result.rows[0];
     req.user.gravatar = getGravatarImage(req.user.email);
-    delete req.user.password;
+    req.user.password = null;
     next();
   });
 };

@@ -1,15 +1,15 @@
-<section id="settings" class="animated bounceIn">
-  <h2>Settings</h2>
-  <h3>Account</h3>
-    <form role="form" ng-submit="updateUser(user)">
-      <input ng-model="user.email" type="email" required>
-      <input ng-model="user.password" type="password" placeholder="New password (optional)">
-      <span class="error" ng-if="error">{{error}}</span>
-      <button type="submit">Update!</button>
-    </form>
-    <form id="delete-account">
-      <button type="submit">Delete this account (DANGER)!</button>
-    </form>
+<section id="settings" class="card transparent center">
+  <!-- <h3>Account</h3> -->
+
+  <form role="form" ng-submit="updateUser(user)">
+    <input ng-model="user.email" type="email" class="card depth" required>
+    <input ng-model="user.password" type="password" placeholder="New password (optional)" class="card depth">
+    <span class="error" ng-if="error">{{error}}</span>
+    <button type="submit">Update!</button>
+  </form>
+  <!-- <form id="delete-account">
+    <button type="submit">Delete this account (DANGER)!</button>
+  </form> -->
 
   <!-- <div>
     <h3>Billing</h3>

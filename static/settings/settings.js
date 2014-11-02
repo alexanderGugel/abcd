@@ -10,11 +10,6 @@ angular.module('angularApp.settings', ['ngRoute'])
 }])
 
 .controller('SettingsCtrl', ['$scope', '$http', '$location', function ($scope, $http) {
-  if (localStorage.getItem('token') === null) {
-    $location.path('/');
-    return;
-  }
-
   $scope.autoPopulate = function () {
     $http({
       url: '/api/users/me',

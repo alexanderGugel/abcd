@@ -90,15 +90,29 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.debugger = [];
 
-  $scope.$watch('actions', function (newActions) {
-    _.each(newActions, function (action) {
-      if (action.type) return;
-      action.type = action.completed_at ? 'completed' : 'started';
-      action.ip = action.meta_data.ip;
-      action.browser = action.meta_data.user_agent.browser.name + ' ' + action.meta_data.user_agent.browser.major;
-      action.os = action.meta_data.user_agent.os.name + ' ' + action.meta_data.user_agent.os.version;
-    });
-  });
+  $scope.results = {
+    variants: {}
+  };
+
+  $scope.handleNewAction = function (action) {
+    action.type = action.completed_at ? 'completed' : 'started';
+    action.ip = action.meta_data.ip;
+    action.browser = action.meta_data.user_agent.browser.name + ' ' + action.meta_data.user_agent.browser.major;
+    action.os = action.meta_data.user_agent.os.name + ' ' + action.meta_data.user_agent.os.version;
+
+
+    $scope.results.variants[action.variant] = $scope.results.variants[action.variant] || {
+      started: 0,
+      completed: 0
+    };
+
+    var result = $scope.results.variants[action.variant];
+
+    result.started++;
+    action.completed_at && result.completed++;
+
+    return action;
+  };
 
   $scope.fetchActions = function (experimentId) {
     return $http({
@@ -168,11 +182,13 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.fetchExperiment(experimentId);
   $scope.fetchActions(experimentId).then(function () {
+    $scope.actions = _.each($scope.actions, $scope.handleNewAction);
+
     socket.on('action', function (action) {
       $scope.debugger.push(action);
 
       if (!action.completed_at) {
-        $scope.actions.push(action);
+        $scope.actions.push($scope.handleNewAction(action));
       } else {
         var oldAction = _.where($scope.actions, {
           id: action.id
@@ -184,23 +200,24 @@ angular.module('angularApp.experiment', ['ngRoute'])
     });
   });
 
-  $scope.$watch('actions', function (actions) {
-    var results = {
-      variants: {}
-    };
-
-    _.each(actions, function (action) {
-      results.variants[action.variant] = results.variants[action.variant] || {
-        started: 0,
-        completed: 0
-      };
-
-      var result = results.variants[action.variant];
-
-      result.started++;
-      action.completed_at && result.completed++;
-    });
-
-    $scope.results = results;
-  })
+  // $scope.$watch('actions', function (actions) {
+  //   var results = {
+  //     variants: {}
+  //   };
+  //
+  //   // TODO Performance
+  //   // _.each(actions, function (action) {
+  //   //   results.variants[action.variant] = results.variants[action.variant] || {
+  //   //     started: 0,
+  //   //     completed: 0
+  //   //   };
+  //   //
+  //   //   var result = results.variants[action.variant];
+  //   //
+  //   //   result.started++;
+  //   //   action.completed_at && result.completed++;
+  //   // });
+  //
+  //   $scope.results = results;
+  // })
 }]);

@@ -16,9 +16,8 @@ experiments.post('/', auth, function (req, res) {
     });
   }
   query('INSERT INTO "experiments" (name, user_id) VALUES ($1, $2) RETURNING id', [req.body.name, req.user.id], function (error, result) {
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
+
     res.send({
       id: result.rows[0].id
     });
@@ -28,27 +27,24 @@ experiments.post('/', auth, function (req, res) {
 experiments.get('/', auth, function (req, res) {
   query(
     'SELECT * FROM experiments WHERE deleted = FALSE AND experiments.user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1) ORDER BY experiments.created_at DESC;', [req.user.id], function (error, result) {
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
+
     res.send(result.rows);
   });
 });
 
 experiments.put('/:id', auth, function (req, res) {
-  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5, description = $6 WHERE (user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id, req.body.name, req.body.archived, req.body.active, req.body.description], function (error) {
-    if (error) {
-      res.status(400).send({
-        error: 'Invalid experiment'
-      });
-      throw error;
-    }
+
+  query('UPDATE "experiments" SET name = $3, archived = $4, active = $5, description = $6 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, !!req.body.archived, !!req.body.active, req.body.description], function (error) {
+    if (error) throw error;
     res.status(204).send({});
   });
 });
 
 experiments.get('/:id', auth, function (req, res) {
   query('SELECT * FROM experiments WHERE (deleted = FALSE AND user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id], function (error, result) {
+    if (error) throw error;
+
     if (result.rows) {
       res.send(result.rows[0]);
     } else {
@@ -61,19 +57,28 @@ experiments.get('/:id', auth, function (req, res) {
 
 experiments.delete('/:id', auth, function (req, res) {
   query('UPDATE experiments SET deleted = TRUE WHERE (user_id = $1 AND id = $2)', [req.user.id, req.params.id], function (error, result) {
+    if (error) throw error;
+
     res.send({});
   });
 });
 
 experiments.get('/:id/actions', auth, function (req, res) {
   query('SELECT id, started_at, completed_at, variant, meta_data FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    if (error) throw error;
+
     res.send(result.rows);
   });
 });
 
-
 experiments.delete('/:id/actions', auth, function (req, res) {
   query('UPDATE actions SET deleted = TRUE WHERE (experiment_id IN (SELECT id FROM experiments WHERE id = $2 AND user_id = $1))', [req.user.id, req.params.id], function (error, result) {
+    res.send({});
+  });
+});
+
+experiments.delete('/:experimentId/actions/:actionId', auth, function (req, res) {
+  query('UPDATE actions SET deleted = TRUE WHERE (experiment_id IN (SELECT id FROM experiments WHERE id = $2 AND user_id = $1)) AND id = $3', [req.user.id, req.params.experimentId, req.params.actionId], function (error, result) {
     res.send({});
   });
 });
@@ -118,6 +123,8 @@ experiments.get('/:id/convert', function (req, res) {
     });
   }
   query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)', [req.query.action_id, req.params.id], function (error, result) {
+    if (error) throw error;
+    
     res.jsonp({});
     redis.publish(req.params.id, req.query.action_id);
   });

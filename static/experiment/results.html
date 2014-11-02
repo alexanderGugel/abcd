@@ -6,9 +6,9 @@
           Variant
           <i ng-if="predicate === 'variant'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
         </th>
-        <th ng-click="predicate = 'conversions'; reverse = !reverse">
+        <th ng-click="predicate = 'completed'; reverse = !reverse">
           Conversions/ Views
-          <i ng-if="predicate === 'conversions'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
+          <i ng-if="predicate === 'completed'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
         </th>
         <th ng-click="predicate = 'conversionRate'; reverse = !reverse">
           Conversion Rate
@@ -17,10 +17,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="(variant, result) in summary.variants | orderBy:predicate:reverse">
+      <tr ng-repeat="(variant, result) in results.variants | orderBy:predicate:reverse">
         <td>{{variant}}</td>
-        <td>{{result.conversions}} / {{result.actions}}</td>
-        <td>{{(result.conversions / result.actions) * 100 | number:2}} %</td>
+        <td>{{result.completed}} / {{result.started}}</td>
+        <td>{{(result.completed / result.started) * 100 | number:2}} %</td>
       </tr>
     </tbody>
   </table>

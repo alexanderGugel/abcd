@@ -183,4 +183,24 @@ angular.module('angularApp.experiment', ['ngRoute'])
       $scope.$apply('actions');
     });
   });
+
+  $scope.$watch('actions', function (actions) {
+    var results = {
+      variants: {}
+    };
+
+    _.each(actions, function (action) {
+      results.variants[action.variant] = results.variants[action.variant] || {
+        started: 0,
+        completed: 0
+      };
+
+      var result = results.variants[action.variant];
+
+      result.started++;
+      action.completed_at && result.completed++;
+    });
+
+    $scope.results = results;
+  })
 }]);

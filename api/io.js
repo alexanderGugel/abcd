@@ -20,11 +20,13 @@ var io = function (server) {
         'SELECT 1 FROM experiments WHERE id = $1 AND user_id = (SELECT user_id FROM tokens WHERE id = $2)',
         [debug.experimentId, debug.token],
         function (error, result) {
-          if (!result.rows) {
+          if (error) throw error;
+
+          if (result.rows.length === 0) {
             socket.emit('error', {
               error: 'Access denied'
             });
-            return
+            return;
           }
 
           redis.subscribe(debug.experimentId);
@@ -38,7 +40,6 @@ var io = function (server) {
               }
             )
           });
-
         }
       )
     });

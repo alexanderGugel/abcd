@@ -34,7 +34,6 @@ experiments.get('/', auth, function (req, res) {
 });
 
 experiments.put('/:id', auth, function (req, res) {
-
   query('UPDATE "experiments" SET name = $3, archived = $4, active = $5, description = $6 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, !!req.body.archived, !!req.body.active, req.body.description], function (error) {
     if (error) throw error;
     res.status(204).send({});
@@ -45,7 +44,7 @@ experiments.get('/:id', auth, function (req, res) {
   query('SELECT * FROM experiments WHERE (deleted = FALSE AND user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id], function (error, result) {
     if (error) throw error;
 
-    if (result.rows) {
+    if (result.rows.length > 0) {
       res.send(result.rows[0]);
     } else {
       res.status(404).send({
@@ -64,7 +63,7 @@ experiments.delete('/:id', auth, function (req, res) {
 });
 
 experiments.get('/:id/actions', auth, function (req, res) {
-  query('SELECT id, started_at, completed_at, variant, meta_data FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+  query('SELECT * FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     if (error) throw error;
 
     res.send(result.rows);
@@ -93,16 +92,11 @@ experiments.get('/:id/actions.csv', auth, function (req, res) {
 });
 
 experiments.get('/:id/participate', function (req, res) {
-  var userAgent = req.headers['user-agent'];
+  var userAgent = req.query.user_agent || req.headers['user-agent'];
   var userAgentParsed = uaParser.setUA(userAgent).getResult();
-  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  var ip = req.query.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-  var meta_data = {
-    user_agent: userAgentParsed,
-    ip: ip
-  };
-
-  query('INSERT INTO actions (variant, meta_data, experiment_id) VALUES ($1, $2, (SELECT id FROM experiments WHERE id = $3 AND active = TRUE)) RETURNING id;', [req.query.variant || 'control', meta_data, req.params.id], function (error, result) {
+  query('INSERT INTO actions (variant, user_agent, experiment_id, user_agent_parsed, ip) VALUES ($1, $2, (SELECT id FROM experiments WHERE id = $3 AND active = TRUE), $4, $5) RETURNING id;', [req.query.variant || 'control', userAgent, req.params.id, userAgentParsed, ip], function (error, result) {
     if (error) {
       if (error.code === '23502') {
         return res.jsonp({
@@ -118,13 +112,13 @@ experiments.get('/:id/participate', function (req, res) {
 
 experiments.get('/:id/convert', function (req, res) {
   if (!req.query.action_id) {
-    return res.status(500).jsonp({
-      error: 'Action id required'
+    return res.status(400).jsonp({
+      error: 'action_id required'
     });
   }
   query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)', [req.query.action_id, req.params.id], function (error, result) {
     if (error) throw error;
-    
+
     res.jsonp({});
     redis.publish(req.params.id, req.query.action_id);
   });

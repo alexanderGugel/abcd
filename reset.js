@@ -34,11 +34,11 @@ query(
 
   'CREATE TABLE IF NOT EXISTS "actions" (' +
     'id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),' +
-    'meta_data JSON,' +
+    'ip inet,' +
+    'user_agent TEXT,' +
+    'user_agent_parsed JSON,' +
     'started_at TIMESTAMP DEFAULT NOW(),' +
     'completed_at TIMESTAMP,' +
-    'start_data JSON,' +
-    'complete_data JSON,' +
     'variant TEXT NOT NULL,' +
     'deleted BOOLEAN DEFAULT FALSE,' +
     'experiment_id UUID NOT NULL REFERENCES "experiments"(id)' +

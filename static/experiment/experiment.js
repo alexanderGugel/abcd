@@ -96,9 +96,8 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.handleNewAction = function (action) {
     action.type = action.completed_at ? 'completed' : 'started';
-    action.ip = action.meta_data.ip;
-    action.browser = action.meta_data.user_agent.browser.name + ' ' + action.meta_data.user_agent.browser.major;
-    action.os = action.meta_data.user_agent.os.name + ' ' + action.meta_data.user_agent.os.version;
+    action.browser = action.user_agent_parsed.browser.name + ' ' + action.user_agent_parsed.browser.major;
+    action.os = action.user_agent_parsed.os.name + ' ' + action.user_agent_parsed.os.version;
 
 
     $scope.results.variants[action.variant] = $scope.results.variants[action.variant] || {
@@ -185,7 +184,7 @@ angular.module('angularApp.experiment', ['ngRoute'])
     $scope.actions = _.each($scope.actions, $scope.handleNewAction);
 
     socket.on('action', function (action) {
-      $scope.debugger.push(action);
+      $scope.show === 'debugger' && $scope.debugger.push(action);
 
       if (!action.completed_at) {
         $scope.actions.push($scope.handleNewAction(action));
@@ -199,25 +198,4 @@ angular.module('angularApp.experiment', ['ngRoute'])
       $scope.$apply('actions');
     });
   });
-
-  // $scope.$watch('actions', function (actions) {
-  //   var results = {
-  //     variants: {}
-  //   };
-  //
-  //   // TODO Performance
-  //   // _.each(actions, function (action) {
-  //   //   results.variants[action.variant] = results.variants[action.variant] || {
-  //   //     started: 0,
-  //   //     completed: 0
-  //   //   };
-  //   //
-  //   //   var result = results.variants[action.variant];
-  //   //
-  //   //   result.started++;
-  //   //   action.completed_at && result.completed++;
-  //   // });
-  //
-  //   $scope.results = results;
-  // })
 }]);

@@ -21,7 +21,7 @@ var auth = function (req, res, next) {
   }
   query('SELECT * FROM "users" WHERE id = (SELECT user_id FROM tokens WHERE id = $1)', [token], function (error, result) {
     if (error) throw error;
-    if (!result.rows) {
+    if (result.rows.length === 0) {
       return res.send(400, {
         error: 'Invalid token'
       });

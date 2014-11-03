@@ -1,29 +1,31 @@
-<header class="depth card">
-  <input type="text" ng-model="experiment.name" ng-focus="experiment.originalName = experiment.name" ng-blur="updateExperiment(experiment)">
-  <small>Click to change experiment name</small>
-</header>
+<div class="summary">
+  <header class="depth card">
+    <input type="text" ng-model="experiment.name" ng-focus="experiment.originalName = experiment.name" ng-blur="updateExperiment(experiment)">
+    <small>Click to change experiment name</small>
+  </header>
 
-<section class="depth card">
-  <h3>Status</h3>
+  <section class="depth card">
+    <h3>Status</h3>
 
-  <i ng-click="experiment.active = !experiment.active; updateExperiment(experiment)" ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }" class="icon ion-ios7-circle-filled"></i>
-  <small ng-if="experiment.active">This project is currently active</small>
-  <small ng-if="!experiment.active">This project is currently inactive</small>
+    <i ng-click="experiment.active = !experiment.active; updateExperiment(experiment)" ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }" class="icon ion-ios7-circle-filled"></i>
+    <small ng-if="experiment.active">This project is currently active</small>
+    <small ng-if="!experiment.active">This project is currently inactive</small>
 
-  <br>
+    <br>
 
-  <i ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)" class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i>
-  <small ng-if="experiment.archived">This project has been archived</small>
-  <small ng-if="!experiment.archived">This project has not been archived</small>
-</section>
+    <i ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)" class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i>
+    <small ng-if="experiment.archived">This project has been archived</small>
+    <small ng-if="!experiment.archived">This project has not been archived</small>
+  </section>
 
-<!-- <section class="depth card">
-  {{startDate}}
-  <input type="date" ng-model="startDate">
-  <input type="date" ng-model="endDate">
-</section> -->
+  <!-- <section class="depth card">
+    {{startDate}}
+    <input type="date" ng-model="startDate">
+    <input type="date" ng-model="endDate">
+  </section> -->
 
-<section class="ago">
-  created <span am-time-ago="experiment.created_at"></span> | {{actions.length}} action<span ng-if="actions.length !== 1">s</span> | {{experiment.name}} |
-  <a href="" ng-click="resetExperiment(experiment)">Reset</a> | <a href="" ng-click="deleteExperiment(experiment)">Delete</a>
-</section>
+  <section class="ago">
+    created <span am-time-ago="experiment.created_at"></span> | {{actions.length}} action<span ng-if="actions.length !== 1">s</span> | {{experiment.name}} |
+    <a href="" ng-click="resetExperiment(experiment)">Reset</a> | <a href="" ng-click="deleteExperiment(experiment)">Delete</a>
+  </section>
+</div>

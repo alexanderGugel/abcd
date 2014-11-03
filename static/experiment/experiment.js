@@ -90,28 +90,26 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.debugger = [];
 
+  $scope.actions = [];
+
   $scope.results = {
     variants: {}
   };
+
+  var actionsMap = {};
 
   $scope.handleNewAction = function (action) {
     action.type = action.completed_at ? 'completed' : 'started';
     action.browser = action.user_agent_parsed.browser.name + ' ' + action.user_agent_parsed.browser.major;
     action.os = action.user_agent_parsed.os.name + ' ' + action.user_agent_parsed.os.version;
 
-    $scope.results.variants[action.variant] = $scope.results.variants[action.variant] || {
-      started: 0,
-      completed: 0
-    };
+    if (actionsMap[action.id]) {
+      _.assign(actionsMap[action.id], action);
+    } else {
+      $scope.actions.push(action);
+    }
 
-    var result = $scope.results.variants[action.variant];
-
-    //
-    // if (action.completed_at) {
-    //   result.completed++;
-    // } else if (action.started_at) {
-    //   result.started++;
-    // }
+    actionsMap[action.id] = action;
 
     return action;
   };
@@ -124,8 +122,8 @@ angular.module('angularApp.experiment', ['ngRoute'])
         token: localStorage.getItem('token')
       }
     })
-    .success(function (data) {
-      $scope.actions = data;
+    .success(function (actions) {
+      _.map(actions, $scope.handleNewAction);
     });
   };
 
@@ -184,20 +182,19 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.fetchExperiment(experimentId);
   $scope.fetchActions(experimentId).then(function () {
-    $scope.actions = _.map($scope.actions, $scope.handleNewAction);
 
     socket.on('action', function (action) {
 
-      if (!action.completed_at) {
-        var action = $scope.handleNewAction(action);
-        $scope.actions.push(action);
-      } else {
-        var oldAction = _.where($scope.actions, {
-          id: action.id
-        })[0];
-
-        _.assign(oldAction, action);
-      }
+      // if (!action.completed_at) {
+      var action = $scope.handleNewAction(action);
+      //   $scope.actions.push(action);
+      // } else {
+      //   var oldAction = _.where($scope.actions, {
+      //     id: action.id
+      //   })[0];
+      //
+      //   _.assign(oldAction, action);
+      // }
 
       $scope.show === 'debugger' && $scope.debugger.push(action);
       $scope.$apply('actions');

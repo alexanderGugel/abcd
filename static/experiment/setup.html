@@ -17,18 +17,18 @@
   var experiment = abcd.experiment('{{experiment.id}}')
 
   experiment.variant('control', function () {
-  console.log('I am in the control group :(');
+    console.log('I am in the control group :(');
   })
   .variant('blue button', function () {
-  $('button').css({ background: 'blue' });
+    $('button').css({ background: 'blue' });
   })
   .variant('yellow button', function () {
-  $('button').css({ background: 'yellow' });
+    $('button').css({ background: 'yellow' });
   })
   .start();
 
   $('button').on('click', function () {
-  experiment.convert();
+    experiment.convert();
   });
 &lt;/script&gt;
 </pre>

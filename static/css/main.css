@@ -41,6 +41,9 @@ button {
 .subtle {
   color: #eee;
 }
+.icon {
+  line-height: 1;
+}
 code pre {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

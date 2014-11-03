@@ -4,6 +4,8 @@ var auth = require('./auth');
 var json2csv = require('json-2-csv');
 var redis = require('../redis')();
 
+var isUUID = require('./util').isUUID;
+
 var UAParser = require('ua-parser-js');
 var uaParser = new UAParser();
 
@@ -34,6 +36,11 @@ experiments.get('/', auth, function (req, res) {
 });
 
 experiments.put('/:id', auth, function (req, res) {
+  if (!isUUID(req.params.id)) {
+    return res.send(400, {
+      error: 'Id needs to be UUID'
+    });
+  }
   query('UPDATE "experiments" SET name = $3, archived = $4, active = $5, description = $6 WHERE user_id = $1 AND id = $2', [req.user.id, req.params.id, req.body.name, !!req.body.archived, !!req.body.active, req.body.description], function (error) {
     if (error) throw error;
     res.status(204).send({});
@@ -41,6 +48,11 @@ experiments.put('/:id', auth, function (req, res) {
 });
 
 experiments.get('/:id', auth, function (req, res) {
+  if (!isUUID(req.params.id)) {
+    return res.send(400, {
+      error: 'Id needs to be UUID'
+    });
+  }
   query('SELECT * FROM experiments WHERE (deleted = FALSE AND user_id = $1 OR id IN (SELECT experiment_id FROM collaborators WHERE user_id = $1)) AND id = $2', [req.user.id, req.params.id], function (error, result) {
     if (error) throw error;
 
@@ -55,6 +67,12 @@ experiments.get('/:id', auth, function (req, res) {
 });
 
 experiments.delete('/:id', auth, function (req, res) {
+  if (!isUUID(req.params.id)) {
+    return res.send(400, {
+      error: 'Id needs to be UUID'
+    });
+  }
+
   query('UPDATE experiments SET deleted = TRUE WHERE (user_id = $1 AND id = $2)', [req.user.id, req.params.id], function (error, result) {
     if (error) throw error;
 
@@ -63,6 +81,12 @@ experiments.delete('/:id', auth, function (req, res) {
 });
 
 experiments.get('/:id/actions', auth, function (req, res) {
+  if (!isUUID(req.params.id)) {
+    return res.send(400, {
+      error: 'Id needs to be UUID'
+    });
+  }
+
   query('SELECT * FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     if (error) throw error;
 
@@ -71,18 +95,36 @@ experiments.get('/:id/actions', auth, function (req, res) {
 });
 
 experiments.delete('/:id/actions', auth, function (req, res) {
+  if (!isUUID(req.params.id)) {
+    return res.send(400, {
+      error: 'Id needs to be UUID'
+    });
+  }
+
   query('UPDATE actions SET deleted = TRUE WHERE (experiment_id IN (SELECT id FROM experiments WHERE id = $2 AND user_id = $1))', [req.user.id, req.params.id], function (error, result) {
     res.send({});
   });
 });
 
 experiments.delete('/:experimentId/actions/:actionId', auth, function (req, res) {
+  if (!isUUID(req.params.experimentId) || !isUUID(req.params.actionId)) {
+    return res.send(400, {
+      error: 'Ids need to be UUIDs'
+    });
+  }
+
   query('UPDATE actions SET deleted = TRUE WHERE (experiment_id IN (SELECT id FROM experiments WHERE id = $2 AND user_id = $1)) AND id = $3', [req.user.id, req.params.experimentId, req.params.actionId], function (error, result) {
     res.send({});
   });
 });
 
 experiments.get('/:id/actions.csv', auth, function (req, res) {
+  if (!isUUID(req.params.id)) {
+    return res.send(400, {
+      error: 'Id needs to be UUID'
+    });
+  }
+
   query('SELECT * FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
     if (error) throw error;
     json2csv.json2csv(result.rows, function (error, csv) {
@@ -96,6 +138,12 @@ experiments.get('/:id/actions.csv', auth, function (req, res) {
 });
 
 experiments.get('/:id/participate', function (req, res) {
+  if (!isUUID(req.params.id)) {
+    return res.status(400).jsonp({
+      error: 'Id needs to be UUID'
+    });
+  }
+
   var userAgent = req.query.user_agent || req.headers['user-agent'];
   var userAgentParsed = uaParser.setUA(userAgent).getResult();
   var ip = req.query.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -122,6 +170,13 @@ experiments.get('/:id/convert', function (req, res) {
       error: 'action_id required'
     });
   }
+
+  if (!isUUID(req.params.id) || !isUUID(req.query.action_id)) {
+    return res.status(400).jsonp({
+      error: 'Ids need to be UUIDs'
+    });
+  }
+
   query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)', [req.query.action_id, req.params.id], function (error, result) {
     if (error) throw error;
 

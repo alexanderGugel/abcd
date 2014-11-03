@@ -44,6 +44,7 @@ angular.module('angularApp', [
       $rootScope.user = data.user;
     })
     .error(function (data) {
+      debugger;
       delete $rootScope.user;
       delete $rootScope.token;
       localStorage.removeItem('token');

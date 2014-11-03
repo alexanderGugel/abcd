@@ -162,7 +162,7 @@ angular.module('angularApp.experiment', ['ngRoute'])
         token: localStorage.getItem('token')
       }
     }).success(function () {
-      $scope.fetchActions(experiment.id);
+      $scope.actions = [];
     });
   };
 

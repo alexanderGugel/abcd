@@ -180,6 +180,21 @@ angular.module('angularApp.experiment', ['ngRoute'])
     });
   };
 
+
+  $scope.deleteAction = function (action) {
+    var confirmation = confirm('Are you sure you want to delete this action?');
+    if (!confirmation) return;
+    return $http({
+      url: '/api/experiments/' + $scope.experiment.id + '/actions/' + action.id,
+      method: 'DELETE',
+      params: {
+        token: localStorage.getItem('token')
+      }
+    }).success(function () {
+      _.remove($scope.actions, action);
+    });
+  };
+
   $scope.fetchExperiment(experimentId);
   $scope.fetchActions(experimentId).then(function () {
 

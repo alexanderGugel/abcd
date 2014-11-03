@@ -33,11 +33,11 @@
             Browser
             <i ng-if="predicate === user_agent['browser']" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-          <th class="browser mini" ng-click="predicate = 'os'; reverse = !reverse">
+          <th class="os mini" ng-click="predicate = 'os'; reverse = !reverse">
             OS
             <i ng-if="predicate === 'os'" class="icon" ng-class="{'ion-ios7-arrow-down': !reverse, 'ion-ios7-arrow-up': reverse}"></i>
           </th>
-          <!-- <th class="archive mini"></th> -->
+          <th class="delete mini"></th>
         </tr>
       </thead>
       <tbody>
@@ -65,6 +65,9 @@
           </td>
           <td class="os mini">
             {{action.os}}
+          </td>
+          <td class="delete mini" ng-click="deleteAction(action)">
+            <i class="icon ion-trash-a"></i>
           </td>
           <!-- <td class="active mini" ng-click="action.active = !action.active; updateExperiment(action)"><span ng-class="{ 'active': action.active, 'inactive': !action.active }"><i class="icon ion-ios7-circle-filled"></i></span></td>
           <td class="archive mini" ng-click="action.archived = !action.archived; updateExperiment(action)"><i class="icon" ng-class="{ 'ion-reply': action.archived, 'ion-ios7-filing-outline': !action.archived }"></i></td> -->

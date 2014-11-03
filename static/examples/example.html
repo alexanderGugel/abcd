@@ -6,6 +6,7 @@
   <body>
     <button>Buy!</button>
 
+    <!-- jQuery is optional, but required for this example -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://alex.dev:3000/client.bundle.js"></script>
     <script>
@@ -26,13 +27,10 @@
           });
         }
 
-        console.log(result);
-
         $('button').on('click', function () {
           experiment.convert();
         });
       });
-
     </script>
   </body>
 </html>

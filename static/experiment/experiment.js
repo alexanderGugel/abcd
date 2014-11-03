@@ -211,7 +211,7 @@ angular.module('angularApp.experiment', ['ngRoute'])
       //   _.assign(oldAction, action);
       // }
 
-      $scope.show === 'debugger' && $scope.debugger.push(action);
+      $scope.show === 'debugger' && $scope.debugger.unshift(_.clone(action));
       $scope.$apply('actions');
       $scope.$apply('debugger');
     });

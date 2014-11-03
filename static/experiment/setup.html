@@ -8,27 +8,36 @@
   <div class="card">
   <code>
 <pre>
-&lt;script src=&quot;http://alex.dev:3000/abcd.bundle.js&quot;&gt;&lt;/script&gt;
+&lt;button&gt;Buy!&lt;/button&gt;
+
+&lt;!-- jQuery is optional, but required for this example --&gt;
+&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://alex.dev:3000/client.bundle.js&quot;&gt;&lt;/script&gt;
 </pre>
   </code>
   <code>
 <pre>
 &lt;script&gt;
-  var experiment = abcd.experiment('{{experiment.id}}')
+  var experiment = new abcd.Experiment('{{experiment.id}}');
 
-  experiment.variant('control', function () {
-    console.log('I am in the control group :(');
-  })
-  .variant('blue button', function () {
-    $('button').css({ background: 'blue' });
-  })
-  .variant('yellow button', function () {
-    $('button').css({ background: 'yellow' });
-  })
-  .start();
+  experiment.participate(['control', 'blue button', 'red button'], function (error, result) {
+    if (error) throw error;
 
-  $('button').on('click', function () {
-    experiment.convert();
+    if (result.variant === 'control') {
+      // Do nothing
+    } else if (result.variant === 'blue button') {
+      $('button').css({
+        background: 'blue'
+      });
+    } else if (result.variant === 'red button') {
+      $('button').css({
+        background: 'red'
+      });
+    }
+
+    $('button').on('click', function () {
+      experiment.convert();
+    });
   });
 &lt;/script&gt;
 </pre>

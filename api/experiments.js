@@ -83,9 +83,13 @@ experiments.delete('/:experimentId/actions/:actionId', auth, function (req, res)
 });
 
 experiments.get('/:id/actions.csv', auth, function (req, res) {
-  query('SELECT id, started_at, completed_at, variant, meta_data FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
-    json2csv.json2csv(result.rows, function (err, csv) {
-      if (err) throw err;
+  query('SELECT * FROM actions WHERE deleted = FALSE AND experiment_id = (SELECT id from experiments WHERE id = $2 AND user_id = $1)', [req.user.id, req.params.id], function (error, result) {
+    if (error) throw error;
+    json2csv.json2csv(result.rows, function (error, csv) {
+      if (error) throw error;
+
+      res.attachment('actions_' + req.params.id + '_' + (new Date()).getTime() + '.csv');
+
       res.send(csv);
     });
   });

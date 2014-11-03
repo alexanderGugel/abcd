@@ -106,8 +106,12 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
     var result = $scope.results.variants[action.variant];
 
-    result.started++;
-    action.completed_at && result.completed++;
+    //
+    // if (action.completed_at) {
+    //   result.completed++;
+    // } else if (action.started_at) {
+    //   result.started++;
+    // }
 
     return action;
   };
@@ -182,24 +186,22 @@ angular.module('angularApp.experiment', ['ngRoute'])
   $scope.fetchActions(experimentId).then(function () {
     $scope.actions = _.map($scope.actions, $scope.handleNewAction);
 
-
     socket.on('action', function (action) {
 
-      var action = $scope.handleNewAction(action);
-
       if (!action.completed_at) {
+        var action = $scope.handleNewAction(action);
         $scope.actions.push(action);
       } else {
-
         var oldAction = _.where($scope.actions, {
           id: action.id
         })[0];
 
         _.assign(oldAction, action);
       }
-      
+
       $scope.show === 'debugger' && $scope.debugger.push(action);
       $scope.$apply('actions');
+      $scope.$apply('debugger');
     });
   });
 }]);

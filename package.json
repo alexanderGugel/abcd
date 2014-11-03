@@ -13,6 +13,7 @@
     "watch": "npm run watch-js & npm run watch-css & npm run watch-client",
     "start": "node server.js"
   },
+  "private": true,
   "author": "",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

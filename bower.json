@@ -4,7 +4,6 @@
   "authors": [
     "Alexander Gugel <alexander.gugel@gmail.com>"
   ],
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -12,6 +11,7 @@
     "test",
     "tests"
   ],
+  "private": true,
   "dependencies": {
     "sweetalert": "~0.1.2",
     "crossfilter": "~1.3.11",

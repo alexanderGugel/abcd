@@ -99,7 +99,6 @@ angular.module('angularApp.experiment', ['ngRoute'])
     action.browser = action.user_agent_parsed.browser.name + ' ' + action.user_agent_parsed.browser.major;
     action.os = action.user_agent_parsed.os.name + ' ' + action.user_agent_parsed.os.version;
 
-
     $scope.results.variants[action.variant] = $scope.results.variants[action.variant] || {
       started: 0,
       completed: 0
@@ -181,20 +180,25 @@ angular.module('angularApp.experiment', ['ngRoute'])
 
   $scope.fetchExperiment(experimentId);
   $scope.fetchActions(experimentId).then(function () {
-    $scope.actions = _.each($scope.actions, $scope.handleNewAction);
+    $scope.actions = _.map($scope.actions, $scope.handleNewAction);
+
 
     socket.on('action', function (action) {
-      $scope.show === 'debugger' && $scope.debugger.push(action);
+
+      var action = $scope.handleNewAction(action);
 
       if (!action.completed_at) {
-        $scope.actions.push($scope.handleNewAction(action));
+        $scope.actions.push(action);
       } else {
+
         var oldAction = _.where($scope.actions, {
           id: action.id
         })[0];
 
         _.assign(oldAction, action);
       }
+      
+      $scope.show === 'debugger' && $scope.debugger.push(action);
       $scope.$apply('actions');
     });
   });

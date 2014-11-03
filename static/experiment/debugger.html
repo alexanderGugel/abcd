@@ -13,8 +13,8 @@
 
       <br>
 
-      <span class="user-agent">{{action.meta_data.user_agent.raw}}</span>
-      <span class="ip">{{action.meta_data.ip}}</span>
+      <span class="user-agent">{{action.user_agent}}</span>
+      <span class="ip">{{action.ip}}</span>
       <span class="duration" ng-if="action.started_at">• started <span am-time-ago="action.started_at"></span></span>
     </li>
   </ul>

@@ -201,4 +201,6 @@ angular.module('angularApp.experiment', ['ngRoute'])
       $scope.$apply('debugger');
     });
   });
+
+
 }]);

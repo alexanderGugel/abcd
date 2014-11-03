@@ -1,7 +1,6 @@
 var express = require('express');
 var query = require('../db/query');
 var auth = require('./auth');
-var _ = require('async');
 
 var usage = express.Router();
 

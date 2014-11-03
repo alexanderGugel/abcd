@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <button>Buy!</button>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://alex.dev:3000/client.bundle.js"></script>
+    <script>
+      var experiment = new abcd.Experiment('877bdbde-8397-4013-8515-edf9abe72c68');
+
+      experiment.participate(['control', 'blue button', 'red button'], function (error, result) {
+        if (error) throw error;
+
+        if (result.variant === 'control') {
+          // Do nothing
+        } else if (result.variant === 'blue button') {
+          $('button').css({
+            background: 'blue'
+          });
+        } else if (result.variant === 'red button') {
+          $('button').css({
+            background: 'red'
+          });
+        }
+
+        console.log(result);
+
+        $('button').on('click', function () {
+          experiment.convert();
+        });
+      });
+
+    </script>
+  </body>
+</html>

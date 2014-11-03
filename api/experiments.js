@@ -110,7 +110,9 @@ experiments.get('/:id/participate', function (req, res) {
       throw error;
     }
     redis.publish(req.params.id, result.rows[0].id);
-    res.jsonp(result.rows[0]);
+    res.jsonp({
+      actionId: result.rows[0].id
+    });
   });
 });
 
@@ -123,7 +125,9 @@ experiments.get('/:id/convert', function (req, res) {
   query('UPDATE "actions" SET completed_at = NOW() WHERE id = $1 AND experiment_id = (SELECT id FROM experiments WHERE id = $2 AND active = TRUE)', [req.query.action_id, req.params.id], function (error, result) {
     if (error) throw error;
 
-    res.jsonp({});
+    res.jsonp({
+      actionId: req.query.action_id
+    });
     redis.publish(req.params.id, req.query.action_id);
   });
 });

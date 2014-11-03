@@ -7,15 +7,19 @@
   <section class="depth card">
     <h3>Status</h3>
 
-    <i ng-click="experiment.active = !experiment.active; updateExperiment(experiment)" ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }" class="icon ion-ios7-circle-filled"></i>
-    <small ng-if="experiment.active">This project is currently active</small>
-    <small ng-if="!experiment.active">This project is currently inactive</small>
+    <span ng-click="experiment.active = !experiment.active; updateExperiment(experiment)">
+      <i ng-class="{ 'active': experiment.active, 'inactive': !experiment.active }" class="icon ion-ios7-circle-filled"></i>
+      <small ng-if="experiment.active">This project is currently active</small>
+      <small ng-if="!experiment.active">This project is currently inactive</small>
+    </span>
 
     <br>
 
-    <i ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)" class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i>
-    <small ng-if="experiment.archived">This project has been archived</small>
-    <small ng-if="!experiment.archived">This project has not been archived</small>
+    <span ng-click="experiment.archived = !experiment.archived; updateExperiment(experiment)">
+      <i class="icon" ng-class="{ 'ion-reply': experiment.archived, 'ion-ios7-filing-outline': !experiment.archived }"></i>
+      <small ng-if="experiment.archived">This project has been archived</small>
+      <small ng-if="!experiment.archived">This project has not been archived</small>
+    </span>
   </section>
 
   <section class="depth card">
